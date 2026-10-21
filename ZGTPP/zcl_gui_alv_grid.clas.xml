@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_CLAS" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <VSEOCLASS>
+    <CLSNAME>ZCL_GUI_ALV_GRID</CLSNAME>
+    <LANGU>3</LANGU>
+    <DESCRIPT>alv 머지</DESCRIPT>
+    <STATE>1</STATE>
+    <CLSCCINCL>X</CLSCCINCL>
+    <FIXPT>X</FIXPT>
+    <UNICODE>X</UNICODE>
+   </VSEOCLASS>
+   <DESCRIPTIONS_SUB>
+    <SEOSUBCOTX>
+     <CMPNAME>Z_SET_CELL_STYLE</CMPNAME>
+     <SCONAME>STYLE</SCONAME>
+     <LANGU>3</LANGU>
+     <DESCRIPT>ALV 제어: 스타일</DESCRIPT>
+    </SEOSUBCOTX>
+    <SEOSUBCOTX>
+     <CMPNAME>Z_SET_CELL_STYLE</CMPNAME>
+     <SCONAME>STYLE2</SCONAME>
+     <LANGU>3</LANGU>
+     <DESCRIPT>ALV 제어: 스타일</DESCRIPT>
+    </SEOSUBCOTX>
+    <SEOSUBCOTX>
+     <CMPNAME>Z_SET_MERGE_HORIZ</CMPNAME>
+     <SCONAME>TAB_COL_MERGE</SCONAME>
+     <LANGU>3</LANGU>
+     <DESCRIPT>ALV 제어: 열 레이아웃</DESCRIPT>
+    </SEOSUBCOTX>
+    <SEOSUBCOTX>
+     <CMPNAME>Z_SET_MERGE_VERT</CMPNAME>
+     <SCONAME>TAB_COL_MERGE</SCONAME>
+     <LANGU>3</LANGU>
+     <DESCRIPT>ALV 제어: 열 레이아웃</DESCRIPT>
+    </SEOSUBCOTX>
+   </DESCRIPTIONS_SUB>
+  </asx:values>
+ </asx:abap>
+</abapGit>

@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_NROB" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <ATTRIBUTES>
+    <OBJECT>ZSD_000018</OBJECT>
+    <DOMLEN>CHAR10</DOMLEN>
+    <PERCENTAGE>10.0</PERCENTAGE>
+    <BUFFER>X</BUFFER>
+    <UNAME>ZLSGABAP2</UNAME>
+    <UDATE>2026-09-30</UDATE>
+    <UTIME>11:16:18</UTIME>
+   </ATTRIBUTES>
+   <TEXT>
+    <LANGU>3</LANGU>
+    <OBJECT>ZSD_000018</OBJECT>
+    <TXT>[SD]납품정보변경</TXT>
+    <TXTSHORT>[SD]납품정보변경</TXTSHORT>
+   </TEXT>
+  </asx:values>
+ </asx:abap>
+</abapGit>

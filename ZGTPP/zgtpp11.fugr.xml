@@ -1,0 +1,509 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_FUGR" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <AREAT>[GT] PP 적용 기능별 BAPI, BDC</AREAT>
+   <INCLUDES>
+    <SOBJ_NAME>LZGTPP11TOP</SOBJ_NAME>
+    <SOBJ_NAME>SAPLZGTPP11</SOBJ_NAME>
+   </INCLUDES>
+   <FUNCTIONS>
+    <item>
+     <FUNCNAME>ZGTPP_CHG_ARBPL</FUNCNAME>
+     <REMOTE_CALL>R</REMOTE_CALL>
+     <SHORT_TEXT>[GT] 설비변경 BAPI</SHORT_TEXT>
+     <IMPORT>
+      <RSIMP>
+       <PARAMETER>IV_ARBPL</PARAMETER>
+       <TYP>ARBPL</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>IV_WERKS</PARAMETER>
+       <TYP>WERKS_D</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>IV_MATNR</PARAMETER>
+       <TYP>MATNR</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>IV_AUFNR</PARAMETER>
+       <TYP>AUFNR</TYP>
+      </RSIMP>
+     </IMPORT>
+     <EXPORT>
+      <RSEXP>
+       <PARAMETER>EV_MESSAGE</PARAMETER>
+       <TYP>CHAR100</TYP>
+      </RSEXP>
+      <RSEXP>
+       <PARAMETER>EV_MSG_TYPE</PARAMETER>
+       <TYP>CHAR01</TYP>
+      </RSEXP>
+     </EXPORT>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>IV_ARBPL</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>작업장</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>IV_WERKS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>플랜트</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>IV_MATNR</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>자재 번호</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>IV_AUFNR</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>오더 번호</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>EV_MESSAGE</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>문자 100</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>EV_MSG_TYPE</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>길이 1의 문자 필드</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+    <item>
+     <FUNCNAME>ZGTPP_CONF_CANCEL</FUNCNAME>
+     <REMOTE_CALL>R</REMOTE_CALL>
+     <SHORT_TEXT>[GT] 확정취소(Async)</SHORT_TEXT>
+     <IMPORT>
+      <RSIMP>
+       <PARAMETER>CONFIRMATION</PARAMETER>
+       <TYP>BAPI_PP_CONF_KEY-CONF_NO</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>CONFIRMATIONCOUNTER</PARAMETER>
+       <TYP>BAPI_PP_CONF_KEY-CONF_CNT</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>POSTG_DATE</PARAMETER>
+       <TYP>BAPI_PP_CONFIRM-POSTG_DATE</TYP>
+      </RSIMP>
+     </IMPORT>
+     <EXPORT>
+      <RSEXP>
+       <PARAMETER>CREATED_CONF_NO</PARAMETER>
+       <TYP>BAPI_PP_CONF_KEY-CONF_NO</TYP>
+      </RSEXP>
+      <RSEXP>
+       <PARAMETER>CREATED_CONF_COUNT</PARAMETER>
+       <TYP>BAPI_PP_CONF_KEY-CONF_CNT</TYP>
+      </RSEXP>
+      <RSEXP>
+       <PARAMETER>EV_TYPE</PARAMETER>
+       <TYP>CHAR01</TYP>
+      </RSEXP>
+      <RSEXP>
+       <PARAMETER>EV_MESSAGE</PARAMETER>
+       <TYP>ZGTPPT2460-STAT_MSG</TYP>
+      </RSEXP>
+     </EXPORT>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>CONFIRMATION</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>작업 완료확정 번호</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CONFIRMATIONCOUNTER</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>확정 카운터</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>POSTG_DATE</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>전기일</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CREATED_CONF_NO</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>작업 완료확정 번호</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CREATED_CONF_COUNT</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>확정 카운터</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>EV_TYPE</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>길이 1의 문자 필드</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>EV_MESSAGE</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>메시지 텍스트</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+    <item>
+     <FUNCNAME>ZGTPP_CONF_CREATE_TT</FUNCNAME>
+     <REMOTE_CALL>R</REMOTE_CALL>
+     <SHORT_TEXT>[GT] 확정 생성(Async)</SHORT_TEXT>
+     <EXPORT>
+      <RSEXP>
+       <PARAMETER>CREATED_CONF_NO</PARAMETER>
+       <TYP>BAPI_PP_CONF_KEY-CONF_NO</TYP>
+      </RSEXP>
+      <RSEXP>
+       <PARAMETER>CREATED_CONF_COUNT</PARAMETER>
+       <TYP>BAPI_PP_CONF_KEY-CONF_CNT</TYP>
+      </RSEXP>
+      <RSEXP>
+       <PARAMETER>EV_TYPE</PARAMETER>
+       <TYP>CHAR01</TYP>
+      </RSEXP>
+      <RSEXP>
+       <PARAMETER>EV_MESSAGE</PARAMETER>
+       <TYP>ZGTPPT2460-STAT_MSG</TYP>
+      </RSEXP>
+     </EXPORT>
+     <TABLES>
+      <RSTBL>
+       <PARAMETER>TIMETICKETS</PARAMETER>
+       <DBSTRUCT>BAPI_PP_TIMETICKET</DBSTRUCT>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>DETAIL_RETURN</PARAMETER>
+       <DBSTRUCT>BAPI_CORU_RETURN</DBSTRUCT>
+      </RSTBL>
+     </TABLES>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>CREATED_CONF_NO</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>작업 완료확정 번호</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CREATED_CONF_COUNT</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>확정 카운터</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>EV_TYPE</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>길이 1의 문자 필드</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>EV_MESSAGE</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>메시지 텍스트</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>TIMETICKETS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>BAPI 구조: PP 확정 타임 티켓</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>DETAIL_RETURN</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>API 리턴정보</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+    <item>
+     <FUNCNAME>ZGTPP_CREATE_PR_BY_BDC</FUNCNAME>
+     <REMOTE_CALL>R</REMOTE_CALL>
+     <SHORT_TEXT>[GT] 구매요청 생성</SHORT_TEXT>
+     <IMPORT>
+      <RSIMP>
+       <PARAMETER>IS_PR_INFOR</PARAMETER>
+       <TYP>ZGTPPS0004</TYP>
+      </RSIMP>
+     </IMPORT>
+     <EXPORT>
+      <RSEXP>
+       <PARAMETER>EV_RESULT</PARAMETER>
+       <TYP>CHAR01</TYP>
+      </RSEXP>
+      <RSEXP>
+       <PARAMETER>EV_BANFN</PARAMETER>
+       <TYP>BANFN</TYP>
+      </RSEXP>
+     </EXPORT>
+     <TABLES>
+      <RSTBL>
+       <PARAMETER>IT_CHART</PARAMETER>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>ZGTPPY0005</TYP>
+      </RSTBL>
+     </TABLES>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>IS_PR_INFOR</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>[GT] 구매요청 등록 정보</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>EV_RESULT</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>길이 1의 문자 필드</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>EV_BANFN</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>구매 요청 번호</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>IT_CHART</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>[GT] 특성값 입력 테이블타입</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+    <item>
+     <FUNCNAME>ZGTPP_GOODSMVT_CANCEL</FUNCNAME>
+     <REMOTE_CALL>R</REMOTE_CALL>
+     <SHORT_TEXT>[GT] 자재이동 취소(Async)</SHORT_TEXT>
+     <IMPORT>
+      <RSIMP>
+       <PARAMETER>MATERIALDOCUMENT</PARAMETER>
+       <TYP>BAPI2017_GM_HEAD_02-MAT_DOC</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>MATDOCUMENTYEAR</PARAMETER>
+       <TYP>BAPI2017_GM_HEAD_02-DOC_YEAR</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>GOODSMVT_PSTNG_DATE</PARAMETER>
+       <TYP>BAPI2017_GM_HEAD_02-PSTNG_DATE</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>GOODSMVT_PR_UNAME</PARAMETER>
+       <TYP>BAPI2017_GM_HEAD_01-PR_UNAME</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>DOCUMENTHEADER_TEXT</PARAMETER>
+       <TYP>BAPI2017_GM_HEAD_02-HEADER_TXT</TYP>
+      </RSIMP>
+     </IMPORT>
+     <EXPORT>
+      <RSEXP>
+       <PARAMETER>EV_TYPE</PARAMETER>
+       <TYP>CHAR01</TYP>
+      </RSEXP>
+      <RSEXP>
+       <PARAMETER>EV_MESSAGE</PARAMETER>
+       <TYP>ZGTPPT2460-STAT_MSG</TYP>
+      </RSEXP>
+      <RSEXP>
+       <PARAMETER>EV_MBLNR</PARAMETER>
+       <TYP>MSEG-MBLNR</TYP>
+      </RSEXP>
+      <RSEXP>
+       <PARAMETER>EV_MJAHR</PARAMETER>
+       <TYP>MSEG-MJAHR</TYP>
+      </RSEXP>
+     </EXPORT>
+     <TABLES>
+      <RSTBL>
+       <PARAMETER>GOODSMVT_MATDOCITEM</PARAMETER>
+       <DBSTRUCT>BAPI2017_GM_ITEM_04</DBSTRUCT>
+      </RSTBL>
+     </TABLES>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>MATERIALDOCUMENT</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>자재 문서 번호</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>MATDOCUMENTYEAR</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>자재 문서 연도</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>GOODSMVT_PSTNG_DATE</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>문서 내 전기일</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>GOODSMVT_PR_UNAME</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>사용자 이름</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>DOCUMENTHEADER_TEXT</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>문서 헤더 텍스트</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>EV_TYPE</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>길이 1의 문자 필드</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>EV_MESSAGE</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>메시지 텍스트</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>EV_MBLNR</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>자재 문서 번호</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>EV_MJAHR</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>자재 문서 연도</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>GOODSMVT_MATDOCITEM</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>BAPI 통신구조: 자재문서취소, 품목</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+    <item>
+     <FUNCNAME>ZGTPP_GOODSMVT_CREATE</FUNCNAME>
+     <REMOTE_CALL>R</REMOTE_CALL>
+     <SHORT_TEXT>[GT] 자재이동 생성(Async)</SHORT_TEXT>
+     <IMPORT>
+      <RSIMP>
+       <PARAMETER>GOODSMVT_HEADER</PARAMETER>
+       <TYP>BAPI2017_GM_HEAD_01</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>GOODSMVT_CODE</PARAMETER>
+       <TYP>BAPI2017_GM_CODE</TYP>
+      </RSIMP>
+     </IMPORT>
+     <EXPORT>
+      <RSEXP>
+       <PARAMETER>EV_TYPE</PARAMETER>
+       <TYP>CHAR01</TYP>
+      </RSEXP>
+      <RSEXP>
+       <PARAMETER>EV_MESSAGE</PARAMETER>
+       <TYP>ZGTPPT2460-STAT_MSG</TYP>
+      </RSEXP>
+      <RSEXP>
+       <PARAMETER>EV_MBLNR</PARAMETER>
+       <TYP>MSEG-MBLNR</TYP>
+      </RSEXP>
+      <RSEXP>
+       <PARAMETER>EV_MJAHR</PARAMETER>
+       <TYP>MSEG-MJAHR</TYP>
+      </RSEXP>
+     </EXPORT>
+     <TABLES>
+      <RSTBL>
+       <PARAMETER>GOODSMVT_ITEM</PARAMETER>
+       <DBSTRUCT>BAPI2017_GM_ITEM_CREATE</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+     </TABLES>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>GOODSMVT_HEADER</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>BAPI 통신구조: 자재문서 헤더데이타</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>GOODSMVT_CODE</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>MMIM: 재고관리 트랜잭션에 신규 키지정 GM_CODE</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>EV_TYPE</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>길이 1의 문자 필드</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>EV_MESSAGE</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>메시지 텍스트</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>EV_MBLNR</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>자재 문서 번호</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>EV_MJAHR</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>자재 문서 연도</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>GOODSMVT_ITEM</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>BAPI 통신 구조: 자재 전표 항목 생성</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+    <item>
+     <FUNCNAME>ZGTPP_SO_CHAR_BDC</FUNCNAME>
+     <SHORT_TEXT>[GT] 판매오더 특성값 변경</SHORT_TEXT>
+     <IMPORT>
+      <RSIMP>
+       <PARAMETER>IV_VBELN</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>VBELN_VA</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>IV_POSNR</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>POSNR_VA</TYP>
+      </RSIMP>
+     </IMPORT>
+     <EXPORT>
+      <RSEXP>
+       <PARAMETER>EV_TYPE</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>CHAR01</TYP>
+      </RSEXP>
+     </EXPORT>
+     <TABLES>
+      <RSTBL>
+       <PARAMETER>IT_CHA</PARAMETER>
+       <DBSTRUCT>BAPI1003_ALLOC_VALUES_CHAR</DBSTRUCT>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>T_MESSAGE</PARAMETER>
+       <DBSTRUCT>BDCMSGCOLL</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+     </TABLES>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>IV_VBELN</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>영업문서</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>IV_POSNR</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>영업문서품목</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>EV_TYPE</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>처리결과(성공 S, 실패 E)</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>IT_CHA</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>분류 BAPI - 유형 CHAR, BOOL 값</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>T_MESSAGE</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>SAP 시스템의 메세지수집</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+   </FUNCTIONS>
+  </asx:values>
+ </asx:abap>
+</abapGit>

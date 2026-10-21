@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_DOMA" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <DD01V>
+    <DOMNAME>ZGTDAMT</DOMNAME>
+    <DDLANGUAGE>3</DDLANGUAGE>
+    <DATATYPE>CURR</DATATYPE>
+    <LENG>000018</LENG>
+    <OUTPUTLEN>000025</OUTPUTLEN>
+    <DECIMALS>000002</DECIMALS>
+    <SIGNFLAG>X</SIGNFLAG>
+    <DDTEXT>[GT] 견적테이블 금액</DDTEXT>
+   </DD01V>
+  </asx:values>
+ </asx:abap>
+</abapGit>

@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_DDLS" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <DDLS>
+    <DDLNAME>ZGTSD_CV_GET_DLVREQ_DUE_LIGHT</DDLNAME>
+    <DDLANGUAGE>3</DDLANGUAGE>
+    <DDTEXT>[GT] 출하요청 상태용 경량화 뷰 (상태 조회 전용)</DDTEXT>
+    <SOURCE_TYPE>W</SOURCE_TYPE>
+   </DDLS>
+  </asx:values>
+ </asx:abap>
+</abapGit>

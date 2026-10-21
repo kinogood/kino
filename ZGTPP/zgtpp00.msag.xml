@@ -1,0 +1,290 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_MSAG" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <T100A>
+    <ARBGB>ZGTPP00</ARBGB>
+    <MASTERLANG>3</MASTERLANG>
+    <STEXT>PP Module Message</STEXT>
+   </T100A>
+   <T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZGTPP00</ARBGB>
+     <MSGNR>000</MSGNR>
+     <TEXT>&amp;1 &amp;2 &amp;3 &amp;4</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZGTPP00</ARBGB>
+     <MSGNR>001</MSGNR>
+     <TEXT>해당 자료는 존재하지 않습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZGTPP00</ARBGB>
+     <MSGNR>002</MSGNR>
+     <TEXT>&amp;1 건 조회되었습니다</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZGTPP00</ARBGB>
+     <MSGNR>003</MSGNR>
+     <TEXT>&amp;1</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZGTPP00</ARBGB>
+     <MSGNR>004</MSGNR>
+     <TEXT>성공적으로 저장 되었습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZGTPP00</ARBGB>
+     <MSGNR>005</MSGNR>
+     <TEXT>&amp;1 &amp;2</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZGTPP00</ARBGB>
+     <MSGNR>006</MSGNR>
+     <TEXT>&amp;1 &amp;2 &amp;3</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZGTPP00</ARBGB>
+     <MSGNR>007</MSGNR>
+     <TEXT>COGI가 삭제된 건이 없습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZGTPP00</ARBGB>
+     <MSGNR>008</MSGNR>
+     <TEXT>COGI가 처리된 건이 없습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZGTPP00</ARBGB>
+     <MSGNR>009</MSGNR>
+     <TEXT>전체 &amp;1건 중 &amp;2건 처리 성공, &amp;3건 처리 실패</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZGTPP00</ARBGB>
+     <MSGNR>010</MSGNR>
+     <TEXT>백로그 문서번호 &amp;1//&amp;2의 투입 오류 수량보다 투입 재처리 수량 + 기존 투입 완료수량이 더 큽니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZGTPP00</ARBGB>
+     <MSGNR>011</MSGNR>
+     <TEXT>자재 &amp;1 상태는 &amp;2로 조장구성표 작성할 수 없습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZGTPP00</ARBGB>
+     <MSGNR>012</MSGNR>
+     <TEXT>해당 플랜트 &amp;1 내 자재 &amp;2 의 저장위치 &amp;3의 재고가 없습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZGTPP00</ARBGB>
+     <MSGNR>013</MSGNR>
+     <TEXT>오더계획 시작일자 또는 작업시작일자를 입력해주시길 바랍니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZGTPP00</ARBGB>
+     <MSGNR>014</MSGNR>
+     <TEXT>삭제에 실패했습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZGTPP00</ARBGB>
+     <MSGNR>015</MSGNR>
+     <TEXT>존재하지 않는 코스트센터입니다.(&amp;1)</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZGTPP00</ARBGB>
+     <MSGNR>016</MSGNR>
+     <TEXT>작업장(&amp;1)을 변경 완료하였습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZGTPP00</ARBGB>
+     <MSGNR>017</MSGNR>
+     <TEXT>작업장(&amp;1)을 생성 완료하였습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZGTPP00</ARBGB>
+     <MSGNR>018</MSGNR>
+     <TEXT>고정값 설정 데이터 저장에 성공하였습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZGTPP00</ARBGB>
+     <MSGNR>019</MSGNR>
+     <TEXT>데이터 저장 도중 오류가 발생하였습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZGTPP00</ARBGB>
+     <MSGNR>020</MSGNR>
+     <TEXT>처리할 자료가 존재하지 않습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZGTPP00</ARBGB>
+     <MSGNR>021</MSGNR>
+     <TEXT>삭제가 완료 되었습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZGTPP00</ARBGB>
+     <MSGNR>022</MSGNR>
+     <TEXT>지정한 시판 계획오더 &amp;1는 존재하지 않습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZGTPP00</ARBGB>
+     <MSGNR>023</MSGNR>
+     <TEXT>자재 &amp;1은 플랜트 &amp;2 자재가 아닙니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZGTPP00</ARBGB>
+     <MSGNR>024</MSGNR>
+     <TEXT>설비 &amp;1는 적합하지 않습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZGTPP00</ARBGB>
+     <MSGNR>025</MSGNR>
+     <TEXT>&amp;1 생산버전이 존재하지 않습니다</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZGTPP00</ARBGB>
+     <MSGNR>026</MSGNR>
+     <TEXT>&amp;1을(를) 입력하십시오.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZGTPP00</ARBGB>
+     <MSGNR>027</MSGNR>
+     <TEXT>자재코드 &amp;1건 중, 라우팅 &amp;2건 성공, 생산버전 &amp;3건 성공</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZGTPP00</ARBGB>
+     <MSGNR>028</MSGNR>
+     <TEXT>플랜트 &amp;2내의 CS 설비코드 &amp;1을(를) 정의하지 않았습니다</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZGTPP00</ARBGB>
+     <MSGNR>029</MSGNR>
+     <TEXT>다른 주문에 할당된 재고입니다.(&amp;1 / &amp;2)</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZGTPP00</ARBGB>
+     <MSGNR>030</MSGNR>
+     <TEXT>다른 주문에 할당된 판매오더 재고입니다.(&amp;1 / &amp;2)</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZGTPP00</ARBGB>
+     <MSGNR>031</MSGNR>
+     <TEXT>&amp;1은(는) 필수 입력 값입니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZGTPP00</ARBGB>
+     <MSGNR>032</MSGNR>
+     <TEXT>영업문서 &amp;1/&amp;2 이(가) 존재하지 않습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZGTPP00</ARBGB>
+     <MSGNR>033</MSGNR>
+     <TEXT>검색조건에 해당하는 데이타가 존재하지 않습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZGTPP00</ARBGB>
+     <MSGNR>034</MSGNR>
+     <TEXT>생산오더번호 &amp;1 는 이미 실적 처리되어있는 오더입니다, 투입 또는 실적 취소 이후 삭제 재시도 바랍니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZGTPP00</ARBGB>
+     <MSGNR>035</MSGNR>
+     <TEXT>조정 허용 수량(&amp;1)보다 조정수량이 큽니다. 수량을 점검하십시요.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZGTPP00</ARBGB>
+     <MSGNR>036</MSGNR>
+     <TEXT>이미 재고실사 차이 조정이 발생하여 결과 수신이 불가합니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZGTPP00</ARBGB>
+     <MSGNR>037</MSGNR>
+     <TEXT>해당 판매오더 품목은 Picking 완료되었습니다.(&amp;1 / &amp;2)</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZGTPP00</ARBGB>
+     <MSGNR>038</MSGNR>
+     <TEXT>해당 품목 내 순번(&amp;1)에 이미 PICKING 처리되었습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZGTPP00</ARBGB>
+     <MSGNR>039</MSGNR>
+     <TEXT>이미 PICKING된 Lot입니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZGTPP00</ARBGB>
+     <MSGNR>040</MSGNR>
+     <TEXT>&amp;1 동일 판매오더, 품목으로 작업 중입니다.(&amp;2 / &amp;3)</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZGTPP00</ARBGB>
+     <MSGNR>041</MSGNR>
+     <TEXT>SPG코드 &amp;1, 자재그룹 &amp;2 에 맞는 스크랩 코드 추출 실패, SPG코드 확인 필요</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZGTPP00</ARBGB>
+     <MSGNR>042</MSGNR>
+     <TEXT>입고 처리한 수량에서 검사여장을 차감하면, 판매오더 조장 길이보다 작습니다. 생산 입고 길이를 점검하세요.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZGTPP00</ARBGB>
+     <MSGNR>043</MSGNR>
+     <TEXT>판매오더품목(&amp;1)과 스캔품목(&amp;2)이 서로 다릅니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZGTPP00</ARBGB>
+     <MSGNR>044</MSGNR>
+     <TEXT>판매오더조장(&amp;1)과 스캔조장(&amp;2)이 서로 다릅니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZGTPP00</ARBGB>
+     <MSGNR>045</MSGNR>
+     <TEXT>배치번호(&amp;1)에 `정조장` 주문할당이 존재하여 지시가 불가합니다.</TEXT>
+    </T100>
+   </T100>
+  </asx:values>
+ </asx:abap>
+</abapGit>

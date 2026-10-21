@@ -1,0 +1,70 @@
+*&---------------------------------------------------------------------*
+*& Include          ZGTSDI0001SEL
+*&---------------------------------------------------------------------*
+*----------------------------------------------------------------------*
+* Selection-Screen
+*----------------------------------------------------------------------*
+"법인
+SELECTION-SCREEN BEGIN OF BLOCK b01 WITH FRAME TITLE TEXT-s00.
+
+*  SELECT-OPTIONS : S_TARG   FOR ZGTSDT1007-ZSYSTEM_ID MODIF ID M2. "수신 시스템
+  SELECT-OPTIONS :
+**  S_VBELN  FOR VBAK-VBELN,
+                   s_ivno  FOR zlet0005-iv_no,
+                   s_erdat  FOR vbak-erdat NO-EXTENSION MODIF ID m1,
+                   s_erdat2 FOR vbak-erdat NO-EXTENSION MODIF ID m2.
+
+SELECTION-SCREEN END OF BLOCK b01.
+
+SELECTION-SCREEN BEGIN OF BLOCK b02 WITH FRAME TITLE TEXT-s05.
+
+  SELECTION-SCREEN BEGIN OF LINE.
+    SELECTION-SCREEN COMMENT (20) TEXT-s01.
+    SELECTION-SCREEN POSITION 33.
+    PARAMETERS: rb_send RADIOBUTTON GROUP gr1 DEFAULT 'X' USER-COMMAND usr.
+    SELECTION-SCREEN COMMENT (12) TEXT-s03 FOR FIELD rb_send.
+
+    SELECTION-SCREEN POSITION 52.
+    PARAMETERS: rb_disp RADIOBUTTON GROUP gr1.
+    SELECTION-SCREEN COMMENT (12) TEXT-s04 FOR FIELD rb_disp.
+  SELECTION-SCREEN END OF LINE.
+
+
+
+
+  SELECTION-SCREEN BEGIN OF LINE.
+    SELECTION-SCREEN COMMENT (20) TEXT-s08 MODIF ID m2.
+    SELECTION-SCREEN POSITION 33.
+    PARAMETERS: rb_all RADIOBUTTON GROUP gr3   DEFAULT 'X' MODIF ID m2.
+    SELECTION-SCREEN COMMENT (12) TEXT-s09 FOR FIELD rb_all MODIF ID m2.
+
+    SELECTION-SCREEN POSITION 52.
+    PARAMETERS: rb_su RADIOBUTTON GROUP gr3 MODIF ID m2.
+    SELECTION-SCREEN COMMENT (12) TEXT-s10 FOR FIELD rb_su MODIF ID m2.
+
+    SELECTION-SCREEN POSITION 72.
+    PARAMETERS: rb_fa RADIOBUTTON GROUP gr3 MODIF ID m2.
+    SELECTION-SCREEN COMMENT (12) TEXT-s11 FOR FIELD rb_fa MODIF ID m2.
+
+  SELECTION-SCREEN END OF LINE.
+
+
+  PARAMETERS : rb_t1 RADIOBUTTON GROUP radi,
+               rb_10 RADIOBUTTON GROUP radi DEFAULT 'X',
+* [GO-SD][26.01.28] Add logic for 가온MES  - Start.
+               rb_gp RADIOBUTTON GROUP radi,
+               rb_go RADIOBUTTON GROUP radi,
+* [GO-SD][26.01.28] Add logic for 가온MES  - End.
+* [GO-SD][26.02.23] Add logic for 가온OneClick  - Start.
+               rb_gc RADIOBUTTON GROUP radi,
+* [GO-SD][26.02.23] Add logic for 가온OneClick  - End.
+*[S] 한미소 MOM 전송 기능 추가
+              rb_11 RADIOBUTTON GROUP radi MODIF ID m1.
+*[M] 한미소
+
+
+SELECTION-SCREEN END OF BLOCK b02.
+
+
+
+PARAMETERS : p_call(1) NO-DISPLAY.

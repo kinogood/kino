@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_ENQU" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <DD25V>
+    <VIEWNAME>EZGT_ZGTSDT9110</VIEWNAME>
+    <DDLANGUAGE>3</DDLANGUAGE>
+    <AGGTYPE>E</AGGTYPE>
+    <ROOTTAB>ZGTSDS9110</ROOTTAB>
+    <DDTEXT>[GT] 적송 DO 데이터 잠금 - ZGTSDT9110</DDTEXT>
+   </DD25V>
+   <DD26E_TABLE>
+    <DD26E>
+     <VIEWNAME>EZGT_ZGTSDT9110</VIEWNAME>
+     <TABNAME>ZGTSDS9110</TABNAME>
+     <TABPOS>0001</TABPOS>
+     <FORTABNAME>ZGTSDS9110</FORTABNAME>
+     <ENQMODE>X</ENQMODE>
+    </DD26E>
+   </DD26E_TABLE>
+   <DD27P_TABLE>
+    <DD27P>
+     <VIEWNAME>EZGT_ZGTSDT9110</VIEWNAME>
+     <OBJPOS>0001</OBJPOS>
+     <VIEWFIELD>VBELN</VIEWFIELD>
+     <TABNAME>ZGTSDS9110</TABNAME>
+     <FIELDNAME>VBELN</FIELDNAME>
+     <KEYFLAG>X</KEYFLAG>
+     <ENQMODE>X</ENQMODE>
+     <MEMORYID>VL</MEMORYID>
+     <LOGFLAG>X</LOGFLAG>
+     <CONVEXIT>ALPHA</CONVEXIT>
+    </DD27P>
+   </DD27P_TABLE>
+  </asx:values>
+ </asx:abap>
+</abapGit>

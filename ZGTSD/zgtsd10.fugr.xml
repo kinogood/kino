@@ -1,0 +1,1152 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_FUGR" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <AREAT>[GT] 가온전선 일반함수</AREAT>
+   <INCLUDES>
+    <SOBJ_NAME>LZGTSD10F01</SOBJ_NAME>
+    <SOBJ_NAME>LZGTSD10F02</SOBJ_NAME>
+    <SOBJ_NAME>LZGTSD10TOP</SOBJ_NAME>
+    <SOBJ_NAME>SAPLZGTSD10</SOBJ_NAME>
+   </INCLUDES>
+   <FUNCTIONS>
+    <item>
+     <FUNCNAME>ZGTSD_DETER_CCA_BY_SALESGRP</FUNCNAME>
+     <SHORT_TEXT>[GT] 영업그룹별 CCA 결정</SHORT_TEXT>
+     <IMPORT>
+      <RSIMP>
+       <PARAMETER>I_VKORG</PARAMETER>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>VKORG</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_VKGRP</PARAMETER>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>VKGRP</TYP>
+      </RSIMP>
+     </IMPORT>
+     <EXPORT>
+      <RSEXP>
+       <PARAMETER>E_KKBER</PARAMETER>
+       <TYP>KKBER</TYP>
+      </RSEXP>
+      <RSEXP>
+       <PARAMETER>E_TYPE</PARAMETER>
+       <TYP>BAPI_MTYPE</TYP>
+      </RSEXP>
+      <RSEXP>
+       <PARAMETER>E_MSG</PARAMETER>
+       <TYP>BAPI_MSG</TYP>
+      </RSEXP>
+     </EXPORT>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>I_VKORG</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>영업 조직</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_VKGRP</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>영업 그룹</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>E_KKBER</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>여신 관리 영역</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>E_TYPE</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>메시지 유형: S 성공, E 오류, W 경고, I 정보, A 중단</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>E_MSG</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>메시지 텍스트</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+    <item>
+     <FUNCNAME>ZGTSD_DO_BATCH_SPLIT</FUNCNAME>
+     <SHORT_TEXT>[GT] DO Batch Split</SHORT_TEXT>
+     <EXPORT>
+      <RSEXP>
+       <PARAMETER>E_TYPE</PARAMETER>
+       <TYP>BAPI_MTYPE</TYP>
+      </RSEXP>
+      <RSEXP>
+       <PARAMETER>E_MSG</PARAMETER>
+       <TYP>BAPI_MSG</TYP>
+      </RSEXP>
+     </EXPORT>
+     <TABLES>
+      <RSTBL>
+       <PARAMETER>IT_ITEM</PARAMETER>
+       <DBSTRUCT>ZGTSDS0023</DBSTRUCT>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>IT_BATCH</PARAMETER>
+       <DBSTRUCT>ZGTSDS0024</DBSTRUCT>
+      </RSTBL>
+     </TABLES>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>E_TYPE</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>메시지 유형: S 성공, E 오류, W 경고, I 정보, A 중단</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>E_MSG</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>메시지 텍스트</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>IT_ITEM</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>[GT_SD] DO Batch Split</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>IT_BATCH</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>[GT_SD] DO Batch Split - Batch Line</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+    <item>
+     <FUNCNAME>ZGTSD_EXCEL_UPLOAD_2</FUNCNAME>
+     <SHORT_TEXT>[GT] 엑셀 업로드</SHORT_TEXT>
+     <IMPORT>
+      <RSIMP>
+       <PARAMETER>FILENAME</PARAMETER>
+       <TYP>RLGRAP-FILENAME</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_BEGIN_COL</PARAMETER>
+       <TYP>I</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_BEGIN_ROW</PARAMETER>
+       <TYP>I</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_END_COL</PARAMETER>
+       <TYP>I</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_END_ROW</PARAMETER>
+       <TYP>I</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_SHEETS</PARAMETER>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>I</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_SHEETNO</PARAMETER>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>I</TYP>
+      </RSIMP>
+     </IMPORT>
+     <TABLES>
+      <RSTBL>
+       <PARAMETER>INTERN</PARAMETER>
+       <DBSTRUCT>ZGTSDS1090</DBSTRUCT>
+      </RSTBL>
+     </TABLES>
+     <EXCEPTION>
+      <RSEXC>
+       <EXCEPTION>INCONSISTENT_PARAMETERS</EXCEPTION>
+      </RSEXC>
+      <RSEXC>
+       <EXCEPTION>UPLOAD_OLE</EXCEPTION>
+      </RSEXC>
+     </EXCEPTION>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>FILENAME</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>업로드/다운로드할 로컬 파일</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_BEGIN_COL</PARAMETER>
+       <KIND>P</KIND>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_BEGIN_ROW</PARAMETER>
+       <KIND>P</KIND>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_END_COL</PARAMETER>
+       <KIND>P</KIND>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_END_ROW</PARAMETER>
+       <KIND>P</KIND>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_SHEETS</PARAMETER>
+       <KIND>P</KIND>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_SHEETNO</PARAMETER>
+       <KIND>P</KIND>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>INTERN</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Excel 데이타가 있는 테이블 행</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>INCONSISTENT_PARAMETERS</PARAMETER>
+       <KIND>X</KIND>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>UPLOAD_OLE</PARAMETER>
+       <KIND>X</KIND>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+    <item>
+     <FUNCNAME>ZGTSD_GET_ZZYUSCD</FUNCNAME>
+     <SHORT_TEXT>[GT] 영업그룹별 영업소코드 추출</SHORT_TEXT>
+     <IMPORT>
+      <RSIMP>
+       <PARAMETER>I_VKORG</PARAMETER>
+       <DEFAULT>&apos;6000&apos;</DEFAULT>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>VKORG</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_VKGRP</PARAMETER>
+       <TYP>VKGRP</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_KDKG4</PARAMETER>
+       <TYP>KDKG4</TYP>
+      </RSIMP>
+     </IMPORT>
+     <EXPORT>
+      <RSEXP>
+       <PARAMETER>E_ZZYUSCD</PARAMETER>
+       <TYP>ZGTEYUSCD</TYP>
+      </RSEXP>
+      <RSEXP>
+       <PARAMETER>E_TYPE</PARAMETER>
+       <TYP>BAPI_MTYPE</TYP>
+      </RSEXP>
+      <RSEXP>
+       <PARAMETER>E_MSG</PARAMETER>
+       <TYP>BAPI_MSG</TYP>
+      </RSEXP>
+     </EXPORT>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>I_VKORG</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>영업 조직</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_VKGRP</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>영업 그룹</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_KDKG4</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>고객조건그룹 4</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>E_ZZYUSCD</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>영업소 코드</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>E_TYPE</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>메시지 유형: S 성공, E 오류, W 경고, I 정보, A 중단</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>E_MSG</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>메시지 텍스트</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+    <item>
+     <FUNCNAME>ZGTSD_JS_BILLING</FUNCNAME>
+     <SHORT_TEXT>[GT] 적송 - BILLING</SHORT_TEXT>
+     <EXPORT>
+      <RSEXP>
+       <PARAMETER>E_TYPE</PARAMETER>
+       <TYP>BAPI_MTYPE</TYP>
+      </RSEXP>
+      <RSEXP>
+       <PARAMETER>E_MSG</PARAMETER>
+       <TYP>BAPI_MSG</TYP>
+      </RSEXP>
+     </EXPORT>
+     <TABLES>
+      <RSTBL>
+       <PARAMETER>IT_DATA</PARAMETER>
+       <DBSTRUCT>ZGTSDS0033</DBSTRUCT>
+      </RSTBL>
+     </TABLES>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>E_TYPE</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>메시지 유형: S 성공, E 오류, W 경고, I 정보, A 중단</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>E_MSG</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>메시지 텍스트</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>IT_DATA</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>[GT_SD] BILLING_적송</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+    <item>
+     <FUNCNAME>ZGTSD_JS_CANCEL_GOOD_ISSUE</FUNCNAME>
+     <SHORT_TEXT>[GT] 적송 - DO 출고 취소</SHORT_TEXT>
+     <EXPORT>
+      <RSEXP>
+       <PARAMETER>E_TYPE</PARAMETER>
+       <TYP>BAPI_MTYPE</TYP>
+      </RSEXP>
+      <RSEXP>
+       <PARAMETER>E_MSG</PARAMETER>
+       <TYP>BAPI_MSG</TYP>
+      </RSEXP>
+     </EXPORT>
+     <TABLES>
+      <RSTBL>
+       <PARAMETER>IT_DATA</PARAMETER>
+       <DBSTRUCT>ZGTSDS0021</DBSTRUCT>
+      </RSTBL>
+     </TABLES>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>E_TYPE</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>메시지 유형: S 성공, E 오류, W 경고, I 정보, A 중단</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>E_MSG</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>메시지 텍스트</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>IT_DATA</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>[GT_SD] DO 출고 취소</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+    <item>
+     <FUNCNAME>ZGTSD_JS_CHANGE_ATTR_DO_ITEM</FUNCNAME>
+     <SHORT_TEXT>[GT] 적송 - CHANGE DO ITEM 주요속성</SHORT_TEXT>
+     <EXPORT>
+      <RSEXP>
+       <PARAMETER>E_TYPE</PARAMETER>
+       <TYP>BAPI_MTYPE</TYP>
+      </RSEXP>
+      <RSEXP>
+       <PARAMETER>E_MSG</PARAMETER>
+       <TYP>BAPI_MSG</TYP>
+      </RSEXP>
+     </EXPORT>
+     <TABLES>
+      <RSTBL>
+       <PARAMETER>IT_DATA</PARAMETER>
+       <DBSTRUCT>ZGTSDS0026</DBSTRUCT>
+      </RSTBL>
+     </TABLES>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>E_TYPE</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>메시지 유형: S 성공, E 오류, W 경고, I 정보, A 중단</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>E_MSG</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>메시지 텍스트</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>IT_DATA</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>[GT_SD] CHANGE DO ITEM 주요속성_적송</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+    <item>
+     <FUNCNAME>ZGTSD_JS_DELETE_BATCH_LINE</FUNCNAME>
+     <SHORT_TEXT>[GT] 적송 - DO 품목 배치분할 라인 일괄 삭제</SHORT_TEXT>
+     <EXPORT>
+      <RSEXP>
+       <PARAMETER>E_TYPE</PARAMETER>
+       <TYP>BAPI_MTYPE</TYP>
+      </RSEXP>
+      <RSEXP>
+       <PARAMETER>E_MSG</PARAMETER>
+       <TYP>BAPI_MSG</TYP>
+      </RSEXP>
+     </EXPORT>
+     <TABLES>
+      <RSTBL>
+       <PARAMETER>IT_DATA</PARAMETER>
+       <DBSTRUCT>ZGTSDS0025</DBSTRUCT>
+      </RSTBL>
+     </TABLES>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>E_TYPE</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>메시지 유형: S 성공, E 오류, W 경고, I 정보, A 중단</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>E_MSG</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>메시지 텍스트</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>IT_DATA</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>[GT_SD] DO 품목 배치분할 라인 일괄 삭제</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+    <item>
+     <FUNCNAME>ZGTSD_JS_DO_CREATE</FUNCNAME>
+     <SHORT_TEXT>[GT] 적송 - DO 생성</SHORT_TEXT>
+     <IMPORT>
+      <RSIMP>
+       <PARAMETER>I_LFART</PARAMETER>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>LFART</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_WADAT</PARAMETER>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>WADAT</TYP>
+      </RSIMP>
+     </IMPORT>
+     <EXPORT>
+      <RSEXP>
+       <PARAMETER>E_TYPE</PARAMETER>
+       <TYP>BAPI_MTYPE</TYP>
+      </RSEXP>
+      <RSEXP>
+       <PARAMETER>E_MSG</PARAMETER>
+       <TYP>BAPI_MSG</TYP>
+      </RSEXP>
+     </EXPORT>
+     <TABLES>
+      <RSTBL>
+       <PARAMETER>IT_DATA</PARAMETER>
+       <DBSTRUCT>ZGTSDS0031</DBSTRUCT>
+      </RSTBL>
+     </TABLES>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>I_LFART</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>납품 유형</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_WADAT</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>출고일</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>E_TYPE</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>메시지 유형: S 성공, E 오류, W 경고, I 정보, A 중단</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>E_MSG</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>메시지 텍스트</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>IT_DATA</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>[GT_SD]  DO 생성_적송</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+    <item>
+     <FUNCNAME>ZGTSD_JS_GI</FUNCNAME>
+     <SHORT_TEXT>[GT] 적송 - 출고처리</SHORT_TEXT>
+     <EXPORT>
+      <RSEXP>
+       <PARAMETER>E_TYPE</PARAMETER>
+       <TYP>BAPI_MTYPE</TYP>
+      </RSEXP>
+      <RSEXP>
+       <PARAMETER>E_MSG</PARAMETER>
+       <TYP>BAPI_MSG</TYP>
+      </RSEXP>
+     </EXPORT>
+     <TABLES>
+      <RSTBL>
+       <PARAMETER>IT_DATA</PARAMETER>
+       <DBSTRUCT>ZGTSDS0032</DBSTRUCT>
+      </RSTBL>
+     </TABLES>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>E_TYPE</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>메시지 유형: S 성공, E 오류, W 경고, I 정보, A 중단</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>E_MSG</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>메시지 텍스트</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>IT_DATA</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>[GT_SD] 출고처리_적송</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+    <item>
+     <FUNCNAME>ZGTSD_JS_GOODSMVT_CREATE</FUNCNAME>
+     <SHORT_TEXT>[GT] 적송 - 적송창고 이동</SHORT_TEXT>
+     <EXPORT>
+      <RSEXP>
+       <PARAMETER>E_TYPE</PARAMETER>
+       <TYP>BAPI_MTYPE</TYP>
+      </RSEXP>
+      <RSEXP>
+       <PARAMETER>E_MSG</PARAMETER>
+       <TYP>BAPI_MSG</TYP>
+      </RSEXP>
+     </EXPORT>
+     <TABLES>
+      <RSTBL>
+       <PARAMETER>IT_DATA</PARAMETER>
+       <DBSTRUCT>ZGTSDS0029</DBSTRUCT>
+      </RSTBL>
+     </TABLES>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>E_TYPE</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>메시지 유형: S 성공, E 오류, W 경고, I 정보, A 중단</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>E_MSG</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>메시지 텍스트</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>IT_DATA</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>[GT_SD] 적송창고 이동_적송</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+    <item>
+     <FUNCNAME>ZGTSD_JS_RESTORE_ATTRIBUTE_DO</FUNCNAME>
+     <SHORT_TEXT>[GT] 적송 - 기존DO 품목라인 주요속성 원복</SHORT_TEXT>
+     <EXPORT>
+      <RSEXP>
+       <PARAMETER>E_TYPE</PARAMETER>
+       <TYP>BAPI_MTYPE</TYP>
+      </RSEXP>
+      <RSEXP>
+       <PARAMETER>E_MSG</PARAMETER>
+       <TYP>BAPI_MSG</TYP>
+      </RSEXP>
+     </EXPORT>
+     <TABLES>
+      <RSTBL>
+       <PARAMETER>IT_DATA</PARAMETER>
+       <DBSTRUCT>ZGTSDS0034</DBSTRUCT>
+      </RSTBL>
+     </TABLES>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>E_TYPE</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>메시지 유형: S 성공, E 오류, W 경고, I 정보, A 중단</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>E_MSG</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>메시지 텍스트</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>IT_DATA</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>[GT_SD] 기존DO 품목라인 주요속성 원복</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+    <item>
+     <FUNCNAME>ZGTSD_JS_RESTORE_BATCH_LINE</FUNCNAME>
+     <SHORT_TEXT>[GT] 적송 - 기존DO 품목 배치분할 라인 원복</SHORT_TEXT>
+     <EXPORT>
+      <RSEXP>
+       <PARAMETER>E_TYPE</PARAMETER>
+       <TYP>BAPI_MTYPE</TYP>
+      </RSEXP>
+      <RSEXP>
+       <PARAMETER>E_MSG</PARAMETER>
+       <TYP>BAPI_MSG</TYP>
+      </RSEXP>
+     </EXPORT>
+     <TABLES>
+      <RSTBL>
+       <PARAMETER>IT_DATA</PARAMETER>
+       <DBSTRUCT>ZGTSDS0036</DBSTRUCT>
+      </RSTBL>
+     </TABLES>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>E_TYPE</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>메시지 유형: S 성공, E 오류, W 경고, I 정보, A 중단</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>E_MSG</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>메시지 텍스트</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>IT_DATA</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>[GT_SD] 기존 DO 품목라인 배치분할 라인 원복</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+    <item>
+     <FUNCNAME>ZGTSD_JS_SAVE_DO_INFO</FUNCNAME>
+     <SHORT_TEXT>[GT] 적송 - DO 정보 저장</SHORT_TEXT>
+     <EXPORT>
+      <RSEXP>
+       <PARAMETER>E_TYPE</PARAMETER>
+       <TYP>BAPI_MTYPE</TYP>
+      </RSEXP>
+      <RSEXP>
+       <PARAMETER>E_MSG</PARAMETER>
+       <TYP>BAPI_MSG</TYP>
+      </RSEXP>
+     </EXPORT>
+     <TABLES>
+      <RSTBL>
+       <PARAMETER>IT_LIKP</PARAMETER>
+       <DBSTRUCT>ZGTSDT9110</DBSTRUCT>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>IT_LIPS</PARAMETER>
+       <DBSTRUCT>ZGTSDT9120</DBSTRUCT>
+      </RSTBL>
+     </TABLES>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>E_TYPE</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>메시지 유형: S 성공, E 오류, W 경고, I 정보, A 중단</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>E_MSG</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>메시지 텍스트</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>IT_LIKP</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>[GT_SD] 적송처리 - 납품 헤더데이타</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>IT_LIPS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>SD 문서: 납품: 품목 데이터</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+    <item>
+     <FUNCNAME>ZGTSD_JS_SERVICE_GI</FUNCNAME>
+     <SHORT_TEXT>[GT] 적송 - DO 서비스 출고</SHORT_TEXT>
+     <EXPORT>
+      <RSEXP>
+       <PARAMETER>E_TYPE</PARAMETER>
+       <TYP>BAPI_MTYPE</TYP>
+      </RSEXP>
+      <RSEXP>
+       <PARAMETER>E_MSG</PARAMETER>
+       <TYP>BAPI_MSG</TYP>
+      </RSEXP>
+     </EXPORT>
+     <TABLES>
+      <RSTBL>
+       <PARAMETER>IT_DATA</PARAMETER>
+       <DBSTRUCT>ZGTSDS0028</DBSTRUCT>
+      </RSTBL>
+     </TABLES>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>E_TYPE</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>메시지 유형: S 성공, E 오류, W 경고, I 정보, A 중단</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>E_MSG</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>메시지 텍스트</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>IT_DATA</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>[GT_SD] DO 서비스 출고_적송</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+    <item>
+     <FUNCNAME>ZGTSD_JS_SET_HEADER_DO_BLOCK</FUNCNAME>
+     <SHORT_TEXT>[GT] 적송 - DO 납품보류 설정</SHORT_TEXT>
+     <EXPORT>
+      <RSEXP>
+       <PARAMETER>E_TYPE</PARAMETER>
+       <TYP>BAPI_MTYPE</TYP>
+      </RSEXP>
+      <RSEXP>
+       <PARAMETER>E_MSG</PARAMETER>
+       <TYP>BAPI_MSG</TYP>
+      </RSEXP>
+     </EXPORT>
+     <TABLES>
+      <RSTBL>
+       <PARAMETER>IT_DATA</PARAMETER>
+       <DBSTRUCT>ZGTSDS0022</DBSTRUCT>
+      </RSTBL>
+     </TABLES>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>E_TYPE</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>메시지 유형: S 성공, E 오류, W 경고, I 정보, A 중단</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>E_MSG</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>메시지 텍스트</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>IT_DATA</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>[GT_SD] DO 납품보류</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+    <item>
+     <FUNCNAME>ZGTSD_JS_UPDATE_INITIAL_WEIGHT</FUNCNAME>
+     <SHORT_TEXT>[GT] 적송 - DO 최초중량정보 업데이트</SHORT_TEXT>
+     <EXPORT>
+      <RSEXP>
+       <PARAMETER>E_TYPE</PARAMETER>
+       <TYP>BAPI_MTYPE</TYP>
+      </RSEXP>
+      <RSEXP>
+       <PARAMETER>E_MSG</PARAMETER>
+       <TYP>BAPI_MSG</TYP>
+      </RSEXP>
+     </EXPORT>
+     <TABLES>
+      <RSTBL>
+       <PARAMETER>IT_DATA</PARAMETER>
+       <DBSTRUCT>ZGTSDS0027</DBSTRUCT>
+      </RSTBL>
+     </TABLES>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>E_TYPE</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>메시지 유형: S 성공, E 오류, W 경고, I 정보, A 중단</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>E_MSG</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>메시지 텍스트</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>IT_DATA</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>[GT_SD] DO 최초중량정보 업데이트_적송</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+    <item>
+     <FUNCNAME>ZGTSD_MAECHUL_BILL_BDC_GO</FUNCNAME>
+     <SHORT_TEXT>매출마감관련 Recording Common Routin</SHORT_TEXT>
+     <IMPORT>
+      <RSIMP>
+       <PARAMETER>I_IMODE</PARAMETER>
+       <DBFIELD>HRVCOST-MODE</DBFIELD>
+       <OPTIONAL>X</OPTIONAL>
+       <REFERENCE>X</REFERENCE>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_UCOMM</PARAMETER>
+       <DBFIELD>SYST-UCOMM</DBFIELD>
+       <OPTIONAL>X</OPTIONAL>
+       <REFERENCE>X</REFERENCE>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_FKDAT</PARAMETER>
+       <DBFIELD>VBRK-FKDAT</DBFIELD>
+       <OPTIONAL>X</OPTIONAL>
+       <REFERENCE>X</REFERENCE>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_TCODE</PARAMETER>
+       <OPTIONAL>X</OPTIONAL>
+       <REFERENCE>X</REFERENCE>
+       <TYP>SY-TCODE</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_FLAG</PARAMETER>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>CHAR01</TYP>
+      </RSIMP>
+     </IMPORT>
+     <EXPORT>
+      <RSEXP>
+       <PARAMETER>E_SUBRC</PARAMETER>
+       <DBFIELD>SYST-SUBRC</DBFIELD>
+       <REFERENCE>X</REFERENCE>
+      </RSEXP>
+      <RSEXP>
+       <PARAMETER>E_MESG</PARAMETER>
+       <DBFIELD>SYST-RTITL</DBFIELD>
+       <REFERENCE>X</REFERENCE>
+      </RSEXP>
+     </EXPORT>
+     <TABLES>
+      <RSTBL>
+       <PARAMETER>IZSDS011</PARAMETER>
+       <DBSTRUCT>ZSDS011</DBSTRUCT>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>IZSDS012</PARAMETER>
+       <DBSTRUCT>ZSDS012</DBSTRUCT>
+      </RSTBL>
+     </TABLES>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>I_IMODE</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>데이타전송 처리모드</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_UCOMM</PARAMETER>
+       <KIND>P</KIND>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_FKDAT</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>대금청구 인덱스 및 인쇄출력에 대한 대금청구일</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_TCODE</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>ABAP System Field: Current Transaction Code</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_FLAG</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>길이 1의 문자 필드</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>E_SUBRC</PARAMETER>
+       <KIND>P</KIND>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>E_MESG</PARAMETER>
+       <KIND>P</KIND>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>IZSDS011</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>매출마감관련 구조1(납품번호)</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>IZSDS012</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>매출마감관련 구조2(BDC Recording Internal TBL)</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+    <item>
+     <FUNCNAME>ZGTSD_PICKING_STATUS</FUNCNAME>
+     <SHORT_TEXT>[GT] 납품문서/항목별 피킹상태 조회</SHORT_TEXT>
+     <EXPORT>
+      <RSEXP>
+       <PARAMETER>E_TYPE</PARAMETER>
+       <TYP>BAPI_MTYPE</TYP>
+      </RSEXP>
+      <RSEXP>
+       <PARAMETER>E_MSG</PARAMETER>
+       <TYP>BAPI_MSG</TYP>
+      </RSEXP>
+     </EXPORT>
+     <TABLES>
+      <RSTBL>
+       <PARAMETER>IT_DATA</PARAMETER>
+       <DBSTRUCT>ZGTSDS0050</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>ET_DATA</PARAMETER>
+       <DBSTRUCT>ZGTSDS0051</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+     </TABLES>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>E_TYPE</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>메시지 유형: S 성공, E 오류, W 경고, I 정보, A 중단</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>E_MSG</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>메시지 텍스트</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>IT_DATA</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>[GT_SD] 납품문서/항목별 피킹상태 INPUT</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>ET_DATA</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>[GT_SD] 납품문서/항목별 피킹상태 OUTPUT</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+    <item>
+     <FUNCNAME>ZGTSD_RECEIVE_MCHA_LINK_INFO</FUNCNAME>
+     <SHORT_TEXT>[GT] 케이블 상품 LINK 정보 수신(From MM)</SHORT_TEXT>
+     <IMPORT>
+      <RSIMP>
+       <PARAMETER>I_VBELN</PARAMETER>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>VBELN_VA</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_POSNR</PARAMETER>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>POSNR_VA</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_PSTYV</PARAMETER>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>PSTYV</TYP>
+      </RSIMP>
+     </IMPORT>
+     <EXPORT>
+      <RSEXP>
+       <PARAMETER>E_TYPE</PARAMETER>
+       <TYP>BAPI_MTYPE</TYP>
+      </RSEXP>
+      <RSEXP>
+       <PARAMETER>E_MSG</PARAMETER>
+       <TYP>BAPI_MSG</TYP>
+      </RSEXP>
+     </EXPORT>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>I_VBELN</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>판매 문서</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_POSNR</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>판매 문서 항목</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_PSTYV</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>판매 문서 항목 범주</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>E_TYPE</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>메시지 유형: S 성공, E 오류, W 경고, I 정보, A 중단</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>E_MSG</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>메시지 텍스트</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+    <item>
+     <FUNCNAME>ZGTSD_RECEIVE_STOCK_LINK_INFO</FUNCNAME>
+     <SHORT_TEXT>[GT] 재고 LINK 정보 수신</SHORT_TEXT>
+     <IMPORT>
+      <RSIMP>
+       <PARAMETER>I_VBELN</PARAMETER>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>VBELN_VA</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_POSNR</PARAMETER>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>POSNR_VA</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_MVGR3</PARAMETER>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>MVGR3</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_LIFSP</PARAMETER>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>LIFSP</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_FIXMG</PARAMETER>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>FIXMG</TYP>
+      </RSIMP>
+     </IMPORT>
+     <EXPORT>
+      <RSEXP>
+       <PARAMETER>E_TYPE</PARAMETER>
+       <TYP>BAPI_MTYPE</TYP>
+      </RSEXP>
+      <RSEXP>
+       <PARAMETER>E_MSG</PARAMETER>
+       <TYP>BAPI_MSG</TYP>
+      </RSEXP>
+     </EXPORT>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>I_VBELN</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>판매 문서</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_POSNR</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>판매 문서 항목</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_MVGR3</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>자재 그룹 3</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_LIFSP</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>기본 납품 보류</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_FIXMG</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>납품일 및 수량(고정)</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>E_TYPE</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>메시지 유형: S 성공, E 오류, W 경고, I 정보, A 중단</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>E_MSG</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>메시지 텍스트</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+    <item>
+     <FUNCNAME>ZGTSD_SHIP_REQ_DUE_LIST_AMT</FUNCNAME>
+     <SHORT_TEXT>[GT] 미 출하확정량 금액 산출</SHORT_TEXT>
+     <IMPORT>
+      <RSIMP>
+       <PARAMETER>I_PARTNER</PARAMETER>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>BU_PARTNER</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_SEGMENT</PARAMETER>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>KKBER</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_FROMDATE</PARAMETER>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>SY-DATUM</TYP>
+      </RSIMP>
+     </IMPORT>
+     <EXPORT>
+      <RSEXP>
+       <PARAMETER>E_AMOUNT</PARAMETER>
+       <TYP>UKM_COMM_ACTUAL_ITEM</TYP>
+      </RSEXP>
+      <RSEXP>
+       <PARAMETER>E_WAERS</PARAMETER>
+       <TYP>WAERS</TYP>
+      </RSEXP>
+      <RSEXP>
+       <PARAMETER>E_TYPE</PARAMETER>
+       <TYP>BAPI_MTYPE</TYP>
+      </RSEXP>
+      <RSEXP>
+       <PARAMETER>E_MSG</PARAMETER>
+       <TYP>BAPI_MSG</TYP>
+      </RSEXP>
+     </EXPORT>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>I_PARTNER</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>비즈니스 파트너 번호</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_SEGMENT</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>여신 관리 영역</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_FROMDATE</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>ABAP system field: Current date of application server</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>E_AMOUNT</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>리포팅 통화의 약정</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>E_WAERS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>통화 키</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>E_TYPE</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>메시지 유형: S 성공, E 오류, W 경고, I 정보, A 중단</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>E_MSG</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>메시지 텍스트</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+   </FUNCTIONS>
+  </asx:values>
+ </asx:abap>
+</abapGit>

@@ -1,0 +1,86 @@
+FUNCTION ZGTSD_JS_SAVE_DO_INFO.
+*"----------------------------------------------------------------------
+*"*"Local Interface:
+*"  EXPORTING
+*"     VALUE(E_TYPE) TYPE  BAPI_MTYPE
+*"     VALUE(E_MSG) TYPE  BAPI_MSG
+*"  TABLES
+*"      IT_LIKP STRUCTURE  ZGTSDT9110
+*"      IT_LIPS STRUCTURE  ZGTSDT9120
+*"----------------------------------------------------------------------
+  DATA: LV_SUBRC TYPE SY-SUBRC.
+  DATA: LV_CHK1,LV_CHK2.
+
+*-01. CHECK
+  IF NOT ( IT_LIKP[] IS NOT INITIAL AND
+           IT_LIPS[] IS NOT INITIAL      ).
+    E_TYPE = GC_E.
+    E_MSG  = TEXT-M04.
+    EXIT.
+  ENDIF.
+
+  DATA(LV_VBELN) = VALUE #( IT_LIKP[ 1 ]-VBELN OPTIONAL ).
+
+  SELECT SINGLE *
+    FROM ZGTSDT9110
+   WHERE VBELN EQ @LV_VBELN
+     AND LOEVM NE @SPACE
+    INTO @DATA(LS_ZGTSDT9110).
+  IF SY-SUBRC EQ 0.
+    LV_CHK1 = GC_X.
+  ENDIF.
+
+  SELECT SINGLE *
+    FROM ZGTSDT9120
+   WHERE VBELN EQ @LV_VBELN
+     AND LOEVM NE @SPACE
+    INTO @DATA(LS_ZGTSDT9120).
+  IF SY-SUBRC EQ 0.
+    LV_CHK2 = GC_X.
+  ENDIF.
+
+  LV_SUBRC = 0.
+
+  TRY.
+      IF LV_CHK1 EQ GC_X.
+        DELETE FROM ZGTSDT9110 WHERE VBELN EQ LV_VBELN.
+        IF SY-SUBRC NE 0.
+          LV_SUBRC = 4.
+        ENDIF.
+      ENDIF.
+
+      IF LV_CHK2 EQ GC_X AND LV_SUBRC EQ 0.
+        DELETE FROM ZGTSDT9120 WHERE VBELN EQ LV_VBELN.
+        IF SY-SUBRC NE 0.
+          LV_SUBRC = 4.
+        ENDIF.
+      ENDIF.
+
+      IF LV_SUBRC EQ 0.
+        MODIFY ZGTSDT9110 FROM TABLE IT_LIKP.
+        IF SY-SUBRC EQ 0.
+          MODIFY ZGTSDT9120 FROM TABLE IT_LIPS.
+          IF SY-SUBRC NE 0.
+            LV_SUBRC = 4.
+          ENDIF.
+        ELSE.
+          LV_SUBRC = 4.
+        ENDIF.
+      ENDIF.
+    CATCH CX_ROOT INTO DATA(LO_REF).
+      LV_SUBRC = 4.
+  ENDTRY.
+
+  IF LV_SUBRC EQ 0.
+    COMMIT WORK AND WAIT.
+
+    E_TYPE = GC_S.
+    E_MSG  = TEXT-S01.
+  ELSE.
+    ROLLBACK WORK.
+
+    E_TYPE = GC_E.
+    E_MSG  = TEXT-M05.
+  ENDIF.
+
+ENDFUNCTION.

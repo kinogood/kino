@@ -1,0 +1,105 @@
+FUNCTION ZGTSD_MAECHUL_BILL_BDC_GO.
+*"----------------------------------------------------------------------
+*"*"Local Interface:
+*"  IMPORTING
+*"     REFERENCE(I_IMODE) LIKE  HRVCOST-MODE OPTIONAL
+*"     REFERENCE(I_UCOMM) LIKE  SYST-UCOMM OPTIONAL
+*"     REFERENCE(I_FKDAT) LIKE  VBRK-FKDAT OPTIONAL
+*"     REFERENCE(I_TCODE) TYPE  SY-TCODE OPTIONAL
+*"     VALUE(I_FLAG) TYPE  CHAR01 OPTIONAL
+*"  EXPORTING
+*"     REFERENCE(E_SUBRC) LIKE  SYST-SUBRC
+*"     REFERENCE(E_MESG) LIKE  SYST-RTITL
+*"  TABLES
+*"      IZSDS011 STRUCTURE  ZSDS011
+*"      IZSDS012 STRUCTURE  ZSDS012
+*"----------------------------------------------------------------------
+  DATA  : LL_CNT_CHECK(1) TYPE C.
+  DATA  : L_POSTING(1) TYPE C.
+
+
+
+  CLEAR : G_TMP_T,  G_TMP_T[],
+          G_TMP2_T, G_TMP2_T[],
+          G_BDC_T,  G_BDC_T[].
+
+  CLEAR : L_POSTING, G_TCODE,G_TAD.
+
+  G_TAD = I_FLAG.
+
+  L_POSTING = 'X'.
+
+  G_IMODE  =  I_IMODE.
+  G_UCOMM  =  I_UCOMM.
+  G_FKDAT  =  I_FKDAT.
+
+  G_TCODE  =  I_TCODE.
+
+  G_TMP_T[]   =  IZSDS011[].
+  G_TMP2_T[]  =  IZSDS011[].
+
+  LOOP AT IZSDS012.
+
+    MOVE-CORRESPONDING  IZSDS012  TO  G_BDC_T.
+    APPEND  G_BDC_T.
+    CLEAR  G_BDC_T.
+
+    IF L_POSTING NE 'A'.
+** Request by 최석원 : 2006-04-20
+** 샘플건과 대금청구건이 동시에 들어가 있을 때 검출 logic 추가
+      CLEAR LL_CNT_CHECK.
+
+      SELECT COUNT(*)
+        INTO LL_CNT_CHECK
+        FROM LIPS
+       WHERE VBELN = IZSDS012-VBELN
+         AND POSNR = IZSDS012-POSNR
+         AND VGTYP <> 'I'.
+
+      IF LL_CNT_CHECK > 0.
+        L_POSTING  =  'A'.
+      ELSE.
+        L_POSTING  =  'X'.
+      ENDIF.
+
+    ENDIF.
+
+  ENDLOOP.
+
+  CLEAR LL_CNT_CHECK.
+
+  EXPORT L_POSTING TO MEMORY ID 'ZSD028'.
+
+  CLEAR L_POSTING.
+*  endloop.
+
+  SORT G_TMP_T BY VBELN.
+  SORT G_TMP2_T BY VBELN.
+  SORT G_BDC_T BY VBELN.
+
+** 내수/로칼구분
+  READ TABLE G_BDC_T INDEX 1.
+
+  IF  G_BDC_T-KURRF IS INITIAL  OR
+      G_BDC_T-KURRF = SPACE.
+    G_GUBUN  =  'D'.
+  ELSE.
+    G_GUBUN  =  'E'.
+  ENDIF.
+
+*  IF G_TCODE = 'ZGTSDR0120' OR G_TCODE = 'ZGTSDR1080'.
+*    G_UCOMM  =  'ZGT'.
+*  ENDIF.
+
+** Request by 윤방희C : 2005-06-30
+  DATA : L_MAECHUL.
+  L_MAECHUL  =  'X'.
+  EXPORT L_MAECHUL TO MEMORY ID 'ZSD013'.
+
+** BDC Recording
+  PERFORM  BDC_PROCESS_RTN.
+
+  E_SUBRC  =  G_SUBRC.
+  E_MESG  =  G_MESG.
+
+ENDFUNCTION.

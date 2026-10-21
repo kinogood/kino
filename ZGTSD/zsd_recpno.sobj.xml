@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_SOBJ" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <SWOTOL>
+    <SWOTOL>
+     <OBJTYPE>ZSD_RECPNO</OBJTYPE>
+     <AREA>*ROOT</AREA>
+     <AREACLASS>04</AREACLASS>
+     <MAINENTRY>X</MAINENTRY>
+    </SWOTOL>
+   </SWOTOL>
+   <TOJTB>
+    <TOJTB>
+     <NAME>ZSD_RECPNO</NAME>
+     <ACTIVELANG>3</ACTIVELANG>
+     <PROGNAME>ZSD_RECPNO</PROGNAME>
+     <EDITELEM>ZSD_RECPNO</EDITELEM>
+     <EPRIMETHOD>Display</EPRIMETHOD>
+     <APPLIC>V</APPLIC>
+     <CREA_REL>757</CREA_REL>
+     <OBJTYPECLS>01</OBJTYPECLS>
+     <MODELONLY>X</MODELONLY>
+    </TOJTB>
+   </TOJTB>
+   <TOJTT>
+    <TOJTT>
+     <NAME>ZSD_RECPNO</NAME>
+     <LANGUAGE>3</LANGUAGE>
+     <NTEXT>[SD] 커미션 계약</NTEXT>
+     <STEXT>ZSD_ZKONA</STEXT>
+    </TOJTT>
+   </TOJTT>
+  </asx:values>
+ </asx:abap>
+</abapGit>

@@ -1,0 +1,29 @@
+FUNCTION ZGTSD_UPDATE_ZSD0018T_GO.
+*"----------------------------------------------------------------------
+*"*"Update Function Module:
+*"
+*"*"Local Interface:
+*"  IMPORTING
+*"     VALUE(IS_VBAK) TYPE  VBAK OPTIONAL
+*"     VALUE(IS_ZSD0018T) TYPE  ZSD0018T
+*"----------------------------------------------------------------------
+  DATA: LS_DATA TYPE ZSD0018T.
+
+  CHECK IS_VBAK-VKORG EQ '6000'.
+  CHECK IS_VBAK-AUART EQ 'B3'.
+
+  SELECT SINGLE *
+    INTO @DATA(LS_TEMP)
+    FROM ZSD0018T
+   WHERE KNUMA    EQ @IS_ZSD0018T-KNUMA
+     AND VBELN    EQ @IS_ZSD0018T-VBELN
+     AND POSNR    EQ @IS_ZSD0018T-POSNR
+     AND AUBEL    EQ @IS_ZSD0018T-AUBEL
+     AND AUPOS    EQ @IS_ZSD0018T-AUPOS
+     AND VBELN_SE EQ @IS_ZSD0018T-VBELN_SE.
+  IF SY-SUBRC EQ 0.
+    MOVE-CORRESPONDING IS_ZSD0018T TO LS_DATA.
+    MODIFY ZSD0018T FROM LS_DATA.
+  ENDIF.
+
+ENDFUNCTION.

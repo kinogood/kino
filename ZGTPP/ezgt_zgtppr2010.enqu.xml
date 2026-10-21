@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_ENQU" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <DD25V>
+    <VIEWNAME>EZGT_ZGTPPR2010</VIEWNAME>
+    <DDLANGUAGE>3</DDLANGUAGE>
+    <AGGTYPE>E</AGGTYPE>
+    <ROOTTAB>ZGTPPT2010</ROOTTAB>
+    <DDTEXT>조장구성표 구성 락오브젝트</DDTEXT>
+   </DD25V>
+   <DD26E_TABLE>
+    <DD26E>
+     <VIEWNAME>EZGT_ZGTPPR2010</VIEWNAME>
+     <TABNAME>ZGTPPT2010</TABNAME>
+     <TABPOS>0001</TABPOS>
+     <FORTABNAME>ZGTPPT2010</FORTABNAME>
+     <ENQMODE>E</ENQMODE>
+    </DD26E>
+   </DD26E_TABLE>
+   <DD27P_TABLE>
+    <DD27P>
+     <VIEWNAME>EZGT_ZGTPPR2010</VIEWNAME>
+     <OBJPOS>0001</OBJPOS>
+     <VIEWFIELD>GRPNR</VIEWFIELD>
+     <TABNAME>ZGTPPT2010</TABNAME>
+     <FIELDNAME>GRPNR</FIELDNAME>
+     <KEYFLAG>X</KEYFLAG>
+     <ENQMODE>E</ENQMODE>
+     <MEMORYID>ZGRPNR</MEMORYID>
+    </DD27P>
+   </DD27P_TABLE>
+  </asx:values>
+ </asx:abap>
+</abapGit>

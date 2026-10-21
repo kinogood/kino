@@ -1,0 +1,121 @@
+*&---------------------------------------------------------------------*
+*& Include          ZGTPPR1060TOP
+*&---------------------------------------------------------------------*
+TABLES: ZGTPPT1060, MAKT, T001W, ZGTPPT1010.
+
+DATA: BEGIN OF GS_1060.
+        INCLUDE STRUCTURE ZGTPPT1060.
+DATA:   MAKTX LIKE MAKT-MAKTX,
+        NAME1 LIKE T001W-NAME1,
+      END OF GS_1060.
+
+DATA: BEGIN OF GS_DATA,
+        ID            LIKE ICON-ID,               "ID
+        ROUT_STAT     LIKE ZGTPPT1060-ROUT_STAT,  "처리상태
+        ROUT_MSG      LIKE ZGTPPT1060-ROUT_MSG,   "메세지
+        PTYPE(10),                                "처리유형
+        MATNR         LIKE ZGTPPT1060-MATNR,      "완제품코드
+        MAKTX         LIKE MAKT-MAKTX,            "완제품내역
+        WERKS         LIKE ZGTPPT1060-WERKS,      "플랜트
+        NAME1         LIKE T001W-NAME1,           "플랜트내역
+        ZIFKEY        LIKE ZGTPPT1060-ZIFKEY,     "인터페이스키
+        ZSYSTEM_ID    LIKE ZGTPPT1060-ZSYSTEM_ID, "송신시스템
+        ZSERNO        LIKE ZGTPPT1060-ZSERNO,     "일련번호
+        STDDT         LIKE ZGTPPT1060-STDDT,      "기준일자
+*        ROUT_MATNR    LIKE ZGTPPT1060-ROUT_MATNR, "품목코드
+*        ROUT_MAKTX    LIKE MAKT-MAKTX,            "품목내역
+        WC_TYPE       LIKE ZGTPPT1060-WC_TYPE,    "작업유형
+        TYPE_DESC(10),                            "유형내역
+        ZTIME         LIKE ZGTPPT1060-ZTIME,      "작업시간
+        ZUNIT         LIKE ZGTPPT1060-ZUNIT,      "시간단위
+        IFDAT         LIKE ZGTPPT1060-IFDAT,      "전송일자
+        IFTIM         LIKE ZGTPPT1060-IFTIM,      "전송시간
+        IFNAM         LIKE ZGTPPT1060-IFNAM,      "전송자
+
+        VORNR         LIKE PLPO-VORNR,            "액티비티
+        ARBPL         LIKE CRHD-ARBPL,            "작업장
+      END OF GS_DATA.
+
+DATA: BEGIN OF GS_ACT_SUM,
+        MATNR LIKE ZGTPPT1060-MATNR,      "완제품코드
+        WERKS LIKE ZGTPPT1060-WERKS,      "플랜트
+        ZTIME LIKE ZGTPPT1060-ZTIME,      "작업시간
+      END OF GS_ACT_SUM.
+
+DATA: GO_CONTAIN_0100 TYPE REF TO CL_GUI_DOCKING_CONTAINER.
+DATA: GO_GRID_0100 TYPE REF TO CL_GUI_ALV_GRID.
+DATA: GS_VARIANT TYPE DISVARIANT.
+DATA: GS_LAYOUT_0100 TYPE LVC_S_LAYO.
+DATA: GT_EXCLUDE_0100 TYPE UI_FUNCTIONS.
+DATA: GT_FIELDCAT_0100 TYPE LVC_T_FCAT.
+
+DATA: GT_1060    LIKE TABLE OF GS_1060,
+      GT_DATA    LIKE TABLE OF GS_DATA,
+      GT_ACT_SUM LIKE TABLE OF GS_ACT_SUM,
+      GT_1010    LIKE TABLE OF ZGTPPT1010.
+
+*- BAPI
+DATA : GT_TASK         TYPE TABLE OF BAPI1012_TSK_C,
+       GS_TASK         TYPE BAPI1012_TSK_C,
+       GT_MAT_TASK_ALC TYPE TABLE OF BAPI1012_MTK_C,
+       GS_MAT_TASK_ALC TYPE BAPI1012_MTK_C,
+       GT_OPERATION    TYPE TABLE OF BAPI1012_OPR_C,
+       GS_OPERATION    TYPE BAPI1012_OPR_C,
+       GT_RETURN       TYPE TABLE OF BAPIRET2,
+       GS_RETURN       TYPE BAPIRET2,
+       GV_GROUP        TYPE PLKO-PLNNR,
+       GV_GROUPCOUNTER TYPE PLKO-PLNAL,
+       GV_PLNNR        TYPE MAPL-PLNNR,
+       GV_VORNR        TYPE PLPO-VORNR.
+
+*- BDC
+DATA: BDCDATA   LIKE BDCDATA    OCCURS 0 WITH HEADER LINE,
+      MESSTAB   LIKE BDCMSGCOLL OCCURS 0 WITH HEADER LINE,
+      GS_PARAMS TYPE CTU_PARAMS.
+
+DATA: GS_CSTMAT LIKE CSTMAT.
+DATA: BEGIN OF GT_STB OCCURS 0.
+        INCLUDE STRUCTURE STPOX.
+DATA: END OF GT_STB.
+
+DATA: GV_OK_CODE TYPE SYUCOMM,
+      GV_DBCNT   TYPE CHAR10.
+
+DATA: GV_REPID TYPE SYREPID,
+      GV_VALID TYPE CHAR01,
+      GV_INDEX TYPE SY-TABIX,
+      GV_TEXT  TYPE CHAR255.
+
+CONSTANTS: GC_C          TYPE CHAR1    VALUE 'C',
+           GC_D          TYPE CHAR1    VALUE 'D',
+           GC_E          TYPE CHAR1    VALUE 'E',
+           GC_L          TYPE CHAR1    VALUE 'L',
+           GC_R          TYPE CHAR1    VALUE 'R',
+           GC_S          TYPE CHAR1    VALUE 'S',
+           GC_W          TYPE CHAR1    VALUE 'W',
+           GC_X          TYPE CHAR1    VALUE 'X',
+           GC_ALL        TYPE CHAR1    VALUE '*',
+           GC_UMREN      TYPE CP_UMREN VALUE '1',
+           GC_AS         TYPE CHAR2    VALUE 'AS',
+           GC_HALB       TYPE MTART    VALUE 'HALB',
+           GC_FERT       TYPE MTART    VALUE 'FERT',
+           GC_CAPID_PP01 TYPE CAPID    VALUE 'PP01',
+           GC_ASM001     TYPE ARBPL    VALUE 'ASM001',
+           GC_0010       TYPE VORNR    VALUE '0010'.
+
+DEFINE _CL.
+  CLEAR : &1,  &1[].
+END-OF-DEFINITION.
+DEFINE M_CUNIT.
+  IF &1 = 'I'.
+    CALL FUNCTION 'CONVERSION_EXIT_CUNIT_INPUT'
+        EXPORTING  INPUT  = &2
+        IMPORTING  OUTPUT = &3
+       EXCEPTIONS  ERROR_MESSAGE = 99.
+  ELSE.
+    CALL FUNCTION 'CONVERSION_EXIT_CUNIT_OUTPUT'
+        EXPORTING  INPUT  = &2
+        IMPORTING  OUTPUT = &3
+       EXCEPTIONS  ERROR_MESSAGE = 99.
+  ENDIF.
+END-OF-DEFINITION.

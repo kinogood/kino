@@ -1,0 +1,611 @@
+class ZCL_IM_SD_UKM_BP_ADD_FIELD definition
+  public
+  final
+  create public .
+
+public section.
+
+  interfaces IF_EX_UKM_BP_ADD_FIELDS .
+protected section.
+private section.
+ENDCLASS.
+
+
+
+CLASS ZCL_IM_SD_UKM_BP_ADD_FIELD IMPLEMENTATION.
+
+
+  METHOD IF_EX_UKM_BP_ADD_FIELDS~FILL_ADD_INFOS.
+
+    DATA:
+      LCL_ADAPTER TYPE REF TO   XO_BDT_ADAPTER,
+      LR_MO       TYPE REF TO   FSBP_MEMORY_OBJECT,
+      LT_BP3100   TYPE TABLE OF BP3100,
+      LS_BP3100   LIKE LINE  OF LT_BP3100,
+      LV_PARTNER  TYPE          BU_PARTNER,
+      LS_ADD_INFO TYPE          UKM_S_ADD_INFO.
+
+
+    "take over passed partner or try to retrive partner from BDT dialog
+    IF I_PARTNER IS NOT INITIAL.
+      LV_PARTNER = I_PARTNER.
+    ELSE.
+      LCL_ADAPTER = FSBP_BDT_ADAPTER_INTERN=>GET_INSTANCE( FSBP_BDT_ADAPTER=>BDT_OBJAP ).
+      LV_PARTNER = LCL_ADAPTER->GET_CURRENT_OBJECT( ).
+    ENDIF.
+
+    "read BP3100 data from memory instance
+    LR_MO ?= FSBP_MEMORY_FACTORY=>GET_INSTANCE(
+               I_PARTNER    = LV_PARTNER
+               I_TABLE_NAME = IF_FSBP_CONST_XO_OBJECTS=>MO_BP3100 ).
+
+    LR_MO->GET_DATA_NEW( IMPORTING E_DATA_NEW = LT_BP3100 ).
+
+    "convert BP3100 data
+    LOOP AT LT_BP3100 INTO LS_BP3100.
+      CLEAR LS_ADD_INFO.
+      MOVE-CORRESPONDING LS_BP3100 TO LS_ADD_INFO.
+      LS_ADD_INFO-INFOTYPE      = LS_BP3100-DATA_TYPE.
+      LS_ADD_INFO-COUNTER       = LS_BP3100-COUNTER.
+      LS_ADD_INFO-CREDIT_SGMNT  = LS_BP3100-CRITER.
+      LS_ADD_INFO-DATE_FROM     = LS_BP3100-DATEFR.
+      LS_ADD_INFO-DATE_TO       = LS_BP3100-DATETO.
+      LS_ADD_INFO-DATE_WHEN     = LS_BP3100-ADDATE.
+      LS_ADD_INFO-TEXT          = LS_BP3100-TEXT.
+      LS_ADD_INFO-AMOUNT        = LS_BP3100-AMNT.
+      LS_ADD_INFO-CURRENCY      = LS_BP3100-CURR.
+
+      CASE LS_BP3100-ADDTYPE.
+        WHEN '10' OR '11'.
+          "collaterals
+          LS_ADD_INFO-INFOCATEGORY   = '10'.
+          LS_ADD_INFO-CHECK_RELEVANT = LS_BP3100-XFELD.
+          LS_ADD_INFO-AMOUNT         = LS_BP3100-AMNT.
+          LS_ADD_INFO-CURRENCY       = LS_BP3100-CURR.
+          LS_ADD_INFO-DATE_FOLLOW_UP = LS_BP3100-ADDATE.
+
+          "[가온전선] 추가필드
+*          LS_ADD_INFO-ZZS_PLAN        = LS_BP3100-ZZS_PLAN.
+*          LS_ADD_INFO-ZZC_PLAN_C      = LS_BP3100-ZZC_PLAN_C.
+*          LS_ADD_INFO-ZZC_PLAN_N      = LS_BP3100-ZZC_PLAN_N.
+*          LS_ADD_INFO-ZZGUR_AGY       = LS_BP3100-ZZGUR_AGY.
+*          LS_ADD_INFO-ZZAREA          = LS_BP3100-ZZAREA.
+*          LS_ADD_INFO-ZZSQUARE        = LS_BP3100-ZZSQUARE.
+*          LS_ADD_INFO-ZZCOLSEC_AMT    = LS_BP3100-ZZCOLSEC_AMT.
+*          LS_ADD_INFO-ZZCOLSEC_PRI    = LS_BP3100-ZZCOLSEC_PRI.
+*          LS_ADD_INFO-ZZCOLSEC_SET    = LS_BP3100-ZZCOLSEC_SET.
+*          LS_ADD_INFO-ZZCOLSEC_AMT_P  = LS_BP3100-ZZCOLSEC_AMT_P.
+*          LS_ADD_INFO-ZZREALEST_AMT   = LS_BP3100-ZZREALEST_AMT.
+*          LS_ADD_INFO-ZZADDRESS       = LS_BP3100-ZZADDRESS.
+          "CLEAR ls_add_info-date_when.
+        WHEN '20'.
+          "negative characteristics
+          LS_ADD_INFO-INFOCATEGORY  = '20'.
+          LS_ADD_INFO-DATE_CLEAR     = LS_BP3100-DATETO.
+
+          "[가온전선] 추가필드
+*          LS_ADD_INFO-ZZS_PLAN        = LS_BP3100-ZZS_PLAN.
+*          LS_ADD_INFO-ZZC_PLAN_C      = LS_BP3100-ZZC_PLAN_C.
+*          LS_ADD_INFO-ZZC_PLAN_N      = LS_BP3100-ZZC_PLAN_N.
+*          LS_ADD_INFO-ZZGUR_AGY       = LS_BP3100-ZZGUR_AGY.
+*          LS_ADD_INFO-ZZAREA          = LS_BP3100-ZZAREA.
+*          LS_ADD_INFO-ZZSQUARE        = LS_BP3100-ZZSQUARE.
+*          LS_ADD_INFO-ZZCOLSEC_AMT    = LS_BP3100-ZZCOLSEC_AMT.
+*          LS_ADD_INFO-ZZCOLSEC_PRI    = LS_BP3100-ZZCOLSEC_PRI.
+*          LS_ADD_INFO-ZZCOLSEC_SET    = LS_BP3100-ZZCOLSEC_SET.
+*          LS_ADD_INFO-ZZCOLSEC_AMT_P  = LS_BP3100-ZZCOLSEC_AMT_P.
+*          LS_ADD_INFO-ZZREALEST_AMT   = LS_BP3100-ZZREALEST_AMT.
+*          LS_ADD_INFO-ZZADDRESS       = LS_BP3100-ZZADDRESS.
+
+        WHEN '30'.
+          "check exceptions
+          LS_ADD_INFO-INFOCATEGORY  = '30'.
+          LS_ADD_INFO-INACTIVE_CHECK = LS_BP3100-CT_FIELD.
+        WHEN '40'.
+          "credit insurance
+          LS_ADD_INFO-INFOCATEGORY  = '40'.
+          LS_ADD_INFO-CHECK_RELEVANT = LS_BP3100-XFELD.
+          LS_ADD_INFO-AMOUNT         = LS_BP3100-AMNT.
+          LS_ADD_INFO-CURRENCY       = LS_BP3100-CURR.
+
+          "[가온전선] 추가필드
+*          LS_ADD_INFO-ZZS_PLAN        = LS_BP3100-ZZS_PLAN.
+*          LS_ADD_INFO-ZZC_PLAN_C      = LS_BP3100-ZZC_PLAN_C.
+*          LS_ADD_INFO-ZZC_PLAN_N      = LS_BP3100-ZZC_PLAN_N.
+*          LS_ADD_INFO-ZZGUR_AGY       = LS_BP3100-ZZGUR_AGY.
+*          LS_ADD_INFO-ZZAREA          = LS_BP3100-ZZAREA.
+*          LS_ADD_INFO-ZZSQUARE        = LS_BP3100-ZZSQUARE.
+*          LS_ADD_INFO-ZZCOLSEC_AMT    = LS_BP3100-ZZCOLSEC_AMT.
+*          LS_ADD_INFO-ZZCOLSEC_PRI    = LS_BP3100-ZZCOLSEC_PRI.
+*          LS_ADD_INFO-ZZCOLSEC_SET    = LS_BP3100-ZZCOLSEC_SET.
+*          LS_ADD_INFO-ZZCOLSEC_AMT_P  = LS_BP3100-ZZCOLSEC_AMT_P.
+*          LS_ADD_INFO-ZZREALEST_AMT   = LS_BP3100-ZZREALEST_AMT.
+*          LS_ADD_INFO-ZZADDRESS       = LS_BP3100-ZZADDRESS.
+
+        WHEN '50'.
+          "Limit adjustments
+          LS_ADD_INFO-INFOCATEGORY  = '50'.
+          LS_ADD_INFO-CHECK_RELEVANT = LS_BP3100-XFELD.
+          LS_ADD_INFO-AMOUNT         = LS_BP3100-AMNT.
+          LS_ADD_INFO-CURRENCY       = LS_BP3100-CURR.
+
+          "[가온전선] 추가필드
+          LS_ADD_INFO-ZZS_PLAN        = LS_BP3100-ZZS_PLAN.
+          LS_ADD_INFO-ZZC_PLAN_C      = LS_BP3100-ZZC_PLAN_C.
+          LS_ADD_INFO-ZZC_PLAN_N      = LS_BP3100-ZZC_PLAN_N.
+          LS_ADD_INFO-ZZGUR_AGY       = LS_BP3100-ZZGUR_AGY.
+          LS_ADD_INFO-ZZAREA          = LS_BP3100-ZZAREA.
+          LS_ADD_INFO-ZZSQUARE        = LS_BP3100-ZZSQUARE.
+          LS_ADD_INFO-ZZCOLSEC_AMT    = LS_BP3100-ZZCOLSEC_AMT.
+          LS_ADD_INFO-ZZCOLSEC_PRI    = LS_BP3100-ZZCOLSEC_PRI.
+          LS_ADD_INFO-ZZCOLSEC_SET    = LS_BP3100-ZZCOLSEC_SET.
+          LS_ADD_INFO-ZZCOLSEC_AMT_P  = LS_BP3100-ZZCOLSEC_AMT_P.
+          LS_ADD_INFO-ZZREALEST_AMT   = LS_BP3100-ZZREALEST_AMT.
+          LS_ADD_INFO-ZZADDRESS       = LS_BP3100-ZZADDRESS.
+
+        WHEN OTHERS.
+          CONTINUE.
+      ENDCASE.
+
+      INSERT LS_ADD_INFO INTO TABLE ET_ADD_INFOS.
+    ENDLOOP.
+
+*   METHOD 'SAVE_ADD_INFO'에서 IMPORT
+    EXPORT ET_ADD_INFOS FROM ET_ADD_INFOS TO MEMORY ID 'ADDINFO_GET'.
+
+  ENDMETHOD.
+
+
+  method IF_EX_UKM_BP_ADD_FIELDS~FILL_FIELDS.
+  endmethod.
+
+
+  METHOD IF_EX_UKM_BP_ADD_FIELDS~SAVE_ADD_INFOS.
+    DATA:
+      LT_FS_ADD_MEM TYPE TABLE OF BAPI_STR_BUPA_FS_ADDITION,
+      LT_FS_ADD_DB  TYPE TABLE OF BAPI_STR_BUPA_FS_ADDITION,
+      LT_FS_ADD_ADD TYPE TABLE OF BAPI_STR_BUPA_FS_ADDITION,
+      LT_FS_ADD_CHG TYPE TABLE OF BAPI_STR_BUPA_FS_ADDITION,
+      LT_FS_ADD_REM TYPE TABLE OF BAPI_STR_BUPA_FS_ADDITION,
+      LT_FS_ADD_X   TYPE TABLE OF BAPI_STR_BUPA_FS_ADDITI_X,
+      LS_FS_ADD_MEM TYPE BAPI_STR_BUPA_FS_ADDITION,
+      LS_FS_ADD_DB  TYPE BAPI_STR_BUPA_FS_ADDITION,
+      LS_FS_ADD_X   TYPE BAPI_STR_BUPA_FS_ADDITI_X VALUE 'XXXXXXXXXXXXXXXXXXXX',
+      LS_ADD_INFO   TYPE UKM_S_ADD_INFO,
+      L_CHGDOC      TYPE BAPI_STR_BUPA_FS_CHANGE_DOCU,
+      LT_RETURN     TYPE TABLE OF BAPIRET2,
+      L_TESTRUN     TYPE BOOLEAN VALUE ' '.
+
+    DATA: LT_DFVAL  TYPE TABLE OF BP_CRITER,
+          LS_BUT100 TYPE BUT100.
+    DATA  LD_DFVAL  TYPE  BU_DFVAL.
+    DATA: LT_BP3100 TYPE TABLE OF BP3100,
+          LS_BP3100 LIKE LINE OF LT_BP3100.
+
+    DEFINE BAPIRETURNCHECK.
+      READ TABLE LT_RETURN
+           WITH KEY TYPE = 'E'
+           TRANSPORTING NO FIELDS.
+      IF SY-SUBRC = 0.
+        RAISE FAILED.
+      ENDIF.
+    END-OF-DEFINITION.
+
+    CHECK I_TESTRUN IS INITIAL.
+* 1. transfer additional credit infos to database format
+    LOOP AT IT_ADD_INFOS INTO LS_ADD_INFO.
+      CLEAR LS_FS_ADD_MEM.
+      LS_FS_ADD_MEM-DATA_TYPE       = LS_ADD_INFO-INFOTYPE.
+      LS_FS_ADD_MEM-COUNTER         = LS_ADD_INFO-COUNTER.
+      LS_FS_ADD_MEM-CRITERIUM       = LS_ADD_INFO-CREDIT_SGMNT.
+      LS_FS_ADD_MEM-DATE_FROM       = LS_ADD_INFO-DATE_FROM.
+      LS_FS_ADD_MEM-DATE_TO         = LS_ADD_INFO-DATE_TO.
+      LS_FS_ADD_MEM-ADDITIONAL_DATE = LS_ADD_INFO-DATE_WHEN.
+      LS_FS_ADD_MEM-TEXT            = LS_ADD_INFO-TEXT.
+
+      CASE LS_ADD_INFO-INFOCATEGORY.
+        WHEN '10'.
+*       collaterals
+          LS_FS_ADD_MEM-ADDTYPE          = '10'.
+          LS_FS_ADD_MEM-CHECK_FIELD      = LS_ADD_INFO-CHECK_RELEVANT.
+          LS_FS_ADD_MEM-AMOUNT           = LS_ADD_INFO-AMOUNT.
+          LS_FS_ADD_MEM-CURRENCY         = LS_ADD_INFO-CURRENCY.
+          LS_FS_ADD_MEM-ADDITIONAL_DATE  = LS_ADD_INFO-DATE_FOLLOW_UP.
+
+          "[가온전선] 추가필드
+          LS_FS_ADD_MEM-ZZS_PLAN        = LS_ADD_INFO-ZZS_PLAN.
+          LS_FS_ADD_MEM-ZZC_PLAN_C      = LS_ADD_INFO-ZZC_PLAN_C.
+          LS_FS_ADD_MEM-ZZC_PLAN_N      = LS_ADD_INFO-ZZC_PLAN_N.
+          LS_FS_ADD_MEM-ZZGUR_AGY       = LS_ADD_INFO-ZZGUR_AGY.
+          LS_FS_ADD_MEM-ZZAREA          = LS_ADD_INFO-ZZAREA.
+          LS_FS_ADD_MEM-ZZSQUARE        = LS_ADD_INFO-ZZSQUARE.
+          LS_FS_ADD_MEM-ZZCOLSEC_AMT    = LS_ADD_INFO-ZZCOLSEC_AMT.
+          LS_FS_ADD_MEM-ZZCOLSEC_PRI    = LS_ADD_INFO-ZZCOLSEC_PRI.
+          LS_FS_ADD_MEM-ZZCOLSEC_SET    = LS_ADD_INFO-ZZCOLSEC_SET.
+          LS_FS_ADD_MEM-ZZCOLSEC_AMT_P  = LS_ADD_INFO-ZZCOLSEC_AMT_P.
+          LS_FS_ADD_MEM-ZZREALEST_AMT   = LS_ADD_INFO-ZZREALEST_AMT.
+          LS_FS_ADD_MEM-ZZADDRESS       = LS_ADD_INFO-ZZADDRESS.
+
+        WHEN '20'.
+*       negative characteristics
+          LS_FS_ADD_MEM-ADDTYPE = '20'.
+          IF LS_ADD_INFO-DATE_TO IS INITIAL.
+            LS_FS_ADD_MEM-DATE_TO = LS_ADD_INFO-DATE_CLEAR.
+          ELSE.
+            LS_FS_ADD_MEM-DATE_TO = LS_ADD_INFO-DATE_TO.
+          ENDIF.
+
+*          "[가온전선] 추가필드
+*          LS_FS_ADD_MEM-ZZS_PLAN        = LS_ADD_INFO-ZZS_PLAN.
+*          LS_FS_ADD_MEM-ZZC_PLAN_C      = LS_ADD_INFO-ZZC_PLAN_C.
+*          LS_FS_ADD_MEM-ZZC_PLAN_N      = LS_ADD_INFO-ZZC_PLAN_N.
+*          LS_FS_ADD_MEM-ZZGUR_AGY       = LS_ADD_INFO-ZZGUR_AGY.
+*          LS_FS_ADD_MEM-ZZAREA          = LS_ADD_INFO-ZZAREA.
+*          LS_FS_ADD_MEM-ZZSQUARE        = LS_ADD_INFO-ZZSQUARE.
+*          LS_FS_ADD_MEM-ZZCOLSEC_AMT    = LS_ADD_INFO-ZZCOLSEC_AMT.
+*          LS_FS_ADD_MEM-ZZCOLSEC_PRI    = LS_ADD_INFO-ZZCOLSEC_PRI.
+*          LS_FS_ADD_MEM-ZZCOLSEC_SET    = LS_ADD_INFO-ZZCOLSEC_SET.
+*          LS_FS_ADD_MEM-ZZCOLSEC_AMT_P  = LS_ADD_INFO-ZZCOLSEC_AMT_P.
+*          LS_FS_ADD_MEM-ZZREALEST_AMT   = LS_ADD_INFO-ZZREALEST_AMT.
+*          LS_FS_ADD_MEM-ZZADDRESS       = LS_ADD_INFO-ZZADDRESS.
+        WHEN '30'.
+*       check exceptions
+          LS_FS_ADD_MEM-ADDTYPE           = '30'.
+          LS_FS_ADD_MEM-CUSTOMIZING_FIELD = LS_ADD_INFO-INACTIVE_CHECK.
+        WHEN '40'.
+*       credit insurance
+          LS_FS_ADD_MEM-ADDTYPE     = '40'.
+          LS_FS_ADD_MEM-CHECK_FIELD = LS_ADD_INFO-CHECK_RELEVANT.
+          LS_FS_ADD_MEM-AMOUNT      = LS_ADD_INFO-AMOUNT.
+          LS_FS_ADD_MEM-CURRENCY    = LS_ADD_INFO-CURRENCY.
+
+          "[가온전선] 추가필드
+*          LS_FS_ADD_MEM-ZZS_PLAN        = LS_ADD_INFO-ZZS_PLAN.
+*          LS_FS_ADD_MEM-ZZC_PLAN_C      = LS_ADD_INFO-ZZC_PLAN_C.
+*          LS_FS_ADD_MEM-ZZC_PLAN_N      = LS_ADD_INFO-ZZC_PLAN_N.
+*          LS_FS_ADD_MEM-ZZGUR_AGY       = LS_ADD_INFO-ZZGUR_AGY.
+*          LS_FS_ADD_MEM-ZZAREA          = LS_ADD_INFO-ZZAREA.
+*          LS_FS_ADD_MEM-ZZSQUARE        = LS_ADD_INFO-ZZSQUARE.
+*          LS_FS_ADD_MEM-ZZCOLSEC_AMT    = LS_ADD_INFO-ZZCOLSEC_AMT.
+*          LS_FS_ADD_MEM-ZZCOLSEC_PRI    = LS_ADD_INFO-ZZCOLSEC_PRI.
+*          LS_FS_ADD_MEM-ZZCOLSEC_SET    = LS_ADD_INFO-ZZCOLSEC_SET.
+*          LS_FS_ADD_MEM-ZZCOLSEC_AMT_P  = LS_ADD_INFO-ZZCOLSEC_AMT_P.
+*          LS_FS_ADD_MEM-ZZREALEST_AMT   = LS_ADD_INFO-ZZREALEST_AMT.
+*          LS_FS_ADD_MEM-ZZADDRESS       = LS_ADD_INFO-ZZADDRESS.
+
+        WHEN '50'.
+*       Limit Adjustments
+          LS_FS_ADD_MEM-ADDTYPE     = '50'.
+          LS_FS_ADD_MEM-CHECK_FIELD = LS_ADD_INFO-CHECK_RELEVANT.
+          LS_FS_ADD_MEM-AMOUNT      = LS_ADD_INFO-AMOUNT.
+          LS_FS_ADD_MEM-CURRENCY    = LS_ADD_INFO-CURRENCY.
+
+          "[가온전선] 추가필드
+          LS_FS_ADD_MEM-ZZS_PLAN        = LS_ADD_INFO-ZZS_PLAN.
+          LS_FS_ADD_MEM-ZZC_PLAN_C      = LS_ADD_INFO-ZZC_PLAN_C.
+          LS_FS_ADD_MEM-ZZC_PLAN_N      = LS_ADD_INFO-ZZC_PLAN_N.
+          LS_FS_ADD_MEM-ZZGUR_AGY       = LS_ADD_INFO-ZZGUR_AGY.
+          LS_FS_ADD_MEM-ZZAREA          = LS_ADD_INFO-ZZAREA.
+          LS_FS_ADD_MEM-ZZSQUARE        = LS_ADD_INFO-ZZSQUARE.
+          LS_FS_ADD_MEM-ZZCOLSEC_AMT    = LS_ADD_INFO-ZZCOLSEC_AMT.
+          LS_FS_ADD_MEM-ZZCOLSEC_PRI    = LS_ADD_INFO-ZZCOLSEC_PRI.
+          LS_FS_ADD_MEM-ZZCOLSEC_SET    = LS_ADD_INFO-ZZCOLSEC_SET.
+          LS_FS_ADD_MEM-ZZCOLSEC_AMT_P  = LS_ADD_INFO-ZZCOLSEC_AMT_P.
+          LS_FS_ADD_MEM-ZZREALEST_AMT   = LS_ADD_INFO-ZZREALEST_AMT.
+          LS_FS_ADD_MEM-ZZADDRESS       = LS_ADD_INFO-ZZADDRESS.
+      ENDCASE.
+
+      APPEND LS_FS_ADD_MEM TO LT_FS_ADD_MEM.
+
+    ENDLOOP.
+
+* 2. read database, skip additional infos that aren't credit infos
+*    use bapi to process it, but not within the BDT
+    DATA: L_AKTYP TYPE BU_AKTYP.
+
+    CALL FUNCTION 'BUS_PARAMETERS_ISSTA_GET'
+      IMPORTING
+        E_AKTYP = L_AKTYP.
+
+*   in case this is not in the BDT=> BAPI/CLASS OBJECTS
+    IF L_AKTYP IS INITIAL.
+      CALL FUNCTION 'BAPI_BUPA_FS_BPADDITION_GET'
+        EXPORTING
+          BUSINESSPARTNER = I_PARTNER
+        TABLES
+          ADDITION        = LT_FS_ADD_DB.
+
+      DELETE LT_FS_ADD_DB WHERE ADDTYPE <> '10'
+                          AND   ADDTYPE <> '11'
+                          AND   ADDTYPE <> '20'
+                          AND   ADDTYPE <> '30'
+                          AND   ADDTYPE <> '40'
+                          AND   ADDTYPE <> '50'.
+
+      "구조 'UKM_S_ADD_INFO'
+      DATA: L_STR_RETURN TYPE BAPIRETURN.
+      SELECT *
+        FROM DD03L
+       WHERE TABNAME EQ 'UKM_S_ADD_INFO'
+        INTO TABLE @DATA(LT_DD03L).
+      LOOP AT LT_FS_ADD_DB ASSIGNING FIELD-SYMBOL(<FS_DB>).
+        LOOP AT LT_DD03L INTO DATA(LS_FIELD) WHERE DATATYPE EQ 'CURR'.
+          ASSIGN COMPONENT LS_FIELD-FIELDNAME OF STRUCTURE <FS_DB> TO FIELD-SYMBOL(<FS_VAL_DB>).
+          IF SY-SUBRC EQ 0 AND <FS_VAL_DB> IS NOT INITIAL.
+
+            CALL FUNCTION 'BAPI_CURRENCY_CONV_TO_INTERN_9'
+              EXPORTING
+                CURRENCY             = <FS_DB>-CURRENCY
+                AMOUNT_EXTERNAL      = <FS_VAL_DB>
+                MAX_NUMBER_OF_DIGITS = 15
+              IMPORTING
+                AMOUNT_INTERNAL      = <FS_VAL_DB>
+                RETURN               = L_STR_RETURN.
+
+
+          ENDIF.
+          IF <FS_VAL_DB> IS ASSIGNED. UNASSIGN <FS_VAL_DB>. ENDIF.
+        ENDLOOP.
+      ENDLOOP.
+
+
+* 3. build insert and change table
+      LOOP AT LT_FS_ADD_MEM INTO LS_FS_ADD_MEM.
+        READ TABLE LT_FS_ADD_DB
+             WITH KEY CRITERIUM = LS_FS_ADD_MEM-CRITERIUM
+                      ADDTYPE   = LS_FS_ADD_MEM-ADDTYPE
+                      DATA_TYPE = LS_FS_ADD_MEM-DATA_TYPE
+                      TIMESTAMP = LS_FS_ADD_MEM-TIMESTAMP
+                      COUNTER   = LS_FS_ADD_MEM-COUNTER
+             INTO LS_FS_ADD_DB.
+*   do not use this for comparison
+        CLEAR LS_FS_ADD_DB-CURRENCY_ISO.
+        IF SY-SUBRC <> 0.
+          APPEND LS_FS_ADD_MEM TO LT_FS_ADD_ADD.
+        ELSEIF LS_FS_ADD_MEM <> LS_FS_ADD_DB.
+          APPEND LS_FS_ADD_MEM TO LT_FS_ADD_CHG.
+          APPEND LS_FS_ADD_X   TO LT_FS_ADD_X.
+        ENDIF.
+
+        IF  NOT  LS_FS_ADD_MEM-CRITERIUM  IS  INITIAL.
+          COLLECT  LS_FS_ADD_MEM-CRITERIUM INTO LT_DFVAL.
+        ENDIF.
+      ENDLOOP.
+
+* begin of note 2190457
+      LOOP  AT  LT_DFVAL  INTO  LS_BP3100-CRITER.
+        SELECT  SINGLE  DFVAL  FROM  BUT100  INTO LS_BUT100-DFVAL
+         WHERE  PARTNER  =  I_PARTNER
+           AND  RLTYP    =  'UKM000'
+           AND  DFVAL    =  LS_BP3100-CRITER.
+        IF  SY-SUBRC <>  0.
+          LD_DFVAL = LS_BP3100-CRITER.
+          CALL FUNCTION 'BUPA_ROLE_ADD_2'
+            EXPORTING
+              IV_PARTNER             = I_PARTNER
+              IV_PARTNERROLECATEGORY = 'UKM000'
+              IV_DIFFTYPEVALUE       = LD_DFVAL
+            TABLES
+              ET_RETURN              = LT_RETURN.
+        ENDIF.
+      ENDLOOP.
+
+* 4. build remove table
+      LOOP AT LT_FS_ADD_DB INTO LS_FS_ADD_DB.
+        READ TABLE LT_FS_ADD_MEM
+             WITH KEY CRITERIUM = LS_FS_ADD_DB-CRITERIUM
+                      ADDTYPE   = LS_FS_ADD_DB-ADDTYPE
+                      DATA_TYPE = LS_FS_ADD_DB-DATA_TYPE
+                      TIMESTAMP = LS_FS_ADD_DB-TIMESTAMP
+                      COUNTER   = LS_FS_ADD_DB-COUNTER
+             INTO LS_FS_ADD_MEM.
+
+        IF SY-SUBRC <> 0.
+          APPEND LS_FS_ADD_DB TO LT_FS_ADD_REM.
+        ENDIF.
+      ENDLOOP.
+
+* 5. add, change and remove
+      L_CHGDOC-CHANGE_DOCU = I_WITH_CHDOCS.
+
+
+*     [ADD]
+      IF NOT LT_FS_ADD_ADD[] IS INITIAL.
+        "금액필드 VALUE EXTERNAL FORMAT 으로 변환 => BAPI 내에서 다시 INTERNAL FORMAT으로 변환 함.
+        LOOP AT LT_FS_ADD_ADD ASSIGNING FIELD-SYMBOL(<FS_ADD>).
+          LOOP AT LT_DD03L INTO LS_FIELD WHERE DATATYPE EQ 'CURR'.
+            ASSIGN COMPONENT LS_FIELD-FIELDNAME OF STRUCTURE <FS_ADD> TO FIELD-SYMBOL(<FS_VAL_ADD>).
+            IF SY-SUBRC EQ 0 AND <FS_VAL_ADD> IS NOT INITIAL.
+
+              CALL FUNCTION 'BAPI_CURRENCY_CONV_TO_EXTERN_9'
+                EXPORTING
+                  CURRENCY        = <FS_ADD>-CURRENCY
+                  AMOUNT_INTERNAL = <FS_VAL_ADD>
+                IMPORTING
+                  AMOUNT_EXTERNAL = <FS_VAL_ADD>.
+
+            ENDIF.
+            IF <FS_VAL_ADD> IS ASSIGNED. UNASSIGN <FS_VAL_ADD>. ENDIF.
+          ENDLOOP.
+        ENDLOOP.
+        CALL FUNCTION 'BAPI_BUPA_FS_BPADDITION_ADD'
+*      starting new task 'UKM_ADD'
+*      calling bapicheck on end of task
+          EXPORTING
+            BUSINESSPARTNER = I_PARTNER
+            CHANGEDOCU      = L_CHGDOC
+            TESTRUN         = L_TESTRUN
+          TABLES
+            ADDITION        = LT_FS_ADD_ADD
+            RETURN          = LT_RETURN.
+
+        BAPIRETURNCHECK.
+      ENDIF.
+
+*     [CHANGE]
+      IF NOT LT_FS_ADD_CHG[] IS INITIAL.
+        "금액필드 VALUE EXTERNAL FORMAT 으로 변환 => BAPI 내에서 다시 INTERNAL FORMAT으로 변환 함.
+        LOOP AT LT_FS_ADD_CHG ASSIGNING FIELD-SYMBOL(<FS_CHG>).
+          LOOP AT LT_DD03L INTO LS_FIELD WHERE DATATYPE EQ 'CURR'.
+            ASSIGN COMPONENT LS_FIELD-FIELDNAME OF STRUCTURE <FS_CHG> TO FIELD-SYMBOL(<FS_VAL_CHG>).
+            IF SY-SUBRC EQ 0 AND <FS_VAL_CHG> IS NOT INITIAL.
+              CALL FUNCTION 'BAPI_CURRENCY_CONV_TO_EXTERN_9'
+                EXPORTING
+                  CURRENCY        = <FS_CHG>-CURRENCY
+                  AMOUNT_INTERNAL = <FS_VAL_CHG>
+                IMPORTING
+                  AMOUNT_EXTERNAL = <FS_VAL_CHG>.
+            ENDIF.
+            IF <FS_VAL_CHG> IS ASSIGNED. UNASSIGN <FS_VAL_CHG>. ENDIF.
+          ENDLOOP.
+        ENDLOOP.
+        CALL FUNCTION 'BAPI_BUPA_FS_BPADDITION_CHANGE'
+*       STARTING NEW TASK 'UKM_CHG'
+          EXPORTING
+            BUSINESSPARTNER = I_PARTNER
+            CHANGEDOCU      = L_CHGDOC
+            TESTRUN         = L_TESTRUN
+          TABLES
+            ADDITION        = LT_FS_ADD_CHG
+            ADDITIONCHANGE  = LT_FS_ADD_X
+            RETURN          = LT_RETURN.
+
+        BAPIRETURNCHECK.
+      ENDIF.
+
+*     [REMOVE]
+      IF NOT LT_FS_ADD_REM[] IS INITIAL.
+        CALL FUNCTION 'BAPI_BUPA_FS_BPADDITION_REMOVE'
+*          starting new task 'UKM_REM'
+          EXPORTING
+            BUSINESSPARTNER = I_PARTNER
+            CHANGEDOCU      = L_CHGDOC
+            TESTRUN         = L_TESTRUN
+          TABLES
+            ADDITION        = LT_FS_ADD_REM
+            RETURN          = LT_RETURN.
+
+        BAPIRETURNCHECK.
+      ENDIF.
+*  commit not allowed
+*  IF i_testrun IS INITIAL.
+*    CALL FUNCTION 'FS_API_EXPL_SAVE'.
+      CALL FUNCTION 'BAPI_TRANSACTION_COMMIT'.
+*  ENDIF.
+      EXIT.
+    ENDIF.
+
+
+*   process within BDT
+    IF NOT L_AKTYP IS INITIAL.
+      .
+* read from memory (do not use bapi)
+      DATA: LT_ADD_INFOS_OLD TYPE UKM_TS_ADD_INFO,
+            LS_OLD           LIKE LINE OF LT_ADD_INFOS_OLD.
+
+* do this
+      DATA: LT_TBZ0C TYPE TABLE OF TBZ0C.
+      CALL FUNCTION 'BDT_TBZ0C_GET_WITH_RLTYP'
+        EXPORTING
+*         IV_CLIENT       = SY-MANDT
+          IV_OBJAP = 'BUPA'
+          IV_RLTYP = 'UKM000'
+        TABLES
+          ET_TBZ0C = LT_TBZ0C
+        EXCEPTIONS
+          OTHERS   = 0.
+      .
+      LOOP AT LT_TBZ0C TRANSPORTING NO FIELDS
+          WHERE APPLI = 'FS06'.
+*      MESSAGE e000(ukm_bp) WITH 'Application FS06 is already active'.
+        EXIT.
+      ENDLOOP.
+
+*     METHOD 'FILL_ADD_INFO'에서 EXPORT
+      IMPORT ET_ADD_INFOS = LT_ADD_INFOS_OLD FROM MEMORY ID 'ADDINFO_GET'.
+
+* 2. read database, skip additional infos that aren't credit infos
+*    only credit infos are in this table
+*
+* 3. build insert and change table
+      LOOP AT LT_FS_ADD_MEM INTO LS_FS_ADD_MEM.
+
+        READ TABLE LT_ADD_INFOS_OLD
+             WITH KEY CREDIT_SGMNT  = LS_FS_ADD_MEM-CRITERIUM
+                      INFOCATEGORY = LS_FS_ADD_MEM-ADDTYPE
+                      INFOTYPE = LS_FS_ADD_MEM-DATA_TYPE
+*                  timestamp = ls_fs_add_mem-timestamp
+                      COUNTER   = LS_FS_ADD_MEM-COUNTER
+             INTO LS_OLD.
+        IF SY-SUBRC <> 0.
+          APPEND LS_FS_ADD_MEM TO LT_FS_ADD_ADD.
+        ELSE.
+*      send all data - even if not changed
+          APPEND LS_FS_ADD_MEM TO LT_FS_ADD_CHG.
+        ENDIF.
+      ENDLOOP.
+
+*   remove table not necessary (BDT will do it)
+* 4. build remove table
+
+* 5. add, change and remove
+      EXPORT LT_FS_ADD_ADD  FROM LT_FS_ADD_ADD
+             LT_FS_ADD_CHG  FROM LT_FS_ADD_CHG
+             LT_FS_ADD_REM  FROM LT_FS_ADD_REM
+             BU_PARTNER     FROM I_PARTNER
+               TO MEMORY ID 'ADDINFO'.
+* in BDT maintenance it is called at evend DSAVB
+* pass the data to the FS06
+
+      LOOP AT LT_FS_ADD_MEM INTO LS_FS_ADD_MEM.
+        MOVE-CORRESPONDING LS_FS_ADD_MEM TO LS_BP3100.
+        LS_BP3100-PARTNER  = I_PARTNER.
+        LS_BP3100-XFELD    = LS_FS_ADD_MEM-CHECK_FIELD.
+        LS_BP3100-CT_FIELD = LS_FS_ADD_MEM-CUSTOMIZING_FIELD.
+        LS_BP3100-DATEFR   = LS_FS_ADD_MEM-DATE_FROM.
+        LS_BP3100-DATETO   = LS_FS_ADD_MEM-DATE_TO.
+        LS_BP3100-ADDATE   = LS_FS_ADD_MEM-ADDITIONAL_DATE.
+        LS_BP3100-AMNT     = LS_FS_ADD_MEM-AMOUNT.
+        LS_BP3100-CURR     = LS_FS_ADD_MEM-CURRENCY.
+        LS_BP3100-CRITER   = LS_FS_ADD_MEM-CRITERIUM.
+*    l  ts_bp3100-kz = 'U'.
+        APPEND LS_BP3100 TO LT_BP3100.
+      ENDLOOP.
+
+      DATA: LCL_ADAPTER TYPE REF TO   XO_BDT_ADAPTER.
+      LCL_ADAPTER =
+      FSBP_BDT_ADAPTER_INTERN=>GET_INSTANCE( FSBP_BDT_ADAPTER=>BDT_OBJAP ).
+
+      FSBP_BDT_ADAPTER=>SET_CURRENT_BP_DATA(
+     I_TABLE_NAME   = IF_FSBP_CONST_XO_OBJECTS=>MO_BP3100
+     I_DATA_NEW     = LT_BP3100[]
+     I_VALIDATE     = SPACE
+   ).
+* add missing BUT100 role   note 1565811
+*  for nw7.31 FSDT checks for the role
+*  therefore it has to be added for new segments (criter) of a BP
+*   call function 'FSDT_BUPA_EVENT_DSAVB'.
+
+      IF NOT LT_BP3100 IS INITIAL.
+        LOOP AT LT_BP3100 INTO LS_BP3100.
+          IF NOT LS_BP3100-CRITER IS INITIAL.
+            COLLECT LS_BP3100-CRITER INTO LT_DFVAL.
+          ENDIF.
+        ENDLOOP.
+        LOOP AT LT_DFVAL INTO LS_BP3100-CRITER.
+          SELECT SINGLE DFVAL FROM BUT100 INTO LS_BUT100-DFVAL WHERE PARTNER = I_PARTNER
+                                      AND RLTYP = 'UKM000'
+                                      AND DFVAL = LS_BP3100-CRITER.
+          IF SY-SUBRC <> 0.
+            CALL FUNCTION 'FSDT_BUPA_EVENT_DSAVB'
+              EXPORTING
+                IV_CRITER = LS_BP3100-CRITER.
+          ENDIF.
+        ENDLOOP.
+      ENDIF.
+
+
+    ENDIF.
+
+  ENDMETHOD.
+ENDCLASS.

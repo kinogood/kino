@@ -1,0 +1,327 @@
+*&---------------------------------------------------------------------*
+*&  Include           ZLER1200_TOP
+*&---------------------------------------------------------------------*
+TABLES : LIPS, LIKP, VTTK, VTTP, VBAK, MARA, ZLET0917, ZLET0400.
+
+CONSTANTS: GC_X       VALUE 'X',
+           GC_NO_EDIT VALUE ' ',
+           GC_E       VALUE 'E',
+           GC_S       VALUE 'S',
+           GC_EDIT    VALUE 'X',
+           GC_V       VALUE 'V',
+           GC_70      TYPE I VALUE '70',
+           GC_MRM1    TYPE CHAR4 VALUE 'MRM1',
+           GC_ROH1    TYPE CHAR4 VALUE 'ROH1',
+           GC_ROH2    TYPE CHAR4 VALUE 'ROH2'.
+
+CONSTANTS: GC_TCODE2  LIKE SY-TCODE VALUE 'ZGTLER1201'.
+
+DATA: GV_ERROR,
+      GV_MESSAGE      TYPE STRING,
+      GV_TEXT         TYPE CHAR255,
+      GV_SUBRC        TYPE SY-SUBRC,
+      GV_SUBRC2       TYPE SY-SUBRC,
+      GV_TABIX        TYPE SY-TABIX,
+      GV_MOD_FLAG,
+      GV_INDEX        TYPE SY-TABIX,
+      GV_ATWRT        TYPE ATWRT,
+      GV_ANSWER,
+      GV_REFRESH_FLAG,
+      GV_CHECK_MODIFY.
+
+DATA: BEGIN OF GT_TOP_LEFT OCCURS 0,
+        ICON       TYPE ICON_D,
+        VBELN      LIKE VBAP-VBELN,  " Sales Order No
+        POSNR      LIKE LIPS-POSNR,
+        BZAREA     LIKE ZLET0033-BZAREA,
+        VSTEL      LIKE LIKP-VSTEL,  "Shipping point code(원출하지점)
+        ORGSHP     LIKE LIKP-VSTEL,  "Shipping point code(실제출하지점)
+        ADDSHP     LIKE LIKP-VSTEL,  "Shipping point code(추가출하지점
+        TPLST      LIKE VTTK-TPLST,  "Planning Point(운송계획지점)
+        SHTYP      LIKE VTTK-SHTYP,  "Shipment Type(선적유형 -> DELITP
+        VGTYP      LIKE ZLET0917-VGTYP, "Doc Section C:Delivery Simula
+        VSART      LIKE LIKP-VSART,  "Shipping type(선배송, 택배
+        TRFLG      LIKE ZLET0917-TRFLG, "경유여부
+        VSBED      LIKE LIKP-VSBED,  "출하조건
+        BFART      LIKE ZLET0917-BFART, "서비스레벨
+        INCO1      LIKE LIKP-INCO1,     "인도조건
+        KUNNR      LIKE LIKP-KUNNR,     "delivery
+        POST_CODE1 TYPE ADRC-POST_CODE1, "우편번호
+        STREET     TYPE ADRC-STREET,   " 주소
+        ROUTE      LIKE LIKP-ROUTE,  " sap  루트
+        ROUTE_TEXT LIKE ZLET0917-ROUTE_TEXT,  " 루트 TEXT
+        " 혼적불가여부(혼적불가:V, 혼적가능:' ')
+        MIXLOD     TYPE ZLET0917-MIXLOD,
+        URGNT      TYPE ZLET0917-URGNT,  " 긴급도(0~9)
+        RUTEKY     TYPE ZLET0917-RUTEKY, "  TMS루트키
+        WADAT      TYPE LIKP-WADAT, "  납품계획일
+        LFDAT      TYPE LIKP-LFDAT, " 배송요청일
+        LFUHR      TYPE LIKP-LFUHR, " 배송요청시간
+        NAME1      TYPE KNA1-NAME1, " 납품처명
+        GRTXT      TYPE ZLET0917-GRTXT,   " 출하 요청 텍스트
+        VHCTYP     TYPE ZLET0917-VHCTYP,  "차량톤수
+        "톤수제한(해당차종:VT, 차종이하:VTL, 차종이상:VTE, 해당차량:VH)
+        VHCINEQ    LIKE ZLET0917-VHCINEQ,
+        TDLNR      TYPE VTTK-TDLNR, " 운송사 코드
+        EXTI1      TYPE VTTK-EXTI1, " 차량번호
+        EXTI2      TYPE VTTK-EXTI2,  " 기사명
+        TPBEZ      TYPE VTTK-TPBEZ, " 기사전화번호
+        SHSRQ      LIKE ZLET0403-SHSRQ, "  선적시뮬레이션 요청번호
+        CONTY      LIKE ZLET0403-CONTY, "  타입
+        CONSZ      LIKE ZLET0403-CONSZ, "  규격
+        KUNAG      LIKE LIKP-KUNAG,    "판매처
+        NAMAG      LIKE KNA1-NAME1,    "판매처명
+        CELLTAB    TYPE LVC_T_STYL, "STYLE Field.
+        COLORTAB   TYPE LVC_T_SCOL, "STYLE Field.
+        F_COL      TYPE LVC_T_SCOL.
+DATA: END OF GT_TOP_LEFT.
+
+DATA: BEGIN OF GT_TOP_RIGHT OCCURS 0,
+        ICON     TYPE ICON_D,
+        VBELN    LIKE VBAP-VBELN,  " Sales Order No
+        POSNR    LIKE LIPS-POSNR,
+        DELIDN   TYPE ZLET0917-DELIDN,
+        PKTYP    TYPE CHAR10, " 포장재 타입(유형)
+        PKMATNR  TYPE MATNR,  "  포장재 자재코드
+        MENGE    TYPE ZLET0917-MENGE,      " 포장재 코드 수량
+        ZMEINS   TYPE ZLET0917-ZMEINS, " 단위
+        WIDTH    TYPE ZLET0917-WIDTH, "   폭
+        ZLENGTH  TYPE ZLET0917-ZLENGTH, "   길이
+        HEIGHT   TYPE ZLET0917-HEIGHT, "  높이
+        PKWEI    TYPE ZLET0917-PKWEI, " 포장재 무게
+        PMEINS   TYPE MEINS, " 단위
+        SHSRQ    LIKE ZLET0403-SHSRQ, "  선적시뮬레이션 요청번호
+        CELLTAB  TYPE LVC_T_STYL, "STYLE Field.
+        COLORTAB TYPE LVC_T_SCOL. "STYLE Field.
+DATA: END OF GT_TOP_RIGHT.
+
+DATA: BEGIN OF GT_BOTTOM_LEFT OCCURS 0,
+        ICON     TYPE ICON_D,
+        VBELN    LIKE VBAP-VBELN,  " Sales Order No
+        POSNR    LIKE LIPS-POSNR,
+        MATNR    LIKE LIPS-MATNR,      "  자재코드
+        ARKTX    LIKE LIPS-ARKTX,       " 품명
+        SPART    LIKE LIPS-SPART,       " 제품군
+        WERKS    TYPE WERKS_D,        " 플랜트
+        LENGTH   TYPE I,                   " 조장
+        FACTOR   TYPE I,                    " 조장 수
+        LFIMG    TYPE LIPS-LFIMG,  "  납품수량
+        VRKME    TYPE LIPS-VRKME,  " 납품단위
+        VBELN_VL LIKE VBAP-VBELN,  " Sales Order No
+        POSNR_VL LIKE VBAP-POSNR,  " Sales Item No
+        KUNNR    LIKE VBAK-KUNNR,  " 판매처
+        NAMAG    LIKE KNA1-NAME1,  " 판매처명
+        KUNWE    LIKE LIKP-KUNNR,  " 납품처
+        NAMWE    LIKE KNA1-NAME1,  " 납품처명
+        FLTLVL   TYPE ZLET0917-FLTLVL,           " 적재단수
+        BRGEW    TYPE LIPS-BRGEW,  " 총중량(mara)
+        NTGEW    TYPE MARA-NTGEW,  " 중량(mara)
+        GEWEI    TYPE MARA-GEWEI,  " 중량단위(mara)
+        BRGEW_LF TYPE LIPS-BRGEW,  " 총중량(lips)
+        NTGEW_LF TYPE MARA-NTGEW,  " 중량(lips)
+        GEWEI_LF TYPE MARA-GEWEI,  " 중량단위(lips)
+        SHSRQ    LIKE ZLET0917-SHSRQ,
+        CELLTAB  TYPE LVC_T_STYL, "STYLE Field.
+        COLORTAB TYPE LVC_T_SCOL. "STYLE Field.
+DATA: END OF GT_BOTTOM_LEFT.
+
+DATA: BEGIN OF GT_BOTTOM_RIGHT OCCURS 0,
+        ICON       TYPE ICON_D,
+        VBELN      LIKE VBAP-VBELN,  " Sales Order No
+        POSNR      LIKE LIPS-POSNR,
+        DELIDN     TYPE ZLET0917-DELIDN,
+        PUSH       TYPE ICON_D,
+        SPART      LIKE LIPS-SPART,       " 제품군
+        TKNUM      TYPE VTTK-TKNUM,
+        PKTYP      TYPE ZLET0917-PKTYP,  " 포장재 타입(유형)
+        PKMATNR    TYPE ZLET0917-PKMATNR, "  포장재 자재코드
+        DMMATNR    TYPE ZLET0917-PKMATNR, "  DM 자재코드
+        INMENGE    TYPE ZLET0917-MENGE,      " 포장재 코드 수량
+        MENGE      TYPE ZLET0917-MENGE,      " 포장재 코드 수량
+        ZMEINS     TYPE ZLET0917-ZMEINS, " 단위
+        WIDTH      TYPE ZLET0917-WIDTH, "   폭
+        ZLENGTH    TYPE ZLET0917-ZLENGTH, "   길이
+        HEIGHT     TYPE ZLET0917-HEIGHT, "  높이
+        PKWEI      TYPE ZLET0917-PKWEI, " 포장재 무게
+        PMEINS     TYPE ZLET0917-PMEINS, " 포장재 단위
+        VBELN_VL   TYPE VBAK-VBELN,
+        POSNR_VL   TYPE VBAP-POSNR,
+        MATNR      TYPE ZLET0917-MATNR,
+        ARKTX      TYPE ZLET0917-ARKTX,
+        CODE_POINT TYPE CHAR20,
+        KEY_TEXT   TYPE CHAR20,
+        SHSRQ      LIKE ZLET0917-SHSRQ,
+        XLOEK      LIKE ZLET0917-XLOEK,
+        KUNNR      LIKE ZLET0917-KUNNR,
+        NAME1      TYPE KNA1-NAME1, " 납품처명
+**** 20170907 필드추가 BY 서동우
+        LENGTH     TYPE I,           " 조장
+        FACTOR     TYPE I,           " 조장 수
+        NTGEW      TYPE MARA-NTGEW,  " 순 중량(lips)
+        GEWEI      TYPE MARA-GEWEI,  " 순중량단위(lips)
+        NTGEW_LF   TYPE LIPS-BRGEW,  " 총 중량(lips)
+        GEWEI_LF   TYPE LIPS-GEWEI,  " 총 중량단위(lips)
+**** 20170907 필드추가 BY 서동우
+*        fltlvl     TYPE zlet0917-fltlvl, " 적재단수
+        CELLTAB    TYPE LVC_T_STYL, "STYLE Field.
+        COLORTAB   TYPE LVC_T_SCOL. "STYLE Field.
+DATA: END OF GT_BOTTOM_RIGHT.
+
+DATA: BEGIN OF GT_ADRC1 OCCURS 0,
+        VBELN      LIKE VBPA-VBELN,
+        KUNNR      LIKE KNA1-KUNNR,
+        POST_CODE1 LIKE ADRC-POST_CODE1,
+        CITY1      LIKE ADRC-CITY1,
+        EXTENSION2 LIKE ADRC-EXTENSION2,
+      END OF GT_ADRC1.
+
+DATA: BEGIN OF GT_LIPS OCCURS 0.
+        INCLUDE STRUCTURE LIPS.
+DATA:   SHSRQ LIKE ZLET0917-SHSRQ.
+DATA: END OF GT_LIPS.
+
+DATA: GT_LIKP      LIKE LIKP     OCCURS 0 WITH HEADER LINE.
+*DATA: gt_lips      LIKE GT_LIPS  OCCURS 0 WITH HEADER LINE.
+DATA: GT_0404      LIKE ZLET0404 OCCURS 0 WITH HEADER LINE.
+DATA: GT_0403      LIKE ZLET0403 OCCURS 0 WITH HEADER LINE.
+DATA: GT_VTTP      LIKE VTTP     OCCURS 0 WITH HEADER LINE.
+DATA: GT_VBAK      LIKE VBAK     OCCURS 0 WITH HEADER LINE.
+DATA: GT_VBAP      LIKE VBAP     OCCURS 0 WITH HEADER LINE.
+DATA: GT_0903      LIKE ZLET0903 OCCURS 0 WITH HEADER LINE.
+DATA: GT_0917      LIKE ZLET0917 OCCURS 0 WITH HEADER LINE.
+
+
+DATA: BEGIN OF GT_0033 OCCURS 0.
+        INCLUDE STRUCTURE ZLET0033.
+DATA:   VBELN LIKE GT_LIPS-VBELN.
+DATA: END OF GT_0033.
+
+DATA: GT_0012      LIKE ZLET0012 OCCURS 0 WITH HEADER LINE.
+DATA: GT_0013      LIKE ZLET0013 OCCURS 0 WITH HEADER LINE.
+DATA: GT_INSERT    LIKE ZLET0917 OCCURS 0 WITH HEADER LINE.
+
+DATA: BEGIN OF GT_KNA1 OCCURS 0,
+        KUNNR LIKE KNA1-KUNNR,
+        NAME1 LIKE KNA1-NAME1,
+      END   OF GT_KNA1.
+
+DATA: BEGIN OF GT_ADRC OCCURS 0,
+        VBELN LIKE VBPA-VBELN,
+        NAME1 LIKE ADRC-NAME1,
+      END   OF GT_ADRC.
+
+" 1. 제품군 10(팔레트 적재) : LIPS-MATNR로 MARA-SPART 확인
+DATA: GT_0510      LIKE ZLET0510 OCCURS 0 WITH HEADER LINE.
+DATA: GS_0510      LIKE ZLET0510.
+DATA: GT_MARA      LIKE MARA     OCCURS 0 WITH HEADER LINE.
+DATA: GT_0210      LIKE ZEDT0210 OCCURS 0 WITH HEADER LINE.
+DATA: GT_OBJECT    LIKE CLOBJDAT OCCURS 0 WITH HEADER LINE.
+
+DATA: BEGIN OF GT_AREA OCCURS 0,
+        VBELN      LIKE GT_LIPS-VBELN,
+        POSNR      LIKE GT_LIPS-POSNR,
+        SPART      LIKE GT_LIPS-SPART,
+        KUNNR      LIKE LIKP-KUNNR,
+        VGBEL      LIKE GT_LIPS-VGBEL,
+        VGPOS      LIKE GT_LIPS-VGPOS,
+        PKTYP      TYPE ZLET0917-PKTYP,  " 포장재 타입(유형)
+        PKMATNR    TYPE ZLET0917-PKMATNR, "  포장재 자재코드
+        INMENGE    TYPE ZLET0917-MENGE,      " 포장재 코드 수량
+        MENGE      TYPE ZLET0917-MENGE,      " 포장재 코드 수량
+        ZMEINS     TYPE ZLET0917-ZMEINS, " 단위
+        WIDTH      TYPE ZLET0917-WIDTH, "   폭 - 가로
+        ZLENGTH    TYPE ZLET0917-ZLENGTH, "   길이 -세로
+        HEIGHT     TYPE ZLET0917-HEIGHT, "  높이
+        PKWEI      TYPE ZLET0917-PKWEI, " 포장재 무게
+        DMMATNR    TYPE CHAR10,  " 드럼 넘버
+        PMEINS     TYPE ZLET0917-PMEINS, " 포장재 단위
+        CODE_POINT TYPE CHAR20,
+        KEY_TEXT   TYPE CHAR20.
+DATA: END OF GT_AREA.
+
+DATA: BEGIN OF GT_0400 OCCURS 0,
+        VGBEL  LIKE GT_LIPS-VGBEL,
+        VHCTP  LIKE ZLET0400-VHCTP,
+        ALONE  LIKE ZLET0400-ALONE, " 단독여부
+        REMARK LIKE ZLET0400-REMARK, " 리마크
+        BKNFT  LIKE ZLET0400-BKNFT, " 왕복여부
+        IMMDT  LIKE ZLET0400-IMMDT, " 긴급 출하
+        ARRTM  LIKE ZLET0400-ARRTM, " 도착시간
+        TRTYP  LIKE ZLET0400-TRTYP, " 운송유형
+      END OF GT_0400.
+
+DATA: GT_ET_CHAR   LIKE CONF_OUT OCCURS 0 WITH HEADER LINE.
+
+DATA: BEGIN OF GT_0540 OCCURS 0.
+        INCLUDE STRUCTURE ZLET0540.
+DATA:   ZCY_DESC LIKE ZLET0541-ZCY_DESC.
+DATA: END OF GT_0540.
+
+DATA: BEGIN OF GT_VTTK OCCURS 0.
+        INCLUDE STRUCTURE VTTK.
+DATA:   VBELN LIKE VTTP-VBELN.
+DATA: END OF GT_VTTK.
+
+DATA: GT_DELTA_CELLS TYPE LVC_T_MODI,
+      GS_DELTA_CELLS TYPE LVC_S_MODI.
+
+*DATA: gv_subrc.
+
+DATA : OK_CODE   LIKE SY-UCOMM,
+       OK_SAVE   LIKE SY-UCOMM,
+       GV_OBJECT LIKE AUSP-OBJEK.
+
+*{ 기능개선 163582 - 추가
+DATA : GV_TITLE(50).
+*} 기능개선 163582 - 추가
+
+*{ 기능개선 156428 - 추가
+DATA: BEGIN OF GT_EXCL OCCURS 0,
+        FCODE LIKE SY-UCOMM,
+      END   OF GT_EXCL.
+*} 기능개선 156428 - 추가
+
+*___ALV 관련 변수
+DATA : GC_CONTAINER_NAME   TYPE SCRFNAME VALUE 'MY_CONTAINER',
+       GC_CUSTOM_CONTAINER TYPE REF TO CL_GUI_CUSTOM_CONTAINER,
+       SPLITTER            TYPE REF TO CL_GUI_SPLITTER_CONTAINER,
+       CONTAINER_1         TYPE REF TO CL_GUI_CONTAINER,
+       CONTAINER_2         TYPE REF TO CL_GUI_CONTAINER,
+       CONTAINER_3         TYPE REF TO CL_GUI_CONTAINER,
+       CONTAINER_4         TYPE REF TO CL_GUI_CONTAINER,
+       GC_ALV_GRID1        TYPE REF TO CL_GUI_ALV_GRID,
+       GC_ALV_GRID2        TYPE REF TO CL_GUI_ALV_GRID,
+       GC_ALV_GRID3        TYPE REF TO CL_GUI_ALV_GRID,
+       GC_ALV_GRID4        TYPE REF TO CL_GUI_ALV_GRID,
+       GC_EVENT_HANDLER1   TYPE REF TO LCL_EVENT_HANDLER,
+       GC_EVENT_HANDLER2   TYPE REF TO LCL_EVENT_HANDLER,
+       GC_EVENT_HANDLER3   TYPE REF TO LCL_EVENT_HANDLER,
+       GC_EVENT_HANDLER4   TYPE REF TO LCL_EVENT_HANDLER,
+       GS_LAYOUT1          TYPE LVC_S_LAYO,
+       GS_LAYOUT2          TYPE LVC_S_LAYO,
+       GS_LAYOUT3          TYPE LVC_S_LAYO,
+       GS_LAYOUT4          TYPE LVC_S_LAYO,
+       GT_SORT             TYPE LVC_T_SORT WITH HEADER LINE,
+       GT_FIELDCAT1        TYPE LVC_T_FCAT WITH HEADER LINE,
+       GT_FIELDCAT2        TYPE LVC_T_FCAT WITH HEADER LINE,
+       GT_FIELDCAT3        TYPE LVC_T_FCAT WITH HEADER LINE,
+       GT_FIELDCAT4        TYPE LVC_T_FCAT WITH HEADER LINE,
+       GS_SCROLL           TYPE LVC_S_STBL,
+       GT_EXCLUDE          TYPE UI_FUNCTIONS,
+       GT_EXCLUDE2         TYPE UI_FUNCTIONS,
+       GS_VARIANT          LIKE DISVARIANT.
+
+DATA : GV_ITAB LIKE LVC_S_FCAT-TABNAME,
+       GV_POS  LIKE LVC_S_FCAT-COL_POS.
+
+TYPES BEGIN OF LINE.
+INCLUDE TYPE ZSDS310_A.
+TYPES: ATINN          TYPE ATINN,
+       ATFOR          TYPE ATFOR,
+       ATFLV          TYPE ATFLV,
+       ATFLB          TYPE ATFLB,
+       ATCOD          TYPE ATCOD,
+       E_RESULT(2),
+       E_MESSAGE(100),
+       STYL           TYPE LVC_T_STYL,
+       END   OF LINE.

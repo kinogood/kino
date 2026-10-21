@@ -1,0 +1,146 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_FUGR" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <AREAT>[GT] 부스닥트 MES I/F 수신</AREAT>
+   <INCLUDES>
+    <SOBJ_NAME>LZGTSD61F01</SOBJ_NAME>
+    <SOBJ_NAME>LZGTSD61TOP</SOBJ_NAME>
+    <SOBJ_NAME>SAPLZGTSD61</SOBJ_NAME>
+   </INCLUDES>
+   <FUNCTIONS>
+    <item>
+     <FUNCNAME>ZGTSD_IF_I_BD_HANDLING_UNIT</FUNCNAME>
+     <REMOTE_CALL>R</REMOTE_CALL>
+     <SHORT_TEXT>[SD]부스닥트 MES 포장실적 수신</SHORT_TEXT>
+     <IMPORT>
+      <RSIMP>
+       <PARAMETER>I_SYSTEM_ID</PARAMETER>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>CHAR04</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_BDC_MODE</PARAMETER>
+       <DEFAULT>&apos;N&apos;</DEFAULT>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>CHAR01</TYP>
+      </RSIMP>
+     </IMPORT>
+     <EXPORT>
+      <RSEXP>
+       <PARAMETER>ZO_RESULT</PARAMETER>
+       <TYP>CHAR2</TYP>
+      </RSEXP>
+      <RSEXP>
+       <PARAMETER>ZO_MESSAGE</PARAMETER>
+       <TYP>CHAR100</TYP>
+      </RSEXP>
+     </EXPORT>
+     <TABLES>
+      <RSTBL>
+       <PARAMETER>IT_TAB</PARAMETER>
+       <DBSTRUCT>ZGTSDSIF0070</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+     </TABLES>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>I_SYSTEM_ID</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>수신 시스템</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_BDC_MODE</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>처리유형</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>ZO_RESULT</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>처리결과(&apos;00&apos;:Success, Others:Error)</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>ZO_MESSAGE</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Message</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>IT_TAB</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>[BD]HANDLING UNIT I/F</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+    <item>
+     <FUNCNAME>ZGTSD_IF_I_BD_MFG_DLVDAT_RSLT</FUNCNAME>
+     <REMOTE_CALL>R</REMOTE_CALL>
+     <SHORT_TEXT>[SD]부스닥트 MES 제조지시 출하예정일 생관 입력날짜 수신</SHORT_TEXT>
+     <IMPORT>
+      <RSIMP>
+       <PARAMETER>IS_HEADER</PARAMETER>
+       <DBFIELD>ZGTSDSIF0076</DBFIELD>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_SYSTEM_ID</PARAMETER>
+       <TYP>ZGTETARGET</TYP>
+      </RSIMP>
+     </IMPORT>
+     <EXPORT>
+      <RSEXP>
+       <PARAMETER>ZO_RESULT</PARAMETER>
+       <TYP>ZO_RESULT</TYP>
+      </RSEXP>
+      <RSEXP>
+       <PARAMETER>ZO_MESSAGE</PARAMETER>
+       <TYP>ZO_MESSAGE</TYP>
+      </RSEXP>
+     </EXPORT>
+     <TABLES>
+      <RSTBL>
+       <PARAMETER>IT_ITEM</PARAMETER>
+       <DBSTRUCT>ZGTSDSIF0077</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>OT_RESULT</PARAMETER>
+       <DBSTRUCT>ZGTSDSIF0078</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+     </TABLES>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>IS_HEADER</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>[GT-SD] 제조지시 납기일변경 결과 수신 Header</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_SYSTEM_ID</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Interface Target 시스템</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>ZO_RESULT</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>처리결과</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>ZO_MESSAGE</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>처리메세지</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>IT_ITEM</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>[GT-SD] 제조지시 납기일변경 결과 수신 Item</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>OT_RESULT</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>[GT-SD] 제조지시 납기일변경 결과</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+   </FUNCTIONS>
+  </asx:values>
+ </asx:abap>
+</abapGit>

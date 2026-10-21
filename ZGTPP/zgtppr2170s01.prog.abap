@@ -1,0 +1,46 @@
+*&---------------------------------------------------------------------*
+*& Include          GTPPR2170S01
+*&---------------------------------------------------------------------*
+
+*----------------------------------------------------------------------*
+* Section Screen                                                       *
+*----------------------------------------------------------------------*
+SELECTION-SCREEN BEGIN OF BLOCK BLK3 WITH FRAME TITLE TEXT-T03.
+  SELECTION-SCREEN BEGIN OF LINE.
+    SELECTION-SCREEN COMMENT 1(31) TEXT-001 FOR FIELD P_WERKS.
+    PARAMETERS P_WERKS TYPE T001L-WERKS MEMORY ID WRK MATCHCODE OBJECT ZGTHPP_WERKS.
+    SELECTION-SCREEN COMMENT 40(30) P_NAME1 MODIF ID TXT.
+  SELECTION-SCREEN END OF LINE.
+
+  SELECT-OPTIONS S_ZASGNO FOR ZGTPPT2170-ZASSIGN_NO.
+  SELECT-OPTIONS S_ZASGTP FOR ZGTPPT2170-ZASSIGN_TYPE.
+  SELECT-OPTIONS S_ZCUTNO FOR ZGTPPT2190-ZCUT_ORD_NO.
+  SELECT-OPTIONS S_VBELN FOR VBAP-VBELN.
+  SELECT-OPTIONS S_POSNR FOR VBAP-POSNR.
+  SELECT-OPTIONS S_VKBUR FOR VBAK-VKBUR.
+  SELECT-OPTIONS S_KUNNR FOR VBAK-KUNNR.
+  SELECT-OPTIONS S_EDATU FOR VBEP-EDATU.
+  SELECT-OPTIONS S_MATNR FOR VBAP-MATNR.
+  SELECT-OPTIONS S_MTART FOR MARA-MTART.
+  SELECT-OPTIONS S_MATKL FOR MARA-MATKL.
+  SELECT-OPTIONS S_SPGCD FOR ZPPT0107-SPGCD.
+  SELECT-OPTIONS S_FEVOR FOR MARC-FEVOR.
+  SELECT-OPTIONS S_ERDAT FOR VBAK-ERDAT.
+  SELECT-OPTIONS S_CRDAT FOR ZGTPPT2170-CRDAT.
+  SELECT-OPTIONS S_FCHARG FOR ZGTPPT2180-F_CHARG MODIF ID RST.
+  SELECT-OPTIONS S_ACHARG FOR MATDOC-CHARG MODIF ID RST.
+  SELECT-OPTIONS S_LOEKZ FOR ZGTPPT2170-LOEKZ MODIF ID RST.
+
+SELECTION-SCREEN END OF BLOCK BLK3.
+
+*---------------------------------------------------------------------*
+* AT SELECTION-SCREEN OUTPUT                                          *
+*---------------------------------------------------------------------*
+AT SELECTION-SCREEN OUTPUT.
+  PERFORM AT_SELECTION_SCREEN_OUTPUT.
+
+*---------------------------------------------------------------------*
+* AT SELECTION-SCREEN                                                 *
+*---------------------------------------------------------------------*
+AT SELECTION-SCREEN.
+  PERFORM AT_SELECTION_SCREEN.

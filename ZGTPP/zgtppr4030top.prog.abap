@@ -1,0 +1,83 @@
+*&---------------------------------------------------------------------*
+*& Include          ZGTPPR4030TOP
+*&---------------------------------------------------------------------*
+TYPE-POOLS : SLIS.
+INCLUDE <CL_ALV_CONTROL>.
+
+TABLES : ZGTPPT3160, AUFK, AFKO, AFPO, MARA, ZGTPPT1010,
+         MATDOC, VBAK, ZSD0106T, ICON.
+.
+
+** 메인화면 Dislay
+DATA : BEGIN OF GS_MAIN,
+         ZPJNO         LIKE VBAK-ZPJNO, " 프로젝트번호
+         ZPTXT         LIKE ZSD0106T-ZPTXT, "프로젝트내역
+         JOB_NO        LIKE ZGTPPT3160-JOB_NO, " 제조지시번호
+         ZJOB_NAME     LIKE ZGTEDT2121-ZJOB_NAME, " 제조지시내역
+         KDAUF         LIKE AFPO-KDAUF, " 판매오더번호
+         KDPOS         LIKE AFPO-KDPOS, " 판매오더 품목
+         LINE_NO       LIKE ZGTPPT3160-LINE_NO, " 라인번호
+         SERIAL_INFO   LIKE ZGTPPT3160-SERIAL_INFO, " 시리얼정보
+         AUFNR         LIKE AFPO-AUFNR,
+         ORD_STAT      TYPE CHAR100,
+         STATUS_SI     LIKE ICON-ID,
+         STATUS_CONFRM LIKE ICON-ID,
+         STATUS_T10    LIKE ICON-ID,  "U01
+         STATUS_T11    LIKE ICON-ID,  "U01
+         WERKS         LIKE AUFK-WERKS,
+         NAME1         LIKE T001W-NAME1,
+         MTART         LIKE MARA-MTART,
+         MTBEZ         LIKE T134T-MTBEZ,
+         AUART         LIKE AUFK-AUART,
+         MATKL         LIKE MARA-MATKL,
+         WGBEZ         LIKE T023T-WGBEZ,
+         MATNR         LIKE AFPO-MATNR,
+         MAKTX         LIKE MAKT-MAKTX,
+         FLD_02        LIKE ZGTPPT1010-FLD_02,
+         FLD_03        LIKE ZGTPPT1010-FLD_03,
+         GAMNG         LIKE AFKO-GAMNG,
+         WEMNG         LIKE AFPO-WEMNG,
+         GMEIN         LIKE AFKO-GMEIN,
+         IGMNG         LIKE AFKO-IGMNG,
+         GMEIN2        LIKE AFKO-GMEIN,
+         MBLNR         LIKE MATDOC-MBLNR,
+         MJAHR         LIKE MATDOC-MJAHR,
+         MENGE         LIKE MATDOC-MENGE,
+         MEINS         LIKE MATDOC-MEINS,
+         RUECK         LIKE AFRU-RUECK,
+         RMZHL         LIKE AFRU-RMZHL,
+         LMNGA         LIKE AFRU-LMNGA,
+         MEINH         LIKE AFRU-MEINH,
+         ISM02         LIKE AFRU-ISM02,
+         ILE02         LIKE AFRU-ILE02,
+
+         MENGE3160     LIKE ZGTPPT3160-MENGE,  "U01
+         MEINS3160     LIKE ZGTPPT3160-MEINS,  "U01
+         BUDATT10      LIKE AFRU-BUDAT,        "U01
+         RTMSG(100),                           "U01
+       END OF GS_MAIN.
+
+DATA : BEGIN OF GS_MAIN_DISP.
+         INCLUDE STRUCTURE GS_MAIN.
+DATA :   CELLTAB TYPE LVC_T_STYL,
+       END OF GS_MAIN_DISP.
+
+DATA : GT_MAIN LIKE TABLE OF GS_MAIN.
+DATA : GT_MAIN_DISP LIKE TABLE OF GS_MAIN_DISP.
+
+DATA : GV_OK_CODE LIKE SY-UCOMM.
+
+*-/ ALV Global Field
+CLASS LCL_EVENT_HANDLER DEFINITION DEFERRED.
+DATA : GO_EVENT_HANDLER TYPE REF TO LCL_EVENT_HANDLER.
+
+DATA: GT_UCOMM TYPE TABLE OF SY-UCOMM.  "U01
+
+*-----------
+*ALV GRID 100
+DATA : GO_CONTAIN_0100 TYPE REF TO CL_GUI_DOCKING_CONTAINER.
+DATA : GO_GRID_0100 TYPE REF TO CL_GUI_ALV_GRID.
+DATA : GS_VARIANT_0100 TYPE DISVARIANT.
+DATA : GS_LAYOUT_0100 TYPE LVC_S_LAYO.
+DATA : GT_EXCLUDE_0100 TYPE UI_FUNCTIONS.
+DATA : GT_FIELDCAT_0100 TYPE LVC_T_FCAT.

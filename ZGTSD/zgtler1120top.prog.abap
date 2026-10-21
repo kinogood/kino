@@ -1,0 +1,477 @@
+*&---------------------------------------------------------------------*
+*& Include          ZGTLER1120TOP
+*&---------------------------------------------------------------------*
+TABLES: LIKP, LIPS, VEPO, MSKA, MCHB, MSKU, TVROT, T173T, VEKP, VBAK,
+        VTTK,
+        ZLET0006.
+
+INCLUDE <ICON>.
+DATA : BDCDATA LIKE BDCDATA    OCCURS 0 WITH HEADER LINE,
+       MESSTAB LIKE BDCMSGCOLL OCCURS 0 WITH HEADER LINE.
+
+*/ Gloval Internal Table */
+DATA  G_CHECK.
+
+DATA: BEGIN OF GT_LIKP OCCURS 0.
+        INCLUDE STRUCTURE LIKP.
+DATA:   KUNNR_T  LIKE KNA1-NAME1,  "납품처명
+        KUNAG_T  LIKE KNA1-NAME1,  "판매처명
+        ROUTE_T  LIKE TVROT-BEZEI, "운송경로명
+        VSART_T  LIKE T173T-BEZEI, "출하유형명
+*        kostk       LIKE vbuk-kostk,  "피킹상태
+*        cmgst       LIKE vbuk-cmgst,  "여신점검
+        MATNR    LIKE LIPS-MATNR,  "자재코드
+        ARKTX    LIKE LIPS-ARKTX,  "자재명
+        MATGR    LIKE MARC-MATGR,  "SRM2202-09416 자재그루핑 필드
+        WADAT2   LIKE LIKP-WADAT,
+
+        IV_NO    LIKE ZLET0006-IV_NO, "거래명세서 번호
+        TKNUM    LIKE VTTK-TKNUM,     "선적문서
+        OUT_YN   LIKE ZLET0005-OUT_YN,
+        VGBEL    LIKE LIPS-VGBEL,     "주문번호
+        FIDNO    LIKE ZTETFDP-FIDNO, "수출 Financial Doc.
+        ICON1(5),
+        CHK.
+DATA: END OF GT_LIKP.
+
+*/ 화면 200,300 공통
+DATA: BEGIN OF GT_LIPS OCCURS 0.
+        INCLUDE STRUCTURE LIPS.
+DATA:  "LFART LIKE LIKP-LFART,
+        LENGTH            LIKE LIPS-LFIMG,   "조장
+        FACTOR(5)         TYPE P DECIMALS 1, "조장수
+        PACKAGING_CAT(30),
+        PACKAGING(30),
+        TB_PRINT(30),
+        SHIPPING_NO(15),
+        GRADE             LIKE CAWN-ATWRT,   "등급
+        NAME1             LIKE kna1-name1,   "거래처
+        WAERK             LIKE VBAP-WAERK,   "화폐
+        VRKME_SO          LIKE VBAP-VRKME,   "판매단위
+        UMZIZ             LIKE VBAP-UMZIZ,   "환산계수
+        UMZIN             LIKE VBAP-UMZIN,   "환산계수
+        MIGUL             LIKE LIPS-LFIMG,   "미결수량
+        JISIQTY           LIKE LIPS-LFIMG,   "납품지시수량
+        DELQTY            LIKE LIPS-LFIMG,   "납품지정수량
+        NDELQTY           LIKE LIPS-LFIMG,   "납품미지정수량
+        AVQTY(13)         TYPE P DECIMALS 3, "가용재고수량
+        QIQTY             LIKE LIPS-LFIMG,   "QI 재고
+        ITEM1             LIKE LIPS-POSNR,   "
+*{ 기능개선 157076 - 추가
+        SERNP             LIKE MARC-SERNP,   "일련번호 프로파일
+        MATGR             LIKE MARC-MATGR,   "SRM2202-09416 자재그루핑 필드
+        SERNR_M           LIKE EQUI-SERNR,   "일련번호(기계번호)
+*} 기능개선 157076 - 추가
+*       sonum        LIKE vepo-sonum,
+        OUT_WID           LIKE VTRLK-/BEV1/RPMNGLI, "폭/드럼
+        PLAN_DIA          LIKE VTRLK-/BEV1/RPMNGLI, "약경/드럼
+        DR_WEIGHT         LIKE MARA-NTGEW,          "드럼무게/개
+        BRGEW_DR          LIKE MARA-BRGEW,          "총중량(드럼포함)
+        MEINS_MM          LIKE MARA-MEINS,
+        MEINS_KG          LIKE MARA-MEINS,
+        SUB,
+        CALCU,
+        XSORT,
+        ICON1(5),                     "접기/펼치기
+        FIXED,
+        CHK.
+DATA: END OF GT_LIPS.
+
+DATA: GL_LIPS  LIKE GT_LIPS OCCURS 0 WITH HEADER LINE.
+DATA: WA_LIPS  LIKE GT_LIPS OCCURS 0 WITH HEADER LINE.
+DATA: WA_LIPS1 LIKE GT_LIPS OCCURS 0 WITH HEADER LINE.
+DATA: WA_LIPS2 LIKE GT_LIPS OCCURS 0 WITH HEADER LINE.
+DATA: CL_LIPS  LIKE GT_LIPS OCCURS 0 WITH HEADER LINE.
+
+DATA: ET_LIKP LIKE GT_LIKP OCCURS 0 WITH HEADER LINE.
+
+*/ 화면 200
+* 상위 레벨에 대한 COLLECT
+DATA: BEGIN OF GT_SUB OCCURS 0,
+        WERKS LIKE MSKA-WERKS,
+        LGORT LIKE MSKA-LGORT,
+        MATNR LIKE MSKA-MATNR,
+        SOBKZ LIKE MSKA-SOBKZ,
+      END OF GT_SUB .
+
+DATA: BEGIN OF GT_MSKA OCCURS 0,
+        WERKS LIKE MSKA-WERKS,
+        LGORT LIKE MSKA-LGORT,
+        MATNR LIKE MSKA-MATNR,
+        SOBKZ LIKE MSKA-SOBKZ,
+        VBELN LIKE MSKA-VBELN,
+        POSNR LIKE MSKA-POSNR,
+      END OF GT_MSKA.
+
+DATA: BEGIN OF GT_VEPO OCCURS 0.
+        INCLUDE STRUCTURE VEPO.
+DATA:   VGBEL LIKE LIPS-VBELN,
+        VGPOS LIKE LIPS-POSNR,
+        ITEM1 LIKE LIPS-POSNR,
+        CHECK.
+DATA: END OF GT_VEPO.
+
+DATA: BEGIN OF GL_VEPO OCCURS 0,
+*       venum   LIKE vepo-venum,   "내부조정단위번호
+        ITEM1      LIKE LIPS-POSNR,
+        EXIDV      LIKE VEKP-EXIDV,   "포장번호
+        ERDAT      LIKE VEKP-ERDAT,   "포장일
+        WERKS      LIKE VEPO-WERKS,   "플랜트
+        LGORT      LIKE VEPO-LGORT,   "저장위치
+        MATNR      LIKE VEPO-MATNR,   "자재
+        CHARG      LIKE VEPO-CHARG,   "배치번호
+        SOBKZ      LIKE VEPO-SOBKZ,   "특별재고
+        SONUM      LIKE VEPO-SONUM,   "특별재고번호
+        VBELN      LIKE VEPO-VBELN,   "납품문서번호
+        POSNR      LIKE VEPO-POSNR,   "납품ITEM
+        VEMNG      LIKE VEPO-VEMNG,   "포장수량
+        VEMEH      LIKE VEPO-VEMEH,   "포장단위
+        PLACE,                     "지정,미지정 이동후 현재 위치
+        ORGIN,                     "최초 지정, 미지정
+        ICON2(5),                  "포장 중복 지정
+        ICON3(5),                  "지정할수 없는 품목 포함
+        CHART(100),                "배치특성
+        FIXED,
+        EXTNL,                     "외포장구분자
+      END OF GL_VEPO.
+
+DATA: WA_VEPO LIKE GL_VEPO OCCURS 0 WITH HEADER LINE.
+DATA: CL_VEPO LIKE GL_VEPO OCCURS 0 WITH HEADER LINE.
+
+DATA: BEGIN OF GT_NASG OCCURS 0,
+        CHK,
+        EXIDV      LIKE VEKP-EXIDV,   "포장번호
+        ERDAT      LIKE VEKP-ERDAT,   "포장일
+        VEMNG      LIKE VEPO-VEMNG,   "포장수량
+        VEMEH      LIKE VEPO-VEMEH,   "포장단위
+        ICON2(5),                  "포장 중복 지정
+        ICON3(5),                  "지정할수 없는 품목 포함
+        CHART(100),                "배치특성
+      END OF GT_NASG.
+DATA: GT_ASSG LIKE GT_NASG OCCURS 0 WITH HEADER LINE.
+
+DATA: BEGIN OF ET_VEKP OCCURS 0.
+        INCLUDE STRUCTURE VEKP.
+DATA: END OF ET_VEKP.
+DATA: BEGIN OF ET_VEPO OCCURS 0.
+        INCLUDE STRUCTURE VEPO.
+DATA: END OF ET_VEPO.
+
+DATA: BEGIN OF GT_SHIP OCCURS 0,
+        VBELN           LIKE LIPS-VBELN,
+        POSNR           LIKE LIPS-POSNR,
+        SHIPPING_NO(15),
+      END OF GT_SHIP.
+
+DATA: BEGIN OF GT_DETL OCCURS 0,
+        CHARG LIKE VEPO-CHARG,
+        VEMNG LIKE VEPO-VEMNG,
+      END OF GT_DETL.
+
+*/ 배치정렬 특성
+DATA: BEGIN OF GT_KSML OCCURS 0.
+        INCLUDE STRUCTURE KSML.
+DATA:   ATNAM TYPE ATNAM.
+DATA: END OF GT_KSML.
+
+DATA: BEGIN OF GT_AUSP OCCURS 0.
+        INCLUDE STRUCTURE AUSP.
+DATA:   ATNAM TYPE ATNAM.
+DATA:  POSNR LIKE KSML-POSNR.
+DATA: END OF GT_AUSP.
+DATA: LV_COL_ATWRT(100).
+
+*// <<<< 화면300 >>>> //
+*/ 미지정,지정재고에 대한 모든 내용을 담은 내부테이블
+DATA: BEGIN OF XL_NASG OCCURS 0,
+        ITEM1      LIKE LIPS-POSNR,     "상위품목
+        POSNR      LIKE LIPS-POSNR,     "품목
+        MATNR      LIKE LIPS-MATNR,
+        CHARG      LIKE LIPS-CHARG,     "배치
+        GRADE      LIKE CAWN-ATWRT,     "등급
+        NAME1      LIKE KNA1-NAME1,     "거래처명
+        VRKME      LIKE LIPS-VRKME,     "단위
+        LENGTH     LIKE LIPS-LFIMG,   "조장
+        FACTOR(5)  TYPE P DECIMALS 1,   "조장수
+        LABST      LIKE LIPS-LFIMG,     "가용수량
+        FACTOR1(5) TYPE P DECIMALS 1,   "지정조장수
+        DELQTY     LIKE LIPS-LFIMG,     "지정수
+        CHART(100),                     "배치특성
+        SOBKZ      LIKE LIPS-SOBKZ,     "특별재고
+        VGBEL      LIKE LIPS-VGBEL,     "S/O
+        VGPOS      LIKE LIPS-VGPOS,     "S/O 품목
+        XCHPF      LIKE LIPS-XCHPF,     "배치사용여부
+        EQUNR      LIKE EQUI-EQUNR,   "s/n
+        WERKS      LIKE LIPS-WERKS,
+        PDIDT      LIKE ZQMT1065-PDIDT, "PDI 합격일 ADD BY HKSEO 20190201
+        ICON2      TYPE ICON_L2,        "PDI 합격 상태 ADD BY HKSEO 20190201
+*       assgn,                     "지정A, 미지정N
+*       place,                     "현재위치: 지정A, 미지정N
+*       xmove,                     "이동했느냐 여부
+      END OF XL_NASG.
+
+
+DATA: BEGIN OF XT_NASG OCCURS 0,
+        ITEM1      LIKE LIPS-POSNR,   "품목
+        POSNR      LIKE LIPS-POSNR,
+        MATNR      LIKE LIPS-MATNR,
+        CHARG      LIKE LIPS-CHARG,   "배치
+        GRADE      LIKE CAWN-ATWRT,   "등급
+        NAME1      LIKE KNA1-NAME1,   "거래처명
+        VRKME      LIKE LIPS-VRKME,   "단위
+        LENGTH     LIKE LIPS-LFIMG,   "조장
+        FACTOR(5)  TYPE P DECIMALS 1, "조장수
+        LABST      LIKE LIPS-LFIMG,   "가용수량
+        FACTOR1(5) TYPE P DECIMALS 1, "지정조장수
+        DELQTY     LIKE LIPS-LFIMG,   "지정수
+        CHART(100),                   "배치특성
+        XCHPF      LIKE LIPS-XCHPF,     "배치사용여부
+        EQUNR      LIKE EQUI-EQUNR,   "s/n
+        ICON1(5),
+        PDIDT      LIKE ZQMT1065-PDIDT, "PDI 합격일 ADD BY HKSEO 20190201
+        ICON2      TYPE ICON_L2,        "PDI 합격 상태 ADD BY HKSEO 20190201
+        ICON_IMC   TYPE ICON_L2,        "CHM2009-00380 IMC필드추가 ADD BY ZLSGAP1 20200922
+        CHK,
+      END OF XT_NASG.
+
+*{ SRM2202-09416 - s  테이블컨트롤 속성
+DATA: BEGIN OF T_COLUMN OCCURS 0,
+        SCREEN       LIKE SCREEN,
+        INDEX        TYPE I,
+        SELECTED(1)  TYPE C,
+        VISLENGTH    LIKE ICON-OLENG,
+        INVISIBLE(1) TYPE C,
+      END OF T_COLUMN.
+*} SRM2202-09416 - e
+
+
+
+* 지정재고
+DATA: XT_ASSG LIKE XT_NASG OCCURS 0 WITH HEADER LINE.
+DATA: XL_ASSG LIKE XL_NASG OCCURS 0 WITH HEADER LINE.
+DATA: CL_NASG LIKE XL_NASG OCCURS 0 WITH HEADER LINE.
+DATA: CL_ASSG LIKE XL_NASG OCCURS 0 WITH HEADER LINE.
+*DATA: cl_lips LIKE gl_lips OCCURS 0 WITH HEADER LINE.
+*DATA: WA_nasg LIKE xl_nasg OCCURS 0 WITH HEADER LINE.
+
+DATA: GT_NASG_TMP LIKE XT_NASG OCCURS 0 WITH HEADER LINE,
+      GT_ASSG_TMP LIKE XT_NASG OCCURS 0 WITH HEADER LINE.
+
+*지정저장
+DATA: GT_TAB11 LIKE ZLES027 OCCURS 0 WITH HEADER LINE.
+*DATA: gt_tab8  LIKE zles010 OCCURS 0 WITH HEADER LINE.
+*피킹저장: gt_tab1, gt_tab2
+DATA: GT_TAB1 LIKE ZLES010 OCCURS 0 WITH HEADER LINE.
+DATA: GT_TAB2 LIKE ZLES011 OCCURS 0 WITH HEADER LINE.
+DATA: GT_TAB3 LIKE ZLES012 OCCURS 0 WITH HEADER LINE.
+DATA: GT_TAB4 LIKE ZLES010 OCCURS 0 WITH HEADER LINE.
+DATA: GT_TAB5 LIKE ZLES011 OCCURS 0 WITH HEADER LINE.
+DATA: GT_TAB6 LIKE ZLES012 OCCURS 0 WITH HEADER LINE.
+DATA: GT_TAB7 LIKE ZLES011 OCCURS 0 WITH HEADER LINE.
+DATA: GT_TAB8 LIKE ZLES010 OCCURS 0 WITH HEADER LINE.
+
+DATA: GT_SAVE_ITEM LIKE ZLES010 OCCURS 0 WITH HEADER LINE.
+DATA: GT_SAVE_LIPS LIKE ZLES011 OCCURS 0 WITH HEADER LINE.
+DATA: GT_SAVE_VEKP LIKE ZLES012 OCCURS 0 WITH HEADER LINE.
+
+*/ Gloval Variance
+DATA: OK_CODE LIKE  SY-UCOMM,
+      SAVE_OK LIKE  SY-UCOMM.
+DATA: G_CURSOR_FIELD(20), I_CURSOR_LINE TYPE I.
+DATA: P_VBELN       LIKE  LIKP-VBELN,
+      P_KOSTK       LIKE  LIKP-KOSTK,
+      P_KOSTK_T(10),
+      P_KUNNR       LIKE GT_LIKP-KUNNR,
+      P_KUNNR_T     LIKE GT_LIKP-KUNNR_T,
+      P_KUNAG       LIKE GT_LIKP-KUNAG,
+      P_KUNAG_T     LIKE GT_LIKP-KUNAG_T,
+      P_WADAT_IST   LIKE GT_LIKP-WADAT_IST,
+      P_WADAT       LIKE GT_LIKP-WADAT,
+      P_QIQTY       LIKE GT_LIPS-QIQTY,
+      P_VRKME       LIKE GT_LIPS-VRKME.
+DATA: GV_LFIMG      TYPE LFIMG,
+      GV_LFIMG1     TYPE LFIMG,
+      GV_LFIMG2     TYPE LFIMG,
+      GV_LABST      TYPE LFIMG,
+      GV_LABST1     TYPE LFIMG,
+      GV_LABST2     TYPE LFIMG,
+      GV_MENGE      TYPE LFIMG,
+      GV_DELQTY     TYPE LFIMG,
+      GV_SUM_DELQTY TYPE LFIMG,
+      GV_JISIQTY    TYPE LFIMG,
+      GV_VEMNG      TYPE LFIMG,
+      GV_QTY1       TYPE LFIMG,
+      GV_QTY2       TYPE LFIMG,
+      GV_QTY3       TYPE LFIMG,
+      GV_KWMENG     TYPE LFIMG,
+      GV_AVALQTY    TYPE LFIMG,
+      GV_OVERQTY    TYPE LFIMG.
+DATA: GV_ITEM1 LIKE LIPS-POSNR.
+DATA: LV_XHUPF.
+DATA: GV_SAVE_FLAG .
+DATA: GV_LINE TYPE I.
+DATA: OK_PICKING.
+DATA: GV_UEVEL LIKE VEKP-UEVEL.
+DATA: GV_FLAG.
+DATA: GV_LENGTH TYPE ATWRT.
+DATA: GV_RETURN.
+DATA: GV_RESULT, GV_MSG(200).
+*DATA: bdc_mode VALUE 'N'.
+DATA: BDC_MODE LIKE HRVCOST-MODE.
+DATA: GV_VBELN LIKE THEAD-TDNAME.
+DATA: GV_DIV TYPE I.
+
+DATA: GV_TRACTOR.       "출하구분 'M6~' CHECK 구분
+
+*/ Lock Object
+DATA: BEGIN OF GT_AUN OCCURS 0,
+        VBELN TYPE VBELN,
+        VGBEL TYPE VBELN,
+      END OF GT_AUN.
+DATA: FTAB TYPE TABLE OF STRING.
+
+*/ Ranges
+RANGES:  R_VBELN FOR LIKP-VBELN,
+         R_LFART FOR LIKP-LFART.
+
+*/ Constants
+CONSTANTS: C_ICON1(30) VALUE ICON_EXPAND,
+           C_ICON2(30) VALUE ICON_COLLAPSE,
+           C_ICON3(30) VALUE ICON_LED_RED.
+
+*/ Controls
+CONTROLS: TC01 TYPE TABLEVIEW USING SCREEN 0100,
+          TC02 TYPE TABLEVIEW USING SCREEN 0200,
+          TC03 TYPE TABLEVIEW USING SCREEN 0200,
+          TC04 TYPE TABLEVIEW USING SCREEN 0200,
+          TC05 TYPE TABLEVIEW USING SCREEN 0210,
+          TC12 TYPE TABLEVIEW USING SCREEN 0300,
+          TC13 TYPE TABLEVIEW USING SCREEN 0300,
+          TC14 TYPE TABLEVIEW USING SCREEN 0300.
+
+*{ 기능개선 157076 - 추가
+DATA: WA_COLS     LIKE LINE OF TC12-COLS.
+DATA: GV_SERIAL.                       "일련번호 사용여부
+*} 기능개선 157076 - 추가
+
+*/ 기타
+DATA : BEGIN OF S_FUNC OCCURS 0,
+         UCOMM(10) TYPE C,
+       END OF S_FUNC.
+
+*{ SRM2403-04408 - 추가_S
+DATA: GT_ORDS    TYPE TABLE OF ZCHARORDS,
+      GT_ORDVALS TYPE TABLE OF ZCHARVALS,
+      GR_ATNAMO  TYPE TABLE OF EAMPIC_SEL_ATNAM.
+*} SRM2403-04408 - 추가_E
+
+*/ LONG TEXT - SE75
+DATA: GT_TLINE LIKE TLINE OCCURS 0 WITH HEADER LINE.
+*DATA: gv_vbeln LIKE thead-tdname.
+DATA: GV_OBJECT_ID(4).
+DATA: GV_OBJECT(10).
+
+*/ 제품특성
+DATA: GT_CHAR  LIKE ZLES001  OCCURS 0 WITH HEADER LINE.
+DATA: GT_CHAR1 LIKE CONF_OUT OCCURS 0 WITH HEADER LINE.
+
+CONSTANTS:
+** SALES ORDER
+  SO_LENGTH(30)          VALUE 'SAP_LENGTH_VKRME',     "조장
+  SO_FACTOR(30)          VALUE 'SAP_MILLCA_FACTOR',   "조장수 "사용안함
+  SO_PACKAGING(30)       VALUE 'SAP_MILLCA_PACKAGING', "포장재 코드
+  SO_PACKAGING_CAT(30)   VALUE 'SAP_MILLCA_PACKAGING_CAT', "포장재 유형
+  SO_COLOR(30)           VALUE 'PD_CA_COLOR_BASE',     "색상(BASE)
+  SO_COLOR_STRIPE(30)    VALUE 'PD_CA_COLOR_STRIPE',   "색상(STRIPE)
+  SO_GRADE(30)           VALUE 'PD_CA_GRADE',         "등급
+
+** BATCH
+  BA_LENGTH(30)          VALUE 'SAP_MILLCA_LENGTH',    "조장
+  BA_ALLENGTH(30)        VALUE 'BT_AL_LENGTH',         "절단길이
+  BA_FACTOR(30)          VALUE 'SAP_MILLCA_FACTOR',    "조장수
+  BA_PACKAGING(30)       VALUE 'SAP_MILLCA_PACKAGING', "포장재 코드
+  BA_PACKAGING_CAT(30)   VALUE 'SAP_MILLCA_PACKAGING_CAT', "포장재 유형
+  BA_COLOR(30)           VALUE 'PD_CA_COLOR_BASE',     "색상
+  BA_COLOR_STRIPE(30)    VALUE 'PD_CA_COLOR_STRIPE',   "색상(STRIPE)
+
+  BA_IDEN_CODE(30)       VALUE 'PD_CA_INS_IDEN_CODE', "절연선심식별색상코드
+
+**___전사프로세스 개선_Start 2010.02.23 by SDC24
+  BA_BT_AA_GRADE(30)     VALUE 'BT_AA_GRADE',     "SCR 품질등급
+  PD_CA_GRADE(30)        VALUE 'PD_CA_GRADE',     "가온 SCR 품질등급
+  BA_PD_CF_GRADE(30)     VALUE 'PD_CF_GRADE',     "동박제품등급
+  BA_PD_CF_GRADE1(30)    VALUE 'PD_CF_GRADE1',  "동박제품등급(08년7월~)
+  BA_BT_CX_GRADE(30)     VALUE 'BT_CX_GRADE',       "동축 품질등급
+  BA_BT_OF_Q_GRADE(30)   VALUE 'BT_OF_Q_GRADE',     "광섬유 품질등급
+  BA_PD_TB_PRINT_APP(30) VALUE 'PD_TB_PRINT_APP',   "튜브 인쇄사양
+**___전사프로세스 개선_End   2010.02.23 by SDC24
+
+*{ 자체개선 53028 - 추가
+  BA_EG_NO(30)           VALUE 'PD_AM_EG_NO',       "엔진번호
+  BA_TM_NO(30)           VALUE 'PD_AM_TM_NO',       "TM번호
+  BA_CHASSIS_NO(30)      VALUE 'PD_AM_CHASSIS_NO',  "샤시번호
+*} 자체개선 53028 - 추가
+
+*( 기능개선 60400 - 추가
+  BA_PD_CA_STATUS(30)    VALUE 'PD_CA_PACKMARK_STATUS'. "포장재상태
+
+*) 기능개선 60400
+
+
+
+*/ PARTNER FUNCTION
+CONSTANTS: GC_PAR_SP(2) VALUE 'AG',  "판매처
+           GC_PAR_BP(2) VALUE 'RE',  "청구처
+           GC_PAR_PY(2) VALUE 'RG',  "지급처
+           GC_PAR_PE(2) VALUE 'VE',  "영업사원
+           GC_PAR_SH(2) VALUE 'WE'.  "납품처
+
+CONSTANTS: GC_VKORG_6000 TYPE VKORG      VALUE '6000',
+           GC_LIFSK_G3   TYPE LIKP-LIFSK VALUE 'G3',
+           GC_LGORT_3410 TYPE LGORT_D    VALUE '3410',
+           GC_LGORT_3420 TYPE LGORT_D    VALUE '3420',
+           GC_LGORT_3430 TYPE LGORT_D    VALUE '3430',
+           GC_LGORT_3499 TYPE LGORT_D    VALUE '3499',
+           GC_MEINS_KG   TYPE MEINS      VALUE 'KG',
+           GC_MEINS_MM   TYPE MEINS      VALUE 'MM'.
+
+*----------------------------------------------------------------------*
+* CONSTANTS
+*----------------------------------------------------------------------*
+CONSTANTS:
+  GC_A TYPE C VALUE 'A',
+  GC_B TYPE C VALUE 'B',
+  GC_C TYPE C VALUE 'C',
+  GC_D TYPE C VALUE 'D',
+  GC_E TYPE C VALUE 'E',
+  GC_F TYPE C VALUE 'F',
+  GC_G TYPE C VALUE 'G',
+  GC_H TYPE C VALUE 'H',
+  GC_I TYPE C VALUE 'I',
+  GC_J TYPE C VALUE 'J',
+  GC_K TYPE C VALUE 'K',
+  GC_L TYPE C VALUE 'L',
+  GC_M TYPE C VALUE 'M',
+  GC_N TYPE C VALUE 'N',
+  GC_O TYPE C VALUE 'O',
+  GC_P TYPE C VALUE 'P',
+  GC_Q TYPE C VALUE 'Q',
+  GC_R TYPE C VALUE 'R',
+  GC_S TYPE C VALUE 'S',
+  GC_T TYPE C VALUE 'T',
+  GC_U TYPE C VALUE 'U',
+  GC_V TYPE C VALUE 'V',
+  GC_W TYPE C VALUE 'W',
+  GC_X TYPE C VALUE 'X',
+  GC_Y TYPE C VALUE 'Y',
+  GC_Z TYPE C VALUE 'Z',
+  GC_0 TYPE C VALUE '0',
+  GC_1 TYPE C VALUE '1',
+  GC_2 TYPE C VALUE '2',
+  GC_3 TYPE C VALUE '3',
+  GC_4 TYPE C VALUE '4',
+  GC_5 TYPE C VALUE '5',
+  GC_6 TYPE C VALUE '6',
+  GC_7 TYPE C VALUE '7',
+  GC_8 TYPE C VALUE '8',
+  GC_9 TYPE C VALUE '9'.

@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_ENHC" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <SHORTTEXT>[SD] BP 추가 정보 확장필드</SHORTTEXT>
+   <ENH_CHILDS>
+    <ENHNAME>ZGTSD_EH_BAPI_BPADDITION</ENHNAME>
+    <ENHNAME>ZGTSD_EH_MAP2E_BP3100</ENHNAME>
+    <ENHNAME>ZGTSD_EH_UKM_BUPA_SCREEN</ENHNAME>
+   </ENH_CHILDS>
+  </asx:values>
+ </asx:abap>
+</abapGit>

@@ -1,0 +1,577 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_MSAG" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <T100A>
+    <ARBGB>ZGTSD01</ARBGB>
+    <MASTERLANG>3</MASTERLANG>
+   </T100A>
+   <T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZGTSD01</ARBGB>
+     <MSGNR>000</MSGNR>
+     <TEXT>&amp;1 &amp;2 &amp;3 &amp;4</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZGTSD01</ARBGB>
+     <MSGNR>001</MSGNR>
+     <TEXT>&amp;1&amp;2&amp;3&amp;4&amp;5&amp;6&amp;7</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZGTSD01</ARBGB>
+     <MSGNR>002</MSGNR>
+     <TEXT>유효한 라인을 하나만 선택하십시오.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZGTSD01</ARBGB>
+     <MSGNR>003</MSGNR>
+     <TEXT>처리가능한 라인을 선택 하세요.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZGTSD01</ARBGB>
+     <MSGNR>004</MSGNR>
+     <TEXT>처리할 데이타를 선택 하세요.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZGTSD01</ARBGB>
+     <MSGNR>005</MSGNR>
+     <TEXT>&amp;1 &amp;2이(가) 존재하지 않습니다. 값을 확인하십시오.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZGTSD01</ARBGB>
+     <MSGNR>006</MSGNR>
+     <TEXT>&amp;1 &amp;2이(가) 유효하지 않습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZGTSD01</ARBGB>
+     <MSGNR>007</MSGNR>
+     <TEXT>&amp;1은 필수 입력입니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZGTSD01</ARBGB>
+     <MSGNR>008</MSGNR>
+     <TEXT>&amp;1 &amp;2을(를) 입력하세요.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZGTSD01</ARBGB>
+     <MSGNR>009</MSGNR>
+     <TEXT>&amp; 건 검색되었습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZGTSD01</ARBGB>
+     <MSGNR>010</MSGNR>
+     <TEXT>조회할 데이타가 없습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZGTSD01</ARBGB>
+     <MSGNR>011</MSGNR>
+     <TEXT>저장 되었습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZGTSD01</ARBGB>
+     <MSGNR>012</MSGNR>
+     <TEXT>저장을 실패하였습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZGTSD01</ARBGB>
+     <MSGNR>013</MSGNR>
+     <TEXT>삭제 되었습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZGTSD01</ARBGB>
+     <MSGNR>014</MSGNR>
+     <TEXT>삭제를 실패하였습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZGTSD01</ARBGB>
+     <MSGNR>015</MSGNR>
+     <TEXT>저장할 데이터가 없습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZGTSD01</ARBGB>
+     <MSGNR>016</MSGNR>
+     <TEXT>사업장 &amp;1 에 대한 권한이 없습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZGTSD01</ARBGB>
+     <MSGNR>017</MSGNR>
+     <TEXT>신규생성 되었습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZGTSD01</ARBGB>
+     <MSGNR>018</MSGNR>
+     <TEXT>조건에 맞는 DATA가 없습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZGTSD01</ARBGB>
+     <MSGNR>019</MSGNR>
+     <TEXT>출하지점 &amp;1에 대한 권한이 없습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZGTSD01</ARBGB>
+     <MSGNR>022</MSGNR>
+     <TEXT>&amp;1 &amp;2이(가) 이미 존재 합니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZGTSD01</ARBGB>
+     <MSGNR>023</MSGNR>
+     <TEXT>변경된 &amp; 데이터가 없습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZGTSD01</ARBGB>
+     <MSGNR>024</MSGNR>
+     <TEXT>&amp;1 &amp;2이(가) 존재합니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZGTSD01</ARBGB>
+     <MSGNR>025</MSGNR>
+     <TEXT>해당필드는 변경할 수 없습니다. 다른 필드를 선택하십시오.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZGTSD01</ARBGB>
+     <MSGNR>028</MSGNR>
+     <TEXT>&amp; 건 저장되었습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZGTSD01</ARBGB>
+     <MSGNR>029</MSGNR>
+     <TEXT>오류 내역이 존재합니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZGTSD01</ARBGB>
+     <MSGNR>030</MSGNR>
+     <TEXT>데이타를 최신표시했습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZGTSD01</ARBGB>
+     <MSGNR>031</MSGNR>
+     <TEXT>Are you sure you want to save?</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZGTSD01</ARBGB>
+     <MSGNR>032</MSGNR>
+     <TEXT>Are you sure you want to delete?</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZGTSD01</ARBGB>
+     <MSGNR>033</MSGNR>
+     <TEXT>Are you sure you want to change the data?</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZGTSD01</ARBGB>
+     <MSGNR>034</MSGNR>
+     <TEXT>Are you sure you want to New the data?</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZGTSD01</ARBGB>
+     <MSGNR>035</MSGNR>
+     <TEXT>Are you sure you want to continue?</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZGTSD01</ARBGB>
+     <MSGNR>036</MSGNR>
+     <TEXT>Are you sure you want to leave the screen?</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZGTSD01</ARBGB>
+     <MSGNR>037</MSGNR>
+     <TEXT>Are you sure you want to copy?</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZGTSD01</ARBGB>
+     <MSGNR>038</MSGNR>
+     <TEXT>Are you sure you want to restoration?</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZGTSD01</ARBGB>
+     <MSGNR>039</MSGNR>
+     <TEXT>Are you sure you want to delete?</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZGTSD01</ARBGB>
+     <MSGNR>040</MSGNR>
+     <TEXT>확인</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZGTSD01</ARBGB>
+     <MSGNR>041</MSGNR>
+     <TEXT>입력값 [ &amp;1 ] 오류. 숫자만 입력 가능합니다. 엑셀파일을 확인하세요.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZGTSD01</ARBGB>
+     <MSGNR>042</MSGNR>
+     <TEXT>행 선택 후 실행하세요.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZGTSD01</ARBGB>
+     <MSGNR>050</MSGNR>
+     <TEXT>작업이 취소되었습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZGTSD01</ARBGB>
+     <MSGNR>051</MSGNR>
+     <TEXT>전체: &amp;1건 [ 성공: &amp;2건, 실패: &amp;3건 ]</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZGTSD01</ARBGB>
+     <MSGNR>060</MSGNR>
+     <TEXT>지급조건이 수주보고서와 다릅니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZGTSD01</ARBGB>
+     <MSGNR>061</MSGNR>
+     <TEXT>인도조건이 수주보고서와 다릅니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZGTSD01</ARBGB>
+     <MSGNR>062</MSGNR>
+     <TEXT>수주조건이 상이 합니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZGTSD01</ARBGB>
+     <MSGNR>063</MSGNR>
+     <TEXT>입력한 단가가 수주보고서와 다릅니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZGTSD01</ARBGB>
+     <MSGNR>064</MSGNR>
+     <TEXT>주문 보류 처리상태가 &quot; &amp;1 &quot; 입니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZGTSD01</ARBGB>
+     <MSGNR>065</MSGNR>
+     <TEXT>주문 변경 품의서 상태가 &quot; &amp;1 &quot; 입니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZGTSD01</ARBGB>
+     <MSGNR>071</MSGNR>
+     <TEXT>필수 값 &amp;1 이 입력되지 않았습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZGTSD01</ARBGB>
+     <MSGNR>098</MSGNR>
+     <TEXT>시스템 오류 입니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZGTSD01</ARBGB>
+     <MSGNR>100</MSGNR>
+     <TEXT>데이터가 갱신되었습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZGTSD01</ARBGB>
+     <MSGNR>102</MSGNR>
+     <TEXT>사용자 &amp;1가 그룹코드 &amp;2를 수정중입니다</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZGTSD01</ARBGB>
+     <MSGNR>103</MSGNR>
+     <TEXT>사용자 &amp;1가 고객 &amp;2를 마감 처리중 입니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZGTSD01</ARBGB>
+     <MSGNR>104</MSGNR>
+     <TEXT>사용자 &amp;1가 주문번호 &amp;2를 처리중 입니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZGTSD01</ARBGB>
+     <MSGNR>105</MSGNR>
+     <TEXT>영업영역(&amp;1/&amp;2/&amp;3)에 영업그룹 &amp;4 를 지정하지 않았습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZGTSD01</ARBGB>
+     <MSGNR>106</MSGNR>
+     <TEXT>영업그룹 &amp;1을 영업조직 &amp;2 에 지정하지 않았습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZGTSD01</ARBGB>
+     <MSGNR>107</MSGNR>
+     <TEXT>여신세그먼트 &amp;1 을 BP &amp;2 에 지정하지 않았습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZGTSD01</ARBGB>
+     <MSGNR>108</MSGNR>
+     <TEXT>정보범주 &amp;1에 정보유형 &amp;2 를 지정하지 않았습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZGTSD01</ARBGB>
+     <MSGNR>109</MSGNR>
+     <TEXT>리스크클래스 점검규칙 미등록(BP - &amp;1)</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZGTSD01</ARBGB>
+     <MSGNR>110</MSGNR>
+     <TEXT>수수료 입력이 되지 않았습니다.(항목-&amp;1)</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZGTSD01</ARBGB>
+     <MSGNR>111</MSGNR>
+     <TEXT>납품문서(&amp;1)은 &amp;2 상태 입니다. 매출지정 불가 합니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZGTSD01</ARBGB>
+     <MSGNR>112</MSGNR>
+     <TEXT>청구문서 &amp;1가 생성 되었습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZGTSD01</ARBGB>
+     <MSGNR>113</MSGNR>
+     <TEXT>매출일은 &amp;1 월 이어야 합니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZGTSD01</ARBGB>
+     <MSGNR>114</MSGNR>
+     <TEXT>사용자 &amp;1가 &amp;2 / &amp;3 를 처리중 입니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZGTSD01</ARBGB>
+     <MSGNR>115</MSGNR>
+     <TEXT>원DO &amp;1은 &amp;2 상태 입니다. 매출취소 불가합니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZGTSD01</ARBGB>
+     <MSGNR>116</MSGNR>
+     <TEXT>납품문서(&amp;1)은 &amp;2 상태 입니다. 매출취소 불가 합니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZGTSD01</ARBGB>
+     <MSGNR>117</MSGNR>
+     <TEXT>오더유형은 OR,ZEXE만 가능합니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZGTSD01</ARBGB>
+     <MSGNR>118</MSGNR>
+     <TEXT>영업영역 &amp;1 &amp;2 &amp;3이 없습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZGTSD01</ARBGB>
+     <MSGNR>119</MSGNR>
+     <TEXT>영업팀 &amp;4은 영업영역 &amp;1 &amp;2 &amp;3에 지정되어 있지 않습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZGTSD01</ARBGB>
+     <MSGNR>120</MSGNR>
+     <TEXT>영업그룹 &amp;2은 영업팀 &amp;1에 지정되어 있지 않습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZGTSD01</ARBGB>
+     <MSGNR>121</MSGNR>
+     <TEXT>&amp;1 &amp;2에 대한 고객마스터 회사코드 정보가 없습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZGTSD01</ARBGB>
+     <MSGNR>122</MSGNR>
+     <TEXT>&amp;1 &amp;2에 대한 고객마스터 판매관리 정보가 없습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZGTSD01</ARBGB>
+     <MSGNR>123</MSGNR>
+     <TEXT>납품요청일은 오늘 이후만 가능합니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZGTSD01</ARBGB>
+     <MSGNR>124</MSGNR>
+     <TEXT>배치 &amp;1가 중복으로 입력되었습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZGTSD01</ARBGB>
+     <MSGNR>125</MSGNR>
+     <TEXT>배치 &amp;1 대한 자재코드가 없습니다. 마스터를 확인하시기 바랍니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZGTSD01</ARBGB>
+     <MSGNR>126</MSGNR>
+     <TEXT>&amp;1 행에 수량(=길이) 정보가 없습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZGTSD01</ARBGB>
+     <MSGNR>127</MSGNR>
+     <TEXT>&amp;1 행에 배치 정보가 없습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZGTSD01</ARBGB>
+     <MSGNR>128</MSGNR>
+     <TEXT>배치 &amp;1에 의한 자재 &amp;2에 대한 자재마스터 영업조직 정보가 없습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZGTSD01</ARBGB>
+     <MSGNR>129</MSGNR>
+     <TEXT>배치 &amp;1에 의한 자재 &amp;2에 대한 자재마스터 플랜트 정보가 없습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZGTSD01</ARBGB>
+     <MSGNR>130</MSGNR>
+     <TEXT>자재 &amp;1에 대한 자재마스터 영업조직 정보가 없습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZGTSD01</ARBGB>
+     <MSGNR>131</MSGNR>
+     <TEXT>자재 &amp;1에 대한 자재마스터 플랜트 정보가 없습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZGTSD01</ARBGB>
+     <MSGNR>132</MSGNR>
+     <TEXT>자재 &amp;1에 배치 &amp;2가 유효하지 않습니다. 마스터를 확인하시기 바랍니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZGTSD01</ARBGB>
+     <MSGNR>133</MSGNR>
+     <TEXT>&amp;1 행에 자재코드 정보가 없습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZGTSD01</ARBGB>
+     <MSGNR>200</MSGNR>
+     <TEXT>영업조직 &amp;1 에 대한 권한이 없습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZGTSD01</ARBGB>
+     <MSGNR>201</MSGNR>
+     <TEXT>유통경로 &amp;1 에 대한 권한이 없습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZGTSD01</ARBGB>
+     <MSGNR>202</MSGNR>
+     <TEXT>제품군 &amp;1 에 대한 권한이 없습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZGTSD01</ARBGB>
+     <MSGNR>203</MSGNR>
+     <TEXT>영업그룹 &amp;1 에 대한 권한이 없습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZGTSD01</ARBGB>
+     <MSGNR>204</MSGNR>
+     <TEXT>영업문서 &amp;1 이(가) 존재하지 않습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZGTSD01</ARBGB>
+     <MSGNR>205</MSGNR>
+     <TEXT>영업문서 &amp;1/&amp;2 이(가) 존재하지 않습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZGTSD01</ARBGB>
+     <MSGNR>206</MSGNR>
+     <TEXT>납품보류( &amp;1 )이(가) 존재하지 않습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZGTSD01</ARBGB>
+     <MSGNR>207</MSGNR>
+     <TEXT>DO 품목 [&amp;1/&amp;2]이(가) 대상에 존재하지 않습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZGTSD01</ARBGB>
+     <MSGNR>301</MSGNR>
+     <TEXT>&amp;1 &amp;2 &amp;3 &amp;4 에 대한 권한이 없습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZGTSD01</ARBGB>
+     <MSGNR>400</MSGNR>
+     <TEXT>프로젝트 코드를 확인 하세요.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZGTSD01</ARBGB>
+     <MSGNR>401</MSGNR>
+     <TEXT>시작업생산요청을 생성할 제조지시번호를 선택하세요.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZGTSD01</ARBGB>
+     <MSGNR>402</MSGNR>
+     <TEXT>시작업생산요청을 생성할 수 없는 제조지시번호입니다.</TEXT>
+    </T100>
+   </T100>
+  </asx:values>
+ </asx:abap>
+</abapGit>

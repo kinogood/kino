@@ -1,0 +1,16 @@
+*&---------------------------------------------------------------------*
+*& Include          ZGTSDR0150_CLS
+*&---------------------------------------------------------------------*
+CLASS LCL_EVENT_RECEIVER DEFINITION.
+  PUBLIC SECTION.
+  METHODS: ON_HOTSPOT FOR EVENT HOTSPOT_CLICK OF CL_GUI_ALV_GRID
+                      IMPORTING ES_ROW_NO E_COLUMN_ID.
+ENDCLASS.
+
+CLASS LCL_EVENT_RECEIVER IMPLEMENTATION.
+  METHOD ON_HOTSPOT.
+    PERFORM HANDLE_HOTSPOT USING E_COLUMN_ID ES_ROW_NO.
+  ENDMETHOD.
+ENDCLASS.
+
+DATA: LCL_RECEIVER TYPE REF TO LCL_EVENT_RECEIVER.

@@ -1,0 +1,24 @@
+FUNCTION ZGTSD_IF_O_DELIVERY_REQ_INFO.
+*"----------------------------------------------------------------------
+*"*"Local Interface:
+*"  IMPORTING
+*"     VALUE(I_SYSTEM_ID) TYPE  CHAR04 OPTIONAL
+*"  EXPORTING
+*"     VALUE(ZO_RESULT) TYPE  ZO_RESULT
+*"     VALUE(ZO_MESSAGE) TYPE  ZO_MESSAGE2
+*"  TABLES
+*"      OT_TAB_H STRUCTURE  ZGTSDSIF0027 OPTIONAL
+*"      OT_TAB_I1 STRUCTURE  ZGTSDSIF0028 OPTIONAL
+*"      OT_TAB_I2 STRUCTURE  ZGTSDSIF0029 OPTIONAL
+*"      OT_TAB_I3 STRUCTURE  ZGTSDSIF0030 OPTIONAL
+*"  EXCEPTIONS
+*"      SYSTEM_FAILURE
+*"      COMMUNICATION_FAILURE
+*"      ILLEGALNAME
+*"----------------------------------------------------------------------
+
+
+
+
+
+ENDFUNCTION.

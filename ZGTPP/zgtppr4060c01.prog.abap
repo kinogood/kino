@@ -1,0 +1,53 @@
+*&---------------------------------------------------------------------*
+*& Include          ZGTPPR4060C01
+*&---------------------------------------------------------------------*
+* CLASS zcl_event_receiver DEFINITION
+CLASS ZCL_EVENT_RECIEVER DEFINITION.
+
+  PUBLIC SECTION.
+
+    METHODS HDL_TOOLBAR
+      FOR EVENT TOOLBAR OF CL_GUI_ALV_GRID
+      IMPORTING SENDER E_OBJECT E_INTERACTIVE.
+
+    METHODS HDL_USER_COMMAND
+      FOR EVENT USER_COMMAND OF CL_GUI_ALV_GRID
+      IMPORTING SENDER E_UCOMM.
+
+    METHODS HDL_DOUBLE_CLICK
+      FOR EVENT DOUBLE_CLICK OF CL_GUI_ALV_GRID
+      IMPORTING SENDER E_ROW E_COLUMN.
+
+    METHODS HDL_TOP_OF_PAGE
+      FOR EVENT TOP_OF_PAGE OF CL_GUI_ALV_GRID
+      IMPORTING SENDER E_DYNDOC_ID.
+
+ENDCLASS.                    "ZCL_EVENT_RECEIVER DEFINITION
+* CLASS zcl_event_receiver IMPLEMENTATION
+CLASS ZCL_EVENT_RECIEVER IMPLEMENTATION.
+
+*-- ToolBar
+  METHOD HDL_TOOLBAR.
+    PERFORM HDL_TOOLBAR USING SENDER
+                              E_OBJECT
+                              E_INTERACTIVE.
+  ENDMETHOD. " toolbar
+
+*-- user_command
+  METHOD HDL_USER_COMMAND.
+    PERFORM HDL_USER_COMMAND USING SENDER
+                                   E_UCOMM.
+  ENDMETHOD. " user_command
+
+*-- Double Click
+  METHOD HDL_DOUBLE_CLICK.
+    PERFORM HDL_DOUBLE_CLICK USING SENDER
+                                   E_ROW
+                                   E_COLUMN.
+  ENDMETHOD. " double_click
+
+  METHOD HDL_TOP_OF_PAGE.
+    PERFORM HDL_TOP_OF_PAGE USING SENDER E_DYNDOC_ID.
+  ENDMETHOD.
+
+ENDCLASS.                    "ZCL_EVENT_RECEIVER IMPLEMENTATION

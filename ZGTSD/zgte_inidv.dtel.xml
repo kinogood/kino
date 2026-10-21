@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_DTEL" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <DD04V>
+    <ROLLNAME>ZGTE_INIDV</ROLLNAME>
+    <DDLANGUAGE>3</DDLANGUAGE>
+    <DOMNAME>CHAR20</DOMNAME>
+    <HEADLEN>32</HEADLEN>
+    <SCRLEN1>10</SCRLEN1>
+    <SCRLEN2>18</SCRLEN2>
+    <SCRLEN3>32</SCRLEN3>
+    <DDTEXT>내부 처리단위 식별(내포장HU번호)</DDTEXT>
+    <REPTEXT>내부 처리단위 식별(내포장HU번호)</REPTEXT>
+    <SCRTEXT_S>내부 처리</SCRTEXT_S>
+    <SCRTEXT_M>내부 처리단위 식별</SCRTEXT_M>
+    <SCRTEXT_L>내부 처리단위 식별(내포장HU번호)</SCRTEXT_L>
+    <DTELMASTER>3</DTELMASTER>
+    <REFKIND>D</REFKIND>
+   </DD04V>
+  </asx:values>
+ </asx:abap>
+</abapGit>

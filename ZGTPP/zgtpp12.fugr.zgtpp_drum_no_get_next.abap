@@ -1,0 +1,84 @@
+FUNCTION ZGTPP_DRUM_NO_GET_NEXT.
+*"----------------------------------------------------------------------
+*"*"Local Interface:
+*"  IMPORTING
+*"     VALUE(IV_WERKS) TYPE  WERKS_D
+*"     VALUE(IV_MATNR) TYPE  MATNR
+*"  EXPORTING
+*"     VALUE(EV_NUMBER) TYPE  ZGTEDRUM_NO
+*"     VALUE(EV_TYPE) TYPE  ZO_RESULT
+*"     VALUE(EV_MESSAGE) TYPE  ZO_MESSAGE
+*"----------------------------------------------------------------------
+
+  DATA : LS_T001W TYPE T001W.
+  DATA : LS_MSTVAL TYPE ZGTCVMSTVAL.
+  DATA : LV_MATNR TYPE CHAR40.
+  DATA : LT_2500 TYPE TABLE OF ZGTPPT2500.
+
+  EV_TYPE = '00'.
+
+* 입력값 유효성 검증
+  CLEAR LS_T001W.
+  SELECT SINGLE * FROM T001W
+    INTO LS_T001W
+   WHERE WERKS = IV_WERKS.
+  IF SY-SUBRC NE 0.
+    EV_TYPE = '02'.
+    EV_MESSAGE = IV_WERKS &&'은(는) 유효하지 않은 플랜트 번호입니다.'.
+    RETURN.
+  ENDIF.
+
+  CLEAR LS_MSTVAL.
+  SELECT SINGLE * FROM ZGTCVMSTVAL
+    INTO LS_MSTVAL
+   WHERE WERKS = IV_WERKS
+     AND MATNR = IV_MATNR
+     AND LVORMC = ''
+     AND LVORMP = ''
+     AND MMSTA = ''.
+
+  IF SY-SUBRC NE 0.
+    EV_TYPE = '02'.
+    CALL FUNCTION 'CONVERSION_EXIT_MATN1_OUTPUT'
+      EXPORTING
+        INPUT  = IV_MATNR
+      IMPORTING
+        OUTPUT = LV_MATNR.
+
+    EV_MESSAGE = LV_MATNR &&'은(는) 유효하지 않은 자재코드입니다.'.
+    RETURN.
+  ENDIF.
+
+  REFRESH LT_2500.
+* 채번 수행
+  SELECT * FROM ZGTPPT2500
+    INTO TABLE LT_2500
+   WHERE WERKS = IV_WERKS
+     AND MATNR = IV_MATNR.
+  IF SY-SUBRC EQ 0.
+    READ TABLE LT_2500 ASSIGNING FIELD-SYMBOL(<LS_2500>) INDEX 1.
+    ADD 1 TO <LS_2500>-DRUM_NO.
+    EV_NUMBER = <LS_2500>-DRUM_NO.
+  ELSE. " 등록된 플랜트 자재코드 없을시 신규생성
+    APPEND INITIAL LINE TO LT_2500 ASSIGNING <LS_2500>.
+    <LS_2500>-WERKS = IV_WERKS.
+    <LS_2500>-MATNR = IV_MATNR.
+    IF SY-DATUM+0(4) = '2026'.
+      <LS_2500>-DRUM_NO = '5001'.
+    ELSE.
+      <LS_2500>-DRUM_NO = '0001'.
+    ENDIF.
+    EV_NUMBER = <LS_2500>-DRUM_NO.
+  ENDIF.
+
+  MODIFY ZGTPPT2500 FROM TABLE LT_2500.
+  IF SY-SUBRC EQ 0.
+    COMMIT WORK AND WAIT.
+    EV_MESSAGE = EV_NUMBER && '채번 되었습니다.'.
+  ELSE.
+    ROLLBACK WORK.
+    EV_TYPE = '02'.
+    EV_MESSAGE = '드럼번호 채번 저장 중 오류 발생했습니다.'.
+  ENDIF.
+
+ENDFUNCTION.

@@ -1,0 +1,539 @@
+*&---------------------------------------------------------------------*
+*& Include          ZGTSDR1160C01
+*&---------------------------------------------------------------------*
+CLASS LCL_EVENT_HANDLER DEFINITION DEFERRED.
+*CLASS LCL_EVENT_HANDLER_ALV DEFINITION DEFERRED.
+
+TYPE-POOLS: SLIS.
+
+DATA: GRID1    TYPE REF TO CL_GUI_ALV_GRID,
+      GRID2    TYPE REF TO CL_GUI_ALV_GRID,
+      GRID3    TYPE REF TO CL_GUI_ALV_GRID,
+      GRID4    TYPE REF TO CL_GUI_ALV_GRID,
+      GRID5    TYPE REF TO CL_GUI_ALV_GRID,
+      GRID6    TYPE REF TO CL_GUI_ALV_GRID,
+
+      GO_GRID  TYPE REF TO CL_GUI_ALV_GRID,
+      GO_GRID1 TYPE REF TO CL_GUI_ALV_GRID,
+      GO_GRID2 TYPE REF TO CL_GUI_ALV_GRID,
+      GO_GRID3 TYPE REF TO CL_GUI_ALV_GRID,
+      GO_GRID4 TYPE REF TO CL_GUI_ALV_GRID,
+      GO_GRID5 TYPE REF TO CL_GUI_ALV_GRID,
+
+      GO_CCON1 TYPE REF TO CL_GUI_CUSTOM_CONTAINER,
+      GO_CCON2 TYPE REF TO CL_GUI_CUSTOM_CONTAINER,
+      GO_CCON3 TYPE REF TO CL_GUI_CUSTOM_CONTAINER,
+      GO_CCON4 TYPE REF TO CL_GUI_CUSTOM_CONTAINER,
+      GO_CCON5 TYPE REF TO CL_GUI_CUSTOM_CONTAINER,
+      GO_CCON  TYPE REF TO CL_GUI_CUSTOM_CONTAINER,
+
+      GO_DCON1 TYPE REF TO CL_GUI_DOCKING_CONTAINER,
+      GO_DCON2 TYPE REF TO CL_GUI_DOCKING_CONTAINER,
+      GO_DCON3 TYPE REF TO CL_GUI_DOCKING_CONTAINER,
+      GO_DCON4 TYPE REF TO CL_GUI_DOCKING_CONTAINER,
+      GO_DCON5 TYPE REF TO CL_GUI_DOCKING_CONTAINER,
+      GO_DCON  TYPE REF TO CL_GUI_DOCKING_CONTAINER,
+
+      GO_GCON1 TYPE REF TO CL_GUI_CONTAINER,
+      GO_GCON2 TYPE REF TO CL_GUI_CONTAINER,
+      GO_GCON3 TYPE REF TO CL_GUI_CONTAINER,
+      GO_GCON4 TYPE REF TO CL_GUI_CONTAINER,
+      GO_GCON5 TYPE REF TO CL_GUI_CONTAINER,
+      GO_GCON6 TYPE REF TO CL_GUI_CONTAINER.
+
+DATA: GO_ALV_TITLE1 TYPE REF TO CL_DD_DOCUMENT,
+      GO_ALV_TITLE2 TYPE REF TO CL_DD_DOCUMENT,
+      GO_ALV_TITLE3 TYPE REF TO CL_DD_DOCUMENT,
+      GO_ALV_TITLE4 TYPE REF TO CL_DD_DOCUMENT,
+      GO_ALV_TITLE  TYPE REF TO CL_DD_DOCUMENT.
+DATA: GO_HTML       TYPE REF TO CL_GUI_HTML_VIEWER.
+
+DATA: GO_SPLITTER1 TYPE REF TO CL_GUI_SPLITTER_CONTAINER,
+      GO_SPLITTER2 TYPE REF TO CL_GUI_SPLITTER_CONTAINER,
+      GO_SPLITTER3 TYPE REF TO CL_GUI_SPLITTER_CONTAINER,
+      GO_SPLITTER4 TYPE REF TO CL_GUI_SPLITTER_CONTAINER,
+      GO_SPLITTER  TYPE REF TO CL_GUI_SPLITTER_CONTAINER.
+*      GO_EVENT_RECEIVER TYPE REF TO LCL_EVENT_RECEIVER.
+
+DATA: GO_TREE   TYPE REF TO CL_GUI_COLUMN_TREE.
+
+DATA: FIELDCAT     TYPE LVC_S_FCAT OCCURS 0 WITH HEADER LINE,
+      GT_FIELDCAT  TYPE LVC_T_FCAT,
+      GT_FIELDCAT1 TYPE LVC_T_FCAT,
+      GT_FIELDCAT2 TYPE LVC_T_FCAT,
+      GT_FIELDCAT3 TYPE LVC_T_FCAT,
+      GT_FIELDCAT4 TYPE LVC_T_FCAT,
+      GT_FIELDCAT5 TYPE LVC_T_FCAT,
+      GS_FIELDCAT  TYPE LVC_S_FCAT,
+      GT_SORT      TYPE LVC_T_SORT WITH HEADER LINE,
+      GT_SORT1     TYPE LVC_T_SORT WITH HEADER LINE,
+      GT_SORT2     TYPE LVC_T_SORT WITH HEADER LINE,
+      GT_SORT3     TYPE LVC_T_SORT WITH HEADER LINE,
+      GT_SORT4     TYPE LVC_T_SORT WITH HEADER LINE,
+      GT_SORT5     TYPE LVC_T_SORT WITH HEADER LINE,
+      GS_SORT      TYPE LVC_S_SORT,
+      GT_FILTER    TYPE LVC_T_FILT,
+      GS_FILTER    TYPE LVC_S_FILT,
+      GT_ALV_F4    TYPE LVC_T_F4,
+      GS_ALV_F4    TYPE LVC_S_F4,
+      GT_F4        TYPE LVC_T_F4,
+      GS_F4        TYPE LVC_S_F4,
+      GS_LAYOUT    TYPE LVC_S_LAYO,
+      GS_LAYOUT1   TYPE LVC_S_LAYO,
+      GS_LAYOUT2   TYPE LVC_S_LAYO,
+      GS_LAYOUT3   TYPE LVC_S_LAYO,
+      GS_LAYOUT4   TYPE LVC_S_LAYO,
+      GS_LAYOUT5   TYPE LVC_S_LAYO,
+      GS_VARIANT   TYPE DISVARIANT,
+      GS_VARIANT1  TYPE DISVARIANT,
+      GS_VARIANT2  TYPE DISVARIANT,
+      GS_VARIANT3  TYPE DISVARIANT,
+      GS_VARIANT4  TYPE DISVARIANT,
+      GS_VARIANT5  TYPE DISVARIANT,
+      GV_COL_POS   TYPE I.
+
+DATA: GT_COLOR TYPE LVC_T_SCOL,
+      GS_COLOR TYPE LVC_S_SCOL,
+      GS_COL   TYPE LVC_S_COLO.
+
+DATA: GT_EXCLUDE  TYPE UI_FUNCTIONS,
+      GT_EXCLUDE1 TYPE UI_FUNCTIONS,
+      GT_EXCLUDE2 TYPE UI_FUNCTIONS,
+      GT_EXCLUDE3 TYPE UI_FUNCTIONS,
+      GT_EXCLUDE4 TYPE UI_FUNCTIONS,
+      GT_EXCLUDE5 TYPE UI_FUNCTIONS.
+
+DATA: BEGIN OF GT_EXCLU OCCURS 0,
+        FCODE LIKE SY-UCOMM,
+      END OF GT_EXCLU.
+
+DATA: GT_INDEX_ROWS TYPE LVC_T_ROW,
+      GT_ROWS       TYPE LVC_T_ROW,
+      GT_ROW_NO     TYPE LVC_T_ROID,
+      GS_INDEX_ROWS TYPE LVC_S_ROW,
+      GS_ROWS       TYPE LVC_S_ROW,
+      GS_ROW_NO     TYPE LVC_S_ROID.
+
+TYPES: BEGIN OF TY_ROW,
+         ROW    TYPE I,
+         VALUE  TYPE C,
+         COL    TYPE I,
+         ROW_ID TYPE LVC_S_ROW,
+         COL_ID TYPE LVC_S_COL,
+         ROW_NO TYPE LVC_S_ROID,
+       END OF TY_ROW.
+
+TYPES: BEGIN OF TY_SCROLL,
+         ROW_INFO TYPE LVC_S_ROW,
+         COL_INFO TYPE LVC_S_COL,
+         ROW_NO   TYPE LVC_S_ROID,
+       END OF TY_SCROLL.
+
+DATA: GS_V_ROW    TYPE TY_ROW,
+      GS_V_SCROLL TYPE TY_SCROLL.
+
+DATA: GT_FIELDS TYPE TABLE OF HELP_VALUE WITH HEADER LINE.
+
+DATA: GV_SVALUE LIKE HELP_INFO-FLDVALUE,
+      GV_SFIELD LIKE HELP_INFO-FIELDNAME.
+
+*DATA: GV_REPID        LIKE SY-REPID.
+DATA: GV_CPROG        LIKE SY-CPROG,
+      GS_VARIANTE     LIKE DISVARIANT,
+      GS_DEF_VARIANT  LIKE DISVARIANT,
+      GV_VARIANT_EXIT TYPE C.
+
+DATA: GO_ALV_EVT TYPE REF TO CL_GUI_EVENT,
+      GO_ALV_OBJ TYPE REF TO CL_GUI_ALV_GRID,
+      GO_GUI_OBJ TYPE REF TO CL_GUI_CONTROL.
+
+DATA: GV_GRID_TITLE  TYPE LVC_TITLE,
+      GV_GRID_TITLE1 TYPE LVC_TITLE,
+      GV_GRID_TITLE2 TYPE LVC_TITLE,
+      GV_GRID_TITLE3 TYPE LVC_TITLE.
+
+DATA: GO_EVENT_RECEIVER  TYPE REF TO LCL_EVENT_HANDLER.
+*      GO_EVENT_RECEIVER_ALV  TYPE REF TO LCL_EVENT_HANDLER_ALV.
+
+DATA: GT_NODE      TYPE STANDARD TABLE OF TREEV_NODE,
+      GT_NODE_ITEM TYPE STANDARD TABLE OF MTREEITM,
+      GS_NODE      TYPE TREEV_NODE,
+      GS_NODE_ITEM TYPE MTREEITM.
+
+
+*----------------------------------------------------------------------*
+* CLASS LCL_EVENT_RECEIVER DEFINITION
+*----------------------------------------------------------------------*
+CLASS LCL_EVENT_HANDLER DEFINITION.
+
+  PUBLIC SECTION.
+
+    METHODS: HANDLE_DATA_CHANGED
+      FOR EVENT DATA_CHANGED OF CL_GUI_ALV_GRID
+      IMPORTING ER_DATA_CHANGED
+                E_ONF4_AFTER
+                SENDER.
+
+    METHODS: HANDLE_DOUBLE_CLICK
+      FOR EVENT DOUBLE_CLICK OF CL_GUI_ALV_GRID
+      IMPORTING E_ROW
+                E_COLUMN
+                ES_ROW_NO
+                SENDER.
+
+    METHODS: HANDLE_HOTSPOT_CLICK
+      FOR EVENT HOTSPOT_CLICK OF CL_GUI_ALV_GRID
+      IMPORTING E_ROW_ID
+                E_COLUMN_ID
+                SENDER.
+
+    METHODS: HANDLE_TOOLBAR
+      FOR EVENT TOOLBAR OF CL_GUI_ALV_GRID
+      IMPORTING E_OBJECT
+                E_INTERACTIVE
+                SENDER.
+
+    METHODS: HANDLE_USER_COMMAND
+      FOR EVENT USER_COMMAND OF CL_GUI_ALV_GRID
+      IMPORTING E_UCOMM
+                SENDER.
+
+    METHODS: HANDLE_ONF4
+      FOR EVENT ONF4 OF CL_GUI_ALV_GRID
+      IMPORTING E_FIELDNAME
+                E_FIELDVALUE
+                ES_ROW_NO
+                ER_EVENT_DATA
+                ET_BAD_CELLS
+                E_DISPLAY
+                SENDER.
+
+    METHODS: HANDLE_TOP_OF_PAGE
+      FOR EVENT TOP_OF_PAGE OF CL_GUI_ALV_GRID
+      IMPORTING E_DYNDOC_ID
+                SENDER.
+
+    METHODS: HANDLE_MENU_BUTTON
+      FOR EVENT MENU_BUTTON OF CL_GUI_ALV_GRID
+      IMPORTING E_OBJECT
+                E_UCOMM
+                SENDER.
+
+    METHODS: HANDLE_CHANGED_FINISHED
+      FOR EVENT DATA_CHANGED_FINISHED OF CL_GUI_ALV_GRID
+      IMPORTING E_MODIFIED
+                ET_GOOD_CELLS
+                SENDER.
+
+  PRIVATE SECTION.
+
+ENDCLASS.                    "LCL_EVENT_HANDLER_ALV DEFINITION
+*----------------------------------------------------------------------*
+* CLASS LCL_EVENT_RECEIVER IMPLEMENTATION
+*----------------------------------------------------------------------*
+CLASS LCL_EVENT_HANDLER IMPLEMENTATION.
+
+  METHOD HANDLE_DATA_CHANGED.
+    PERFORM ALV_DATA_CHANGED USING ER_DATA_CHANGED
+                                   E_ONF4_AFTER
+                                   SENDER.
+  ENDMETHOD.                    "HANDLE_DATA_CHANGED
+
+  METHOD HANDLE_CHANGED_FINISHED.
+    PERFORM ALV_CHANGED_FINISHED USING E_MODIFIED
+                                       ET_GOOD_CELLS
+                                       SENDER.
+  ENDMETHOD.                    "HANDLE_CHANGED_FINISHED
+
+  METHOD HANDLE_DOUBLE_CLICK.
+*    PERFORM ALV_DOUBLE_CLICK USING E_ROW
+*                                   E_COLUMN
+*                                   ES_ROW_NO
+*                                   SENDER.
+  ENDMETHOD.                    "HANDLE_DOUBLE_CLICK
+
+  METHOD HANDLE_HOTSPOT_CLICK.
+*    PERFORM ALV_HOTSPOT_CLICK USING E_ROW_ID
+*                                    E_COLUMN_ID
+*                                    SENDER.
+  ENDMETHOD.                    "HANDLE_HOTSPOT_CLICK
+
+  METHOD HANDLE_TOOLBAR.
+    PERFORM ALV_TOOLBAR USING E_OBJECT
+                              E_INTERACTIVE
+                              SENDER.
+  ENDMETHOD.                    "HANDLE_TOOLBAR
+
+  METHOD HANDLE_USER_COMMAND.
+    PERFORM ALV_USER_COMMAND USING E_UCOMM
+                                   SENDER.
+  ENDMETHOD.                    "HANDLE_USER_COMMAND
+
+  METHOD HANDLE_ONF4.
+*    PERFORM ALV_ONF4 USING E_FIELDNAME
+*                           E_FIELDVALUE
+*                           ES_ROW_NO
+*                           ER_EVENT_DATA
+*                           ET_BAD_CELLS
+*                           E_DISPLAY
+*                           SENDER.
+
+
+  ENDMETHOD.                    "HANDLE_ONF4
+
+  METHOD HANDLE_TOP_OF_PAGE.
+*    PERFORM ALV_TOP_OF_PAGE USING E_DYNDOC_ID
+*                                  SENDER.
+  ENDMETHOD.                    "HANDLE_TOP_OF_PAGE
+
+  METHOD HANDLE_MENU_BUTTON.
+*    PERFORM ALV_MENU_BUTTON USING E_OBJECT
+*                                  E_UCOMM
+*                                  SENDER.
+  ENDMETHOD.                    "HANDLE_MENU_BUTTON
+
+
+
+ENDCLASS.                    "LCL_EVENT_HANDLER_ALV IMPLEMENTATION
+
+*&---------------------------------------------------------------------*
+*& Form ALV_DATA_CHANGED
+*&---------------------------------------------------------------------*
+*& text
+*&---------------------------------------------------------------------*
+*&      --> ER_DATA_CHANGED
+*&      --> E_ONF4_AFTER
+*&      --> SENDER
+*&---------------------------------------------------------------------*
+FORM ALV_DATA_CHANGED  USING    PO_DATA_CHANGED TYPE REF TO
+                                          CL_ALV_CHANGED_DATA_PROTOCOL
+                                PE_ONF4_AFTER
+                                PV_SENDER.
+
+  FIELD-SYMBOLS:<FS_VALUE> TYPE ANY.
+
+  CALL METHOD PO_DATA_CHANGED->REFRESH_PROTOCOL.
+
+  LOOP AT PO_DATA_CHANGED->MT_MOD_CELLS INTO DATA(LS_MOD_CELLS).
+    IF <FS_VALUE> IS ASSIGNED. UNASSIGN <FS_VALUE>.ENDIF.
+    ASSIGN COMPONENT LS_MOD_CELLS-FIELDNAME OF STRUCTURE GS_LIST TO <FS_VALUE>.
+    CHECK SY-SUBRC EQ 0.
+
+    CASE LS_MOD_CELLS-FIELDNAME.
+      WHEN 'ZZLABEL_TYPE'. "라벨 종류
+        CALL METHOD PO_DATA_CHANGED->GET_CELL_VALUE
+          EXPORTING
+            I_ROW_ID    = LS_MOD_CELLS-ROW_ID
+            I_FIELDNAME = LS_MOD_CELLS-FIELDNAME
+          IMPORTING
+            E_VALUE     = <FS_VALUE>.
+
+        IF <FS_VALUE> IS NOT INITIAL.
+          CALL FUNCTION 'CHECK_DOMAIN_VALUES'
+            EXPORTING
+              DOMNAME       = GC_DOMAIN_TYPE
+              VALUE         = <FS_VALUE>
+            EXCEPTIONS
+              NO_DOMNAME    = 1
+              WRONG_VALUE   = 2
+              DOM_NOT_FOUND = 3
+              OTHERS        = 4.
+          IF SY-SUBRC NE 0.
+            CALL METHOD PO_DATA_CHANGED->ADD_PROTOCOL_ENTRY
+              EXPORTING
+                I_MSGID     = 'ZGTSD01'
+                I_MSGNO     = '000'
+                I_MSGTY     = GC_E
+                I_MSGV1     = TEXT-M01
+                I_MSGV2     = SPACE
+                I_MSGV3     = SPACE
+                I_MSGV4     = SPACE
+                I_FIELDNAME = LS_MOD_CELLS-FIELDNAME
+                I_ROW_ID    = LS_MOD_CELLS-ROW_ID.
+          ELSE.
+            CALL METHOD PO_DATA_CHANGED->MODIFY_CELL
+              EXPORTING
+                I_ROW_ID    = LS_MOD_CELLS-ROW_ID
+                I_FIELDNAME = LS_MOD_CELLS-FIELDNAME
+                I_VALUE     = <FS_VALUE>.
+          ENDIF.
+        ELSE.
+          CALL METHOD PO_DATA_CHANGED->MODIFY_CELL
+            EXPORTING
+              I_ROW_ID    = LS_MOD_CELLS-ROW_ID
+              I_FIELDNAME = LS_MOD_CELLS-FIELDNAME
+              I_VALUE     = <FS_VALUE>.
+        ENDIF.
+
+
+      WHEN OTHERS.
+        CALL METHOD PO_DATA_CHANGED->GET_CELL_VALUE
+          EXPORTING
+            I_ROW_ID    = LS_MOD_CELLS-ROW_ID
+            I_FIELDNAME = LS_MOD_CELLS-FIELDNAME
+          IMPORTING
+            E_VALUE     = <FS_VALUE>.
+
+        CALL METHOD PO_DATA_CHANGED->MODIFY_CELL
+          EXPORTING
+            I_ROW_ID    = LS_MOD_CELLS-ROW_ID
+            I_FIELDNAME = LS_MOD_CELLS-FIELDNAME
+            I_VALUE     = <FS_VALUE>.
+
+    ENDCASE.
+
+  ENDLOOP.
+
+  CALL METHOD PO_DATA_CHANGED->DISPLAY_PROTOCOL.
+
+ENDFORM.
+*&---------------------------------------------------------------------*
+*& Form ALV_CHANGED_FINISHED
+*&---------------------------------------------------------------------*
+*& text
+*&---------------------------------------------------------------------*
+*&      --> E_MODIFIED
+*&      --> ET_GOOD_CELLS
+*&      --> SENDER
+*&---------------------------------------------------------------------*
+FORM ALV_CHANGED_FINISHED  USING    PV_MODIFIED TYPE CHAR01
+                                    PT_GOOD_CELLS TYPE LVC_T_MODI
+                                    PV_SENDER.
+
+  DATA: LT_MODI TYPE LVC_T_MODI.
+  DATA: WA_MODI TYPE LVC_S_MODI.
+
+  CHECK PV_MODIFIED IS NOT INITIAL.
+
+  LT_MODI[] = CORRESPONDING #( PT_GOOD_CELLS[] ).
+  SORT LT_MODI BY ROW_ID.
+  DELETE ADJACENT DUPLICATES FROM LT_MODI COMPARING ROW_ID.
+
+  LOOP AT LT_MODI INTO WA_MODI.
+    CLEAR GS_LIST.
+    READ TABLE GT_LIST ASSIGNING FIELD-SYMBOL(<FS_LIST>) INDEX WA_MODI-ROW_ID.
+    CHECK SY-SUBRC EQ 0.
+    CLEAR:<FS_LIST>-STAT,<FS_LIST>-UPDKZ,<FS_LIST>-RSLT.
+
+    "라벨종류 : 입력가능외 필드 CLEAR
+    CASE <FS_LIST>-ZZLABEL_TYPE.
+      WHEN GC_1.
+        CLEAR: <FS_LIST>-ZZLABEL_TITLE2,
+               <FS_LIST>-ZZLABEL_TITLE3,
+               <FS_LIST>-ZZLABEL_TITLE4.
+      WHEN GC_2.
+        CLEAR: <FS_LIST>-ZZLABEL_TITLE3,
+               <FS_LIST>-ZZLABEL_TITLE4.
+
+      WHEN GC_3.
+        CLEAR: <FS_LIST>-ZZLABEL_TITLE4.
+      WHEN GC_4.
+
+      WHEN SPACE.
+        CLEAR: <FS_LIST>-ZZLABEL_TITLE1,
+               <FS_LIST>-ZZLABEL_TITLE2,
+               <FS_LIST>-ZZLABEL_TITLE3,
+               <FS_LIST>-ZZLABEL_TITLE4.
+
+    ENDCASE.
+
+    "변경 체크
+    PERFORM SET_CHANGE_DATA CHANGING <FS_LIST>.
+
+    "ICON
+    PERFORM SET_LED CHANGING <FS_LIST>.
+
+    PERFORM SET_ATTRIBUTES_LINE CHANGING <FS_LIST>.
+  ENDLOOP.
+
+  PERFORM REFRESH_ALV USING GO_GRID.
+
+ENDFORM.
+*&---------------------------------------------------------------------*
+*& Form ALV_TOOLBAR
+*&---------------------------------------------------------------------*
+*& text
+*&---------------------------------------------------------------------*
+*&      --> E_OBJECT
+*&      --> E_INTERACTIVE
+*&      --> SENDER
+*&---------------------------------------------------------------------*
+FORM ALV_TOOLBAR  USING    PE_OBJECT
+                                TYPE REF TO CL_ALV_EVENT_TOOLBAR_SET
+                           PE_INTERACTIVE
+                           PV_SENDER.
+  DATA: LS_TOOLBAR TYPE STB_BUTTON.
+
+*  CLEAR LS_TOOLBAR.
+*  LS_TOOLBAR-BUTN_TYPE = '3'.
+*  LS_TOOLBAR-DISABLED = SPACE.
+*  APPEND LS_TOOLBAR TO PE_OBJECT->MT_TOOLBAR.
+*
+*  CLEAR LS_TOOLBAR.
+*  LS_TOOLBAR-FUNCTION = 'REFR'.
+*  LS_TOOLBAR-ICON     = ICON_REFRESH.
+*  LS_TOOLBAR-BUTN_TYPE = '0'.
+*  LS_TOOLBAR-DISABLED = SPACE.
+** LS TOOLBAR-TEXT  = TEXT-B10.
+*  LS_TOOLBAR-QUICKINFO = SPACE.
+*  LS_TOOLBAR-CHECKED   = SPACE.
+*  APPEND LS_TOOLBAR TO PE_OBJECT->MT_TOOLBAR.
+
+  CLEAR LS_TOOLBAR.
+  LS_TOOLBAR-BUTN_TYPE = '3'.
+  LS_TOOLBAR-DISABLED = SPACE.
+  APPEND LS_TOOLBAR TO PE_OBJECT->MT_TOOLBAR.
+
+  CLEAR LS_TOOLBAR.
+  LS_TOOLBAR-FUNCTION  = 'ZDELE'.
+  LS_TOOLBAR-ICON      = ICON_DELETE.
+  LS_TOOLBAR-BUTN_TYPE = '0'.
+  LS_TOOLBAR-DISABLED  = SPACE.
+  LS_TOOLBAR-TEXT      = TEXT-B01.
+  LS_TOOLBAR-QUICKINFO = TEXT-B01.
+  LS_TOOLBAR-CHECKED   = SPACE.
+  APPEND LS_TOOLBAR TO PE_OBJECT->MT_TOOLBAR.
+
+  CLEAR LS_TOOLBAR.
+  LS_TOOLBAR-BUTN_TYPE = '3'.
+  LS_TOOLBAR-DISABLED = SPACE.
+  APPEND LS_TOOLBAR TO PE_OBJECT->MT_TOOLBAR.
+
+  CLEAR LS_TOOLBAR.
+  LS_TOOLBAR-FUNCTION  = 'ZUNDO'.
+  LS_TOOLBAR-ICON      = ICON_SYSTEM_UNDO.
+  LS_TOOLBAR-BUTN_TYPE = '0'.
+  LS_TOOLBAR-DISABLED  = SPACE.
+  LS_TOOLBAR-TEXT      = TEXT-B02.
+  LS_TOOLBAR-QUICKINFO = TEXT-B02.
+  LS_TOOLBAR-CHECKED   = SPACE.
+  APPEND LS_TOOLBAR TO PE_OBJECT->MT_TOOLBAR.
+
+ENDFORM.
+*&---------------------------------------------------------------------*
+*& Form ALV_USER_COMMAND
+*&---------------------------------------------------------------------*
+*& text
+*&---------------------------------------------------------------------*
+*&      --> E_UCOMM
+*&      --> SENDER
+*&---------------------------------------------------------------------*
+FORM ALV_USER_COMMAND  USING    PV_UCOMM
+                                PV_SENDER.
+
+  CASE PV_UCOMM.
+*    WHEN 'REFR'."REFRESH
+*      PERFORM REFRESH_LIST.
+
+    WHEN 'ZDELE'. "삭제처리
+      PERFORM SET_DEL_MARK.
+
+    WHEN 'ZUNDO'. "삭제취소
+      PERFORM UNDO_DEL_MARK.
+
+
+    WHEN OTHERS.
+
+  ENDCASE.
+
+ENDFORM.

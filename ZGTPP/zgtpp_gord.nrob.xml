@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_NROB" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <ATTRIBUTES>
+    <OBJECT>ZGTPP_GORD</OBJECT>
+    <DOMLEN>CHAR12</DOMLEN>
+    <PERCENTAGE>10.0</PERCENTAGE>
+    <BUFFER>X</BUFFER>
+    <NOIVBUFFER>00000001</NOIVBUFFER>
+    <UNAME>ZGISPP01</UNAME>
+    <UDATE>2025-12-17</UDATE>
+    <UTIME>09:24:28</UTIME>
+   </ATTRIBUTES>
+   <TEXT>
+    <LANGU>3</LANGU>
+    <OBJECT>ZGTPP_GORD</OBJECT>
+    <TXT>[PP] CBO 오더 번호</TXT>
+    <TXTSHORT>[PP] CBO 오더 번호</TXTSHORT>
+   </TEXT>
+  </asx:values>
+ </asx:abap>
+</abapGit>

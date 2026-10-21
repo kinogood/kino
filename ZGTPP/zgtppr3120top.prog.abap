@@ -1,0 +1,370 @@
+*&---------------------------------------------------------------------*
+*& Include          ZGTPPR3120TOP
+*&---------------------------------------------------------------------*
+
+TYPE-POOLS : SLIS.
+INCLUDE <CL_ALV_CONTROL>.
+
+TABLES: MARA, MARC, MATDOC, T001W, ZGTMMT4210.
+
+RANGES: GR_DATE FOR SY-DATUM.  "주간/일간 조회 일자 변수 RANGE
+
+DATA : GT_MAIN_DISP_100 TYPE REF TO DATA. " 일별
+FIELD-SYMBOLS : <GT_MAIN_DISP_100> TYPE TABLE.
+
+*-CDS VIEW 원천 데이터(ZGTPP_CV_MRP_DAY + ZGTPP_CV_STO_DEMAND)
+DATA: BEGIN OF GS_CVDATA,
+        WERKS     TYPE WERKS_D,         "플랜트
+        MATNR     TYPE MATNR,           "자재
+        BDTER     TYPE BDTER,           "소요일
+        RSNUM     TYPE RSNUM,           "예약 번호
+        RSPOS     TYPE RSPOS,           "예약 품목
+        AUFNR     TYPE AUFNR,           "오더
+        SPART     TYPE SPART,           "제품군
+        MATKL     TYPE MATKL,           "자재 그룹
+        WGBEZ     TYPE WGBEZ,           "자재 그룹 내역
+        MTART     TYPE MTART,           "자재 유형
+        DISPO     TYPE DISPO,           "MRP 관리자
+        EKGRP     TYPE EKGRP,           "구매 그룹
+        EKNAM     TYPE EKNAM,           "구매 그룹 내역
+        XLOEK     TYPE XLOEK,           "삭제지시자
+        XWAOK     TYPE XWAOK,           "이동허용
+        KZEAR     TYPE KZEAR,           "최종 출고
+        BANFN     TYPE BANFN,           "구매 요청
+        BNFPO     TYPE BNFPO,           "구매 요청 품목
+        EBELN     TYPE EBELN,           "구매 문서
+        EBELP     TYPE EBELP,           "구매 문서 품목
+        PLNUM     TYPE PLNUM,           "계획 오더
+        BDART     TYPE BDART,           "소요량유형
+        BDTXT(20),                      "소요량유형 내역
+        MEINS     TYPE MEINS,           "기본 단위
+        DMQTY(16) TYPE P DECIMALS 3,    "DEMAND QTY
+        GIQTY(16) TYPE P DECIMALS 3,    "GI QTY
+        RMQTY(16) TYPE P DECIMALS 3,    "REMAIN QTY
+        MAKTX     LIKE MAKT-MAKTX,      "자재내역
+        VTEXT     LIKE TSPAT-VTEXT,     "제품군내역
+        MTBEZ     LIKE T134T-MTBEZ,     "자재유형내역
+        DSNAM     LIKE T024D-DSNAM,     "MRP관리자내역
+        GBNCD(2),                       "구분코드(소요:DM, 공급:RS)
+      END OF GS_CVDATA.
+DATA: GT_CVDATA LIKE TABLE OF GS_CVDATA.
+
+DATA : BEGIN OF GS_CHK_MEINS,
+         MATNR TYPE MATNR,
+         MEINS TYPE MEINS,
+       END OF GS_CHK_MEINS.
+DATA : GT_CHK_MEINS LIKE TABLE OF GS_CHK_MEINS.
+
+DATA : BEGIN OF GS_MASTER_EKORG,
+         EKORG TYPE T024W-EKORG,
+         EKOTX TYPE T024E-EKOTX, " 내역
+       END OF GS_MASTER_EKORG.
+DATA : GT_MASTER_EKORG LIKE TABLE OF GS_MASTER_EKORG.
+
+DATA : GT_PRE_CVDATA LIKE TABLE OF GS_CVDATA.
+
+DATA : GR_MTART TYPE RANGE OF T134T-MTART.
+
+DATA: BEGIN OF GS_DATA,
+        ID    LIKE ICON-ID,                 "상태
+        WERKS LIKE MARC-WERKS,              "플랜트
+        MATNR LIKE MARC-MATNR,              "자재코드
+        MAKTX LIKE MAKT-MAKTX,              "자재내역
+        MATKL LIKE MARA-MATKL,              "자재그룹
+        WGBEZ LIKE T023T-WGBEZ,             "자재그룹내역
+        MTART LIKE MARA-MTART,              "자재유형
+        SPART LIKE MARA-SPART,              "제품군
+        DISPO LIKE MARC-DISPO,              "MRP관리자
+        EKGRP LIKE MARC-EKGRP,              "구매 그룹
+        EKNAM LIKE T024-EKNAM,              "구매그룹내역
+        DISLS LIKE MARC-DISLS,              "Lot Size
+        BSTMI TYPE CHAR20,              "최소로트크기
+        BSTRF TYPE CHAR20,              "반올림 값
+        PLIFZ TYPE CHAR20,              "Lead Time(일)
+        EISBE TYPE CHAR20,              "안전재고
+        STOCK TYPE CHAR20,       "적정 재고
+        LABST TYPE CHAR20,              "현재고
+        MEINS LIKE MARA-MEINS,              "단위
+      END OF GS_DATA.
+DATA: GT_DATA LIKE TABLE OF GS_DATA.
+
+DATA : BEGIN OF GS_GBN_PLAN,
+         SEQNO     TYPE SY-TABIX,
+         GBNCD(2),
+         BDART(2),
+         GBTXT(10),
+         BDTXT(20),
+       END OF GS_GBN_PLAN.
+DATA : GT_GBN_PLAN LIKE TABLE OF GS_GBN_PLAN.
+
+*-주간 헤더- 주간 주차별 월요일/일요일 일자 및 FROM~TO 정렬
+DATA: BEGIN OF GS_WEEK,
+        WEEK    LIKE SCAL-WEEK,
+        FDAY    LIKE SCAL-DATE,
+        TDAY    LIKE SCAL-DATE,
+        LCNT(2),
+      END OF GS_WEEK.
+DATA: GT_WEEK LIKE TABLE OF GS_WEEK.
+
+*-주간 자재별 SUM
+DATA: BEGIN OF GS_WSUM,
+        WERKS     LIKE MARC-WERKS,      "플랜트
+        MATNR     LIKE MARC-MATNR,      "자재코드
+        WEEK      LIKE SCAL-WEEK,       "주간
+        GBNCD(2),                       "구분코드(소요:DM, 공급:RS)
+        DMQTY(16) TYPE P DECIMALS 3,    "DEMAND QTY
+        GIQTY(16) TYPE P DECIMALS 3,    "GI QTY
+        RMQTY(16) TYPE P DECIMALS 3,    "REMAIN QTY
+      END OF GS_WSUM.
+DATA: GT_WSUM LIKE TABLE OF GS_WSUM.
+
+*-일간 자재별 SUM
+DATA: BEGIN OF GS_DSUM,
+        WERKS     LIKE MARC-WERKS,      "플랜트
+        MATNR     LIKE MARC-MATNR,      "자재코드
+        DAY       LIKE SCAL-DATE,       "일간
+        BDART     TYPE BDART,           "유형
+        GBNCD(2),                       "구분코드(소요:DM, 공급:RS)
+        DMQTY(16) TYPE P DECIMALS 3,    "DEMAND QTY
+        GIQTY(16) TYPE P DECIMALS 3,    "GI QTY
+        RMQTY(16) TYPE P DECIMALS 3,    "RESOURCE QTY
+      END OF GS_DSUM.
+DATA: GT_DSUM LIKE TABLE OF GS_DSUM.
+
+* 일자별 조회시 이전자재 소요이력 SUM
+DATA: BEGIN OF GS_PRE_DSUM,
+        MATNR     LIKE MARC-MATNR,      "자재코드
+        BDART     TYPE BDART,           "유형
+        DMQTY(16) TYPE P DECIMALS 3,    "DEMAND QTY
+        GIQTY(16) TYPE P DECIMALS 3,    "GI QTY
+        RMQTY(16) TYPE P DECIMALS 3,    "RESOURCE QTY
+      END OF GS_PRE_DSUM.
+DATA: GT_PRE_DSUM LIKE TABLE OF GS_PRE_DSUM.
+
+*-자재
+DATA: BEGIN OF GS_MATNR,
+        MATNR LIKE MARC-MATNR,
+      END OF GS_MATNR.
+DATA: GT_MATNR LIKE TABLE OF GS_MATNR.
+
+DATA: BEGIN OF GS_Z1,
+        MATNR     LIKE MARC-MATNR,      "자재코드
+        DAY       LIKE SCAL-DATE,       "일간
+        GBNCD(2),                       "구분코드(Z1)
+        Z1QTY(16) TYPE P DECIMALS 3,
+      END OF GS_Z1.
+DATA: GT_Z1 LIKE TABLE OF GS_Z1.
+
+*-자재별 현재고
+DATA: BEGIN OF GS_STOCK,
+        MATNR     LIKE MARC-MATNR,
+        LABST     LIKE MARD-LABST,
+        INSME     LIKE MARD-INSME,
+        STSUM(16) TYPE P DECIMALS 3,
+      END OF GS_STOCK.
+DATA: GT_STOCK LIKE TABLE OF GS_STOCK.
+
+*-자재별 적정 재고 정보
+DATA: BEGIN OF GS_SUIT,
+        WERKS    LIKE MARC-WERKS,
+        MATNR    LIKE MARC-MATNR,
+        SU_QTY_P TYPE ZGTESUITQTY,
+        SU_QTY_F TYPE ZGTESUITQTY,
+        MEINS    TYPE MEINS,
+        ERDAT    TYPE ERDAT,
+      END OF GS_SUIT.
+DATA: GT_SUIT LIKE TABLE OF GS_SUIT.
+
+*-자재별 기타 정보
+DATA: BEGIN OF GS_ETC,
+        MATNR LIKE MARC-MATNR,             "자재코드
+        DISLS LIKE MARC-DISLS,             "Lot Size
+        BSTMI LIKE MARC-BSTMI,             "최소로트크기
+        BSTRF LIKE MARC-BSTRF,             "반올림 값
+        PLIFZ LIKE MARC-PLIFZ,             "Lead Time(일)
+        WEBAZ LIKE MARC-WEBAZ,             "Lead Time(일)
+        EISBE LIKE MARC-EISBE,             "안전재고
+        EISLO LIKE MARC-EISLO,             "안전재고
+      END OF GS_ETC.
+DATA: GT_ETC LIKE TABLE OF GS_ETC.
+
+DATA : GV_TITLE_MATNR TYPE STRING.
+DATA : GV_MATNR TYPE MATNR.
+DATA : GV_TITLE_DATE TYPE STRING.
+
+*-수요정보 (200)
+DATA: BEGIN OF GS_DM_INFO,
+        BDART     LIKE RESB-BDART, "계획요소
+        BDTXT(20),                 "계획요소내역
+        ORDER(20),                 "오더번호
+        ITMNO     TYPE N LENGTH 5, "품목번호
+        BDTER     LIKE RESB-BDTER, "소요일자
+        DMQTY     LIKE RESB-BDMNG, "예정소요량
+        GIQTY     LIKE RESB-ENMNG, "출고수량
+        RMQTY     LIKE RESB-ENMNG, "잔여소요량
+        MEINS     LIKE RESB-MEINS,        "단위
+        RSNUM     LIKE RESB-RSNUM,   "예약번호
+        RSPOS     LIKE RESB-RSPOS, "예약품목
+      END OF GS_DM_INFO.
+DATA: GT_DM_INFO LIKE TABLE OF GS_DM_INFO.
+
+*-공급정보(300)
+DATA: BEGIN OF GS_RS_INFO,
+        BDART      LIKE RESB-BDART,  "계획요소
+        BDTXT(20),                   "계획요소내역
+        ORDER(20),                   "오더번호
+        ITMNO      TYPE N LENGTH 5, "품목번호
+        LFDAT      LIKE EBAN-LFDAT,  "납품일
+        MENGE      LIKE EBAN-MENGE,  "발주수량
+        BSMNG      LIKE EBAN-BSMNG,  "입고수량
+        RSMNG      LIKE EBAN-BSMNG,  "입고예정수량
+        MEINS      LIKE EBAN-MEINS,   "단위
+        LIFNR      TYPE CHAR20,  "공급업체
+        LIFNRT     TYPE CHAR40,  "업체내역
+        LGORT      LIKE EBAN-LGORT,
+        ID         LIKE ICON-ID,
+        RTMSG(100),
+      END OF GS_RS_INFO.
+DATA: GT_RS_INFO LIKE TABLE OF GS_RS_INFO.
+
+*-구매요청 화면(400) - 화면
+DATA : BEGIN OF GS_REQ_DISP,
+         BSART  TYPE EBAN-BSART, "구매요청 유형
+         BSTYP  TYPE EBAN-BSTYP, "타입
+         BATXT  TYPE T161T-BATXT, "내역
+         EKORG  TYPE EBAN-EKORG, " 구매조직
+         EKOTX  TYPE T024E-EKOTX, " 내역
+         FLIEF  TYPE EBAN-FLIEF, "공급업체
+         NAME1  TYPE LFA1-NAME1, " 내역
+         AFNAM  TYPE EBAN-AFNAM, " 요청자
+         CHECK  TYPE CHAR01, " 재고이전 요청
+         RESWK  TYPE EBAN-RESWK, " 공급플랜트
+         WNAME1 TYPE T001W-NAME1, " 공급플랜트
+       END OF GS_REQ_DISP.
+* ALV
+DATA : BEGIN OF GS_DISP_400,
+         BNFPO   LIKE EBAN-BNFPO,
+         MATNR   LIKE EBAN-MATNR,
+         MAKTX   LIKE MAKT-MAKTX,
+         LFDAT   LIKE EBAN-LFDAT,
+         MENGE   LIKE EBAN-MENGE,
+         MEINS   LIKE EBAN-MEINS,
+         WERKS   LIKE EBAN-WERKS,
+         LGORT   LIKE EBAN-LGORT,
+         STATUS  LIKE ICON-ID,
+         PREQ_NO LIKE EBAN-BANFN,
+         BNFPO2  LIKE EBAN-BNFPO,
+         MESSAGE TYPE CHAR100,
+         CELLTAB TYPE LVC_T_STYL,
+       END OF GS_DISP_400.
+DATA : GT_DISP_400 LIKE TABLE OF GS_DISP_400.
+
+*-구매오더 화면(500) - 화면
+DATA : BEGIN OF GS_ORD_DISP,
+         BSART    TYPE EBAN-BSART, "구매요청 유형
+         BSART_NB TYPE CHAR01, "구매요청 유형(NB)
+         BSART_UB TYPE CHAR1, "구매요청 유형(UB)
+         BSTYP    TYPE EBAN-BSTYP, "타입
+         BATXT    TYPE T161T-BATXT, "내역
+         EKORG    TYPE EKKO-EKORG, " 구매조직
+         EKOTX    TYPE T024E-EKOTX, " 내역
+         EKGRP    TYPE EKKO-EKGRP, "구매그룹
+         EKNAM    TYPE T024-EKNAM, "구매그룹 내역
+         BUKRS    TYPE EKKO-BUKRS,
+         BUTXT    TYPE T001-BUTXT,
+         FLIEF    TYPE EBAN-FLIEF, "공급업체
+         NAME1    TYPE LFA1-NAME1, " 내역
+         RESWK    TYPE EBAN-RESWK, " 공급플랜트
+         WNAME1   TYPE T001W-NAME1, " 공급플랜트
+         INCO1    TYPE EKKO-INCO1, "인코텀스
+         BEZEI    TYPE TINCT-BEZEI, "인코텀스
+       END OF GS_ORD_DISP.
+* ALV
+DATA : BEGIN OF GS_DISP_500,
+         BNFPO   LIKE EBAN-BNFPO,
+         MATNR   LIKE EBAN-MATNR,
+         MAKTX   LIKE MAKT-MAKTX,
+         LFDAT   LIKE EBAN-LFDAT,
+         MENGE   LIKE EBAN-MENGE,
+         MEINS   LIKE EBAN-MEINS,
+         WERKS   LIKE EBAN-WERKS,
+         LGORT   LIKE EBAN-LGORT,
+         PREQ_NO LIKE EBAN-BANFN,
+         BNFPO2  LIKE EBAN-BNFPO,
+         STATUS  LIKE ICON-ID,
+         EBELN   LIKE EKPO-EBELN,
+         EBELP   LIKE EKPO-EBELP,
+         MESSAGE TYPE CHAR100,
+         CELLTAB TYPE LVC_T_STYL,
+       END OF GS_DISP_500.
+DATA : GT_DISP_500 LIKE TABLE OF GS_DISP_500.
+DATA : GV_TEXT_0500 TYPE SY-TITLE.
+
+DATA : GV_MODE.
+
+DATA :  GV_ANSWER.
+
+DATA: GV_OK_CODE LIKE SY-UCOMM.
+DATA: GV_OK_CODE2 LIKE SY-UCOMM.
+DATA: GV_OK_CODE3 LIKE SY-UCOMM.
+DATA: GV_OK_CODE4 LIKE SY-UCOMM.
+DATA: GV_OK_CODE5 LIKE SY-UCOMM.
+
+*-/ ALV Global Field
+CLASS LCL_EVENT_HANDLER DEFINITION DEFERRED.
+DATA : GO_EVENT_HANDLER TYPE REF TO LCL_EVENT_HANDLER.
+
+* screen 100
+DATA : GO_DOCKING_0100 TYPE REF TO CL_GUI_DOCKING_CONTAINER.
+DATA : GO_SPLITTER_0100 TYPE REF TO CL_GUI_SPLITTER_CONTAINER.
+DATA : GO_CONTAIN_0100 TYPE REF TO CL_GUI_CONTAINER.
+DATA : GO_CONTAIN_TOP_0100 TYPE REF TO CL_GUI_CONTAINER.
+DATA : GO_DD_DOCU_0100      TYPE REF TO CL_DD_DOCUMENT.
+DATA : GO_GRID_0100 TYPE REF TO CL_GUI_ALV_GRID.
+DATA : GS_VARIANT TYPE DISVARIANT.
+DATA : GS_LAYOUT_0100 TYPE LVC_S_LAYO.
+DATA : GT_EXCLUDE_0100 TYPE UI_FUNCTIONS.
+DATA : GT_SORT_0100 TYPE LVC_T_SORT.
+DATA : GT_FIELDCAT_0100 TYPE LVC_T_FCAT.
+
+* screen 200(수요정보 상세팝업)
+DATA : GO_DOCKING_0200 TYPE REF TO CL_GUI_DOCKING_CONTAINER.
+DATA : GO_SPLITTER_0200 TYPE REF TO CL_GUI_SPLITTER_CONTAINER.
+DATA : GO_CONTAIN_0200 TYPE REF TO CL_GUI_CONTAINER.
+DATA : GO_CONTAIN_TOP_0200 TYPE REF TO CL_GUI_CONTAINER.
+DATA : GO_DD_DOCU_0200      TYPE REF TO CL_DD_DOCUMENT.
+DATA : GO_GRID_0200 TYPE REF TO CL_GUI_ALV_GRID.
+DATA : GS_VARIANT_0200 TYPE DISVARIANT.
+DATA : GS_LAYOUT_0200 TYPE LVC_S_LAYO.
+DATA : GT_EXCLUDE_0200 TYPE UI_FUNCTIONS.
+DATA : GT_SORT_0200 TYPE LVC_T_SORT.
+DATA : GT_FIELDCAT_0200 TYPE LVC_T_FCAT.
+
+* screen 300(공급정보 상세팝업)
+DATA : GO_DOCKING_0300 TYPE REF TO CL_GUI_DOCKING_CONTAINER.
+DATA : GO_SPLITTER_0300 TYPE REF TO CL_GUI_SPLITTER_CONTAINER.
+DATA : GO_CONTAIN_0300 TYPE REF TO CL_GUI_CONTAINER.
+DATA : GO_CONTAIN_TOP_0300 TYPE REF TO CL_GUI_CONTAINER.
+DATA : GO_DD_DOCU_0300      TYPE REF TO CL_DD_DOCUMENT.
+DATA : GO_GRID_0300 TYPE REF TO CL_GUI_ALV_GRID.
+DATA : GS_VARIANT_0300 TYPE DISVARIANT.
+DATA : GS_LAYOUT_0300 TYPE LVC_S_LAYO.
+DATA : GT_EXCLUDE_0300 TYPE UI_FUNCTIONS.
+DATA : GT_SORT_0300 TYPE LVC_T_SORT.
+DATA : GT_FIELDCAT_0300 TYPE LVC_T_FCAT.
+
+* screen 400(구매요청(PR) 생성화면)
+DATA : GO_CONTAIN_0400 TYPE REF TO CL_GUI_CUSTOM_CONTAINER.
+DATA : GO_GRID_0400 TYPE REF TO CL_GUI_ALV_GRID.
+DATA : GS_VARIANT_0400 TYPE DISVARIANT.
+DATA : GS_LAYOUT_0400 TYPE LVC_S_LAYO.
+DATA : GT_EXCLUDE_0400 TYPE UI_FUNCTIONS.
+DATA : GT_FIELDCAT_0400 TYPE LVC_T_FCAT.
+
+* screen 500(구매오더(PO) 생성화면)
+DATA : GO_CONTAIN_0500 TYPE REF TO CL_GUI_CUSTOM_CONTAINER.
+DATA : GO_GRID_0500 TYPE REF TO CL_GUI_ALV_GRID.
+DATA : GS_VARIANT_0500 TYPE DISVARIANT.
+DATA : GS_LAYOUT_0500 TYPE LVC_S_LAYO.
+DATA : GT_EXCLUDE_0500 TYPE UI_FUNCTIONS.
+DATA : GT_FIELDCAT_0500 TYPE LVC_T_FCAT.

@@ -1,0 +1,543 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_FUGR" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <AREAT>[GT] 일반 함수 GAON</AREAT>
+   <INCLUDES>
+    <SOBJ_NAME>LZGOPP02F01</SOBJ_NAME>
+    <SOBJ_NAME>LZGOPP02TOP</SOBJ_NAME>
+    <SOBJ_NAME>SAPLZGOPP02</SOBJ_NAME>
+   </INCLUDES>
+   <FUNCTIONS>
+    <item>
+     <FUNCNAME>ZGTPPT_BDC_PRD_CHART</FUNCNAME>
+     <REMOTE_CALL>R</REMOTE_CALL>
+     <SHORT_TEXT>[GT] 생산오더 특성값 BDC</SHORT_TEXT>
+     <IMPORT>
+      <RSIMP>
+       <PARAMETER>IV_GUBUN</PARAMETER>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>CHAR01</TYP>
+      </RSIMP>
+     </IMPORT>
+     <EXPORT>
+      <RSEXP>
+       <PARAMETER>EV_SUCCSEQ</PARAMETER>
+       <TYP>I</TYP>
+      </RSEXP>
+     </EXPORT>
+     <TABLES>
+      <RSTBL>
+       <PARAMETER>IT_2010</PARAMETER>
+       <DBSTRUCT>ZGTPPT2010</DBSTRUCT>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>ET_MESSAGE</PARAMETER>
+       <DBSTRUCT>BDCMSGCOLL</DBSTRUCT>
+      </RSTBL>
+     </TABLES>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>IV_GUBUN</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>길이 1의 문자 필드</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>EV_SUCCSEQ</PARAMETER>
+       <KIND>P</KIND>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>IT_2010</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>[GT] 오더 연결 정보</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>ET_MESSAGE</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>SAP 시스템의 메세지수집</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+    <item>
+     <FUNCNAME>ZGTPP_BAPI_GOODSMVT_CANCEL</FUNCNAME>
+     <REMOTE_CALL>R</REMOTE_CALL>
+     <SHORT_TEXT>[GT] 전표 취소 NEW TASK용 펑션(BAPI_GOODSMVT_CANCEL)</SHORT_TEXT>
+     <IMPORT>
+      <RSIMP>
+       <PARAMETER>MATERIALDOCUMENT</PARAMETER>
+       <TYP>BAPI2017_GM_HEAD_02-MAT_DOC</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>MATDOCUMENTYEAR</PARAMETER>
+       <TYP>BAPI2017_GM_HEAD_02-DOC_YEAR</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>GOODSMVT_PSTNG_DATE</PARAMETER>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>BAPI2017_GM_HEAD_02-PSTNG_DATE</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>GOODSMVT_PR_UNAME</PARAMETER>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>BAPI2017_GM_HEAD_01-PR_UNAME</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>DOCUMENTHEADER_TEXT</PARAMETER>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>BAPI2017_GM_HEAD_02-HEADER_TXT</TYP>
+      </RSIMP>
+     </IMPORT>
+     <EXPORT>
+      <RSEXP>
+       <PARAMETER>GOODSMVT_HEADRET</PARAMETER>
+       <DBFIELD>BAPI2017_GM_HEAD_RET</DBFIELD>
+      </RSEXP>
+     </EXPORT>
+     <TABLES>
+      <RSTBL>
+       <PARAMETER>RETURN</PARAMETER>
+       <DBSTRUCT>BAPIRET2</DBSTRUCT>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>GOODSMVT_MATDOCITEM</PARAMETER>
+       <DBSTRUCT>BAPI2017_GM_ITEM_04</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+     </TABLES>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>MATERIALDOCUMENT</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>자재 문서 번호</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>MATDOCUMENTYEAR</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>자재 문서 연도</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>GOODSMVT_PSTNG_DATE</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>문서 내 전기일</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>GOODSMVT_PR_UNAME</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>사용자 이름</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>DOCUMENTHEADER_TEXT</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>문서 헤더 텍스트</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>GOODSMVT_HEADRET</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>MMIM: 자재이동 전기할 일반 FM에 대한 출력구조</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>RETURN</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>리턴 매개변수</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>GOODSMVT_MATDOCITEM</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>BAPI 통신구조: 자재문서취소, 품목</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+    <item>
+     <FUNCNAME>ZGTPP_FACTOR_BATCH_CHAR_UPDATE</FUNCNAME>
+     <REMOTE_CALL>R</REMOTE_CALL>
+     <SHORT_TEXT>[GT] 팩터배치 개별조장 특성 업데이트</SHORT_TEXT>
+     <TABLES>
+      <RSTBL>
+       <PARAMETER>T_INPUT</PARAMETER>
+       <TYP>ZGTPPY0008</TYP>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>T_OUTPUT</PARAMETER>
+       <TYP>ZGTPPY0009</TYP>
+      </RSTBL>
+     </TABLES>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>T_INPUT</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>[GT] 팩터배치 개별조장 INPUT Table Type</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>T_OUTPUT</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>[GT] 팩터배치 개별조장 Output Table Type</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+    <item>
+     <FUNCNAME>ZGTPP_GAON_PROD_BOM_CH</FUNCNAME>
+     <REMOTE_CALL>R</REMOTE_CALL>
+     <SHORT_TEXT>GT] 생산오더 대체자재변경</SHORT_TEXT>
+     <TABLES>
+      <RSTBL>
+       <PARAMETER>IT_ORDER_BOM</PARAMETER>
+       <DBSTRUCT>ZGTPPS1017</DBSTRUCT>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>OT_RESULT</PARAMETER>
+       <DBSTRUCT>ZGTPPSIF0034</DBSTRUCT>
+      </RSTBL>
+     </TABLES>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>IT_ORDER_BOM</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>[GT] 생산 오더 대체자재 변경</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>OT_RESULT</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>생산 오더 대체자재 변경 수신-결과</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+    <item>
+     <FUNCNAME>ZGTPP_GET_JOJANG</FUNCNAME>
+     <SHORT_TEXT>[GT] 조장정보 확인</SHORT_TEXT>
+     <TABLES>
+      <RSTBL>
+       <PARAMETER>T_INPUT</PARAMETER>
+       <TYP>ZGTPPY0006</TYP>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>T_RESULT</PARAMETER>
+       <TYP>ZGTPPY0007</TYP>
+      </RSTBL>
+     </TABLES>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>T_INPUT</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>[GT] 판매오더 키 Table Type</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>T_RESULT</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>[GT] 판매오더 기준 조장정보 Table_type</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+    <item>
+     <FUNCNAME>ZGTPP_GET_STOCK_LINK_INFO</FUNCNAME>
+     <SHORT_TEXT>[GT] 주문 할당 정보 조회</SHORT_TEXT>
+     <IMPORT>
+      <RSIMP>
+       <PARAMETER>I_WERKS</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>WERKS_D</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_LGORT</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>LGORT_D</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>IT_MATNR</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>RANGE_T_MATNR</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_CHARG</PARAMETER>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>CHARG_D</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_VBELN</PARAMETER>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>VBELN_VA</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_POSNR</PARAMETER>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>POSNR_VA</TYP>
+      </RSIMP>
+     </IMPORT>
+     <TABLES>
+      <RSTBL>
+       <PARAMETER>OT_LINK_DETAIL</PARAMETER>
+       <DBSTRUCT>ZGTPPS1005</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>OT_LINK_STOCK</PARAMETER>
+       <DBSTRUCT>ZGTPPS1006</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+     </TABLES>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>I_WERKS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>플랜트</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_LGORT</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>저장 위치</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>IT_MATNR</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>자재 번호</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_CHARG</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>배치 번호</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_VBELN</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>판매 문서</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_POSNR</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>판매 문서 항목</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>OT_LINK_DETAIL</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>[GT] 주문할당 - Detail</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>OT_LINK_STOCK</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>[GT] 주문할당 - Stock</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+    <item>
+     <FUNCNAME>ZGTPP_LINK_INFO_UPDATE</FUNCNAME>
+     <SHORT_TEXT>[GT] Link 정보 업데이트 처리</SHORT_TEXT>
+     <IMPORT>
+      <RSIMP>
+       <PARAMETER>I_WERKS</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>WERKS_D</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_UPD_TYPE</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>ZGTEUPD_TYPE</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_UPDRQ</PARAMETER>
+       <OPTIONAL>X</OPTIONAL>
+       <REFERENCE>X</REFERENCE>
+       <TYP>ZGTPPT3360-UPDRQ</TYP>
+      </RSIMP>
+     </IMPORT>
+     <TABLES>
+      <RSTBL>
+       <PARAMETER>IT_ITEM</PARAMETER>
+       <DBSTRUCT>ZGTPPSIF0044</DBSTRUCT>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>OT_RETURN</PARAMETER>
+       <DBSTRUCT>ZGTPPSIF0045</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+     </TABLES>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>I_WERKS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>플랜트</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_UPD_TYPE</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>처리 구분</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_UPDRQ</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Link 업데이트 요청번호</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>IT_ITEM</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>[GT] Link 정보 업데이트 처리 - Item</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>OT_RETURN</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>[GT] Link 정보 업데이트 처리 - Return</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+    <item>
+     <FUNCNAME>ZGTPP_MILL_CUT_PROC</FUNCNAME>
+     <SHORT_TEXT>[GT] 절단 실적 처리</SHORT_TEXT>
+     <IMPORT>
+      <RSIMP>
+       <PARAMETER>IS_HEADER</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>ZGTPPS1012</TYP>
+      </RSIMP>
+     </IMPORT>
+     <TABLES>
+      <RSTBL>
+       <PARAMETER>IT_ITEM</PARAMETER>
+       <DBSTRUCT>ZGTPPS1010</DBSTRUCT>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>OT_RETURN</PARAMETER>
+       <DBSTRUCT>ZGTPPS1011</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+     </TABLES>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>IS_HEADER</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>[GT] 절단 실적 처리 - Header</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>IT_ITEM</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>[GT] 절단 실적 처리 - Item</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>OT_RETURN</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>[GT] 절단 실적 처리 - Return</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+    <item>
+     <FUNCNAME>ZGTPP_PROD_STATUS_REF_SO</FUNCNAME>
+     <REMOTE_CALL>R</REMOTE_CALL>
+     <SHORT_TEXT>[GT] 판매 진도 조회 : 공정 진척 현황</SHORT_TEXT>
+     <TABLES>
+      <RSTBL>
+       <PARAMETER>IT_ITEM</PARAMETER>
+       <DBSTRUCT>ZGTPPS1015</DBSTRUCT>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>OT_STAT_OVERVIEW</PARAMETER>
+       <DBSTRUCT>ZGTPPS1013</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>OT_STAT_DETAIL</PARAMETER>
+       <DBSTRUCT>ZGTPPS1014</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+     </TABLES>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>IT_ITEM</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>[GT] 판매 진도 조회 : 공정 진척 현황 - IT_ITEM</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>OT_STAT_OVERVIEW</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>[GT] 판매 진도 조회 : 공정 진척 현황 - OT_STAT_OVERVIEW</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>OT_STAT_DETAIL</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>[GT] 판매 진도 조회 : 공정 진척 현황 - OT_STAT_DETAIL</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+    <item>
+     <FUNCNAME>ZGTPP_QUOT_ROUT_CALC</FUNCNAME>
+     <SHORT_TEXT>[GT] 견적원가용 라우팅 작업시간 계산</SHORT_TEXT>
+     <IMPORT>
+      <RSIMP>
+       <PARAMETER>I_ROUTING</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>CHAR01</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_WERKS</PARAMETER>
+       <OPTIONAL>X</OPTIONAL>
+       <REFERENCE>X</REFERENCE>
+       <TYP>WERKS_D</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_SPART</PARAMETER>
+       <OPTIONAL>X</OPTIONAL>
+       <REFERENCE>X</REFERENCE>
+       <TYP>SPART</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_GONG_CD</PARAMETER>
+       <OPTIONAL>X</OPTIONAL>
+       <REFERENCE>X</REFERENCE>
+       <TYP>ZEGONG_CD</TYP>
+      </RSIMP>
+     </IMPORT>
+     <TABLES>
+      <RSTBL>
+       <PARAMETER>T_CHAR_DATA</PARAMETER>
+       <DBSTRUCT>ZGTPPS1007</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>T_WORK_DATA</PARAMETER>
+       <DBSTRUCT>ZGTPPS1008</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>T_ZPPT0030</PARAMETER>
+       <DBSTRUCT>ZGTPPS1009</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+     </TABLES>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>I_ROUTING</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>&apos;X&apos; 이면 라우팅 작업 시간 Return</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_WERKS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>플랜트</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_SPART</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>제품군</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_GONG_CD</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>공정코드</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>T_CHAR_DATA</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>[GT] 견적원가용라우팅작업시간 - T_CHAR_DATA</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>T_WORK_DATA</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>[GT] 견적원가용라우팅작업시간 - T_WORK_DATA</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>T_ZPPT0030</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>[GT] 견적원가용라우팅작업시간 - T_ZPPT0030</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+   </FUNCTIONS>
+  </asx:values>
+ </asx:abap>
+</abapGit>

@@ -1,0 +1,297 @@
+*&----------------------------------------------------------------*
+*& Include          ZGTPPI1030TOP
+*&----------------------------------------------------------------*
+*-----------------------------------------------------------------*
+* TABLES
+*-----------------------------------------------------------------*
+ TABLES: MARA, MKAL, T001W, AUFK,ZGTPPT1040, ZGTPPT1180,
+         AFPO, RESB, AFKO, AFRU, VBAK, MARC, ZEDT0011.
+*-----------------------------------------------------------------*
+* DATA: Variable
+*-----------------------------------------------------------------*
+ DATA : GV_ERROR.
+ DATA : GT_UCOMM    TYPE TABLE OF SY-UCOMM,
+        GV_OK_CODE  LIKE SY-UCOMM,
+        GV_OK_CODE2 LIKE SY-UCOMM.
+ DATA : GV_CNT  TYPE SY-INDEX.
+ DATA : GV_RESULT  TYPE ZO_RESULT,
+        GV_MESSAGE TYPE ZO_MESSAGE.
+ DATA : GV_ANSWER TYPE C.
+ DATA : GV_CHECK_ERROR.
+ DATA : GV_BUDAT LIKE MATDOC-BUDAT.
+
+ RANGES : GR_WERKS FOR MAPL-WERKS.
+*-----------------------------------------------------------------*
+* DATA: Structure. (Field strings : Working area)
+*-----------------------------------------------------------------*
+ DATA : BEGIN OF GS_DATA,
+          WERKS        TYPE AUFK-WERKS,
+          AUFNR        TYPE AUFK-AUFNR,
+          AUART        TYPE AUFK-AUART,
+          OBJNR        TYPE AUFK-OBJNR,
+          GAMNG        TYPE AFKO-GAMNG,
+          GMEIN        TYPE AFKO-GMEIN,
+          MATNR        TYPE AFPO-MATNR,
+          WEMNG        TYPE AFPO-WEMNG,
+          AMEIN        TYPE AFPO-AMEIN,
+          KDAUF        TYPE AFPO-KDAUF,
+          KDPOS        TYPE AFPO-KDPOS,
+          CMATN        TYPE RESB-MATNR,
+          BDMNG        TYPE RESB-BDMNG,
+          CMEIN        TYPE RESB-MEINS,
+          MTART        TYPE MARA-MTART,
+          ZPJNO        TYPE VBAK-ZPJNO,
+          BSTNK        TYPE VBAK-BSTNK,
+          ZPTXT        TYPE ZSD0106T-ZPTXT,
+          DISPO        TYPE MARC-DISPO,
+          MATKL        TYPE MARA-MATKL,
+          ZJOB_NAME    TYPE ZGTEDT2121-ZJOB_NAME,
+          ZCDSFLAG(1),
+          ZAFRUFLAG(1),
+          CMEINFLAG(1),
+        END OF GS_DATA.
+
+ DATA : BEGIN OF GS_RESB,
+          AUFNR    TYPE RESB-AUFNR,
+          MATNR    TYPE RESB-MATNR,
+          BDMNG    TYPE RESB-BDMNG,
+          MEINS    TYPE RESB-MEINS,
+          OBJNR    TYPE RESB-OBJNR,
+          ERFME    TYPE RESB-ERFME,
+          MTART    TYPE MARA-MTART,
+          DFLAG(1),
+        END OF GS_RESB.
+
+ DATA : BEGIN OF GS_MSEG,
+          AUFNR TYPE MSEG-AUFNR,
+          MATNR TYPE MSEG-MATNR,
+          MENGE TYPE MSEG-MENGE,
+          MEINS TYPE MSEG-MEINS,
+          SHKZG TYPE MSEG-SHKZG,
+          MTART TYPE MARA-MTART,
+        END OF GS_MSEG.
+
+ DATA : BEGIN OF GS_MAKT,
+          MATNR TYPE MAKT-MATNR,
+          SPRAS TYPE MAKT-SPRAS,
+          MAKTX TYPE MAKT-MAKTX,
+        END OF GS_MAKT.
+
+ DATA : BEGIN OF GS_MKAL,
+          MATNR LIKE MKAL-MATNR,
+          WERKS LIKE MKAL-WERKS,
+          VERID LIKE MKAL-VERID,
+          TEXT1 LIKE MKAL-TEXT1,
+          ADATU LIKE MKAL-ADATU,
+          BDATU LIKE MKAL-BDATU,
+          PLNNR LIKE MKAL-PLNNR,
+          ALNAL LIKE MKAL-ALNAL,
+          STLAL LIKE MKAL-STLAL,
+          MDV01 LIKE MKAL-MDV01,
+          ALORT LIKE MKAL-ALORT,
+          ELPRO LIKE MKAL-ELPRO,
+          MTART LIKE MARA-MTART,
+          DISPO LIKE MARC-DISPO,
+        END OF GS_MKAL.
+* 전송
+ DATA : BEGIN OF GS_DISP,
+          AUFNR          LIKE  AUFK-AUFNR,    "생산오더
+          PMATN          LIKE  AFPO-MATNR,    "모품목코드
+          CMATN          LIKE  RESB-MATNR,    "자품목코드
+          WERKS          LIKE  AUFK-WERKS,    "플랜트
+          OBJNR          LIKE  AUFK-OBJNR,    "오브젝트번호
+          ZORDSTAT(30),                     "오더상태
+          PMAKTX         LIKE  MAKT-MAKTX,    "모품목내역
+          CMAKTX         LIKE  MAKT-MAKTX,    "자품목내역
+          GAMNG          LIKE  AFKO-GAMNG,    "생산오더수량
+          WEMNG          LIKE  AFPO-WEMNG,    "생산입고수량
+          GMEIN          LIKE  AFKO-GMEIN,    "생산단위(생산오더수량)
+          AMEIN          LIKE  AFPO-AMEIN,      "생산입고수량(생산입고수량)
+          BDMNG          LIKE  RESB-BDMNG,    "소요량(생산오더수량 기준)
+          ZCUMNG         LIKE  RESB-BDMNG,    "소요량(생산입고수량 기준)
+          MENGE          LIKE  MSEG-MENGE,    "생산투입수량
+          MEINS          LIKE  MSEG-MEINS,    "출고단위
+          MTART          LIKE  MARA-MTART,
+          ZCLASS(16),                       "투입상태
+          ZQTYDIF        LIKE  RESB-BDMNG,    "차이수량
+          ZGIRATE        LIKE  RESB-BDMNG,    "투입율(%)
+          ZGIRATE_D(10),    "투입율(%)
+          ZPJNO          LIKE VBAK-ZPJNO,
+          BSTNK          LIKE VBAK-BSTNK,
+          ZPTXT          LIKE ZSD0106T-ZPTXT,
+          ZJOB_NAME      LIKE ZGTEDT2121-ZJOB_NAME,
+          DISPO          LIKE MARC-DISPO,   "mrp관리자
+          MATKL          LIKE MARA-MATKL,   "모품목 자재그룹
+          ZDELFLAG(1),                      " 삭제대상 플래그
+          ZCDSFLAG(1),
+          ZAFRUFLAG(1),
+          STATS_SUGI     LIKE ICON-ID,
+          ZSTAT(4),                          "백로그 존재 상태
+          WAERS          LIKE T001-WAERS,   "통화키
+          STPRS          LIKE MBEWH-STPRS,  "표준 가격
+          ZAMTDIF        LIKE MBEWH-SALK3, "차이금액
+          GONG_CD        LIKE ZEDT1010-GONG_CD, "공정코드
+          ARBPL          LIKE CRHD-ARBPL, "작업장
+          KTEXT          LIKE CRTX-KTEXT, "작업장내역
+          KGW_CU_GR      LIKE /NFM/TKGW-KGW, "입고CU량
+          KGW_AL_GR      LIKE /NFM/TKGW-KGW, "입고AL량
+          BME_GR         LIKE /NFM/TKGW-BME, "중량단위
+          KGW_CU_GI      LIKE /NFM/TKGW-KGW, "신선CU량
+          KGW_AL_GI      LIKE /NFM/TKGW-KGW, "신선AL량
+          BME_GI         LIKE /NFM/TKGW-BME, "중량단위
+
+          ID             LIKE ICON-ID,
+          RTMSG(100),
+          CHK_INSPECTION LIKE ZGTPPT1180-CHK_INSPECTION,
+          CELLSCOL       TYPE  LVC_T_SCOL,
+          CELLTAB        TYPE  LVC_T_STYL,
+        END OF GS_DISP.
+
+ "프로젝트 내역
+ DATA : BEGIN OF GS_ZSD0106T,
+          ZPJNO TYPE ZSD0106T-ZPJNO,
+          ZPTXT TYPE ZSD0106T-ZPTXT,
+        END OF GS_ZSD0106T.
+
+ "제조지시내역
+ DATA : BEGIN OF GS_ZGTEDT2121T,
+          ZSYSTEM_ID TYPE ZGTEDT2121-ZSYSTEM_ID,
+          ZWERKS     TYPE ZGTEDT2121-ZWERKS,
+          ZJOB_NO    TYPE ZGTEDT2121-ZJOB_NO,
+          ZJOB_NAME  TYPE ZGTEDT2121-ZJOB_NAME,
+        END OF GS_ZGTEDT2121T.
+
+ "백로그 존재여부
+ DATA : BEGIN OF GS_AFFW,
+          WEBLNR  TYPE AFFW-WEBLNR,
+          WEBLPOS TYPE AFFW-WEBLPOS,
+          MATNR   TYPE AFFW-MATNR,
+          AUFNR   TYPE AFFW-AUFNR,
+        END OF GS_AFFW.
+
+ "통화키 추출
+ DATA : BEGIN OF GS_T001,
+          BUKRS TYPE T001-BUKRS,
+          WAERS TYPE T001-WAERS,
+          BWKEY TYPE T001K-BWKEY,
+        END OF GS_T001.
+
+ "표준원가 및 가격단위 추출
+ DATA : BEGIN OF GS_MBEWH,
+          MATNR TYPE MBEWH-MATNR,
+          BWKEY TYPE MBEWH-BWKEY,
+          LFGJA TYPE MBEWH-LFGJA,
+          LFMON TYPE MBEWH-LFMON,
+          STPRS TYPE MBEWH-STPRS,
+          PEINH TYPE MBEWH-PEINH,
+        END OF GS_MBEWH.
+
+ DATA : GS_ZGTPPT1040 LIKE ZGTPPT1040.
+ DATA : GS_SEND LIKE ZGTPPT1040.
+ DATA : GS_ZGTPPT1010 LIKE ZGTPPT1010.
+
+* 실적 Status 체크용
+ DATA : BEGIN OF GT_AFRU OCCURS 0.
+          INCLUDE STRUCTURE AFRU.
+ DATA : END OF GT_AFRU.
+ DATA : GT_AFRU_MIN LIKE GT_AFRU OCCURS 0 WITH HEADER LINE,
+        GT_AFRU_MAX LIKE GT_AFRU OCCURS 0 WITH HEADER LINE.
+*-----------------------------------------------------------------*
+* DATA: Internal Table.
+*-----------------------------------------------------------------*
+* DATA : GT_MKAL TYPE TABLE OF ZAUIF_PP_S006S. "HISTORY_TABLE 저장용 테이블
+ DATA : GT_MKAL   LIKE TABLE OF GS_MKAL.
+ DATA : GT_DISP   LIKE TABLE OF GS_DISP . "전송 ALV 테이블
+ DATA : GT_DISP1  LIKE TABLE OF GS_DISP . "전송 ALV 테이블 생산오더별
+ DATA : GT_DISP2  LIKE TABLE OF GS_DISP.  "전송 ALV 테이블 모품목별
+ DATA : GT_DISP3  LIKE TABLE OF GS_DISP.  "전송 ALV 테이블 자품목별
+ DATA : GT_DISP_TMP  LIKE TABLE OF GS_DISP WITH HEADER LINE.
+ DATA : GT_DISP_MAT  LIKE TABLE OF GS_DISP WITH HEADER LINE.
+ DATA : GT_ZGTPPT1040 LIKE TABLE OF GS_ZGTPPT1040.
+ DATA : GT_ROW_NO TYPE LVC_T_ROID WITH HEADER LINE.
+ DATA : GT_SEND LIKE TABLE OF ZGTPPT1040. "ALV 출력용 테이블 (전송 이력 조회)
+ DATA : GT_OT_ITAB  TYPE TABLE OF ZGTPPSIF0002. "MES 전송용 테이블
+ DATA : GT_ZGTPPT1010 TYPE TABLE OF ZGTPPT1010. "코드 마스터 테이블
+ DATA : GT_DATA LIKE TABLE OF GS_DATA WITH HEADER LINE.
+ DATA : GT_DATA_TMP LIKE TABLE OF GS_DATA WITH HEADER LINE.
+ DATA : GT_DATA_WEMNG LIKE TABLE OF GS_DATA WITH HEADER LINE.
+ DATA : GT_RESB LIKE TABLE OF GS_RESB WITH HEADER LINE.
+ DATA : GT_RESB_SUM LIKE TABLE OF GS_RESB WITH HEADER LINE.
+ DATA : GT_MSEG LIKE TABLE OF GS_MSEG WITH HEADER LINE.
+ DATA : GT_MSEG_TMP LIKE TABLE OF GS_MSEG WITH HEADER LINE.
+ DATA : GT_MSEG_SUM LIKE TABLE OF GS_MSEG WITH HEADER LINE.
+ DATA : GT_MAKT LIKE TABLE OF GS_MAKT WITH HEADER LINE.
+ DATA : GT_ZSD0106T LIKE TABLE OF GS_ZSD0106T WITH HEADER LINE.
+ DATA : GT_ZGTEDT2121 LIKE TABLE OF GS_ZGTEDT2121T WITH HEADER LINE.
+ DATA : GT_AFFW LIKE TABLE OF GS_AFFW WITH HEADER LINE.
+ DATA : GT_T001 LIKE TABLE OF GS_T001 WITH HEADER LINE.
+ DATA : GT_MBEWH LIKE TABLE OF GS_MBEWH WITH HEADER LINE.
+ DATA : GS_CDSV LIKE ISTATUSOBJSTSCHG,
+        GT_CDSV LIKE TABLE OF ISTATUSOBJSTSCHG.
+*-----------------------------------------------------------------*
+* ALV
+*-----------------------------------------------------------------*
+*& CLASS Reference 정의
+ CLASS: LCL_EVENT_HANDLER      DEFINITION DEFERRED,
+        LCL_ALV_GRID           DEFINITION DEFERRED.
+
+*& ALV Global Field
+ DATA : ALV_VARIANT LIKE DISVARIANT,
+        ALV_REPID   LIKE SY-REPID.
+*- ALV COMMON
+ TYPE-POOLS : KKBLO.
+ DATA : GS_STBL      TYPE LVC_S_STBL,
+        GT_SFIELDCAT TYPE KKBLO_T_FIELDCAT,
+        GS_EXCLUDING TYPE LINE OF UI_FUNCTIONS,
+        GT_EXCLUDING TYPE UI_FUNCTIONS.
+* DATA : cellcol TYPE lvc_t_scol,
+*        celltab TYPE lvc_t_styl.
+
+*- ALV1
+ DATA : GRID                TYPE REF TO CL_GUI_ALV_GRID,
+        G_CUSTOM_CONTAINER  TYPE REF TO CL_GUI_CUSTOM_CONTAINER,
+        G_DOCKING_CONTAINER TYPE REF TO CL_GUI_DOCKING_CONTAINER,
+        G_SPLITTER          TYPE REF TO CL_GUI_SPLITTER_CONTAINER,
+        G_CONTAINER         TYPE REF TO CL_GUI_CONTAINER,
+        G_CON               TYPE SCRFNAME VALUE 'ALV1',
+
+        LCL_PARENT_HTML     TYPE REF TO CL_GUI_CONTAINER,
+        LCL_PARENT_GRID     TYPE REF TO CL_GUI_CONTAINER,
+        LCL_DYNDOC_ID       TYPE REF TO CL_DD_DOCUMENT.
+
+ DATA : GS_LAYOUT   TYPE LVC_S_LAYO,
+        GT_FIELDCAT TYPE LVC_T_FCAT,
+        GS_FIELDCAT TYPE LVC_S_FCAT,
+        GT_SORT     TYPE LVC_T_SORT,
+        GS_SORT     TYPE LVC_S_SORT,
+        GT_EXCLUDE  TYPE UI_FUNCTIONS,
+        GT_STYL     TYPE LVC_T_STYL,
+        GS_STYL     TYPE LVC_S_STYL.
+*& Drop-Down List Box List.
+ DATA : GT_DROPDOWN TYPE LVC_T_DROP,
+        GS_DROPDOWN TYPE LVC_S_DROP.
+
+ DATA : GO_DOCKING_CONTAINER TYPE REF TO CL_GUI_DOCKING_CONTAINER.
+ DATA : GO_SPLITTER TYPE REF TO CL_GUI_SPLITTER_CONTAINER.
+ DATA : GO_EVENT_HANDLER TYPE REF TO LCL_EVENT_HANDLER.
+*-----------
+*ALV GRID 100
+ DATA : GO_CONTAIN_0100 TYPE REF TO CL_GUI_CONTAINER.
+ DATA : GO_GRID_0100 TYPE REF TO CL_GUI_ALV_GRID.
+ DATA : GS_VARIANT TYPE DISVARIANT.
+ DATA : GS_LAYOUT_0100 TYPE LVC_S_LAYO.
+ DATA : GT_SORT_0100 TYPE LVC_T_SORT.
+ DATA : GT_EXCLUDE_0100 TYPE UI_FUNCTIONS.
+ DATA : GT_FIELDCAT_0100 TYPE LVC_T_FCAT.
+ DATA : GO_OBJECT TYPE REF TO CL_ALV_EVENT_TOOLBAR_SET.
+
+*-----------
+* ALV GRID 0101
+ DATA : GO_CONTAIN_0101 TYPE REF TO CL_GUI_CONTAINER.
+ DATA : GO_GRID_0101 TYPE REF TO CL_GUI_ALV_GRID.
+ DATA : GS_LAYOUT_0101 TYPE LVC_S_LAYO.
+ DATA : GT_SORT_0101 TYPE LVC_T_SORT.
+ DATA : GT_EXCLUDE_0101 TYPE UI_FUNCTIONS.
+ DATA : GT_FIELDCAT_0101 TYPE LVC_T_FCAT.
+
+ DATA : GV_STABLE TYPE LVC_S_STBL VALUE 'XX'.

@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_PARA" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <TPARA>
+    <PARAMID>ZRCEPNO_GO</PARAMID>
+   </TPARA>
+   <TPARAT>
+    <PARAMID>ZRCEPNO_GO</PARAMID>
+    <SPRACHE>3</SPRACHE>
+    <PARTEXT>고객불만 접수번호(가온전선)</PARTEXT>
+   </TPARAT>
+  </asx:values>
+ </asx:abap>
+</abapGit>

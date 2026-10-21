@@ -1,0 +1,124 @@
+*&---------------------------------------------------------------------*
+*&  Include           ZGTPPR4020TOP                                     *
+*&---------------------------------------------------------------------*
+TYPE-POOLS : SLIS.
+
+INCLUDE <ICON>.
+INCLUDE <SYMBOL>.
+
+*&---------------------------------------------------------------------*
+*&  TABLES
+*&---------------------------------------------------------------------*
+TABLES: MSKA,
+        MARC,
+        MARD,
+        MKPF,
+        MSEG,
+        VBAP,
+        SSCRFIELDS,
+        ZGTBDS310, "ZBDS310,
+        ZPPTLOG10,
+        ZPBT0030,
+        ZLES001.
+
+*&---------------------------------------------------------------------*
+*&  INTERNAL TABLE
+*&---------------------------------------------------------------------*
+DATA: BEGIN OF GT_EXCEL_DATA OCCURS 0,
+        WERKS(4),
+        LGORT(4),
+        MATNR(18),
+        ZMTOS(1),
+        ZEBUN(12),
+        ERFMG(20),
+        ERFME(4),
+      END OF GT_EXCEL_DATA.
+
+DATA: IT_LIST TYPE ZGTBDS310 OCCURS 0 WITH HEADER LINE.
+
+DATA: GT_LIST TYPE ZGTBDS310 OCCURS 0 WITH HEADER LINE.
+
+
+DATA: BDC_MODE(1) VALUE 'N'.
+
+*       Batchinputdata of single transaction
+DATA:   GT_BDCDATA LIKE BDCDATA    OCCURS 0 WITH HEADER LINE.
+*       messages of call transaction
+DATA:   GT_MESSTAB LIKE BDCMSGCOLL OCCURS 0 WITH HEADER LINE.
+*       BDC Option
+DATA:   GS_CTU_PARAMS LIKE CTU_PARAMS.
+
+*GOODS MOVT BAPI
+DATA: GM_HEADER  TYPE BAPI2017_GM_HEAD_01,
+      GM_CODE    TYPE BAPI2017_GM_CODE,
+      GM_HEADRET TYPE BAPI2017_GM_HEAD_RET,
+      GM_MATDOC  TYPE BAPI2017_GM_HEAD_RET-MAT_DOC,
+      GM_DOCYER  TYPE BAPI2017_GM_HEAD_RET-DOC_YEAR,
+      GM_ITEM    TYPE BAPI2017_GM_ITEM_CREATE OCCURS 0
+                      WITH HEADER LINE,
+      GM_RETURN  TYPE BAPIRET2  OCCURS 0 WITH HEADER LINE. "메세지
+
+DATA: GV_FDATE LIKE SY-DATUM,
+      GV_TDATE LIKE SY-DATUM.
+
+DATA: GV_LIMIT LIKE ZGTPPT1010-FLD_02,
+      GV_SPLIT LIKE ZGTPPT1010-FLD_02.
+
+DATA: BEGIN OF GS_AUFNRCNT,
+        MATNR    LIKE MATDOC-MATNR,
+        AUFNRCNT TYPE I,
+        SPLIT    TYPE I,
+      END OF GS_AUFNRCNT.
+DATA: GT_AUFNRCNT LIKE TABLE OF GS_AUFNRCNT.
+
+RANGES: R_POSNR FOR VBAP-POSNR.
+*&---------------------------------------------------------------------*
+*&  VARIABLES
+*&---------------------------------------------------------------------*
+DATA: GV_CHECK(1).
+
+DATA: OK_CODE TYPE SY-UCOMM,
+      SAVE_OK TYPE SY-UCOMM.
+
+
+DATA: FCODE_A TYPE TABLE OF SY-UCOMM,
+      FCODE_B TYPE TABLE OF SY-UCOMM,
+      FCODE_C TYPE TABLE OF SY-UCOMM.
+
+DATA: GV_STATUS(1) TYPE C VALUE 'A'.
+
+DEFINE CLS.
+  CLEAR &1.
+  REFRESH &1.
+END-OF-DEFINITION.
+*&---------------------------------------------------------------------*
+*&  SELECTION-SCREEN
+*&---------------------------------------------------------------------*
+SELECTION-SCREEN FUNCTION KEY 1.
+
+SELECTION-SCREEN: BEGIN OF BLOCK BL1 WITH FRAME TITLE TEXT-001.
+  SELECTION-SCREEN BEGIN OF LINE.
+    SELECTION-SCREEN COMMENT (31) TEXT-002 FOR FIELD P_FILE.
+    PARAMETERS: P_FILE  LIKE  RLGRAP-FILENAME.
+  SELECTION-SCREEN END   OF LINE.
+SELECTION-SCREEN: END OF BLOCK BL1.
+
+SELECTION-SCREEN: BEGIN OF BLOCK BL3 WITH FRAME TITLE TEXT-013. "수량입력방식
+  SELECTION-SCREEN BEGIN OF LINE.
+    SELECTION-SCREEN POSITION 01.
+    PARAMETERS: P_R1 RADIOBUTTON GROUP R1 USER-COMMAND U1 DEFAULT 'X'.
+    SELECTION-SCREEN COMMENT 03(10) TEXT-014 FOR FIELD P_R1.  "실사수량입력
+    SELECTION-SCREEN POSITION 23.
+    PARAMETERS: P_R2 RADIOBUTTON GROUP R1 .
+    SELECTION-SCREEN COMMENT 25(10) TEXT-015 FOR FIELD P_R2.  "차이수량입력
+  SELECTION-SCREEN END OF LINE.
+SELECTION-SCREEN: END OF BLOCK BL3.
+
+SELECTION-SCREEN: BEGIN OF BLOCK BL2 WITH FRAME TITLE TEXT-003.
+  PARAMETERS: P_ZLDAT LIKE RM07I-ZLDAT,
+              P_BLDAT LIKE RM07I-BLDAT,
+*-{ 기능개선_66038 2015.02.09 부스닥트 플랜트 이전
+*                P_WERKS LIKE MARC-WERKS DEFAULT '1202'.
+              P_WERKS LIKE MARC-WERKS DEFAULT '1306'.
+*}- 기능개선_66038
+SELECTION-SCREEN: END OF BLOCK BL2.

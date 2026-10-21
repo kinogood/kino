@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_DOMA" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <DD01V>
+    <DOMNAME>ZGTD_PROFRATE</DOMNAME>
+    <DDLANGUAGE>3</DDLANGUAGE>
+    <DATATYPE>DEC</DATATYPE>
+    <LENG>000003</LENG>
+    <OUTPUTLEN>000005</OUTPUTLEN>
+    <DECIMALS>000002</DECIMALS>
+    <SIGNFLAG>X</SIGNFLAG>
+    <DDTEXT>이익율(%) - Sign</DDTEXT>
+   </DD01V>
+  </asx:values>
+ </asx:abap>
+</abapGit>

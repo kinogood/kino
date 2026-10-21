@@ -1,0 +1,29 @@
+*&---------------------------------------------------------------------*
+*& Report ZGTSDR0150
+*&---------------------------------------------------------------------*
+*&
+*&---------------------------------------------------------------------*
+REPORT ZGTSDR0150  MESSAGE-ID ZGTSD01.
+
+INCLUDE ZGTSDR0150_TOP.
+INCLUDE ZGTSDR0150_CLS.
+INCLUDE ZGTSDR0150_SCR.
+INCLUDE ZGTSDR0150_O01.
+INCLUDE ZGTSDR0150_I01.
+INCLUDE ZGTSDR0150_F01.
+
+INITIALIZATION.
+  PERFORM SET_DATE.
+
+AT SELECTION-SCREEN OUTPUT.
+*  PERFORM SET_SELECTOPTION.
+
+START-OF-SELECTION.
+  PERFORM GET_DATA.
+
+END-OF-SELECTION.
+ IF GT_DATA IS INITIAL.
+   MESSAGE S010 DISPLAY LIKE 'E'.
+ ELSE.
+   CALL SCREEN 100.
+ ENDIF.

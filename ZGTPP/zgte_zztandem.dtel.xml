@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_DTEL" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <DD04V>
+    <ROLLNAME>ZGTE_ZZTANDEM</ROLLNAME>
+    <DDLANGUAGE>3</DDLANGUAGE>
+    <HEADLEN>02</HEADLEN>
+    <SCRLEN1>02</SCRLEN1>
+    <SCRLEN2>02</SCRLEN2>
+    <SCRLEN3>02</SCRLEN3>
+    <DDTEXT>탄뎀</DDTEXT>
+    <REPTEXT>탄뎀</REPTEXT>
+    <SCRTEXT_S>탄뎀</SCRTEXT_S>
+    <SCRTEXT_M>탄뎀</SCRTEXT_M>
+    <SCRTEXT_L>탄뎀</SCRTEXT_L>
+    <DTELMASTER>3</DTELMASTER>
+    <DATATYPE>CHAR</DATATYPE>
+    <LENG>000001</LENG>
+    <OUTPUTLEN>000001</OUTPUTLEN>
+   </DD04V>
+  </asx:values>
+ </asx:abap>
+</abapGit>

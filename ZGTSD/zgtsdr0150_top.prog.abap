@@ -1,0 +1,76 @@
+*&---------------------------------------------------------------------*
+*& Include          ZGTSDR0150_TOP
+*&---------------------------------------------------------------------*
+TABLES: VBAP, VBAK, LIKP, LIPS, KNA1, ZGTSDT0065, ZSD0106T, ZGTSDT0077, ZGTEDT2121,
+        VBRK, VBRP, VBFA, VBKD, ZGTPPT1010, TCURX.
+
+DATA: BEGIN OF GS_DATA,
+      VKBUR LIKE VBAK-VKBUR,    "영업팀
+      BEZEI(20),                "영업팀명_TVKBT
+      VKGRP LIKE VBAK-VKGRP,    "영업그룹
+      BEZEI2(20),               "영업그룹명_TVGRT
+      VTWEG LIKE VBAK-VTWEG,    "유통 경로
+      KUNNR LIKE KNA1-KUNNR,    "고객코드
+      NAME1 LIKE KNA1-NAME1,    "고객명
+      ZPJNO LIKE VBAK-ZPJNO,    "PJT코드
+      ZPTXT LIKE ZSD0106T-ZPTXT, "PJT명
+      ZZJOB_TYPE LIKE ZGTEDT2121-ZZJOB_TYPE,  "제조지시구분
+      FLD_03 LIKE ZGTPPT1010-FLD_03,  "제조지시구분
+      JOB_NO LIKE ZGTSDT0065-JOB_NO,  "제조지시번호
+      JOB_NAME LIKE ZGTSDT0065-JOB_NAME,  "제조지시명
+      VBELN LIKE VBAK-VBELN,    "S/O
+      SPART LIKE VBAK-SPART,    "제품군
+      VTEXT(20),                "제품군명_TSPAT
+      ZDELIV_DATE LIKE ZGTEDT2121-ZDELIV_DATE,    "출고날자
+      ZBCF  LIKE LIKP-ZBCF,     "적송여부
+      DDTEXT(60),
+      NETWRT LIKE VBAK-NETWR,    "견적금액
+      NETWR LIKE VBAK-NETWR,      "매출금액
+      ROHCOST LIKE ZGTSDT0077-ROHCOST,    "원재료비
+      SUBCONCOST LIKE ZGTSDT0077-SUBCONCOST,  "외주가공비
+      INSULCOST LIKE ZGTSDT0077-INSULCOST,    "절연비
+      CONDPRDCOST LIKE ZGTSDT0077-CONDPRDCOST,    "도체가공비
+      ASSYCOST LIKE ZGTSDT0077-ASSYCOST,    "조립가공비
+      COGM LIKE ZGTSDT0077-COGM,    "합계
+      CMAMT LIKE ZGTSDT0077-CMAMT,    "한계이익
+      CMRTE LIKE ZGTSDT0077-CMRTE,    "한계이익률
+      WAERK LIKE ZGTSDT0077-WAERK,    "ZGTSDT0077 WAERK
+      WAERKV LIKE VBAK-WAERK,         "VBAK WAERK
+      WERKS LIKE VBAP-WERKS,
+      PRSDT LIKE VBKD-PRSDT,          "주문오더 가격결정일
+      KRW LIKE VBAP-WAERK,
+      END OF GS_DATA,
+      GT_DATA LIKE TABLE OF GS_DATA.
+
+
+DATA: G_CON TYPE REF TO CL_GUI_DOCKING_CONTAINER,
+      G_ALV TYPE REF TO CL_GUI_ALV_GRID.
+
+DATA: OK_CODE TYPE SY-UCOMM.
+
+
+DATA: GV_KRW TYPE WAERK VALUE 'KRW'.
+DATA: GV_POINT(10) TYPE P DECIMALS 5.
+
+DATA: BEGIN OF GS_BILLING,
+      VBELV LIKE VBFA-VBELV,
+      VBELN LIKE VBFA-VBELN,
+      FKSTO LIKE VBRK-FKSTO,
+      SFAKN LIKE VBRK-SFAKN,
+      FKART LIKE VBRK-FKART,
+      KURRF LIKE VBRK-KURRF,
+      NETWR LIKE VBRK-NETWR,
+      WAERK LIKE VBRK-WAERK,
+      END OF GS_BILLING,
+      GT_BILLING LIKE TABLE OF GS_BILLING.
+**********************************************************************
+
+DEFINE _RANGE.
+  &1-SIGN   = &2.
+  &1-OPTION = &3.
+  &1-LOW    = &4.
+  &1-HIGH   = &5.
+
+  APPEND &1.
+  CLEAR &1.
+END-OF-DEFINITION.

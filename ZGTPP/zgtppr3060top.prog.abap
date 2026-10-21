@@ -1,0 +1,540 @@
+*&----------------------------------------------------------------*
+*& Include          ZGTPPR3060TOP
+*&----------------------------------------------------------------*
+*-----------------------------------------------------------------*
+* TABLES
+*-----------------------------------------------------------------*
+ TABLES: MARA, MKAL, T001W, MARD, MCHB, MSKA, MSLB,
+         MATDOC,  EKPO, ZGTEDT2130, VBAK, AUFK.
+*-----------------------------------------------------------------*
+* DATA: Variable
+*-----------------------------------------------------------------*
+ DATA : GV_ERROR.
+ DATA : GT_UCOMM    TYPE TABLE OF SY-UCOMM,
+        GV_OK_CODE  LIKE SY-UCOMM,
+        GV_OK_CODE2 LIKE SY-UCOMM.
+ DATA : GV_CNT  TYPE SY-INDEX.
+ DATA : GV_RESULT  TYPE ZO_RESULT,
+        GV_MESSAGE TYPE ZO_MESSAGE.
+ DATA : GV_ANSWER TYPE C.
+
+ RANGES : GR_WERKS FOR MAPL-WERKS.
+*-----------------------------------------------------------------*
+* DATA: Structure. (Field strings : Working area)
+*-----------------------------------------------------------------*
+ DATA : BEGIN OF GS_DATA,
+          MATNR         TYPE  MARA-MATNR,
+          MTART         TYPE  MARA-MTART,
+          MATKL         TYPE  MARA-MATKL,
+          MEINS         TYPE  MARA-MEINS,
+          WERKS         TYPE  MSKA-WERKS,
+          LGORT         TYPE  MSKA-LGORT,
+          CHARG         TYPE  MSKA-CHARG,
+          ZZLINE_NO     TYPE  MCHA-ZZLINE_NO,
+          ZZSERIAL_INFO TYPE  MCHA-ZZSERIAL_INFO,
+          SOBKZ         TYPE  MSKA-SOBKZ,
+          VBELN         TYPE  MSKA-VBELN,
+          POSNR         TYPE  MSKA-POSNR,
+          ZPJNO         TYPE  VBAK-ZPJNO, "프로젝트번호
+          PRJNM(30),  "프로젝트 내역
+          BSTNK         TYPE  VBAK-BSTNK, "제조지시번호
+          PRDNM(30),  "제조지시 내역
+          KALAB         TYPE  MSKA-KALAB,
+          KAINS         TYPE  MSKA-KAINS,
+          KASPE         TYPE  MSKA-KASPE,
+          LIFNR         TYPE  MSLB-LIFNR,
+        END OF GS_DATA.
+
+ DATA : BEGIN OF GS_DATA1,
+          MATNR TYPE  MARA-MATNR,
+          MTART TYPE  MARA-MTART,
+          MATKL TYPE  MARA-MATKL,
+          MEINS TYPE  MARA-MEINS,
+          WERKS TYPE  MSKA-WERKS,
+          LGORT TYPE  MSKA-LGORT,
+          CHARG TYPE  MSKA-CHARG,
+          SOBKZ TYPE  MSKA-SOBKZ,
+          VBELN TYPE  MSKA-VBELN,
+          POSNR TYPE  MSKA-POSNR,
+          KALAB TYPE  MSKA-KALAB,
+          KAINS TYPE  MSKA-KAINS,
+          KASPE TYPE  MSKA-KASPE,
+          ZPJNO TYPE  VBAK-ZPJNO, "프로젝트번호
+          BSTNK TYPE  VBAK-BSTNK, "제조지시번호
+        END OF GS_DATA1.
+
+ DATA : BEGIN OF GS_DATA2,
+          MATNR TYPE  MARA-MATNR,
+          MTART TYPE  MARA-MTART,
+          MATKL TYPE  MARA-MATKL,
+          MEINS TYPE  MARA-MEINS,
+          WERKS TYPE  MSLB-WERKS,
+          CHARG TYPE  MSLB-CHARG,
+          SOBKZ TYPE  MSLB-SOBKZ,
+          LIFNR TYPE  MSLB-LIFNR,
+          KALAB TYPE  MSLB-LBLAB,
+          KAINS TYPE  MSLB-LBINS,
+        END OF GS_DATA2.
+
+ DATA : BEGIN OF GS_DATA3,
+          MATNR TYPE  MARA-MATNR,
+          MTART TYPE  MARA-MTART,
+          MATKL TYPE  MARA-MATKL,
+          MEINS TYPE  MARA-MEINS,
+          WERKS TYPE  MCHB-WERKS,
+          LGORT TYPE  MCHB-LGORT,
+          CHARG TYPE  MCHB-CHARG,
+          KALAB TYPE  MCHB-CLABS,
+          KAINS TYPE  MCHB-CINSM,
+          KASPE TYPE  MCHB-CSPEM,
+        END OF GS_DATA3.
+
+ DATA : BEGIN OF GS_DATA4,
+          MATNR TYPE  MARA-MATNR,
+          MTART TYPE  MARA-MTART,
+          MATKL TYPE  MARA-MATKL,
+          MEINS TYPE  MARA-MEINS,
+          WERKS TYPE  MARD-WERKS,
+          LGORT TYPE  MARD-LGORT,
+          KALAB TYPE  MARD-LABST,
+          KAINS TYPE  MARD-INSME,
+          KASPE TYPE  MARD-SPEME,
+        END OF GS_DATA4.
+
+ "자재내역
+ DATA : BEGIN OF GS_MAKT,
+          MATNR TYPE MAKT-MATNR,
+          SPRAS TYPE MAKT-SPRAS,
+          MAKTX TYPE MAKT-MAKTX,
+        END OF GS_MAKT.
+
+ "플랜트
+ DATA : BEGIN OF GS_T001W,
+          WERKS TYPE T001W-WERKS,
+          NAME1 TYPE T001W-NAME1,
+        END OF GS_T001W.
+
+ "자재유형
+ DATA : BEGIN OF GS_T134T,
+          MTART TYPE T134T-MTART,
+          SPRAS TYPE T134T-SPRAS,
+          MTBEZ TYPE T134T-MTBEZ,
+        END OF GS_T134T.
+ "자재그룹내역
+ DATA : BEGIN OF GS_T023T,
+          MATKL TYPE T023T-MATKL,
+          SPRAS TYPE T023T-SPRAS,
+          WGBEZ TYPE T023T-WGBEZ,
+        END OF GS_T023T.
+
+ "저장위치
+ DATA : BEGIN OF GS_T001L,
+          WERKS TYPE T001L-WERKS,
+          LGORT TYPE T001L-LGORT,
+          LGOBE TYPE T001L-LGOBE,
+        END OF GS_T001L.
+ "공급업체 명
+ DATA : BEGIN OF GS_LFA1,
+          LIFNR TYPE LFA1-LIFNR,
+          NAME1 TYPE LFA1-NAME1,
+        END OF GS_LFA1.
+
+ "프로젝트 내역
+ DATA : BEGIN OF GS_ZSD0106T,
+          ZPJNO TYPE ZSD0106T-ZPJNO,
+          ZPTXT TYPE ZSD0106T-ZPTXT,
+        END OF GS_ZSD0106T.
+
+ "제조지시내역
+ DATA : BEGIN OF GS_ZGTEDT2121T,
+          ZSYSTEM_ID TYPE ZGTEDT2121-ZSYSTEM_ID,
+          ZWERKS     TYPE ZGTEDT2121-ZWERKS,
+          ZJOB_NO    TYPE ZGTEDT2121-ZJOB_NO,
+          ZJOB_NAME  TYPE ZGTEDT2121-ZJOB_NAME,
+        END OF GS_ZGTEDT2121T.
+
+ "배치 속성 추출
+ DATA : BEGIN OF GS_MCH1,
+          MATNR         TYPE MCH1-MATNR,
+*          werks         TYPE mch1-werks,
+          CHARG         TYPE MCH1-CHARG,
+          ZZLINE_NO     TYPE MCH1-ZZLINE_NO,
+          ZZSERIAL_INFO TYPE MCH1-ZZSERIAL_INFO,
+        END OF GS_MCH1.
+
+ " 특성 필드 추가
+ DATA : BEGIN OF GS_T1010,
+          MODULE_KIND TYPE ZGTPPT1010-MODULE_KIND,
+          CODEGRP     TYPE ZGTPPT1010-CODEGRP,
+          CODEID      TYPE ZGTPPT1010-CODEID,
+          FLD_01      TYPE ZGTPPT1010-FLD_01,
+          FLD_02      TYPE ZGTPPT1010-FLD_02,
+          FLD_03      TYPE ZGTPPT1010-FLD_03,
+          ATWTB       TYPE ZLES001-ATWTB,
+        END OF GS_T1010.
+
+ " VBPA
+ DATA : BEGIN OF GS_VBAP,
+          VBELN TYPE VBAP-VBELN,
+          POSNR TYPE VBAP-POSNR,
+          MATNR TYPE VBAP-MATNR,
+        END OF GS_VBAP.
+
+ DATA : BEGIN OF GS_MKAL,
+          MATNR LIKE MKAL-MATNR,
+          WERKS LIKE MKAL-WERKS,
+          VERID LIKE MKAL-VERID,
+          TEXT1 LIKE MKAL-TEXT1,
+          ADATU LIKE MKAL-ADATU,
+          BDATU LIKE MKAL-BDATU,
+          PLNNR LIKE MKAL-PLNNR,
+          ALNAL LIKE MKAL-ALNAL,
+          STLAL LIKE MKAL-STLAL,
+          MDV01 LIKE MKAL-MDV01,
+          ALORT LIKE MKAL-ALORT,
+          ELPRO LIKE MKAL-ELPRO,
+          MTART LIKE MARA-MTART,
+          DISPO LIKE MARC-DISPO,
+        END OF GS_MKAL.
+
+ DATA : BEGIN OF GS_ZLES001,
+          VBELN LIKE ZLES001-VBELN,
+          POSNR LIKE ZLES001-POSNR,
+          ATNAM LIKE ZLES001-ATNAM,
+          ATBEZ LIKE ZLES001-ATBEZ,
+          ATWRT LIKE ZLES001-ATWRT,
+          ATWTB LIKE ZLES001-ATWTB,
+          ATFLV LIKE ZLES001-ATFLV,
+          MSEHI LIKE ZLES001-MSEHI,
+          ATFOR LIKE ZLES001-ATFOR,
+          ANZST LIKE ZLES001-ANZST,
+          ANZDZ LIKE ZLES001-ANZDZ,
+        END OF GS_ZLES001.
+
+*   완제품 외주 품목의 공급업체코드 추출(20250731)
+ DATA : BEGIN OF GS_BSTNK_INFOR,
+          BSTNK      TYPE VBAK-BSTNK,
+          LIFNR_PROJ LIKE EKKO-LIFNR,
+          NAME1_PROJ LIKE LFA1-NAME1,
+          LINE_NO     LIKE  ZGTMMT6000-LINE_NO,         "SRM2512-00220
+          SERIAL_INFO  LIKE ZGTMMT6000-SERIAL_INFO, "SRM2512-00220
+        END OF GS_BSTNK_INFOR.
+ DATA : GT_BSTNK_INFOR LIKE TABLE OF GS_BSTNK_INFOR.
+
+* 전송
+ DATA : BEGIN OF GS_DISP,
+          ICON(4), "전송 상태
+          MESSAGE(100), "결과 메시지
+          WERKS         LIKE  MSKA-WERKS,   "플랜트
+          NAME1         LIKE  T001W-NAME1,  "플랜트명
+          MATNR         LIKE  MARA-MATNR,   "자재코드
+          MAKTX         LIKE  MAKT-MAKTX,   "자재코드명
+          MTART         LIKE  MARA-MTART, " 자재유형
+          MTBEZ         LIKE  T134T-MTBEZ, " 자재유형내역
+          MATKL         LIKE  MARA-MATKL,  "자재그룹
+          WGBEZ         LIKE T023T-WGBEZ,  "자재그룹내역
+          LGORT         LIKE  MSKA-LGORT, "저장위치
+          LGOBE         LIKE T001L-LGOBE, "저장위치 내역
+          CHARG         LIKE  MSKA-CHARG, " 배치번호
+          ZZLINE_NO     LIKE  MCHA-ZZLINE_NO,  " 라인번호
+          ZZSERIAL_INFO LIKE  MCHA-ZZSERIAL_INFO, " 시리얼 정보
+          SOBKZ         LIKE  MSKA-SOBKZ,  "특별 재고 지시자
+          LIFNR         LIKE  MSLB-LIFNR,  " 공급업체 번호
+          NAME2         LIKE LFA1-NAME1,   " 공급업체명
+          VBELN         LIKE  MSKA-VBELN,  "판매오더
+          POSNR         LIKE  MSKA-POSNR,  "판매오더 품목
+          ZPJNO         LIKE VBAK-ZPJNO, "프로젝트번호
+          PRJNM(30),                         "프로젝트 내역
+          BSTNK         LIKE VBAK-BSTNK, "제조지시번호
+          PRDNM(30),                          "제조지시 내역
+          KALAB         LIKE  MSKA-KALAB,  "재고수량(가용)
+          KAINS         LIKE  MSKA-KAINS,  "재고수량(품질)
+          KASPE         LIKE  MSKA-KASPE,  "재고수량(보류)
+          MEINS         LIKE  MARA-MEINS,   " 단위
+          CHARACT01     LIKE  ZLES001-ATWTB,
+          CHARACT02     LIKE  ZLES001-ATWTB,
+          CHARACT03     LIKE  ZLES001-ATWTB,
+          CHARACT04     LIKE  ZLES001-ATWTB,
+          CHARACT05     LIKE  ZLES001-ATWTB,
+          CHARACT06     LIKE  ZLES001-ATWTB,
+          CHARACT07     LIKE  ZLES001-ATWTB,
+          CHARACT08     LIKE  ZLES001-ATWTB,
+          CHARACT09     LIKE  ZLES001-ATWTB,
+          CHARACT10     LIKE  ZLES001-ATWTB,
+          CHARACT11     LIKE  ZLES001-ATWTB,
+          CHARACT12     LIKE  ZLES001-ATWTB,
+          CHARACT13     LIKE  ZLES001-ATWTB,
+          CHARACT14     LIKE  ZLES001-ATWTB,
+          CHARACT15     LIKE  ZLES001-ATWTB,
+          CHARACT16     LIKE  ZLES001-ATWTB,
+          CHARACT17     LIKE  ZLES001-ATWTB,
+          CHARACT18     LIKE  ZLES001-ATWTB,
+          CHARACT19     LIKE  ZLES001-ATWTB,
+          CHARACT20     LIKE  ZLES001-ATWTB,
+          CHARACT21     LIKE  ZLES001-ATWTB,
+          CHARACT22     LIKE  ZLES001-ATWTB,
+          CHARACT23     LIKE  ZLES001-ATWTB,
+          CHARACT24     LIKE  ZLES001-ATWTB,
+          CHARACT25     LIKE  ZLES001-ATWTB,
+          CHARACT26     LIKE  ZLES001-ATWTB,
+          CHARACT27     LIKE  ZLES001-ATWTB,
+          CHARACT28     LIKE  ZLES001-ATWTB,
+          CHARACT29     LIKE  ZLES001-ATWTB,
+          CHARACT30     LIKE  ZLES001-ATWTB,
+          LIFNR_PROJ    LIKE EKKO-LIFNR,
+          NAME1_PROJ    LIKE LFA1-NAME1,
+          CELLSCOL      TYPE  LVC_T_SCOL,
+          CELLTAB       TYPE  LVC_T_STYL,
+        END OF GS_DISP.
+
+ DATA : BEGIN OF GS_DISP_R2,
+          WERKS     LIKE  MSKA-WERKS,   "플랜트
+          NAME1     LIKE  T001W-NAME1,  "플랜트명
+          MATNR     LIKE  MARA-MATNR,   "자재코드
+          MAKTX     LIKE  MAKT-MAKTX,   "자재코드명
+          MTART     LIKE  MARA-MTART, " 자재유형
+          MTBEZ     LIKE  T134T-MTBEZ, " 자재유형내역
+          MATKL     LIKE  MARA-MATKL,  "자재그룹
+          WGBEZ     LIKE T023T-WGBEZ,  "자재그룹내역
+          LGORT     LIKE  MSKA-LGORT, "저장위치
+          LGOBE     LIKE T001L-LGOBE, "저장위치 내역
+          SOBKZ     LIKE  MSKA-SOBKZ,  "특별 재고 지시자
+          VBELN     LIKE  MSKA-VBELN,  "판매오더
+          POSNR     LIKE  MSKA-POSNR,  "판매오더 품목
+          ZPJNO     LIKE VBAK-ZPJNO, "프로젝트번호
+          PRJNM(30),                         "프로젝트 내역
+          BSTNK     LIKE VBAK-BSTNK, "제조지시번호
+          PRDNM(30),                          "제조지시 내역
+          KALAB     LIKE  MSKA-KALAB,  "재고수량(가용)
+          KAINS     LIKE  MSKA-KAINS,  "재고수량(품질)
+          KASPE     LIKE  MSKA-KASPE,  "재고수량(보류)
+          MEINS     LIKE  MARA-MEINS,   " 단위
+          CHARACT01 LIKE  ZLES001-ATWTB,
+          CHARACT02 LIKE  ZLES001-ATWTB,
+          CHARACT03 LIKE  ZLES001-ATWTB,
+          CHARACT04 LIKE  ZLES001-ATWTB,
+          CHARACT05 LIKE  ZLES001-ATWTB,
+          CHARACT06 LIKE  ZLES001-ATWTB,
+          CHARACT07 LIKE  ZLES001-ATWTB,
+          CHARACT08 LIKE  ZLES001-ATWTB,
+          CHARACT09 LIKE  ZLES001-ATWTB,
+          CHARACT10 LIKE  ZLES001-ATWTB,
+          CHARACT11 LIKE  ZLES001-ATWTB,
+          CHARACT12 LIKE  ZLES001-ATWTB,
+          CHARACT13 LIKE  ZLES001-ATWTB,
+          CHARACT14 LIKE  ZLES001-ATWTB,
+          CHARACT15 LIKE  ZLES001-ATWTB,
+          CHARACT16 LIKE  ZLES001-ATWTB,
+          CHARACT17 LIKE  ZLES001-ATWTB,
+          CHARACT18 LIKE  ZLES001-ATWTB,
+          CHARACT19 LIKE  ZLES001-ATWTB,
+          CHARACT20 LIKE  ZLES001-ATWTB,
+          CHARACT21 LIKE  ZLES001-ATWTB,
+          CHARACT22 LIKE  ZLES001-ATWTB,
+          CHARACT23 LIKE  ZLES001-ATWTB,
+          CHARACT24 LIKE  ZLES001-ATWTB,
+          CHARACT25 LIKE  ZLES001-ATWTB,
+          CHARACT26 LIKE  ZLES001-ATWTB,
+          CHARACT27 LIKE  ZLES001-ATWTB,
+          CHARACT28 LIKE  ZLES001-ATWTB,
+          CHARACT29 LIKE  ZLES001-ATWTB,
+          CHARACT30 LIKE  ZLES001-ATWTB,
+          CELLSCOL  TYPE  LVC_T_SCOL,
+          CELLTAB   TYPE  LVC_T_STYL,
+        END OF GS_DISP_R2.
+
+ DATA : BEGIN OF GS_DISP_R3,
+          WERKS     LIKE  MSKA-WERKS,   "플랜트
+          NAME1     LIKE  T001W-NAME1,  "플랜트명
+          MATNR     LIKE  MARA-MATNR,   "자재코드
+          MAKTX     LIKE  MAKT-MAKTX,   "자재코드명
+          MTART     LIKE  MARA-MTART, " 자재유형
+          MTBEZ     LIKE  T134T-MTBEZ, " 자재유형내역
+          MATKL     LIKE  MARA-MATKL,  "자재그룹
+          WGBEZ     LIKE T023T-WGBEZ,  "자재그룹내역
+          LGORT     LIKE  MSKA-LGORT, "저장위치
+          LGOBE     LIKE T001L-LGOBE, "저장위치 내역
+          SOBKZ     LIKE  MSKA-SOBKZ,  "특별 재고 지시자
+          ZPJNO     LIKE VBAK-ZPJNO, "프로젝트번호
+          PRJNM(30),                         "프로젝트 내역
+          BSTNK     LIKE VBAK-BSTNK, "제조지시번호
+          PRDNM(30),                          "제조지시 내역
+          KALAB     LIKE  MSKA-KALAB,  "재고수량(가용)
+          KAINS     LIKE  MSKA-KAINS,  "재고수량(품질)
+          KASPE     LIKE  MSKA-KASPE,  "재고수량(보류)
+          MEINS     LIKE  MARA-MEINS,   " 단위
+          CHARACT01 LIKE  ZLES001-ATWTB,
+          CHARACT02 LIKE  ZLES001-ATWTB,
+          CHARACT03 LIKE  ZLES001-ATWTB,
+          CHARACT04 LIKE  ZLES001-ATWTB,
+          CHARACT05 LIKE  ZLES001-ATWTB,
+          CHARACT06 LIKE  ZLES001-ATWTB,
+          CHARACT07 LIKE  ZLES001-ATWTB,
+          CHARACT08 LIKE  ZLES001-ATWTB,
+          CHARACT09 LIKE  ZLES001-ATWTB,
+          CHARACT10 LIKE  ZLES001-ATWTB,
+          CHARACT11 LIKE  ZLES001-ATWTB,
+          CHARACT12 LIKE  ZLES001-ATWTB,
+          CHARACT13 LIKE  ZLES001-ATWTB,
+          CHARACT14 LIKE  ZLES001-ATWTB,
+          CHARACT15 LIKE  ZLES001-ATWTB,
+          CHARACT16 LIKE  ZLES001-ATWTB,
+          CHARACT17 LIKE  ZLES001-ATWTB,
+          CHARACT18 LIKE  ZLES001-ATWTB,
+          CHARACT19 LIKE  ZLES001-ATWTB,
+          CHARACT20 LIKE  ZLES001-ATWTB,
+          CHARACT21 LIKE  ZLES001-ATWTB,
+          CHARACT22 LIKE  ZLES001-ATWTB,
+          CHARACT23 LIKE  ZLES001-ATWTB,
+          CHARACT24 LIKE  ZLES001-ATWTB,
+          CHARACT25 LIKE  ZLES001-ATWTB,
+          CHARACT26 LIKE  ZLES001-ATWTB,
+          CHARACT27 LIKE  ZLES001-ATWTB,
+          CHARACT28 LIKE  ZLES001-ATWTB,
+          CHARACT29 LIKE  ZLES001-ATWTB,
+          CHARACT30 LIKE  ZLES001-ATWTB,
+          CELLSCOL  TYPE  LVC_T_SCOL,
+          CELLTAB   TYPE  LVC_T_STYL,
+        END OF GS_DISP_R3.
+
+
+
+* 로그 조회(재처리)
+ DATA : BEGIN OF GS_DISP2,
+          ICON(4), "전송 상태
+          MESSAGE(100), "결과 메시지
+          ZSYSTEM_ID_DESC LIKE DD07V-DDTEXT,      "시스템 내역
+          EBELN           LIKE ZPPT0019-EBELN,  "구매문서 번호
+          EBELP           LIKE ZPPT0019-EBELP,  "구매문서 품목 번호
+          MBLNR           LIKE ZPPT0019-MBLNR,  "자재 문서 번호
+          MJAHR           LIKE ZPPT0019-MJAHR,  "자재 문서 연도
+          WAMNG           LIKE ZPPT0019-ENMNG,  "출고수량
+          ERFME           LIKE ZPPT0019-MEINS,  "기본 단위
+          CHARG           LIKE ZPPT0019-CHARG,  "배치 번호
+          TAGNR           LIKE ZPPT0019-TAGNR,  "꼬리표번호
+          LGORT	          LIKE ZPPT0019-LGORT,   "저장 위치
+          WERKS           LIKE EKPO-WERKS,       "플랜트
+          MATNR           LIKE EKPO-MATNR,       "자재코드
+          MAKTX           LIKE MAKT-MAKTX,       "자재코드내역
+          TXZ01           LIKE EKPO-TXZ01,       "내역
+          MENGE           LIKE EKPO-MENGE,        "구매문서오더수량
+          MEINS           LIKE EKPO-MEINS,        " 구매수량단위
+          RESWK           LIKE EKKO-RESWK,
+          ZEILE           LIKE MATDOC-ZEILE,
+          BUDAT           LIKE MATDOC-BUDAT,
+          BWART	          LIKE MATDOC-BWART,
+          ZIFKEY          LIKE ZGTPPT3090-ZIFKEY, " 전송key
+          "수신 시스템 (PCM: 지중 MES)
+          ZSYSTEM_ID      LIKE ZGTPPT3060-ZSYSTEM_ID,
+          ZSTAT           LIKE ZGTPPT3060-ZSTAT,     "전송 상태
+          ZMESSAGE        LIKE ZGTPPT3060-ZMESSAGE,  "전송 메시지
+          IFDAT           LIKE ZGTPPT3060-IFDAT,      "전송일자
+          IFTIM           LIKE ZGTPPT3060-IFTIM,     "전송시간
+          IFNAM           LIKE ZGTPPT3060-IFNAM,      "전송자
+        END OF GS_DISP2.
+
+ DATA : GS_ZGTPPT3090 LIKE ZGTPPT3090.
+ DATA : GS_SEND LIKE ZGTPPT3090.
+ DATA : GS_ZGTPPT1010 LIKE ZGTPPT1010.
+*-----------------------------------------------------------------*
+* DATA: Internal Table.
+*-----------------------------------------------------------------*
+
+ DATA : GT_MKAL      LIKE TABLE OF GS_MKAL.
+ DATA : GT_DISP      LIKE TABLE OF GS_DISP.   "전송 ALV 테이블
+ DATA : GT_DISP_R2   LIKE TABLE OF GS_DISP_R2.   "전송 ALV 테이블
+ DATA : GT_DISP_R3   LIKE TABLE OF GS_DISP_R3.   "전송 ALV 테이블
+ "로그 조회(재처리) ALV 테이블
+ DATA : GT_DISP2      LIKE TABLE OF GS_DISP2.
+ DATA : GT_ZGTPPT3090 LIKE TABLE OF GS_ZGTPPT3090.
+ DATA : GT_ROW_NO TYPE LVC_T_ROID WITH HEADER LINE.
+ ."ALV 출력용 테이블 (전송 이력 조회)
+ DATA : GT_SEND     LIKE TABLE OF ZGTPPT3090.
+ DATA : GT_OT_ITAB  TYPE TABLE OF ZGTPPSIF0015. " 자재문서 전송용 테이블
+ "코드 마스터 테이블
+ DATA : GT_ZGTPPT1010 TYPE TABLE OF ZGTPPT1010 WITH HEADER LINE.
+ DATA : GT_DATA  LIKE TABLE OF GS_DATA.
+ DATA : GT_DATA1 LIKE TABLE OF GS_DATA1.
+ DATA : GT_DATA2 LIKE TABLE OF GS_DATA2.
+ DATA : GT_DATA3 LIKE TABLE OF GS_DATA3.
+ DATA : GT_DATA4 LIKE TABLE OF GS_DATA4.
+ DATA : GT_MAKT LIKE TABLE OF GS_MAKT WITH HEADER LINE.
+ DATA : GT_T001W LIKE TABLE OF GS_T001W WITH HEADER LINE.
+ DATA : GT_T134T LIKE TABLE OF GS_T134T WITH HEADER LINE.
+ DATA : GT_T023T LIKE TABLE OF GS_T023T WITH HEADER LINE.
+ DATA : GT_T001L LIKE TABLE OF GS_T001L WITH HEADER LINE.
+ DATA : GT_LFA1 LIKE TABLE OF GS_LFA1 WITH HEADER LINE.
+ DATA : GT_ZSD0106T LIKE TABLE OF GS_ZSD0106T WITH HEADER LINE.
+ DATA : GT_ZGTEDT2121 LIKE TABLE OF GS_ZGTEDT2121T WITH HEADER LINE.
+ DATA : GT_MCH1 LIKE TABLE OF GS_MCH1 WITH HEADER LINE.
+ DATA : GT_T1010 LIKE TABLE OF GS_T1010 WITH HEADER LINE.
+*/ 제품특성
+ DATA: GT_CHAR LIKE TABLE OF API_VALI WITH HEADER LINE.
+ DATA: GT_CHAR2 LIKE TABLE OF GS_ZLES001 WITH HEADER LINE.
+ DATA: GT_VBAP LIKE TABLE OF GS_VBAP WITH HEADER LINE.
+*-----------------------------------------------------------------*
+* ALV
+*-----------------------------------------------------------------*
+*& CLASS Reference 정의
+ CLASS: LCL_EVENT_HANDLER      DEFINITION DEFERRED,
+        LCL_ALV_GRID           DEFINITION DEFERRED.
+
+*& ALV Global Field
+ DATA : ALV_VARIANT LIKE DISVARIANT,
+        ALV_REPID   LIKE SY-REPID.
+*- ALV COMMON
+ TYPE-POOLS : KKBLO.
+ DATA : GS_STBL      TYPE LVC_S_STBL,
+        GT_SFIELDCAT TYPE KKBLO_T_FIELDCAT,
+        GS_EXCLUDING TYPE LINE OF UI_FUNCTIONS,
+        GT_EXCLUDING TYPE UI_FUNCTIONS.
+
+*- ALV1
+ DATA : GRID                TYPE REF TO CL_GUI_ALV_GRID,
+        G_CUSTOM_CONTAINER  TYPE REF TO CL_GUI_CUSTOM_CONTAINER,
+        G_DOCKING_CONTAINER TYPE REF TO CL_GUI_DOCKING_CONTAINER,
+        G_SPLITTER          TYPE REF TO CL_GUI_SPLITTER_CONTAINER,
+        G_CONTAINER         TYPE REF TO CL_GUI_CONTAINER,
+        G_CON               TYPE SCRFNAME VALUE 'ALV1',
+
+        LCL_PARENT_HTML     TYPE REF TO CL_GUI_CONTAINER,
+        LCL_PARENT_GRID     TYPE REF TO CL_GUI_CONTAINER,
+        LCL_DYNDOC_ID       TYPE REF TO CL_DD_DOCUMENT.
+
+ DATA : GS_LAYOUT   TYPE LVC_S_LAYO,
+        GT_FIELDCAT TYPE LVC_T_FCAT,
+        GS_FIELDCAT TYPE LVC_S_FCAT,
+        GT_SORT     TYPE LVC_T_SORT,
+        GS_SORT     TYPE LVC_S_SORT,
+        GT_EXCLUDE  TYPE UI_FUNCTIONS,
+        GT_STYL     TYPE LVC_T_STYL,
+        GS_STYL     TYPE LVC_S_STYL.
+*& Drop-Down List Box List.
+ DATA : GT_DROPDOWN TYPE LVC_T_DROP,
+        GS_DROPDOWN TYPE LVC_S_DROP.
+
+ DATA : GO_DOCKING_CONTAINER TYPE REF TO CL_GUI_DOCKING_CONTAINER.
+ DATA : GO_SPLITTER TYPE REF TO CL_GUI_SPLITTER_CONTAINER.
+ DATA : GO_EVENT_HANDLER TYPE REF TO LCL_EVENT_HANDLER.
+*-----------
+*ALV GRID 100
+ DATA : GO_CONTAIN_0100 TYPE REF TO CL_GUI_CONTAINER.
+ DATA : GO_GRID_0100 TYPE REF TO CL_GUI_ALV_GRID.
+ DATA : GS_VARIANT TYPE DISVARIANT.
+ DATA : GS_LAYOUT_0100 TYPE LVC_S_LAYO.
+ DATA : GT_SORT_0100 TYPE LVC_T_SORT.
+ DATA : GT_EXCLUDE_0100 TYPE UI_FUNCTIONS.
+ DATA : GT_FIELDCAT_0100 TYPE LVC_T_FCAT.
+ DATA : GO_OBJECT TYPE REF TO CL_ALV_EVENT_TOOLBAR_SET.
+
+*-----------
+* ALV GRID 0101
+ DATA : GO_CONTAIN_0101 TYPE REF TO CL_GUI_CONTAINER.
+ DATA : GO_GRID_0101 TYPE REF TO CL_GUI_ALV_GRID.
+ DATA : GS_LAYOUT_0101 TYPE LVC_S_LAYO.
+ DATA : GT_SORT_0101 TYPE LVC_T_SORT.
+ DATA : GT_EXCLUDE_0101 TYPE UI_FUNCTIONS.
+ DATA : GT_FIELDCAT_0101 TYPE LVC_T_FCAT.
+
+ DATA : GV_STABLE TYPE LVC_S_STBL VALUE 'XX'.
+ DATA : GV_TITLE TYPE SY-TITLE.

@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_DTEL" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <DD04V>
+    <ROLLNAME>ZGTERQMON</ROLLNAME>
+    <DDLANGUAGE>3</DDLANGUAGE>
+    <DOMNAME>MCPERIOD</DOMNAME>
+    <HEADLEN>03</HEADLEN>
+    <SCRLEN1>03</SCRLEN1>
+    <SCRLEN2>03</SCRLEN2>
+    <SCRLEN3>03</SCRLEN3>
+    <DDTEXT>요청월</DDTEXT>
+    <REPTEXT>요청월</REPTEXT>
+    <SCRTEXT_S>요청월</SCRTEXT_S>
+    <SCRTEXT_M>요청월</SCRTEXT_M>
+    <SCRTEXT_L>요청월</SCRTEXT_L>
+    <DTELMASTER>3</DTELMASTER>
+    <REFKIND>D</REFKIND>
+   </DD04V>
+  </asx:values>
+ </asx:abap>
+</abapGit>

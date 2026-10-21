@@ -1,0 +1,132 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_FUGR" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <AREAT>[GT] User-Exit / Modi. / Enhance 구성 함수</AREAT>
+   <INCLUDES>
+    <SOBJ_NAME>LZGTSD04F01</SOBJ_NAME>
+    <SOBJ_NAME>LZGTSD04TOP</SOBJ_NAME>
+    <SOBJ_NAME>SAPLZGTSD04</SOBJ_NAME>
+   </INCLUDES>
+   <FUNCTIONS>
+    <item>
+     <FUNCNAME>ZGTSD_CHK_POD_STAT</FUNCNAME>
+     <SHORT_TEXT>[GT] POD 처리여부 확인</SHORT_TEXT>
+     <IMPORT>
+      <RSIMP>
+       <PARAMETER>IV_VKORG</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>VKORG</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>IV_VTWEG</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>VTWEG</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>IV_SPART</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>SPART</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>IV_AUART</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>AUART</TYP>
+      </RSIMP>
+     </IMPORT>
+     <EXPORT>
+      <RSEXP>
+       <PARAMETER>EV_PODKZ</PARAMETER>
+       <TYP>PODKZ</TYP>
+      </RSEXP>
+      <RSEXP>
+       <PARAMETER>ES_RETURN</PARAMETER>
+       <TYP>BAPIRET2</TYP>
+      </RSEXP>
+     </EXPORT>
+     <TABLES>
+      <RSTBL>
+       <PARAMETER>IT_VBEP</PARAMETER>
+       <DBSTRUCT>VBEPVB</DBSTRUCT>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>CT_XVBKD</PARAMETER>
+       <DBSTRUCT>VBKDVB</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+     </TABLES>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>IV_VKORG</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>영업 조직</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>IV_VTWEG</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>유통 경로</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>IV_SPART</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>제품군</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>IV_AUART</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>판매 문서 유형</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>EV_PODKZ</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>POD 처리관련</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>ES_RETURN</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>리턴 매개변수</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>IT_VBEP</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>판매오더 스케쥴라인 정보</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CT_XVBKD</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>판매오더 POD 처리관련 정보 변경</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+    <item>
+     <FUNCNAME>ZGTSD_UPDATE_ZSD0018T_GO</FUNCNAME>
+     <UPDATE_TASK>1</UPDATE_TASK>
+     <SHORT_TEXT>[GT] 커미션 정산오더 금액변경</SHORT_TEXT>
+     <IMPORT>
+      <RSIMP>
+       <PARAMETER>IS_VBAK</PARAMETER>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>VBAK</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>IS_ZSD0018T</PARAMETER>
+       <TYP>ZSD0018T</TYP>
+      </RSIMP>
+     </IMPORT>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>IS_VBAK</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>영업문서: 헤더데이타</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>IS_ZSD0018T</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>[SD] 커미션 정산 관리 테이블</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+   </FUNCTIONS>
+  </asx:values>
+ </asx:abap>
+</abapGit>

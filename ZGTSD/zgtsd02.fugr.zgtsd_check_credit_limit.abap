@@ -1,0 +1,150 @@
+FUNCTION ZGTSD_CHECK_CREDIT_LIMIT .
+*"----------------------------------------------------------------------
+*"*"Local Interface:
+*"  IMPORTING
+*"     VALUE(I_KUNNR) TYPE  KUNNR
+*"     VALUE(I_KKBER) TYPE  KKBER OPTIONAL
+*"     VALUE(I_AMOUNT) TYPE  UKM_COMM_ACTUAL_ITEM
+*"     VALUE(I_WAERK) TYPE  WAERK
+*"     REFERENCE(I_CRDGRP) TYPE  CRMGR_CM
+*"  EXPORTING
+*"     REFERENCE(E_TYPE) TYPE  BAPI_MTYPE
+*"     REFERENCE(E_MSG) TYPE  BAPI_MSG
+*"----------------------------------------------------------------------
+
+**********************************************************************
+*여신체크
+**********************************************************************
+  CONSTANTS : LC_SUCCESS TYPE BAPI_MTYPE VALUE 'S',
+              LC_ERROR   TYPE BAPI_MTYPE VALUE 'E'.
+
+  DATA : LT_RET        TYPE UKM_T_QUERY_RESULTS,
+         LT_ITEMS      TYPE UKM_T_CHECK_ITEM,
+         LS_ITEMS      TYPE UKM_S_CHECK_ITEM,
+         LT_PERMISSION TYPE UKM_TS_CHECK_PERMISSION,
+         LV_RULE       TYPE UKM_CHECK_RULE,
+         LV_LIMIT_RULE TYPE UKM_LIMIT_RULE,
+         LV_NO_CREDIT  TYPE FLAG.
+
+*--- 01. 여신 계정 - BP
+  IF I_KUNNR IS INITIAL.
+    E_TYPE = LC_ERROR.
+    MESSAGE S000(ZGTSD01) WITH TEXT-E07 INTO E_MSG.
+    EXIT.
+  ELSE.
+
+*--- 01-1. Check Customer Existence
+    SELECT SINGLE @ABAP_TRUE INTO @DATA(LV_FLG)
+      FROM I_BUSINESSPARTNERCUSTOMER
+     WHERE CUSTOMER EQ @I_KUNNR.
+
+    IF SY-SUBRC NE 0.
+      E_TYPE = LC_ERROR.
+      MESSAGE S000(ZGTSD01) WITH TEXT-E10 INTO E_MSG.
+      EXIT.
+    ENDIF.
+
+*--- 01-2. Get Credit Partner, Check Rule, Risk Class
+    SELECT SINGLE BUSINESSPARTNER, CHECK_RULE, RISK_CLASS
+      FROM I_BUSINESSPARTNERCUSTOMER AS A INNER JOIN UKMBP_CMS AS B
+        ON BUSINESSPARTNER EQ B~PARTNER
+     WHERE CUSTOMER     EQ @I_KUNNR
+      INTO @DATA(LS_UKM_BP).
+
+    IF SY-SUBRC NE 0.
+      E_TYPE = LC_ERROR.
+      MESSAGE S000(ZGTSD01) WITH TEXT-E11 INTO E_MSG.
+      EXIT.
+    ENDIF.
+  ENDIF.
+
+
+*--- 02. Get Credit Segment
+  IF I_KKBER IS INITIAL.
+    E_TYPE = LC_ERROR.
+    MESSAGE S000(ZGTSD01) WITH TEXT-E13 INTO E_MSG.
+    EXIT.
+  ELSE.
+    SELECT SINGLE CREDIT_SGMNT
+      FROM UKM_KKBER2SGM
+     WHERE KKBER EQ @I_KKBER
+     INTO @DATA(LS_SGMNT).
+
+    IF SY-SUBRC NE 0.
+      E_TYPE = LC_ERROR.
+      MESSAGE S000(ZGTSD01) WITH TEXT-E12 INTO E_MSG.
+      EXIT.
+    ENDIF.
+  ENDIF.
+
+
+*--- 03. Check Automatic Credit Control Reaction
+  IF I_CRDGRP IS INITIAL.
+    E_TYPE = LC_ERROR.
+    MESSAGE S000(ZGTSD01) WITH TEXT-E14 INTO E_MSG.
+    EXIT.
+  ELSE.
+    CLEAR LV_FLG.
+    SELECT SINGLE @ABAP_TRUE INTO @LV_FLG
+      FROM T691F
+     WHERE CRMGR EQ @I_CRDGRP
+       AND CTLPC EQ @LS_UKM_BP-RISK_CLASS
+       AND KKBER EQ @I_KKBER
+       AND PMREA NE @SPACE.
+
+    IF LV_FLG IS INITIAL.
+      E_TYPE = LC_ERROR.
+      MESSAGE S000(ZGTSD01) WITH TEXT-E15 INTO E_MSG.
+      EXIT.
+    ENDIF.
+  ENDIF.
+
+
+*--- 04. Base Data for Credit Limit Check
+  CLEAR LS_ITEMS.
+  LS_ITEMS-MSG_PARTNER  = LS_ITEMS-PARTNER = LS_UKM_BP-BUSINESSPARTNER.
+  LV_RULE               = LS_UKM_BP-CHECK_RULE.
+  LS_ITEMS-MSG_SGMNT    = LS_ITEMS-CREDIT_SGMNT = LS_SGMNT.
+  LS_ITEMS-AMOUNT       = I_AMOUNT.
+  LS_ITEMS-CURRENCY     = I_WAERK.
+  APPEND LS_ITEMS TO LT_ITEMS.
+
+
+*--- 05. Execute Credit Limit Check
+  CALL FUNCTION 'UKM_LOCAL_CRDT_CHCK_WRAPPER'
+    EXPORTING
+      IT_ITEMS              = LT_ITEMS
+      I_CHECK_RULE          = LV_RULE
+      I_DEFAULT_LIMIT_RULE  = LV_LIMIT_RULE
+      IT_CHECK_PERMISSION   = LT_PERMISSION
+      IX_NO_CREDIT_EXPOSURE = LV_NO_CREDIT
+    IMPORTING
+      ET_QUERY_RESULTS      = LT_RET.
+
+
+*--- 06. Return Credit Limit Check Result
+  LOOP AT LT_RET INTO DATA(LS_RET).
+    READ TABLE LS_RET-DENIAL_REASONS INTO DATA(LS_DENIAL_REASON) WITH KEY MSGTY = 'E'
+                                                                          MSGNO = '001'.
+
+    IF SY-SUBRC =  0.
+      MESSAGE ID   LS_DENIAL_REASON-MSGID
+            TYPE   LS_DENIAL_REASON-MSGTY
+            NUMBER LS_DENIAL_REASON-MSGNO
+            WITH   LS_DENIAL_REASON-MSGV1
+                   LS_DENIAL_REASON-MSGV2
+                   LS_DENIAL_REASON-MSGV3
+                   LS_DENIAL_REASON-MSGV4
+            INTO   E_MSG.
+      E_TYPE = LC_ERROR.
+      EXIT.
+    ELSE.
+      E_TYPE = LC_SUCCESS.
+      MESSAGE S000(ZGTSD01) WITH TEXT-S03 INTO E_MSG.
+      EXIT.
+    ENDIF.
+  ENDLOOP.
+
+  FREE : LT_RET, LT_ITEMS.
+
+ENDFUNCTION.

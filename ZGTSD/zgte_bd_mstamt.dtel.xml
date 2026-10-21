@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_DTEL" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <DD04V>
+    <ROLLNAME>ZGTE_BD_MSTAMT</ROLLNAME>
+    <DDLANGUAGE>3</DDLANGUAGE>
+    <DOMNAME>CPE_AMOUNT</DOMNAME>
+    <HEADLEN>21</HEADLEN>
+    <SCRLEN1>10</SCRLEN1>
+    <SCRLEN2>20</SCRLEN2>
+    <SCRLEN3>40</SCRLEN3>
+    <DDTEXT>SalesOutlook 등록 기준가격</DDTEXT>
+    <REPTEXT>SalesOutlook 등록 기준가격</REPTEXT>
+    <SCRTEXT_S>기준가격</SCRTEXT_S>
+    <SCRTEXT_M>SalesOutlook 등록 기준가격</SCRTEXT_M>
+    <SCRTEXT_L>SalesOutlook 등록 기준가격</SCRTEXT_L>
+    <DTELMASTER>3</DTELMASTER>
+    <REFKIND>D</REFKIND>
+   </DD04V>
+  </asx:values>
+ </asx:abap>
+</abapGit>
