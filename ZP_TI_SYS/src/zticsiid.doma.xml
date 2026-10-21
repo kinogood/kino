@@ -1,0 +1,186 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_DOMA" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <DD01V>
+    <DOMNAME>ZTICSIID</DOMNAME>
+    <DDLANGUAGE>3</DDLANGUAGE>
+    <DATATYPE>CHAR</DATATYPE>
+    <LENG>000006</LENG>
+    <OUTPUTLEN>000006</OUTPUTLEN>
+    <VALEXI>X</VALEXI>
+    <DDTEXT>란 내국세부호</DDTEXT>
+   </DD01V>
+   <DD07V_TAB>
+    <DD07V>
+     <VALPOS>0001</VALPOS>
+     <DDLANGUAGE>3</DDLANGUAGE>
+     <DOMVALUE_L>411000</DOMVALUE_L>
+     <DDTEXT>보석,진주등과 이를 사용한 제품(기준가격 100만원)</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0002</VALPOS>
+     <DDLANGUAGE>3</DDLANGUAGE>
+     <DOMVALUE_L>412000</DOMVALUE_L>
+     <DDTEXT>귀금속제품(기준가격 100만원)</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0003</VALPOS>
+     <DDLANGUAGE>3</DDLANGUAGE>
+     <DOMVALUE_L>421001</DOMVALUE_L>
+     <DDTEXT>고급사진기(기준가격 100만원)</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0004</VALPOS>
+     <DDLANGUAGE>3</DDLANGUAGE>
+     <DOMVALUE_L>421002</DOMVALUE_L>
+     <DDTEXT>고급사진기 관련제품(기준가격 50만원)</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0005</VALPOS>
+     <DDLANGUAGE>3</DDLANGUAGE>
+     <DOMVALUE_L>422000</DOMVALUE_L>
+     <DDTEXT>고급시계(기준가격 100만원)</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0006</VALPOS>
+     <DDLANGUAGE>3</DDLANGUAGE>
+     <DOMVALUE_L>423000</DOMVALUE_L>
+     <DDTEXT>고급모피와 동제품(기준가격 100만원)</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0007</VALPOS>
+     <DDLANGUAGE>3</DDLANGUAGE>
+     <DOMVALUE_L>424000</DOMVALUE_L>
+     <DDTEXT>고급융단(기준가격 100만원)</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0008</VALPOS>
+     <DDLANGUAGE>3</DDLANGUAGE>
+     <DOMVALUE_L>425001</DOMVALUE_L>
+     <DDTEXT>고급가구(기준가격 조당 500만원)</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0009</VALPOS>
+     <DDLANGUAGE>3</DDLANGUAGE>
+     <DOMVALUE_L>425002</DOMVALUE_L>
+     <DDTEXT>고급가구(기준가격 개당 300만원)</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0010</VALPOS>
+     <DDLANGUAGE>3</DDLANGUAGE>
+     <DOMVALUE_L>511100</DOMVALUE_L>
+     <DDTEXT>2000cc 초과의 승용자동차,캠핑용자동차</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0011</VALPOS>
+     <DDLANGUAGE>3</DDLANGUAGE>
+     <DOMVALUE_L>511200</DOMVALUE_L>
+     <DDTEXT>2000cc 초과의 지프형 승용차</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0012</VALPOS>
+     <DDLANGUAGE>3</DDLANGUAGE>
+     <DOMVALUE_L>512000</DOMVALUE_L>
+     <DDTEXT>1500cc 초과 2000cc이하의 승용자동차</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0013</VALPOS>
+     <DDLANGUAGE>3</DDLANGUAGE>
+     <DOMVALUE_L>513000</DOMVALUE_L>
+     <DDTEXT>1500cc 이하 승용차, 이륜자동차</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0014</VALPOS>
+     <DDLANGUAGE>3</DDLANGUAGE>
+     <DOMVALUE_L>521000</DOMVALUE_L>
+     <DDTEXT>휘발유와 이와 유사한 대체유류</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0015</VALPOS>
+     <DDLANGUAGE>3</DDLANGUAGE>
+     <DOMVALUE_L>522000</DOMVALUE_L>
+     <DDTEXT>경유</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0016</VALPOS>
+     <DDLANGUAGE>3</DDLANGUAGE>
+     <DOMVALUE_L>523000</DOMVALUE_L>
+     <DDTEXT>등유</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0017</VALPOS>
+     <DDLANGUAGE>3</DDLANGUAGE>
+     <DOMVALUE_L>524000</DOMVALUE_L>
+     <DDTEXT>석유가스(액화의 것 포함)</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0018</VALPOS>
+     <DDLANGUAGE>3</DDLANGUAGE>
+     <DOMVALUE_L>525000</DOMVALUE_L>
+     <DDTEXT>천연가스(액화의 것 포함)</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0019</VALPOS>
+     <DDLANGUAGE>3</DDLANGUAGE>
+     <DOMVALUE_L>601000</DOMVALUE_L>
+     <DDTEXT>투전기, 오락용사행기구, 기타오락용품등</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0020</VALPOS>
+     <DDLANGUAGE>3</DDLANGUAGE>
+     <DOMVALUE_L>602000</DOMVALUE_L>
+     <DDTEXT>골프용품과 수렵용 총포류</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0021</VALPOS>
+     <DDLANGUAGE>3</DDLANGUAGE>
+     <DOMVALUE_L>603000</DOMVALUE_L>
+     <DDTEXT>모터보트,요트와 그 관련제품</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0022</VALPOS>
+     <DDLANGUAGE>3</DDLANGUAGE>
+     <DOMVALUE_L>604000</DOMVALUE_L>
+     <DDTEXT>수상스키용품, 설상 및 수상스쿠터, 윈드서핑용구, 행글라이더</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0023</VALPOS>
+     <DDLANGUAGE>3</DDLANGUAGE>
+     <DOMVALUE_L>605000</DOMVALUE_L>
+     <DDTEXT>공기조절기와 그 관련제품</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0024</VALPOS>
+     <DDLANGUAGE>3</DDLANGUAGE>
+     <DOMVALUE_L>606000</DOMVALUE_L>
+     <DDTEXT>영사기, 촬영기와 그 관련제품</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0025</VALPOS>
+     <DDLANGUAGE>3</DDLANGUAGE>
+     <DOMVALUE_L>701000</DOMVALUE_L>
+     <DDTEXT>텔레비전 영상투사기와 동 스크린</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0026</VALPOS>
+     <DDLANGUAGE>3</DDLANGUAGE>
+     <DOMVALUE_L>702000</DOMVALUE_L>
+     <DDTEXT>플라즈마 영상표시방식의 텔레비전 수상기</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0027</VALPOS>
+     <DDLANGUAGE>3</DDLANGUAGE>
+     <DOMVALUE_L>801000</DOMVALUE_L>
+     <DDTEXT>녹용 및 로얄제리</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0028</VALPOS>
+     <DDLANGUAGE>3</DDLANGUAGE>
+     <DOMVALUE_L>802000</DOMVALUE_L>
+     <DDTEXT>방향성 화장품</DDTEXT>
+    </DD07V>
+   </DD07V_TAB>
+  </asx:values>
+ </asx:abap>
+</abapGit>

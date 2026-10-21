@@ -1,0 +1,171 @@
+*&---------------------------------------------------------------------*
+*& Include ZGTMMR4914TOP
+*&---------------------------------------------------------------------*
+
+TABLES : LIPS.
+
+
+RANGES : GR_GR1   FOR SCREEN-GROUP1,
+         GR_SNM   FOR SCREEN-NAME,
+         GR_VBELN FOR LIKP-VBELN.
+
+
+DATA : BEGIN OF GT_IFNO OCCURS 0,
+         KEY  LIKE ZGTPPT1010-FLD_01,
+         TEXT LIKE ZGTPPT1010-FLD_02,
+       END   OF GT_IFNO.
+
+DATA : BEGIN OF GS_MST,
+         TYPE LIKE ZGTPPT1010-FLD_03,
+         PROG LIKE ZGTPPT1010-FLD_04,
+         VIEW LIKE ZGTPPT1010-FLD_05,
+       END   OF GS_MST.
+
+DATA : BEGIN OF GT_CDHDR OCCURS 0,
+         OBJECTID LIKE CDHDR-OBJECTID,
+         CHANGENR LIKE CDHDR-CHANGENR,
+       END   OF GT_CDHDR.
+
+DATA : BEGIN OF GT_SHDR OCCURS 0.
+DATA :  CHANGENR LIKE ZGTMMT9050-CHANGENR.
+        INCLUDE STRUCTURE ZGTMMSIF0007.
+DATA : END   OF GT_SHDR.
+DATA : GT_SITM LIKE ZGTMMSIF0008 OCCURS 0 WITH HEADER LINE.
+*DATA: GT_SITM LIKE SORTED TABLE OF ZGTMMSIF0008
+*               WITH NON-UNIQUE KEY VBELN POSNR.
+
+DATA : BEGIN OF GT_HOLD OCCURS 0,
+         ZIFKEY TYPE ZGTMM_CV_ID_IF_LOG_L-ZIFKEY,
+         VBELN  TYPE ZGTMM_CV_ID_IF_LOG_L-VBELN,
+         LIFNR  TYPE ZGTMM_CV_ID_IF_LOG_L-LIFNR,
+         ERDAT  TYPE ZGTMM_CV_ID_IF_LOG_L-ERDAT,
+         WERKS  TYPE ZGTMM_CV_ID_IF_LOG_L-WERKS,
+         LFDAT  TYPE ZGTMM_CV_ID_IF_LOG_L-LFDAT,
+         ZDFLG  TYPE ZGTMM_CV_ID_IF_LOG_L-ZDFLG,
+       END   OF GT_HOLD.
+
+DATA : BEGIN OF GT_IOLD OCCURS 0,
+         ZIFKEY LIKE ZGTMMT9051-ZIFKEY,
+         VBELN  LIKE ZGTMMT9051-VBELN,
+         POSNR  LIKE ZGTMMT9051-POSNR,
+         VGBEL  LIKE ZGTMMT9051-VGBEL,
+         VGPOS  LIKE ZGTMMT9051-VGPOS,
+*        LICHN  LIKE ZGTMMT9051-LICHN,
+         MATNR  LIKE ZGTMMT9051-MATNR,
+*        MAKTX  LIKE ZGTMMT9051-MAKTX,
+         WERKS  LIKE ZGTMMT9051-WERKS,
+         LGORT  LIKE ZGTMMT9051-LGORT,
+         LFIMG  LIKE ZGTMMT9051-LFIMG,
+         MEINS  LIKE ZGTMMT9051-MEINS,
+*        NETWR  LIKE ZGTMMT9051-NETWR,
+*        HSDAT  LIKE ZGTMMT9051-HSDAT,
+*        VFDAT  LIKE ZGTMMT9051-VFDAT,
+         PSTYP  LIKE ZGTMMT9051-PSTYP,
+         ZDFLG  LIKE ZGTMMT9051-ZDFLG,
+       END   OF GT_IOLD.
+
+
+DATA : GT_F007 LIKE ZGTMMSIF0007 OCCURS 0 WITH HEADER LINE,
+       GT_F008 LIKE ZGTMMSIF0008 OCCURS 0 WITH HEADER LINE.
+
+DATA : GT_HLOG LIKE ZGTMMT9050 OCCURS 0 WITH HEADER LINE,
+       GT_ILOG LIKE ZGTMMT9051 OCCURS 0 WITH HEADER LINE.
+
+DATA : GS_9000 LIKE ZGTMMT9000,
+       GT_9050 LIKE ZGTMMT9050 OCCURS 0 WITH HEADER LINE,
+       GT_9051 LIKE ZGTMMT9051 OCCURS 0 WITH HEADER LINE.
+
+
+DATA : GV_ERR,
+       GV_CHK,
+       GV_ANS,
+       GV_MSG(100),
+       GV_CNT TYPE I.
+
+DATA : GV_HDEL,
+       GV_IDEL.
+
+DATA : GV_HNAME TYPE TABNAME,
+       GV_INAME TYPE TABNAME.
+
+DATA : GV_OKCODE LIKE SY-UCOMM.
+
+DATA : GV_SEND(10),
+       GV_REF.
+
+
+FIELD-SYMBOLS : <GV_VBELN>,
+                <GS_LIST>,
+                <GT_HLIST> TYPE STANDARD TABLE,
+                <GT_ILIST> TYPE STANDARD TABLE.
+
+
+CONSTANTS : GC_A(1)             VALUE 'A',
+            GC_C(1)             VALUE 'C',
+            GC_D(1)             VALUE 'D',
+            GC_E(1)             VALUE 'E',
+            GC_H(1)             VALUE 'H',
+            GC_I(1)             VALUE 'I',
+            GC_N(1)             VALUE 'N',
+            GC_R(1)             VALUE 'R',
+            GC_S(1)             VALUE 'S',
+            GC_X(1)             VALUE 'X',
+            GC_1(1)             VALUE '1',
+            GC_3(1)             VALUE '3',
+            GC_BT(2)            VALUE 'BT',
+            GC_EL(2)            VALUE 'EL',
+            GC_EQ(2)            VALUE 'EQ',
+            GC_MM(2)            VALUE 'MM',
+            GC_PP(2)            VALUE 'PP',
+            GC_PC(2)            VALUE 'PC',
+            GC_PO(2)            VALUE 'PO',
+            GC_00(2)            VALUE '00',
+            GC_02(2)            VALUE '02',
+            GC_0%(2)            VALUE '0%',
+            GC_9%(2)            VALUE '9%',
+            GC_DIS(3)           VALUE 'DIS',
+            GC_SND(3)           VALUE 'SND',
+            GC_NUMC(4)          VALUE 'NUMC',
+            GC_0010(4)          VALUE '0010',
+            GC_MM00005(7)       VALUE 'MM00005',
+            GC_P_BUKRS(7)       VALUE 'P_BUKRS',
+            GC_P_IFSYT(7)       VALUE 'P_IFSYT',
+            GC_LIEFERUNG(9)     VALUE 'LIEFERUNG',
+            GC_ZGTMMT9051(10)   VALUE 'ZGTMMT9051',
+            GC_S_ERDAT-LOW(11)  VALUE 'S_ERDAT-LOW',
+            GC_S_IFDAT-LOW(11)  VALUE 'S_IFDAT-LOW',
+            GC_S_WERKS-LOW(11)  VALUE 'S_WERKS-LOW',
+            GC_ZGTMMSIF0007(12) VALUE 'ZGTMMSIF0007',
+            GC_ZGTMMSIF0008(12) VALUE 'ZGTMMSIF0008'.
+
+
+*----------------------------------------------------------------------*
+* SELECTION-SCREEN
+*----------------------------------------------------------------------*
+SELECTION-SCREEN BEGIN OF BLOCK BK1 WITH FRAME TITLE TEXT-S01.
+  SELECTION-SCREEN BEGIN OF LINE.
+    PARAMETERS : P_ILOG RADIOBUTTON GROUP GR1
+                             USER-COMMAND EXE DEFAULT 'X'.
+    SELECTION-SCREEN COMMENT (15) TEXT-R01 FOR FIELD P_ILOG.
+
+    SELECTION-SCREEN POSITION 32.
+    PARAMETERS : P_SEND RADIOBUTTON GROUP GR1.
+    SELECTION-SCREEN COMMENT (15) TEXT-R02 FOR FIELD P_SEND.
+  SELECTION-SCREEN END   OF LINE.
+SELECTION-SCREEN END   OF BLOCK BK1.
+
+SELECTION-SCREEN BEGIN OF BLOCK BK2 WITH FRAME TITLE TEXT-S02.
+  PARAMETERS     : P_IFSYT TYPE ZGTE_FLDVAL              "I/F 시스템
+                                AS LISTBOX VISIBLE LENGTH 17.
+  SELECT-OPTIONS : S_IFDAT  FOR SY-DATLO   MODIF ID DIS. "I/F Date
+  PARAMETERS     : P_BUKRS LIKE T001-BUKRS MODIF ID SND. "회사코드
+  SELECT-OPTIONS : S_WERKS  FOR LIPS-WERKS MODIF ID SND, "플랜트
+                   S_VBELN  FOR LIPS-VBELN,              "납품서번호
+                   S_ERDAT  FOR SY-DATLO   MODIF ID SND. "생성/변경일
+SELECTION-SCREEN END   OF BLOCK BK2.
+
+SELECTION-SCREEN BEGIN OF BLOCK BK3 WITH FRAME TITLE TEXT-S03.
+  PARAMETERS : P_BAT AS CHECKBOX MODIF ID SND,
+               P_FNL AS CHECKBOX MODIF ID DIS,
+               P_FRC AS CHECKBOX.
+SELECTION-SCREEN END   OF BLOCK BK3.

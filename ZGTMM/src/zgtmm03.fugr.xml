@@ -1,0 +1,195 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_FUGR" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <AREAT>SAP -&gt; E-Proc I/F</AREAT>
+   <INCLUDES>
+    <SOBJ_NAME>LZGTMM03F01</SOBJ_NAME>
+    <SOBJ_NAME>LZGTMM03TOP</SOBJ_NAME>
+    <SOBJ_NAME>SAPLZGTMM03</SOBJ_NAME>
+   </INCLUDES>
+   <FUNCTIONS>
+    <item>
+     <FUNCNAME>ZGTMM_IF_O_BATCHTAGNR</FUNCNAME>
+     <REMOTE_CALL>R</REMOTE_CALL>
+     <SHORT_TEXT>배치&amp;꼬리표 정보 전송</SHORT_TEXT>
+     <EXPORT>
+      <RSEXP>
+       <PARAMETER>E_ZRESULT</PARAMETER>
+       <TYP>BAPI_MTYPE</TYP>
+      </RSEXP>
+      <RSEXP>
+       <PARAMETER>E_MESSAGE</PARAMETER>
+       <TYP>BAPI_MSG</TYP>
+      </RSEXP>
+     </EXPORT>
+     <TABLES>
+      <RSTBL>
+       <PARAMETER>OT_TAB</PARAMETER>
+       <DBSTRUCT>ZGTMMSIF0045</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+     </TABLES>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>E_ZRESULT</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>성공여부(S,E) (EAI로 부터 SAP로)</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>E_MESSAGE</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>메시지 (EAI로 부터 SAP로)</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>OT_TAB</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>배치&amp;꼬리표 매핑 정보</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+    <item>
+     <FUNCNAME>ZGTMM_IF_O_DIRECTGR</FUNCNAME>
+     <REMOTE_CALL>R</REMOTE_CALL>
+     <SHORT_TEXT>직납 납품서 입고 결과 송신</SHORT_TEXT>
+     <EXPORT>
+      <RSEXP>
+       <PARAMETER>E_ZRESULT</PARAMETER>
+       <TYP>BAPI_MTYPE</TYP>
+      </RSEXP>
+      <RSEXP>
+       <PARAMETER>E_MESSAGE</PARAMETER>
+       <TYP>BAPI_MSG</TYP>
+      </RSEXP>
+     </EXPORT>
+     <TABLES>
+      <RSTBL>
+       <PARAMETER>OT_TAB</PARAMETER>
+       <DBSTRUCT>ZGTMMSIF0043</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+     </TABLES>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>E_ZRESULT</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>성공여부(S,E) (EAI로 부터 SAP로)</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>E_MESSAGE</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>메시지 (EAI로 부터 SAP로)</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>OT_TAB</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>직납 납품서 입고 처리 결과</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+    <item>
+     <FUNCNAME>ZGTMM_IF_O_PO_ER</FUNCNAME>
+     <GLOBAL_FLAG>X</GLOBAL_FLAG>
+     <REMOTE_CALL>R</REMOTE_CALL>
+     <SHORT_TEXT>구매 오더 정보 송신(E-Proc 용)</SHORT_TEXT>
+     <IMPORT>
+      <RSIMP>
+       <PARAMETER>I_AEDAT</PARAMETER>
+       <DBFIELD>SY-DATUM</DBFIELD>
+       <OPTIONAL>X</OPTIONAL>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_EBELN</PARAMETER>
+       <DBFIELD>EKKO-EBELN</DBFIELD>
+       <OPTIONAL>X</OPTIONAL>
+      </RSIMP>
+     </IMPORT>
+     <EXPORT>
+      <RSEXP>
+       <PARAMETER>O_RESULT</PARAMETER>
+       <TYP>CHAR2</TYP>
+      </RSEXP>
+      <RSEXP>
+       <PARAMETER>O_MESSAGE</PARAMETER>
+       <TYP>CHAR100</TYP>
+      </RSEXP>
+     </EXPORT>
+     <TABLES>
+      <RSTBL>
+       <PARAMETER>LT_ITAB06</PARAMETER>
+       <DBSTRUCT>ZMMSI06</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>LT_ITAB07</PARAMETER>
+       <DBSTRUCT>ZGTMMSIF0042</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>LT_ITAB32</PARAMETER>
+       <DBSTRUCT>ZMMTI32</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>LT_ITAB39</PARAMETER>
+       <DBSTRUCT>ZMMSI39</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>LT_ITAB52</PARAMETER>
+       <DBSTRUCT>ZMMTI52</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+     </TABLES>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>I_AEDAT</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>일자 및 시간, 현재(어플리케이션 서버) 일자</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_EBELN</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>구매전표번호</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>O_RESULT</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>RESULT</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>O_MESSAGE</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>ERROR MSG</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>LT_ITAB06</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>e-Procurement 구매오더 Structure</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>LT_ITAB07</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>e-Procurement 구매오더 Detail Structure</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>LT_ITAB32</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>e-Procurement 구매오더 Table(모품목에 대한 구성부품)</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>LT_ITAB39</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>구매 항목별 텍스트</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>LT_ITAB52</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>구매오더 항목별 판매오더 정보</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+   </FUNCTIONS>
+  </asx:values>
+ </asx:abap>
+</abapGit>

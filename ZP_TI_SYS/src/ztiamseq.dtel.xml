@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_DTEL" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <DD04V>
+    <ROLLNAME>ZTIAMSEQ</ROLLNAME>
+    <DDLANGUAGE>3</DDLANGUAGE>
+    <DOMNAME>NUMC2</DOMNAME>
+    <MEMORYID>ZTIAMSEQ</MEMORYID>
+    <LOGFLAG>X</LOGFLAG>
+    <HEADLEN>08</HEADLEN>
+    <SCRLEN1>10</SCRLEN1>
+    <SCRLEN2>15</SCRLEN2>
+    <SCRLEN3>20</SCRLEN3>
+    <DDTEXT>배서차수</DDTEXT>
+    <REPTEXT>배서차수</REPTEXT>
+    <SCRTEXT_S>배서차수</SCRTEXT_S>
+    <SCRTEXT_M>배서차수</SCRTEXT_M>
+    <SCRTEXT_L>배서차수</SCRTEXT_L>
+    <DTELMASTER>3</DTELMASTER>
+    <SHLPNAME>ZTIIP00</SHLPNAME>
+    <SHLPFIELD>AMDSQ</SHLPFIELD>
+    <REFKIND>D</REFKIND>
+   </DD04V>
+  </asx:values>
+ </asx:abap>
+</abapGit>

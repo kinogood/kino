@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_DTEL" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <DD04V>
+    <ROLLNAME>ZTIFWDCD</ROLLNAME>
+    <DDLANGUAGE>3</DDLANGUAGE>
+    <DOMNAME>LIFNR</DOMNAME>
+    <LOGFLAG>X</LOGFLAG>
+    <HEADLEN>11</HEADLEN>
+    <SCRLEN1>10</SCRLEN1>
+    <SCRLEN2>15</SCRLEN2>
+    <SCRLEN3>20</SCRLEN3>
+    <DDTEXT>포워더</DDTEXT>
+    <REPTEXT>포워더</REPTEXT>
+    <SCRTEXT_S>포워더</SCRTEXT_S>
+    <SCRTEXT_M>포워더</SCRTEXT_M>
+    <SCRTEXT_L>포워더</SCRTEXT_L>
+    <DTELMASTER>3</DTELMASTER>
+    <SHLPNAME>ZTIIG10_A</SHLPNAME>
+    <SHLPFIELD>FWDCD</SHLPFIELD>
+    <REFKIND>D</REFKIND>
+   </DD04V>
+  </asx:values>
+ </asx:abap>
+</abapGit>

@@ -1,0 +1,151 @@
+*&---------------------------------------------------------------------*
+*&  Include           ZNFR2220TOP
+*&---------------------------------------------------------------------*
+
+INCLUDE ZNFR2220CLS.
+
+CONTROLS:  TC1            TYPE TABLEVIEW USING SCREEN 200.
+
+TABLES: ZNFT1000,
+        ZNFT1010,
+        ZNFT1020,
+        ZNFT1021,
+        ZNFT1030.
+
+DATA: BEGIN OF GT_1020 OCCURS 0.
+        INCLUDE STRUCTURE ZNFT1020.
+DATA:   CHECK,
+        NAME1       LIKE LFA1-NAME1,        "FCM 명
+        BSTXT(10),                          "Buy/Sell Text
+        MITPT(20),                          "집행유형 내역
+        PRCTR       LIKE ZNFT1000-PRCTR,    "손익센터
+        PTEXT       LIKE ZNFT0004-PTEXT,    "손익센터명
+        RQTYP       LIKE ZNFT1010-RQTYP,    "요청유형
+        RQTXT(20),                          "요청유형 텍스트
+        CONNO       LIKE ZNFT1011-CONNO,    "계약번호
+        COTXT       LIKE ZNFT1000-COTXT,    "계약명
+        KUNNR       LIKE ZNFT1000-KUNNR,    "고객
+        NCUST       LIKE ZNFT1000-NCUST,    "고객명
+        VKGRP       LIKE ZNFT1000-VKGRP,    "영업그룹   기능개선_256766
+        BEZEI       LIKE TVGRT-BEZEI,       "영업그룹명 기능개선_256766
+      END   OF GT_1020.
+
+DATA: BEGIN OF GT_TRAN OCCURS 0.
+        INCLUDE STRUCTURE ZNFT1030.
+DATA:   CHECK,
+        NCIND,                              "신규/청산구분
+        NAME1       LIKE LFA1-NAME1,        "FCM 명
+      END   OF GT_TRAN.
+
+DATA: GT_1030       LIKE ZNFT1030 OCCURS 0 WITH HEADER LINE,
+      GT_1030O      LIKE ZNFT1030 OCCURS 0 WITH HEADER LINE.
+
+DATA: GV_REMQTY     LIKE ZNFT1020-EMENG,
+      GV_LINE       LIKE SY-TABIX.
+
+DATA: GV_CURSOR(30),
+      GV_CURLIN     TYPE I.
+
+DATA: GV_WAERS      LIKE T001-WAERS,     "Currency
+      GV_LAND1      LIKE T001-LAND1,     "Country
+      GV_BUTXT      LIKE T001-BUTXT,     "Company Name
+      GV_KTOPL      LIKE T001-KTOPL,     "Chart of Account
+      GV_KOKRS      LIKE TKA02-KOKRS.    "Controlling Area
+
+DATA: GV_CHANGE,
+      GV_ANSWER,
+      GV_ERROR,
+      GV_SAVE.
+
+RANGES: GR_BY_SL    FOR  ZNFT1020-BY_SL.
+
+DATA: OK_CODE       LIKE SY-UCOMM,
+      OK_SAVE       LIKE SY-UCOMM.
+
+*___Change Doc.용
+DATA: YZNFT1030     LIKE ZNFT1030.
+
+*___ALV용 변수
+DATA: GC_CONTAINER_NAME1    TYPE SCRFNAME VALUE 'CONTAINER1',
+      GC_CUSTOM_CONTAINER1  TYPE REF TO CL_GUI_CUSTOM_CONTAINER,
+      GC_ALV_GRID1          TYPE REF TO CL_GUI_ALV_GRID,
+      GC_EVENT_HANDLER1     TYPE REF TO LCL_EVENT_HANDLER,
+      GC_CONTAINER_NAME2    TYPE SCRFNAME VALUE 'CONTAINER2',
+      GC_CUSTOM_CONTAINER2  TYPE REF TO CL_GUI_CUSTOM_CONTAINER,
+      GC_ALV_GRID2          TYPE REF TO CL_GUI_ALV_GRID,
+      GS_LAYOUT             TYPE LVC_S_LAYO,
+      GT_SORT               TYPE LVC_T_SORT WITH HEADER LINE,
+      GT_FIELDCAT           TYPE LVC_T_FCAT WITH HEADER LINE,
+      GS_FIELDCAT           TYPE LVC_S_FCAT,
+      GS_SCROLL             TYPE LVC_S_STBL,
+      GT_COLS               TYPE LVC_T_COL,
+      GS_COLS               TYPE LVC_S_COL,
+      GT_ROWS               TYPE LVC_T_ROW,
+      GS_ROWS               TYPE LVC_S_ROW,
+      GT_F4                 TYPE LVC_T_F4,
+      GS_F4                 TYPE LVC_S_F4.
+
+DATA: GT_EXCLUDE            TYPE UI_FUNCTIONS,
+      GS_VARIANT            TYPE DISVARIANT,
+      GV_ITAB               LIKE GS_FIELDCAT-TABNAME,
+      GV_POS                LIKE GS_FIELDCAT-COL_POS.
+
+*___F4 Help용 변수
+DATA: SELECTFIELD   LIKE  HELP_INFO-FIELDNAME,
+      IT_FIELDS     LIKE  HELP_VALUE OCCURS 1 WITH HEADER LINE,
+      SELECT_VALUE  LIKE  HELP_INFO-FLDVALUE,
+      LD_TABIX      LIKE  SY-TABIX,
+      GV_INDEX      LIKE  SY-INDEX.
+
+DATA: SCR_FIELDS LIKE DYNPREAD OCCURS 0 WITH HEADER LINE,
+      FELD_TABLE LIKE DYNPREAD OCCURS 0 WITH HEADER LINE.
+
+*___손익센터
+DATA: BEGIN OF GT_PRCTR OCCURS 0,
+        PRCTR       LIKE ZNFT0003-PRCTR,
+        PTEXT       LIKE ZNFT0003-PTEXT,
+      END OF GT_PRCTR.
+
+*___FCM
+DATA: BEGIN OF GT_FCM OCCURS 0,
+        LIFNR       LIKE ZNFT0021-LIFNR,
+        NAME1       LIKE LFA1-NAME1,
+      END   OF GT_FCM.
+
+*___e-Pro 번호
+DATA: BEGIN OF GT_EPRO OCCURS 0,
+        ZEPRO       LIKE ZNFT1021-ZEPRO,
+        NFKEY       LIKE ZNFT1021-NFKEY,
+        FCM         LIKE ZNFT1021-FCM,
+        NAME1       LIKE LFA1-NAME1,
+        RUDAT       LIKE ZNFT1021-RUDAT,
+        BY_SL       LIKE ZNFT1021-BY_SL,
+        ENDAT       LIKE ZNFT1021-ENDAT,
+        MITYP       LIKE ZNFT1021-MITYP,
+        MISPD       LIKE ZNFT1021-MISPD,
+        MIMON       LIKE ZNFT1021-MIMON,
+        PRICE       LIKE ZNFT1021-PRICE,
+        WAERS       LIKE ZNFT1021-WAERS,
+        EMENG       LIKE ZNFT1021-EMENG,
+        MEINS       LIKE ZNFT1021-MEINS,
+        REMQTY      TYPE ZMNG04,
+        MISUS       LIKE ZNFT1021-MISUS,
+        ZNOTE       LIKE ZNFT1021-ZNOTE,
+      END   OF GT_EPRO.
+
+DATA: GV_RUDAT LIKE ZNFT1030-RUDAT,
+      GV_FCM LIKE ZNFT1030-FCM,
+      GV_ENDAT LIKE ZNFT1030-ENDAT,
+      GV_MITYP LIKE ZNFT1030-MITYP,
+      GV_MISPD LIKE ZNFT1030-MISPD,
+      GV_MIMON  LIKE ZNFT1030-MIMON,
+      GV_PRICE  LIKE ZNFT1030-PRICE,
+      GV_MISUS LIKE ZNFT1030-MISUS,
+      GV_CHK1,
+      GV_CHK2,
+      GV_CHK3,
+      GV_CHK4,
+      GV_CHK5,
+      GV_CHK6,
+      GV_CHK7,
+      GV_CHK8.

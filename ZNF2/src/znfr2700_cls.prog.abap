@@ -1,0 +1,17 @@
+*&---------------------------------------------------------------------*
+*& INCLUDE          ZNFR2700_CLS
+*&---------------------------------------------------------------------*
+CLASS LCL_EVENT_RECEIVER DEFINITION.
+  PUBLIC SECTION.
+    METHODS: HANDLER_HOTSPOT_CLICK FOR EVENT HOTSPOT_CLICK OF CL_GUI_ALV_GRID
+      IMPORTING ES_ROW_NO E_COLUMN_ID.
+ENDCLASS.
+
+
+CLASS LCL_EVENT_RECEIVER IMPLEMENTATION.
+  METHOD: HANDLER_HOTSPOT_CLICK.
+    PERFORM ALV_HOTSPOT_CLICK USING ES_ROW_NO
+                                    E_COLUMN_ID.
+  ENDMETHOD. "HANDLER_HOTSPOT_CLICK.
+
+ENDCLASS.

@@ -1,0 +1,276 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_DOMA" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <DD01V>
+    <DOMNAME>ZTICSATY</DOMNAME>
+    <DDLANGUAGE>3</DDLANGUAGE>
+    <DATATYPE>CHAR</DATATYPE>
+    <LENG>000002</LENG>
+    <OUTPUTLEN>000002</OUTPUTLEN>
+    <VALEXI>X</VALEXI>
+    <DDTEXT>거래구분</DDTEXT>
+   </DD01V>
+   <DD07V_TAB>
+    <DD07V>
+     <VALPOS>0001</VALPOS>
+     <DDLANGUAGE>3</DDLANGUAGE>
+     <DOMVALUE_L>11</DOMVALUE_L>
+     <DDTEXT>일반형태 수입</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0002</VALPOS>
+     <DDLANGUAGE>3</DDLANGUAGE>
+     <DOMVALUE_L>12</DOMVALUE_L>
+     <DDTEXT>주문자 상표 부착에 의한 수입물품(OEM방식)</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0003</VALPOS>
+     <DDLANGUAGE>3</DDLANGUAGE>
+     <DOMVALUE_L>13</DOMVALUE_L>
+     <DDTEXT>방위산업용 시설재 및 원자재의 수입</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0004</VALPOS>
+     <DDLANGUAGE>3</DDLANGUAGE>
+     <DOMVALUE_L>14</DOMVALUE_L>
+     <DDTEXT>계획조선용 원자재의 수입</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0005</VALPOS>
+     <DDLANGUAGE>3</DDLANGUAGE>
+     <DOMVALUE_L>15</DOMVALUE_L>
+     <DDTEXT>전자상거래에 의한 수입</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0006</VALPOS>
+     <DDLANGUAGE>3</DDLANGUAGE>
+     <DOMVALUE_L>21</DOMVALUE_L>
+     <DDTEXT>국내외국인투자업체수탁가공수출 위한 원자재 수입</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0007</VALPOS>
+     <DDLANGUAGE>3</DDLANGUAGE>
+     <DOMVALUE_L>22</DOMVALUE_L>
+     <DDTEXT>기타일반업체 수탁가공수출을 위한 원자재 수입</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0008</VALPOS>
+     <DDLANGUAGE>3</DDLANGUAGE>
+     <DOMVALUE_L>29</DOMVALUE_L>
+     <DDTEXT>위탁가공(국외가공)후 수입</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0009</VALPOS>
+     <DDLANGUAGE>3</DDLANGUAGE>
+     <DOMVALUE_L>31</DOMVALUE_L>
+     <DDTEXT>공공차관 수입</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0010</VALPOS>
+     <DDLANGUAGE>3</DDLANGUAGE>
+     <DOMVALUE_L>39</DOMVALUE_L>
+     <DDTEXT>기타차관 수입</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0011</VALPOS>
+     <DDLANGUAGE>3</DDLANGUAGE>
+     <DOMVALUE_L>41</DOMVALUE_L>
+     <DDTEXT>국내투자 수입</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0012</VALPOS>
+     <DDLANGUAGE>3</DDLANGUAGE>
+     <DOMVALUE_L>49</DOMVALUE_L>
+     <DDTEXT>수출자유지역 입주</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0013</VALPOS>
+     <DDLANGUAGE>3</DDLANGUAGE>
+     <DOMVALUE_L>51</DOMVALUE_L>
+     <DDTEXT>수탁판매를 위한 물품의 수입</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0014</VALPOS>
+     <DDLANGUAGE>3</DDLANGUAGE>
+     <DOMVALUE_L>52</DOMVALUE_L>
+     <DDTEXT>연계(구상)무역 수출을 위한 물품의 수입</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0015</VALPOS>
+     <DDLANGUAGE>3</DDLANGUAGE>
+     <DOMVALUE_L>53</DOMVALUE_L>
+     <DDTEXT>소유권이전 조건</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0016</VALPOS>
+     <DDLANGUAGE>3</DDLANGUAGE>
+     <DOMVALUE_L>54</DOMVALUE_L>
+     <DDTEXT>소유권불이전 조건</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0017</VALPOS>
+     <DDLANGUAGE>3</DDLANGUAGE>
+     <DOMVALUE_L>59</DOMVALUE_L>
+     <DDTEXT>임대방식수출후 다시 수입되는 물품</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0018</VALPOS>
+     <DDLANGUAGE>3</DDLANGUAGE>
+     <DOMVALUE_L>61</DOMVALUE_L>
+     <DDTEXT>미군납품자재,국내에서 외화를 받고 판매할 물품구입</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0019</VALPOS>
+     <DDLANGUAGE>3</DDLANGUAGE>
+     <DOMVALUE_L>70</DOMVALUE_L>
+     <DDTEXT>상계원재료</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0020</VALPOS>
+     <DDLANGUAGE>3</DDLANGUAGE>
+     <DOMVALUE_L>71</DOMVALUE_L>
+     <DDTEXT>SOFA 특례수입</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0021</VALPOS>
+     <DDLANGUAGE>3</DDLANGUAGE>
+     <DOMVALUE_L>72</DOMVALUE_L>
+     <DDTEXT>외교관 물품으로서 양수도승인 수입</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0022</VALPOS>
+     <DDLANGUAGE>3</DDLANGUAGE>
+     <DOMVALUE_L>80</DOMVALUE_L>
+     <DDTEXT>기타 외국환거래 수반않는 물품수입</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0023</VALPOS>
+     <DDLANGUAGE>3</DDLANGUAGE>
+     <DOMVALUE_L>81</DOMVALUE_L>
+     <DDTEXT>국내에서 수리하기 위한 선박,항공기 수입</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0024</VALPOS>
+     <DDLANGUAGE>3</DDLANGUAGE>
+     <DOMVALUE_L>82</DOMVALUE_L>
+     <DDTEXT>검사수리목적 외국에 반출된 선박,항공기 수입</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0025</VALPOS>
+     <DDLANGUAGE>3</DDLANGUAGE>
+     <DOMVALUE_L>83</DOMVALUE_L>
+     <DDTEXT>외국검사.수리 목적 반출물품수입(선.기 제외)</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0026</VALPOS>
+     <DDLANGUAGE>3</DDLANGUAGE>
+     <DOMVALUE_L>84</DOMVALUE_L>
+     <DDTEXT>외국물품 국내검사.수리후 반출위한 물품수입(선.기 제외)</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0027</VALPOS>
+     <DDLANGUAGE>3</DDLANGUAGE>
+     <DOMVALUE_L>85</DOMVALUE_L>
+     <DDTEXT>외국국제행사,체육,전시회,박람회,문화공연등 출품물품반입</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0028</VALPOS>
+     <DDLANGUAGE>3</DDLANGUAGE>
+     <DOMVALUE_L>86</DOMVALUE_L>
+     <DDTEXT>국내개최 국제행사,체육대회,전시회,박람회,공연일시반입물품</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0029</VALPOS>
+     <DDLANGUAGE>3</DDLANGUAGE>
+     <DOMVALUE_L>87</DOMVALUE_L>
+     <DDTEXT>무상으로 반립하는 상품의 견품 및 광고용품</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0030</VALPOS>
+     <DDLANGUAGE>3</DDLANGUAGE>
+     <DOMVALUE_L>88</DOMVALUE_L>
+     <DDTEXT>수출물품수리후 재반출 위해 수입</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0031</VALPOS>
+     <DDLANGUAGE>3</DDLANGUAGE>
+     <DOMVALUE_L>89</DOMVALUE_L>
+     <DDTEXT>수출물품 크레임등의 사유로 반입</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0032</VALPOS>
+     <DDLANGUAGE>3</DDLANGUAGE>
+     <DOMVALUE_L>90</DOMVALUE_L>
+     <DDTEXT>수리.검사 위해 반출했던 물품수입,해외검사의뢰물품의 수입</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0033</VALPOS>
+     <DDLANGUAGE>3</DDLANGUAGE>
+     <DOMVALUE_L>91</DOMVALUE_L>
+     <DDTEXT>이사화물수입</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0034</VALPOS>
+     <DDLANGUAGE>3</DDLANGUAGE>
+     <DOMVALUE_L>92</DOMVALUE_L>
+     <DDTEXT>수출계약이행필요물품의 수입등 거래원할위한물품</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0035</VALPOS>
+     <DDLANGUAGE>3</DDLANGUAGE>
+     <DOMVALUE_L>93</DOMVALUE_L>
+     <DDTEXT>대체 위하여 반입하는 물품,누락,부족품보충위한 반입물품</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0036</VALPOS>
+     <DDLANGUAGE>3</DDLANGUAGE>
+     <DOMVALUE_L>94</DOMVALUE_L>
+     <DDTEXT>기타 수입승인 면제물품</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0037</VALPOS>
+     <DDLANGUAGE>3</DDLANGUAGE>
+     <DOMVALUE_L>95</DOMVALUE_L>
+     <DDTEXT>외교관 용품 등 수입</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0038</VALPOS>
+     <DDLANGUAGE>3</DDLANGUAGE>
+     <DOMVALUE_L>96</DOMVALUE_L>
+     <DDTEXT>여행자 또는 승무원 휴대품 수입</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0039</VALPOS>
+     <DDLANGUAGE>3</DDLANGUAGE>
+     <DOMVALUE_L>97</DOMVALUE_L>
+     <DDTEXT>SOFA 협정에 의한 면세대상물품의 반입</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0040</VALPOS>
+     <DDLANGUAGE>3</DDLANGUAGE>
+     <DOMVALUE_L>98</DOMVALUE_L>
+     <DDTEXT>대북 반입대상 물품이나 과세를 한 경우</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0041</VALPOS>
+     <DDLANGUAGE>3</DDLANGUAGE>
+     <DOMVALUE_L>99</DOMVALUE_L>
+     <DDTEXT>대북 반입 또는 직수입 물품</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0042</VALPOS>
+     <DDLANGUAGE>3</DDLANGUAGE>
+     <DOMVALUE_L>LB</DOMVALUE_L>
+     <DDTEXT>LOCAL 건</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0043</VALPOS>
+     <DDLANGUAGE>3</DDLANGUAGE>
+     <DOMVALUE_L>LO</DOMVALUE_L>
+     <DDTEXT>LOCAL 건</DDTEXT>
+    </DD07V>
+   </DD07V_TAB>
+  </asx:values>
+ </asx:abap>
+</abapGit>

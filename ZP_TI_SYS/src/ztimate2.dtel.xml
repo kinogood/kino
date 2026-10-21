@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_DTEL" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <DD04V>
+    <ROLLNAME>ZTIMATE2</ROLLNAME>
+    <DDLANGUAGE>3</DDLANGUAGE>
+    <DOMNAME>X</DOMNAME>
+    <LOGFLAG>X</LOGFLAG>
+    <HEADLEN>23</HEADLEN>
+    <SCRLEN1>10</SCRLEN1>
+    <SCRLEN2>18</SCRLEN2>
+    <SCRLEN3>23</SCRLEN3>
+    <DDTEXT>주요부가조건2(2AB) 여부</DDTEXT>
+    <REPTEXT>주요부가조건2(2AB) 여부</REPTEXT>
+    <SCRTEXT_S>부가조건2</SCRTEXT_S>
+    <SCRTEXT_M>주요부가조건2(2AB)</SCRTEXT_M>
+    <SCRTEXT_L>주요부가조건2(2AB) 여부</SCRTEXT_L>
+    <DTELMASTER>3</DTELMASTER>
+    <REFKIND>D</REFKIND>
+   </DD04V>
+  </asx:values>
+ </asx:abap>
+</abapGit>

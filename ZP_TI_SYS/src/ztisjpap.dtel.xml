@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_DTEL" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <DD04V>
+    <ROLLNAME>ZTISJPAP</ROLLNAME>
+    <DDLANGUAGE>3</DDLANGUAGE>
+    <DOMNAME>ZTISJPAP</DOMNAME>
+    <LOGFLAG>X</LOGFLAG>
+    <HEADLEN>20</HEADLEN>
+    <SCRLEN1>10</SCRLEN1>
+    <SCRLEN2>20</SCRLEN2>
+    <SCRLEN3>20</SCRLEN3>
+    <DDTEXT>물대처리 기준 거래처</DDTEXT>
+    <REPTEXT>물대처리 기준 거래처</REPTEXT>
+    <SCRTEXT_S>물대벤더</SCRTEXT_S>
+    <SCRTEXT_M>물대처리 기준 거래처</SCRTEXT_M>
+    <SCRTEXT_L>물대처리 기준 거래처</SCRTEXT_L>
+    <DTELMASTER>3</DTELMASTER>
+    <REFKIND>D</REFKIND>
+   </DD04V>
+  </asx:values>
+ </asx:abap>
+</abapGit>

@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_CHDO" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <CHDO>
+    <REPORTS_GENERATED>
+     <TCDRPS>
+      <OBJECT>ZNFT1040CHDOC</OBJECT>
+      <REPORTNAME>ZNFT1040CHDOC</REPORTNAME>
+      <ARBGEB>CD</ARBGEB>
+      <FEHLERNR>600</FEHLERNR>
+      <FGRP>ZNF2040</FGRP>
+      <PREFIX>Y</PREFIX>
+      <UPDATE_FLG>1</UPDATE_FLG>
+     </TCDRPS>
+    </REPORTS_GENERATED>
+    <OBJECTS>
+     <TCDOBS>
+      <OBJECT>ZNFT1040CHDOC</OBJECT>
+      <TABNAME>ZNFT1040</TABNAME>
+     </TCDOBS>
+     <TCDOBS>
+      <OBJECT>ZNFT1040CHDOC</OBJECT>
+      <TABNAME>ZNFT1041</TABNAME>
+      <MULTCASE>X</MULTCASE>
+     </TCDOBS>
+    </OBJECTS>
+    <OBJECTS_TEXT>
+     <TCDOBTS>
+      <SPRAS>3</SPRAS>
+      <OBJECT>ZNFT1040CHDOC</OBJECT>
+      <OBTEXT>만기이동요청 Change Document</OBTEXT>
+     </TCDOBTS>
+    </OBJECTS_TEXT>
+   </CHDO>
+  </asx:values>
+ </asx:abap>
+</abapGit>

@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_TRAN" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <TSTC>
+    <TCODE>ZTIT101N</TCODE>
+    <PGMNA>ZTIR1000</PGMNA>
+    <DYPNO>0101</DYPNO>
+   </TSTC>
+   <TSTCC>
+    <TCODE>ZTIT101N</TCODE>
+    <S_WEBGUI>1</S_WEBGUI>
+    <S_WIN32>X</S_WIN32>
+    <S_PLATIN>X</S_PLATIN>
+   </TSTCC>
+   <TSTCT>
+    <SPRSL>3</SPRSL>
+    <TCODE>ZTIT101N</TCODE>
+    <TTEXT>[LS전선] 적하보험 생성 - B/L 기준</TTEXT>
+   </TSTCT>
+  </asx:values>
+ </asx:abap>
+</abapGit>

@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_DTEL" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <DD04V>
+    <ROLLNAME>ZTICFNST</ROLLNAME>
+    <DDLANGUAGE>3</DDLANGUAGE>
+    <DOMNAME>ZTICFNST</DOMNAME>
+    <LOGFLAG>X</LOGFLAG>
+    <HEADLEN>17</HEADLEN>
+    <SCRLEN1>10</SCRLEN1>
+    <SCRLEN2>17</SCRLEN2>
+    <SCRLEN3>20</SCRLEN3>
+    <DDTEXT>정정/확정신고구분</DDTEXT>
+    <REPTEXT>정정/확정신고구분</REPTEXT>
+    <SCRTEXT_S>정정/확정</SCRTEXT_S>
+    <SCRTEXT_M>정정/확정신고구분</SCRTEXT_M>
+    <SCRTEXT_L>정정/확정신고구분</SCRTEXT_L>
+    <DTELMASTER>3</DTELMASTER>
+    <REFKIND>D</REFKIND>
+   </DD04V>
+  </asx:values>
+ </asx:abap>
+</abapGit>

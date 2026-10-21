@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_FUGR" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <AREAT>부스닥트 제조지시</AREAT>
+   <INCLUDES>
+    <SOBJ_NAME>LZGTMM62F01</SOBJ_NAME>
+    <SOBJ_NAME>LZGTMM62TOP</SOBJ_NAME>
+    <SOBJ_NAME>SAPLZGTMM62</SOBJ_NAME>
+   </INCLUDES>
+   <FUNCTIONS>
+    <item>
+     <FUNCNAME>ZGTMM_BDMES_JOBLS_EXTRACT</FUNCNAME>
+     <REMOTE_CALL>R</REMOTE_CALL>
+     <SHORT_TEXT>[BD] 구매 제조지시 데이터 추출</SHORT_TEXT>
+     <IMPORT>
+      <RSIMP>
+       <PARAMETER>I_ZSYSTEM_ID</PARAMETER>
+       <DEFAULT>&apos;KBDM&apos;</DEFAULT>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>ZGTETARGET</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_ZWERKS</PARAMETER>
+       <TYP>EWERK</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_ZTABLE</PARAMETER>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>CHAR20</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_ZKEY1</PARAMETER>
+       <TYP>CHAR40</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_CANCEL</PARAMETER>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>CHAR1</TYP>
+      </RSIMP>
+     </IMPORT>
+     <EXPORT>
+      <RSEXP>
+       <PARAMETER>ZO_RESULT</PARAMETER>
+       <TYP>ZO_RESULT</TYP>
+      </RSEXP>
+      <RSEXP>
+       <PARAMETER>ZO_MESSAGE</PARAMETER>
+       <TYP>ZO_MESSAGE</TYP>
+      </RSEXP>
+     </EXPORT>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>I_ZSYSTEM_ID</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Interface Target 시스템</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_ZWERKS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>플랜트</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_ZTABLE</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>제조지시 데이터 구분, 테이블 이름</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_ZKEY1</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>제조지시 번호</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_CANCEL</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>취소 : &apos;X&apos;</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>ZO_RESULT</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>처리결과 (성공: &apos;S&apos;, 에러: &apos;E&apos;)</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>ZO_MESSAGE</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>처리메세지</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+   </FUNCTIONS>
+  </asx:values>
+ </asx:abap>
+</abapGit>

@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_DTEL" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <DD04V>
+    <ROLLNAME>ZTIINBMT</ROLLNAME>
+    <DDLANGUAGE>3</DDLANGUAGE>
+    <DOMNAME>ZTIINBMT</DOMNAME>
+    <LOGFLAG>X</LOGFLAG>
+    <HEADLEN>27</HEADLEN>
+    <SCRLEN1>10</SCRLEN1>
+    <SCRLEN2>15</SCRLEN2>
+    <SCRLEN3>27</SCRLEN3>
+    <DDTEXT>인바운드 납품생성 방법 정의</DDTEXT>
+    <REPTEXT>인바운드 납품생성 방법 정의</REPTEXT>
+    <SCRTEXT_S>Inb.생성Mt</SCRTEXT_S>
+    <SCRTEXT_M>Inb.생성 방법</SCRTEXT_M>
+    <SCRTEXT_L>인바운드 납품생성 방법 정의</SCRTEXT_L>
+    <DTELMASTER>3</DTELMASTER>
+    <REFKIND>D</REFKIND>
+   </DD04V>
+  </asx:values>
+ </asx:abap>
+</abapGit>

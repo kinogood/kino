@@ -1,0 +1,398 @@
+*&---------------------------------------------------------------------*
+*&  Include           ZNFR2000TOP
+*&---------------------------------------------------------------------*
+
+* TYPE-POOLS
+TYPE-POOLS : SLIS.
+
+TABLES : SSCRFIELDS, T001, KNA1, VBAP,
+         ZNFT1000, ZNFT1001.
+
+************************************************************************
+* GLOBAL Structure & Internal Table
+************************************************************************
+
+* ALV LIST
+DATA: BEGIN OF GS_OUTTAB_B,
+      CONNO    LIKE ZNFT1000-CONNO,
+      COTXT    LIKE ZNFT1000-COTXT,
+      COTYP    LIKE ZNFT1000-COTYP,
+      COTYP_NM TYPE CHAR10,
+      BUKRS    LIKE ZNFT1000-BUKRS,
+      BUKRS_NM LIKE T001-BUTXT,
+      NFCTR    LIKE ZNFT1000-NFCTR,
+      NFCTR_NM LIKE ZNFT0005-NTEXT,
+      PRCTR    LIKE ZNFT1000-PRCTR,
+      PRCTR_NM LIKE ZNFT0004-PTEXT,
+      VKGRP    LIKE ZNFT1000-VKGRP,
+      VKGRP_NM LIKE ZNFT0003-VTEXT,
+      KUNNR    LIKE ZNFT1000-KUNNR,
+      NCUST    LIKE ZNFT1000-NCUST,
+      KUNNR_NM LIKE ZNFT1000-NCUST,
+      SUJUD    LIKE ZNFT1000-SUJUD,
+      SALER    LIKE ZNFT1000-SALER,
+      PRICE    LIKE ZNFT1000-PRICE,
+      PRATE    LIKE ZNFT1000-PRATE,
+      ERATE    LIKE ZNFT1000-ERATE,
+      ERDAT    LIKE ZNFT1000-ERDAT,
+      ERNAM    LIKE ZNFT1000-ERNAM,
+      CSTAT    LIKE ZNFT1000-CSTAT,
+      ZPJNO    LIKE ZNFT1000-ZPJNO,
+      CSTAT_NM TYPE CHAR10,
+      NFKEY    LIKE ZNFT1001-NFKEY,
+      NFKEY_NM TYPE CHAR10,
+      EMENG    LIKE ZNFT1001-EMENG,
+      MEINS    LIKE ZNFT1001-MEINS,
+      PRIND    TYPE CHAR20,
+      SUJUP    TYPE CHAR20,
+      WAERS    LIKE ZNFT1001-WAERS,
+      REQNO    LIKE ZNFT1010-REQNO,
+      H_NO1    LIKE ZNFT1011-H_NO1,
+      ERDAT_R  LIKE ZNFT1011-ERDAT,
+      ENDMM    LIKE ZNFT1011-ENDMM,
+      BY_SL    LIKE ZNFT1011-BY_SL,
+      BY_SL_NM TYPE CHAR10,
+      EMENG_R  LIKE ZNFT1011-EMENG,
+      MEINS_R  LIKE ZNFT1011-MEINS,
+      BIGO4    LIKE ZNFT1011-BIGO4,
+      CELLTAB  TYPE LVC_T_STYL,      " Cell 단위 수정 스타일
+      COLINFO  TYPE LVC_T_SCOL.      " CELL 색상 지정
+DATA: END OF GS_OUTTAB_B.
+DATA: GT_OUTTAB_B LIKE TABLE OF GS_OUTTAB_B.
+
+DATA: BEGIN OF GS_OUTTAB_A,
+      CONNO    LIKE ZNFT1000-CONNO,
+      COTXT    LIKE ZNFT1000-COTXT,
+      COTYP    LIKE ZNFT1000-COTYP,
+      COTYP_NM TYPE CHAR10,
+      BUKRS    LIKE ZNFT1000-BUKRS,
+      BUKRS_NM LIKE T001-BUTXT,
+      NFCTR    LIKE ZNFT1000-NFCTR,
+      NFCTR_NM LIKE ZNFT0005-NTEXT,
+      PRCTR    LIKE ZNFT1000-PRCTR,
+      PRCTR_NM LIKE ZNFT0004-PTEXT,
+      VKGRP    LIKE ZNFT1000-VKGRP,
+      VKGRP_NM LIKE ZNFT0003-VTEXT,
+      KUNNR    LIKE ZNFT1000-KUNNR,
+      NCUST    LIKE ZNFT1000-NCUST,
+      KUNNR_NM LIKE ZNFT1000-NCUST,
+      SUJUD    LIKE ZNFT1000-SUJUD,
+      SALER    LIKE ZNFT1000-SALER,
+      PRICE    LIKE ZNFT1000-PRICE,
+      PRATE    LIKE ZNFT1000-PRATE,
+      ERATE    LIKE ZNFT1000-ERATE,
+      ERDAT    LIKE ZNFT1000-ERDAT,
+      ERNAM    LIKE ZNFT1000-ERNAM,
+      CSTAT    LIKE ZNFT1000-CSTAT,
+      ZPJNO    LIKE ZNFT1000-ZPJNO,
+      CSTAT_NM TYPE CHAR10,
+      NFKEY    LIKE ZNFT1001-NFKEY,
+      NFKEY_NM TYPE CHAR10,
+      EMENG    LIKE ZNFT1001-EMENG,
+      MEINS    LIKE ZNFT1001-MEINS,
+      PRIND    TYPE CHAR20,
+      SUJUP    TYPE CHAR20,
+      WAERS    LIKE ZNFT1001-WAERS,
+      REQNO    LIKE ZNFT1010-REQNO,
+      H_NO1    LIKE ZNFT1011-H_NO1,
+      ERDAT_R  LIKE ZNFT1011-ERDAT,
+      ENDMM    LIKE ZNFT1011-ENDMM,
+      BY_SL    LIKE ZNFT1011-BY_SL,
+      BY_SL_NM TYPE CHAR10,
+      EMENG_R  LIKE ZNFT1011-EMENG,
+      MEINS_R  LIKE ZNFT1011-MEINS,
+      BIGO4    LIKE ZNFT1011-BIGO4,
+      NFUTN_N  LIKE ZNFT1020-NFUTN,
+      RUDAT_N  LIKE ZNFT1020-RUDAT,
+      ENDAT_N  LIKE ZNFT1020-ENDAT,
+      MITYP_N  LIKE ZNFT1020-MITYP,
+      MITYP_NM TYPE CHAR10,
+      MISPD_N  LIKE ZNFT1020-MISPD,
+      MIMON_N  LIKE ZNFT1020-MIMON,
+      PRICE_N  LIKE ZNFT1020-PRICE,
+      EMENG_N  LIKE ZNFT1020-EMENG,
+      CELLTAB  TYPE LVC_T_STYL,      " Cell 단위 수정 스타일
+      COLINFO  TYPE LVC_T_SCOL.      " CELL 색상 지정
+DATA: END OF GS_OUTTAB_A.
+DATA: GT_OUTTAB_A LIKE TABLE OF GS_OUTTAB_A.
+
+DATA: BEGIN OF GS_OUTTAB,
+      CONNO    LIKE ZNFT1000-CONNO,
+      COTXT    LIKE ZNFT1000-COTXT,
+      COTYP    LIKE ZNFT1000-COTYP,
+      COTYP_NM TYPE CHAR10,
+      BUKRS    LIKE ZNFT1000-BUKRS,
+      BUKRS_NM LIKE T001-BUTXT,
+      NFCTR    LIKE ZNFT1000-NFCTR,
+      NFCTR_NM LIKE ZNFT0005-NTEXT,
+      PRCTR    LIKE ZNFT1000-PRCTR,
+      PRCTR_NM LIKE ZNFT0004-PTEXT,
+      VKGRP    LIKE ZNFT1000-VKGRP,
+      VKGRP_NM LIKE ZNFT0003-VTEXT,
+      KUNNR    LIKE ZNFT1000-KUNNR,
+      NCUST    LIKE ZNFT1000-NCUST,
+      KUNNR_NM LIKE ZNFT1000-NCUST,
+      SUJUD    LIKE ZNFT1000-SUJUD,
+      SALER    LIKE ZNFT1000-SALER,
+      PRICE    LIKE ZNFT1000-PRICE,
+      PRATE    LIKE ZNFT1000-PRATE,
+      ERATE    LIKE ZNFT1000-ERATE,
+      ERDAT    LIKE ZNFT1000-ERDAT,
+      ERNAM    LIKE ZNFT1000-ERNAM,
+      CSTAT    LIKE ZNFT1000-CSTAT,
+      ZPJNO    LIKE ZNFT1000-ZPJNO,
+      CSTAT_NM TYPE CHAR10,
+      NFKEY    LIKE ZNFT1001-NFKEY,
+      NFKEY_NM TYPE CHAR10,
+      EMENG    LIKE ZNFT1001-EMENG,
+      MEINS    LIKE ZNFT1001-MEINS,
+      PRIND    TYPE CHAR20,
+      SUJUP    TYPE CHAR20,
+      WAERS    LIKE ZNFT1001-WAERS,
+      REQNO    LIKE ZNFT1010-REQNO,
+      H_NO1    LIKE ZNFT1011-H_NO1,
+      ERDAT_R  LIKE ZNFT1011-ERDAT,
+      ENDMM    LIKE ZNFT1011-ENDMM,
+      BY_SL    LIKE ZNFT1011-BY_SL,
+      BY_SL_NM TYPE CHAR10,
+      EMENG_R  LIKE ZNFT1011-EMENG,
+      MEINS_R  LIKE ZNFT1011-MEINS,
+      BIGO4    LIKE ZNFT1011-BIGO4,
+      NFUTN_N  LIKE ZNFT1020-NFUTN,
+      RUDAT_N  LIKE ZNFT1020-RUDAT,
+      ENDAT_N  LIKE ZNFT1020-ENDAT,
+      MITYP_N  LIKE ZNFT1020-MITYP,
+      MITYP_NM TYPE CHAR10,
+      MISPD_N  LIKE ZNFT1020-MISPD,
+      MIMON_N  LIKE ZNFT1020-MIMON,
+      PRICE_N  LIKE ZNFT1020-PRICE,
+      EMENG_N  LIKE ZNFT1020-EMENG,
+      CELLTAB  TYPE LVC_T_STYL,      " Cell 단위 수정 스타일
+      COLINFO  TYPE LVC_T_SCOL.      " CELL 색상 지정
+DATA: END OF GS_OUTTAB.
+DATA: GT_OUTTAB LIKE TABLE OF GS_OUTTAB.
+
+DATA: BEGIN OF GT_HEADER OCCURS 0,
+      CONNO    LIKE ZNFT1000-CONNO,
+      COTXT    LIKE ZNFT1000-COTXT,
+      COTYP    LIKE ZNFT1000-COTYP,
+      COTYP_NM TYPE CHAR10,
+      BUKRS    LIKE ZNFT1000-BUKRS,
+      BUKRS_NM LIKE T001-BUTXT,
+      NFCTR    LIKE ZNFT1000-NFCTR,
+      NFCTR_NM LIKE ZNFT0005-NTEXT,
+      PRCTR    LIKE ZNFT1000-PRCTR,
+      PRCTR_NM LIKE ZNFT0004-PTEXT,
+      VKGRP    LIKE ZNFT1000-VKGRP,
+      VKGRP_NM LIKE ZNFT0003-VTEXT,
+      KUNNR    LIKE ZNFT1000-KUNNR,
+      NCUST    LIKE ZNFT1000-NCUST,
+      KUNNR_NM LIKE ZNFT1000-NCUST,
+      SUJUD    LIKE ZNFT1000-SUJUD,
+      SALER    LIKE ZNFT1000-SALER,
+      PRICE    LIKE ZNFT1000-PRICE,
+      PRATE    LIKE ZNFT1000-PRATE,
+      ERDAT    LIKE ZNFT1000-ERDAT,
+      ERNAM    LIKE ZNFT1000-ERNAM,
+      CSTAT    LIKE ZNFT1000-CSTAT,
+      ZPJNO    LIKE ZNFT1000-ZPJNO,
+      CSTAT_NM TYPE CHAR10,
+      NFKEY    LIKE ZNFT1001-NFKEY,
+      NFKEY_NM TYPE CHAR10,
+      EMENG    LIKE ZNFT1001-EMENG,
+      MEINS    LIKE ZNFT1001-MEINS,
+      PRIND    TYPE CHAR20,
+      SUJUP    TYPE CHAR20,
+      WAERS    LIKE ZNFT1001-WAERS,
+      EXPAND   TYPE XFELD.
+DATA: END OF GT_HEADER.
+
+DATA: BEGIN OF GT_ITEM OCCURS 0,
+      CONNO    LIKE ZNFT1000-CONNO,
+      REQNO    LIKE ZNFT1010-REQNO,
+      H_NO1    LIKE ZNFT1011-H_NO1,
+      NFKEY    LIKE ZNFT1011-NFKEY,
+      NFKEY_NM TYPE CHAR10,
+      ERDAT_R  LIKE ZNFT1011-ERDAT,
+      ENDMM    LIKE ZNFT1011-ENDMM,
+      BY_SL    LIKE ZNFT1011-BY_SL,
+      BY_SL_NM TYPE CHAR10,
+      EMENG_R  LIKE ZNFT1011-EMENG,
+      MEINS_R  LIKE ZNFT1011-MEINS,
+      BIGO4    LIKE ZNFT1011-BIGO4.
+DATA: END OF GT_ITEM.
+
+************************************************************************
+* GLOBAL VARIABLE
+************************************************************************
+DATA: OK_CODE TYPE SY-UCOMM,
+      OK_SAVE TYPE SY-UCOMM,
+      GV_CODE TYPE SY-UCOMM.
+
+DATA: GV_ERROR TYPE CHAR01.
+
+DATA: GV_CNT TYPE I.
+
+RANGES : R_CSTAT FOR ZNFT1000-CSTAT.
+
+
+
+************************************************************************
+* F4 Help용 변수
+************************************************************************
+
+
+
+
+
+
+
+************************************************************************
+* ALV GLOBAL VARIABLE
+************************************************************************
+CLASS : LCL_EVT_RECEIVER DEFINITION DEFERRED.
+
+DATA: GRF_CONTAINER      TYPE REF TO CL_GUI_CUSTOM_CONTAINER,
+      GRF_CONTAINER_NAME TYPE SCRFNAME VALUE 'CONTAINER_1100',
+      GRF_GRID           TYPE REF TO CL_GUI_ALV_GRID,
+      GRF_EVENT_RECEIVER TYPE REF TO LCL_EVT_RECEIVER.
+
+DATA: GT_EXCLUDE  TYPE UI_FUNCTIONS,
+      GT_SORT     TYPE LVC_T_SORT,  GS_SORT     TYPE LVC_S_SORT,
+      GT_FIELDCAT TYPE LVC_T_FCAT,  GS_FIELDCAT TYPE LVC_S_FCAT,
+      GS_LAYOUT   TYPE LVC_S_LAYO,  GS_VARIANT  TYPE DISVARIANT,
+      GT_ROWS     TYPE LVC_T_ROW,   GS_ROWS     TYPE LVC_S_ROW,
+      GT_COLS     TYPE LVC_T_COL,   GS_COLS     TYPE LVC_S_COL,
+      GT_F4       TYPE LVC_T_F4,    GS_F4       TYPE LVC_S_F4,
+      GT_CELLTAB  TYPE LVC_T_STYL,  GS_CELLTAB  TYPE LVC_S_STYL,
+      GT_STYL     TYPE LVC_T_STYL,  GS_STBL     TYPE LVC_S_STBL,
+      GT_FILTER   TYPE LVC_T_FILT.
+
+DATA: GT_EVENTS_H            TYPE SLIS_T_EVENT,
+      GT_LIST_TOP_OF_PAGE_H  TYPE SLIS_T_LISTHEADER,
+      GT_FIELDCAT_H          TYPE SLIS_T_FIELDCAT_ALV  WITH HEADER LINE,
+      GT_FIELD_H             TYPE SLIS_T_FIELDCAT_ALV,
+      GT_SORT_H              TYPE SLIS_T_SORTINFO_ALV  WITH HEADER LINE.
+*      구조
+DATA : GS_LAYOUT_H               TYPE SLIS_LAYOUT_ALV,
+       GS_EXIT_CAUSED_BY_USER_H  TYPE SLIS_EXIT_BY_USER,
+       GS_VARIANT_H              TYPE DISVARIANT,
+       GS_FIELDCAT_H             TYPE SLIS_FIELDCAT_ALV,
+       GS_SORT_H                 TYPE SLIS_SORTINFO_ALV,
+       GS_KEYINFO_H              TYPE SLIS_KEYINFO_ALV.
+
+CONSTANTS : C_STATUS_SET       TYPE SLIS_FORMNAME VALUE 'PF_STATUS_SET',
+            C_USER_COMMAND     TYPE SLIS_FORMNAME VALUE 'USER_COMMAND',
+            C_TOP_OF_PAGE      TYPE SLIS_FORMNAME VALUE 'TOP_OF_PAGE',
+            C_TOP_OF_LIST      TYPE SLIS_FORMNAME VALUE 'TOP_OF_LIST',
+            C_END_OF_LIST      TYPE SLIS_FORMNAME VALUE 'END_OF_LIST'.
+
+DATA : GV_EXIT_CAUSED_BY_CALLER  TYPE C,
+       GV_SAVE                   TYPE C VALUE 'A',
+       GV_REPID                  TYPE SY-REPID ,
+       GV_TABNAME_HEADER         TYPE SLIS_TABNAME,
+       GV_TABNAME_ITEM           TYPE SLIS_TABNAME.
+DATA : GV_ITAB TYPE CHAR30,
+       GV_POS  TYPE INT4.
+
+* Grid Line variable
+DATA: GS_ROW_ID TYPE LVC_S_ROW,
+      GS_COL_ID TYPE LVC_S_COL,
+      GS_VALUE  TYPE CHAR10.
+
+DATA: GS_ROW  TYPE LVC_S_ROW,
+      GS_COL  TYPE LVC_S_COL,
+      GS_ROID TYPE LVC_S_ROID.
+
+*----------------------------------------------------------------------*
+*       CLASS lcl_evt_receiver DEFINITION
+*----------------------------------------------------------------------*
+CLASS LCL_EVT_RECEIVER DEFINITION.
+
+  PUBLIC SECTION.
+    METHODS : HANDLE_TOOLBAR
+                FOR EVENT TOOLBAR OF CL_GUI_ALV_GRID
+                IMPORTING E_OBJECT
+                          E_INTERACTIVE,
+
+              HANDLE_USER_COMMAND
+                FOR EVENT USER_COMMAND OF CL_GUI_ALV_GRID
+                IMPORTING E_UCOMM,
+
+              HANDLE_DATA_CHANGED
+                FOR EVENT DATA_CHANGED OF CL_GUI_ALV_GRID
+                IMPORTING ER_DATA_CHANGED,
+
+              HANDLE_DATA_CHANGED_FINISHED
+                FOR EVENT DATA_CHANGED_FINISHED OF CL_GUI_ALV_GRID
+                IMPORTING E_MODIFIED
+                          ET_GOOD_CELLS,
+
+              HANDLE_HOTSPOT_CLICK
+                FOR EVENT HOTSPOT_CLICK OF CL_GUI_ALV_GRID
+                IMPORTING E_ROW_ID
+                          E_COLUMN_ID,
+
+              HANDLE_DOUBLE_CLICK
+                FOR EVENT DOUBLE_CLICK OF CL_GUI_ALV_GRID
+                IMPORTING E_ROW
+                          E_COLUMN
+                          ES_ROW_NO,
+
+              HANDLE_ON_F4
+                FOR EVENT ONF4 OF CL_GUI_ALV_GRID
+                IMPORTING SENDER
+                          E_FIELDNAME
+                          E_FIELDVALUE
+                          ES_ROW_NO
+                          ER_EVENT_DATA
+                          ET_BAD_CELLS
+                          E_DISPLAY.
+
+ENDCLASS.  " lcl_evt_receiver
+*----------------------------------------------------------------------*
+*       CLASS lcl_evt_receiver IMPLEMENTATION
+*----------------------------------------------------------------------*
+CLASS LCL_EVT_RECEIVER IMPLEMENTATION.
+
+  METHOD HANDLE_TOOLBAR.
+*    perform alv_event_toobar_part using name
+*                                        e_object
+*                                        e_interactive.
+  ENDMETHOD.                    "handle_toolbar
+
+  METHOD HANDLE_USER_COMMAND.
+*    perform alv_event_user_command_part using name
+*                                    e_ucomm.
+  ENDMETHOD.                    "handle_user_command
+
+  METHOD HANDLE_DATA_CHANGED.
+*    PERFORM ALV_EVENT_DATA_CHANGED USING ER_DATA_CHANGED.
+  ENDMETHOD.                    "handle_data_changed
+
+  METHOD HANDLE_DATA_CHANGED_FINISHED.
+*    PERFORM ALV_EVENT_DATA_CHG_FINISHED USING E_MODIFIED
+*                                              ET_GOOD_CELLS.
+  ENDMETHOD.                    "handle_data_changed_finished
+
+  METHOD HANDLE_HOTSPOT_CLICK.
+*    perform alv_event_hotspot_click using e_row_id e_column_id.
+  ENDMETHOD.                    "handle_hotspot_click
+
+  METHOD HANDLE_DOUBLE_CLICK.
+    PERFORM ALV_EVENT_DOUBLE_CLICK USING E_ROW
+                                         E_COLUMN
+                                         ES_ROW_NO.
+  ENDMETHOD.                    "handle_double_click
+
+  METHOD HANDLE_ON_F4.
+*    PERFORM ALV_EVENT_ON_F4 USING SENDER
+*                                  E_FIELDNAME
+*                                  E_FIELDVALUE
+*                                  ES_ROW_NO
+*                                  ER_EVENT_DATA
+*                                  ET_BAD_CELLS
+*                                  E_DISPLAY.
+  ENDMETHOD.                    "handle_on_f4
+
+ENDCLASS.  " lcl_dvt_receiver

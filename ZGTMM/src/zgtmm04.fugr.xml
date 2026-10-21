@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_FUGR" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <AREAT>E-Proc -&gt; SAP I/F</AREAT>
+   <INCLUDES>
+    <SOBJ_NAME>LZGTMM04F01</SOBJ_NAME>
+    <SOBJ_NAME>LZGTMM04TOP</SOBJ_NAME>
+    <SOBJ_NAME>SAPLZGTMM04</SOBJ_NAME>
+   </INCLUDES>
+   <FUNCTIONS>
+    <item>
+     <FUNCNAME>ZGTMM_IF_DIRECTGR</FUNCNAME>
+     <REMOTE_CALL>R</REMOTE_CALL>
+     <SHORT_TEXT>직납 납품서 검수 결과 수신</SHORT_TEXT>
+     <EXPORT>
+      <RSEXP>
+       <PARAMETER>E_ZRESULT</PARAMETER>
+       <TYP>BAPI_MTYPE</TYP>
+      </RSEXP>
+      <RSEXP>
+       <PARAMETER>E_MESSAGE</PARAMETER>
+       <TYP>BAPI_MSG</TYP>
+      </RSEXP>
+     </EXPORT>
+     <TABLES>
+      <RSTBL>
+       <PARAMETER>IT_DELIV</PARAMETER>
+       <DBSTRUCT>ZGTMMSIF0044</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+     </TABLES>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>E_ZRESULT</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>성공여부(S,E)</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>E_MESSAGE</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>메시지</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>IT_DELIV</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>직납 납품서 검수 결과</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+   </FUNCTIONS>
+  </asx:values>
+ </asx:abap>
+</abapGit>

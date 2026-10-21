@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_DTEL" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <DD04V>
+    <ROLLNAME>ZTILCITY</ROLLNAME>
+    <DDLANGUAGE>3</DDLANGUAGE>
+    <DOMNAME>ZTILCITY</DOMNAME>
+    <LOGFLAG>X</LOGFLAG>
+    <HEADLEN>16</HEADLEN>
+    <SCRLEN1>06</SCRLEN1>
+    <SCRLEN2>16</SCRLEN2>
+    <SCRLEN3>16</SCRLEN3>
+    <DDTEXT>Long TEXT 구분자 (7/8/9/A)</DDTEXT>
+    <REPTEXT>Long TEXT 구분자</REPTEXT>
+    <SCRTEXT_S>구분자</SCRTEXT_S>
+    <SCRTEXT_M>Long TEXT 구분자</SCRTEXT_M>
+    <SCRTEXT_L>Long TEXT 구분자</SCRTEXT_L>
+    <DTELMASTER>3</DTELMASTER>
+    <REFKIND>D</REFKIND>
+   </DD04V>
+  </asx:values>
+ </asx:abap>
+</abapGit>

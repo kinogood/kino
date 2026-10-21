@@ -1,0 +1,164 @@
+*&---------------------------------------------------------------------*
+*& Include          ZGTMMR4300TOP
+*&---------------------------------------------------------------------*
+
+*----------------------------------------------------------------------*
+* TABLES
+*----------------------------------------------------------------------*
+
+*----------------------------------------------------------------------*
+* TYPES
+*----------------------------------------------------------------------*
+TYPES:
+  BEGIN OF TY_DOC,
+*I/F 정보
+    ZIFNO      TYPE ZGTMMT9000-ZIFNO,
+    SYSTEM_ID  TYPE ZGTMMT9000-SYSTEM_ID,
+    SYSTEM_TXT TYPE ZGTPPT1010-FLD_02,
+    ZIFKEY     TYPE ZGTMMT9000-ZIFKEY,
+    ZSTAT      TYPE ZGTMMT9000-ZSTAT,
+    MESSAGE    TYPE ZGTMMT9000-MESSAGE,
+    IFNAM      TYPE ZGTMMT9000-IFNAM,
+*자재문서 정보
+    MJAHR      TYPE MSEG-MJAHR,
+    MBLNR      TYPE MSEG-MBLNR,
+    ZEILE      TYPE MSEG-ZEILE,
+    BUDAT      TYPE MKPF-BUDAT,
+    WERKS      TYPE MSEG-WERKS,
+    MATNR      TYPE MSEG-MATNR,
+    ZZMAKTX80  TYPE MARA-ZZMAKTX80,
+    BWART      TYPE MSEG-BWART,
+    CHARG      TYPE MSEG-CHARG,
+    MENGE      LIKE MSEG-MENGE,
+    MEINS      LIKE MSEG-MEINS,
+    EBELN      TYPE MSEG-EBELN,
+    EBELP      TYPE MSEG-EBELP,
+    LIFNR      TYPE MSEG-LIFNR,
+    LIFNR_TXT  TYPE LFA1-NAME1,
+    TAGNR      TYPE ZPPT0001-TAGNR,
+    SHKZG      TYPE MSEG-SHKZG,
+    MENGE_V    TYPE ZGTMMT9400-MENGE,
+  END OF TY_DOC.
+
+TYPES:
+  BEGIN OF TY_SYS,
+    SYSTEM_ID TYPE ZGTMMT9000-SYSTEM_ID,
+  END OF TY_SYS,
+  BEGIN OF TY_SUC,
+    SYSTEM_ID TYPE ZGTMMT9000-SYSTEM_ID,
+    MJAHR     TYPE MATDOC-MJAHR,
+    MBLNR     TYPE MATDOC-MBLNR,
+    ZEILE     TYPE MATDOC-ZEILE,
+  END OF TY_SUC.
+
+TYPES:
+  BEGIN OF TY_DATA.
+    INCLUDE TYPE ZGTMMS4000.
+TYPES:
+    MENGE_V TYPE ZGTMMT9400-MENGE,
+    SHKZG   TYPE MSEG-SHKZG,
+  END OF TY_DATA.
+
+
+TYPES:
+  TY_T_DATA TYPE STANDARD TABLE OF TY_DATA,
+  TY_T_SYS  TYPE STANDARD TABLE OF TY_SYS,
+  TY_T_SUC  TYPE SORTED TABLE OF TY_SUC WITH UNIQUE KEY SYSTEM_ID MJAHR MBLNR ZEILE.
+
+*----------------------------------------------------------------------*
+* DATA
+*----------------------------------------------------------------------*
+
+DATA:
+  GT_DOC   TYPE STANDARD TABLE OF TY_DOC.
+
+DATA:
+  GV_WERKS TYPE T001W-WERKS,
+  GV_MATNR TYPE MARA-MATNR,
+  GV_BWART TYPE MSEG-BWART,
+  GV_LIFNR TYPE MSEG-LIFNR,
+  GV_CPUDT TYPE MKPF-CPUDT,
+  GV_BUDAT TYPE MKPF-BUDAT,
+  GV_EBELN TYPE EKKO-EBELN.
+
+DATA:
+  GT_ECOMM  TYPE STANDARD TABLE OF SY-UCOMM,
+  GV_OKCODE TYPE SY-UCOMM.
+
+*----------------------------------------------------------------------*
+* CONSTANTS
+*----------------------------------------------------------------------*
+CONSTANTS:
+  GC_A TYPE C LENGTH 1 VALUE 'A',
+  GC_C TYPE C LENGTH 1 VALUE 'C',
+  GC_D TYPE C LENGTH 1 VALUE 'D',
+  GC_E TYPE C LENGTH 1 VALUE 'E',
+  GC_S TYPE C LENGTH 1 VALUE 'S',
+  GC_H TYPE C LENGTH 1 VALUE 'H'.
+
+CONSTANTS:
+  GC_1       TYPE C LENGTH 1 VALUE '1',
+  GC_00      TYPE C LENGTH 2 VALUE '00',
+  GC_02      TYPE C LENGTH 2 VALUE '02',
+  GC_PP      TYPE C LENGTH 2 VALUE 'PP',
+  GC_0010    TYPE C LENGTH 4 VALUE '0010',
+  GC_MM00039 TYPE ZGTEIFNO VALUE 'MM00039'.
+
+CONSTANTS:
+  GC_MAX TYPE INT4 VALUE 100. "전송 시 최대 데이터 라인 수
+
+
+*----------------------------------------------------------------------*
+* ALV
+*----------------------------------------------------------------------*
+DATA:
+  GO_GRID  TYPE REF TO CL_GUI_ALV_GRID,
+  GO_CONT  TYPE REF TO CL_GUI_CUSTOM_CONTAINER,
+  GV_ASAVE TYPE CHAR01 VALUE 'A',
+  GS_LAYO  TYPE LVC_S_LAYO,
+  GS_VARI  TYPE DISVARIANT,
+  GT_FCAT  TYPE LVC_T_FCAT,
+  GT_SORT  TYPE LVC_T_SORT,
+  GT_EXCL  TYPE UI_FUNCTIONS.
+
+*----------------------------------------------------------------------*
+* Screen - 1000
+*----------------------------------------------------------------------*
+SELECTION-SCREEN BEGIN OF BLOCK B01 WITH FRAME TITLE TEXT-S01.
+
+  SELECTION-SCREEN BEGIN OF LINE.
+    PARAMETERS : P_ILOG RADIOBUTTON GROUP GR1
+                             USER-COMMAND EXE DEFAULT 'X'.
+    SELECTION-SCREEN COMMENT (15) TEXT-R01 FOR FIELD P_ILOG.
+
+    SELECTION-SCREEN POSITION 32.
+    PARAMETERS : P_SEND RADIOBUTTON GROUP GR1.
+    SELECTION-SCREEN COMMENT (15) TEXT-R02 FOR FIELD P_SEND.
+  SELECTION-SCREEN END   OF LINE.
+
+SELECTION-SCREEN END   OF BLOCK B01.
+
+SELECTION-SCREEN BEGIN OF BLOCK B02 WITH FRAME TITLE TEXT-S02.
+  PARAMETERS :
+    P_IFSYT TYPE ZGTE_FLDVAL AS LISTBOX VISIBLE
+                          LENGTH 17 MODIF ID IFS.
+
+  SELECT-OPTIONS:
+    S_IFDAT FOR SY-DATLO MODIF ID IFD,
+    S_WERKS FOR GV_WERKS MODIF ID WRK MEMORY ID WRK,
+    S_MATNR FOR GV_MATNR,
+    S_BWART FOR GV_BWART MODIF ID BWA,
+    S_LIFNR FOR GV_LIFNR,
+    S_EBELN FOR GV_EBELN MODIF ID EBE,
+    S_CPUDT FOR GV_CPUDT MODIF ID CPU,
+    S_BUDAT FOR GV_BUDAT MODIF ID BUD.
+
+SELECTION-SCREEN END   OF BLOCK B02.
+
+SELECTION-SCREEN BEGIN OF BLOCK B03 WITH FRAME TITLE TEXT-S03.
+
+  PARAMETERS :
+    P_BAT AS CHECKBOX MODIF ID BAT,
+    P_FRC AS CHECKBOX MODIF ID FRC.
+
+SELECTION-SCREEN END   OF BLOCK B03.

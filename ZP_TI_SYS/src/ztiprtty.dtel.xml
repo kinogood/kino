@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_DTEL" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <DD04V>
+    <ROLLNAME>ZTIPRTTY</ROLLNAME>
+    <DDLANGUAGE>3</DDLANGUAGE>
+    <DOMNAME>ZTIPRTTY</DOMNAME>
+    <LOGFLAG>X</LOGFLAG>
+    <HEADLEN>42</HEADLEN>
+    <SCRLEN1>10</SCRLEN1>
+    <SCRLEN2>15</SCRLEN2>
+    <SCRLEN3>40</SCRLEN3>
+    <DDTEXT>출력유형</DDTEXT>
+    <REPTEXT>출력유형(1:Printer, 2:Fax, 3:e-Mail,4:PDF)</REPTEXT>
+    <SCRTEXT_S>출력유형</SCRTEXT_S>
+    <SCRTEXT_M>출력유형</SCRTEXT_M>
+    <SCRTEXT_L>출력유형(1:Printer,2:Fax,3:e-Mail,4:PDF)</SCRTEXT_L>
+    <DTELMASTER>3</DTELMASTER>
+    <REFKIND>D</REFKIND>
+   </DD04V>
+  </asx:values>
+ </asx:abap>
+</abapGit>

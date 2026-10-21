@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_TRAN" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <TSTC>
+    <TCODE>ZGTMMR4540E</TCODE>
+    <PGMNA>ZGTMMR4540</PGMNA>
+    <DYPNO>0200</DYPNO>
+   </TSTC>
+   <TSTCC>
+    <TCODE>ZGTMMR4540E</TCODE>
+    <S_WEBGUI>1</S_WEBGUI>
+    <S_WIN32>X</S_WIN32>
+    <S_PLATIN>X</S_PLATIN>
+   </TSTCC>
+   <TSTCT>
+    <SPRSL>3</SPRSL>
+    <TCODE>ZGTMMR4540E</TCODE>
+    <TTEXT>미투입자재용 기타통문 요청</TTEXT>
+   </TSTCT>
+  </asx:values>
+ </asx:abap>
+</abapGit>

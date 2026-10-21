@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_DDLS" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <DDLS>
+    <DDLNAME>ZGTMM_CV_GET_MAX_ZGTMMT1040</DDLNAME>
+    <DDLANGUAGE>3</DDLANGUAGE>
+    <DDTEXT>견적/단가 계약 구성 정보 조회(기준일자 기준 최신)</DDTEXT>
+    <SOURCE_TYPE>W</SOURCE_TYPE>
+   </DDLS>
+  </asx:values>
+ </asx:abap>
+</abapGit>

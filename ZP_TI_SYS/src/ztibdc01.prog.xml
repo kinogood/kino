@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_PROG" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <PROGDIR>
+    <NAME>ZTIBDC01</NAME>
+    <SUBC>1</SUBC>
+    <APPL>M</APPL>
+    <RSTAT>K</RSTAT>
+    <RLOAD>3</RLOAD>
+    <FIXPT>X</FIXPT>
+    <UCCHECK>X</UCCHECK>
+   </PROGDIR>
+   <CUA>
+    <TIT>
+     <RSMPE_TITT>
+      <CODE>T1000</CODE>
+      <TEXT>Open L/C Upload ( Migration용 )</TEXT>
+     </RSMPE_TITT>
+    </TIT>
+   </CUA>
+   <TPOOL>
+    <item>
+     <ID>I</ID>
+     <KEY>010</KEY>
+     <ENTRY>****************     EXCEL FILE 서식     ***************</ENTRY>
+     <LENGTH>100</LENGTH>
+    </item>
+    <item>
+     <ID>I</ID>
+     <KEY>011</KEY>
+     <ENTRY>수입의뢰종류,Amend 차수,프로젝트,지불조건,유산스기간,이종통화 FX,최종선적일자,</ENTRY>
+     <LENGTH>79</LENGTH>
+    </item>
+    <item>
+     <ID>I</ID>
+     <KEY>012</KEY>
+     <ENTRY>개설금액,개설통화,USD환산금액,사업구분,운송방법,원산지(코드),원산지(명칭),</ENTRY>
+     <LENGTH>79</LENGTH>
+    </item>
+    <item>
+     <ID>I</ID>
+     <KEY>013</KEY>
+     <ENTRY>선적항(국가),선적항(코드),도착항(국가),도착항(코드),개설희망일자,신청일자,</ENTRY>
+     <LENGTH>79</LENGTH>
+    </item>
+    <item>
+     <ID>I</ID>
+     <KEY>014</KEY>
+     <ENTRY>개설일자,유효일자,이체희망일자,의뢰은행,수입개설번호,</ENTRY>
+     <LENGTH>79</LENGTH>
+    </item>
+    <item>
+     <ID>I</ID>
+     <KEY>015</KEY>
+     <ENTRY>구매오더,품번,수입의뢰수량,H/S 코드</ENTRY>
+     <LENGTH>79</LENGTH>
+    </item>
+    <item>
+     <ID>I</ID>
+     <KEY>030</KEY>
+     <ENTRY>**** 프로그램실행전에 엑셀파일은 종료한 후 사용하십시오. ****</ENTRY>
+     <LENGTH>61</LENGTH>
+    </item>
+    <item>
+     <ID>I</ID>
+     <KEY>106</KEY>
+     <ENTRY>출력일자</ENTRY>
+     <LENGTH>8</LENGTH>
+    </item>
+    <item>
+     <ID>I</ID>
+     <KEY>P01</KEY>
+     <ENTRY>Excel 파일을 읽는 중입니다 %99999%%</ENTRY>
+     <LENGTH>35</LENGTH>
+    </item>
+    <item>
+     <ID>R</ID>
+     <ENTRY>[BDC] OPEN L/C Upload ( Migration용 )</ENTRY>
+     <LENGTH>37</LENGTH>
+    </item>
+    <item>
+     <ID>S</ID>
+     <KEY>P_HEADER</KEY>
+     <ENTRY>파일상 헤더 내역을 포함합니다.</ENTRY>
+     <LENGTH>38</LENGTH>
+    </item>
+    <item>
+     <ID>S</ID>
+     <KEY>P_UPLOAD</KEY>
+     <ENTRY>업로드용 파일 이름</ENTRY>
+     <LENGTH>26</LENGTH>
+    </item>
+   </TPOOL>
+  </asx:values>
+ </asx:abap>
+</abapGit>

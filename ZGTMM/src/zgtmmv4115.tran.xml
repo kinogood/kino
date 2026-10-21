@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_TRAN" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <TSTC>
+    <TCODE>ZGTMMV4115</TCODE>
+    <CINFO>Ag==</CINFO>
+   </TSTC>
+   <TSTCC>
+    <TCODE>ZGTMMV4115</TCODE>
+    <S_WEBGUI>1</S_WEBGUI>
+    <S_WIN32>X</S_WIN32>
+    <S_PLATIN>X</S_PLATIN>
+   </TSTCC>
+   <TSTCT>
+    <SPRSL>3</SPRSL>
+    <TCODE>ZGTMMV4115</TCODE>
+    <TTEXT>외주 재고 불출 승인 알림 메일 대상자</TTEXT>
+   </TSTCT>
+   <TSTCP>
+    <TCODE>ZGTMMV4115</TCODE>
+    <PARAM>/*SM30 VIEWNAME=ZGTMMV4115;SHOW=X;</PARAM>
+   </TSTCP>
+  </asx:values>
+ </asx:abap>
+</abapGit>

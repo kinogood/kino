@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_FUGR" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <AREAT>인바운드 납품 생성 관련</AREAT>
+   <INCLUDES>
+    <SOBJ_NAME>LZ_TI_INBOUND_FUNCTIONSF01</SOBJ_NAME>
+    <SOBJ_NAME>LZ_TI_INBOUND_FUNCTIONSTOP</SOBJ_NAME>
+    <SOBJ_NAME>SAPLZ_TI_INBOUND_FUNCTIONS</SOBJ_NAME>
+   </INCLUDES>
+   <FUNCTIONS>
+    <item>
+     <FUNCNAME>Z_TI_CONFIRMATION_ANL_QTY</FUNCNAME>
+     <GLOBAL_FLAG>X</GLOBAL_FLAG>
+     <SHORT_TEXT>Liefert offene anlieferungsrelevante Mengen und Termine einer Position</SHORT_TEXT>
+     <IMPORT>
+      <RSIMP>
+       <PARAMETER>I_EBELN</PARAMETER>
+       <DBFIELD>EKKO-EBELN</DBFIELD>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_EBELP</PARAMETER>
+       <DBFIELD>EKPO-EBELP</DBFIELD>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_EINDT</PARAMETER>
+       <DBFIELD>EKET-EINDT</DBFIELD>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_BSTAE</PARAMETER>
+       <DBFIELD>EKPO-BSTAE</DBFIELD>
+       <OPTIONAL>X</OPTIONAL>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_UPTYP</PARAMETER>
+       <DBFIELD>EKPO-UPTYP</DBFIELD>
+       <OPTIONAL>X</OPTIONAL>
+      </RSIMP>
+     </IMPORT>
+     <TABLES>
+      <RSTBL>
+       <PARAMETER>XEKET</PARAMETER>
+       <DBSTRUCT>BEKET</DBSTRUCT>
+      </RSTBL>
+     </TABLES>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>I_EBELN</PARAMETER>
+       <KIND>P</KIND>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_EBELP</PARAMETER>
+       <KIND>P</KIND>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_EINDT</PARAMETER>
+       <KIND>P</KIND>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_BSTAE</PARAMETER>
+       <KIND>P</KIND>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_UPTYP</PARAMETER>
+       <KIND>P</KIND>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>XEKET</PARAMETER>
+       <KIND>P</KIND>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+   </FUNCTIONS>
+  </asx:values>
+ </asx:abap>
+</abapGit>

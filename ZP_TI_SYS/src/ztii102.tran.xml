@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_TRAN" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <TSTC>
+    <TCODE>ZTII102</TCODE>
+    <CINFO>Ag==</CINFO>
+   </TSTC>
+   <TSTCC>
+    <TCODE>ZTII102</TCODE>
+    <S_WEBGUI>1</S_WEBGUI>
+   </TSTCC>
+   <TSTCT>
+    <SPRSL>3</SPRSL>
+    <TCODE>ZTII102</TCODE>
+    <TTEXT>B/L 관리번호 번호범위 관리</TTEXT>
+   </TSTCT>
+   <TSTCP>
+    <TCODE>ZTII102</TCODE>
+    <PARAM>/NSNUM TNRO-OBJECT=ZTIIBLNO;</PARAM>
+   </TSTCP>
+   <AUTHORIZATIONS>
+    <TSTCA>
+     <TCODE>ZTII102</TCODE>
+    </TSTCA>
+   </AUTHORIZATIONS>
+   <I18N_TPOOL>
+    <TSTCT>
+     <SPRSL>D</SPRSL>
+     <TTEXT>Nummernkreise Einkaufsbelege</TTEXT>
+    </TSTCT>
+    <TSTCT>
+     <SPRSL>E</SPRSL>
+     <TTEXT>Number Ranges for Purch. Documents</TTEXT>
+    </TSTCT>
+   </I18N_TPOOL>
+  </asx:values>
+ </asx:abap>
+</abapGit>

@@ -1,0 +1,243 @@
+*&---------------------------------------------------------------------*
+*& Include ZGTMMI6020TOP
+*&---------------------------------------------------------------------*
+
+TABLES : ZGTMMT9000, EKKO, EKPO.
+
+
+RANGES : GR_GR1   FOR SCREEN-GROUP1,
+         GR_SNM   FOR SCREEN-NAME,
+         GR_LCDAT FOR EKKO-LASTCHANGEDATETIME,
+         GR_EBELN FOR EKKO-EBELN.
+
+
+DATA : BEGIN OF GT_IFNO OCCURS 0,
+         KEY  LIKE ZGTPPT1010-FLD_01,
+         TEXT LIKE ZGTPPT1010-FLD_02,
+       END   OF GT_IFNO.
+
+DATA : BEGIN OF GT_HDR OCCURS 0,
+         ZIFNO              LIKE ZGTMMT9000-ZIFNO,     "I/F No
+         ZIFKEY             LIKE ZGTMMT9000-ZIFKEY,    "Interface Key
+         SYSTEM_ID          LIKE ZGTMMT9000-SYSTEM_ID, "I/F 시스템
+         ZSTAT              LIKE ZGTMMT9000-ZSTAT,     "상태
+         MESSAGE            LIKE ZGTMMT9000-MESSAGE,   "메시지
+         IFDAT              LIKE ZGTMMT9000-IFDAT,     "I/F 일자
+         IFTIM              LIKE ZGTMMT9000-IFTIM,     "I/F 시간
+         IFNAM              LIKE ZGTMMT9000-IFNAM,     "송수신자
+         EBELN              LIKE ZGTMMT6020-EBELN,     "구매오더
+         BSART              LIKE ZGTMMT6020-BSART,     "유형
+         BUKRS              LIKE ZGTMMT6020-BUKRS,     "CoCd
+         EKORG              LIKE ZGTMMT6020-EKORG,     "POrg
+         EKGRP              LIKE ZGTMMT6020-EKGRP,     "PGrp
+         EKNAM              LIKE ZGTMMT6020-EKNAM,     "구매그룹
+         BSAKZ              LIKE ZGTMMT6020-BSAKZ,     "Ctl
+         LIFNR              LIKE ZGTMMT6020-LIFNR,     "공급업체
+         NAME1              LIKE ZGTMMT6020-NAME1,     "공급업체명
+         RESWK              LIKE ZGTMMT6020-RESWK,     "출고플랜트
+         BEDAT              LIKE ZGTMMT6020-BEDAT,     "증빙일
+         AEDAT              LIKE ZGTMMT6020-AEDAT,     "생성일
+         LASTCHANGEDATETIME LIKE ZGTMMT6020-LASTCHANGEDATETIME, "최종 변경일시
+       END   OF GT_HDR.
+
+DATA : GT_ITM TYPE ZGTMMT6021 OCCURS 0 WITH HEADER LINE,
+       GT_CMP TYPE ZGTMMT6022 OCCURS 0 WITH HEADER LINE.
+
+DATA : BEGIN OF GT_DATA OCCURS 0,
+         EBELN              LIKE EKKO-EBELN,
+         BSART              LIKE EKKO-BSART,
+         BUKRS              LIKE EKKO-BUKRS,
+         EKORG              LIKE EKKO-EKORG,
+         EKGRP              LIKE EKKO-EKGRP,
+         EKNAM              LIKE T024-EKNAM,
+         BSAKZ              LIKE EKKO-BSAKZ,
+         LIFNR              LIKE EKKO-LIFNR,
+         NAME1              LIKE LFA1-NAME1,
+         RESWK              LIKE EKKO-RESWK,
+         BEDAT              LIKE EKKO-BEDAT,
+         AEDAT              LIKE EKKO-AEDAT,
+         LASTCHANGEDATETIME LIKE EKKO-LASTCHANGEDATETIME,
+
+         EBELP              LIKE EKPO-EBELP,
+         LOEKZ              LIKE EKPO-LOEKZ,
+         PSTYP              LIKE EKPO-PSTYP,
+         KNTTP              LIKE EKPO-KNTTP,
+         MATNR              LIKE EKPO-MATNR,
+         TXZ01              LIKE EKPO-TXZ01,
+         MTART              LIKE EKPO-MTART,
+         MATKL              LIKE EKPO-MATKL,
+         MENGE              LIKE EKPO-MENGE,
+         MEINS              LIKE EKPO-MEINS,
+         UEBTO              LIKE EKPO-UEBTO,
+         UNTTO              LIKE EKPO-UNTTO,
+         WERKS              LIKE EKPO-WERKS,
+         LGORT              LIKE EKPO-LGORT,
+         BSTAE              LIKE EKPO-BSTAE,
+         EMLIF              LIKE EKPO-EMLIF,
+         EMLIF_TX           LIKE LFA1-NAME1,
+         LBLKZ              LIKE EKPO-LBLKZ,
+         KUNNR              LIKE EKPO-KUNNR,
+         KUNNR_TX           LIKE KNA1-NAME1,
+         RETPO              LIKE EKPO-RETPO,
+         JOB_NO             LIKE EKPO-BEDNR,
+
+         EINDT              LIKE EKET-EINDT,
+       END   OF GT_DATA.
+
+DATA : BEGIN OF GT_PO OCCURS 0,
+         EBELN LIKE EKPO-EBELN,
+         EBELP LIKE EKPO-EBELP,
+       END   OF GT_PO.
+
+DATA : BEGIN OF GT_6000 OCCURS 0,
+         EBELN     LIKE ZGTMMT6000-EBELN,
+         EBELP     LIKE ZGTMMT6000-EBELP,
+         JOB_NO    LIKE ZGTMMT6000-JOB_NO,
+         LINE_NO   LIKE ZGTMMT6000-LINE_NO,
+         SERIAL_NO LIKE ZGTMMT6000-SERIAL_INFO,
+       END   OF GT_6000.
+
+DATA : GT_6000D LIKE GT_6000 OCCURS 0 WITH HEADER LINE.
+
+DATA : BEGIN OF GT_EKKN OCCURS 0,
+         EBELN      LIKE EKKN-EBELN,
+         EBELP      LIKE EKKN-EBELP,
+         VBELN      LIKE EKKN-VBELN,
+         VBELP      LIKE EKKN-VBELP,
+         AUFNR      LIKE EKKN-AUFNR,
+         AUFPL      LIKE EKKN-AUFPL,
+         APLZL      LIKE EKKN-APLZL,
+         PS_PSP_PNR LIKE EKKN-PS_PSP_PNR,
+         ABLAD      LIKE EKKN-ABLAD,
+       END   OF GT_EKKN.
+
+DATA : BEGIN OF GT_AFVC OCCURS 0,
+         AUFNR LIKE EKKN-AUFNR,
+         AUFPL LIKE AFVC-AUFPL,
+         APLZL LIKE AFVC-APLZL,
+         VORNR LIKE AFVC-VORNR,
+       END   OF GT_AFVC.
+
+DATA : BEGIN OF GT_PRXX OCCURS 0,
+         PS_PSP_PNR LIKE EKKN-PS_PSP_PNR,
+         PSPNR      LIKE PRPS-PSPNR,
+         POSID      LIKE PRPS-POSID,
+         PSPID      LIKE PROJ-PSPID,
+       END   OF GT_PRXX.
+
+DATA : BEGIN OF GT_LKEY OCCURS 0,
+         ZIFKEY LIKE ZGTMMT6020-ZIFKEY,
+         EBELN  LIKE ZGTMMT6020-EBELN,
+         EBELP  LIKE ZGTMMT6021-EBELP,
+*        MATNR  LIKE ZGTMMT6022-MATNR,
+       END   OF GT_LKEY.
+
+DATA : GT_F063 LIKE ZGTMMSIF0063 OCCURS 0 WITH HEADER LINE,
+       GT_F064 LIKE ZGTMMSIF0064 OCCURS 0 WITH HEADER LINE,
+       GT_F065 LIKE ZGTMMSIF0065 OCCURS 0 WITH HEADER LINE.
+
+DATA : GS_9000 LIKE ZGTMMT9000,
+       GT_6020 LIKE ZGTMMT6020 OCCURS 0 WITH HEADER LINE,
+       GT_6021 LIKE ZGTMMT6021 OCCURS 0 WITH HEADER LINE,
+       GT_6022 LIKE ZGTMMT6022 OCCURS 0 WITH HEADER LINE.
+
+DATA : GS_CREA LIKE ZGTMMS0001.
+
+DATA : GV_ZIFKEY LIKE ZGTMMT9000-ZIFKEY.
+
+DATA : GV_ERR,
+       GV_ANS,
+       GV_MSG(100),
+       GV_CNT TYPE I.
+
+DATA : GV_OKCODE LIKE SY-UCOMM.
+
+
+CONSTANTS : GC_A(1)            VALUE 'A',
+            GC_D(1)            VALUE 'D',
+            GC_E(1)            VALUE 'E',
+            GC_I(1)            VALUE 'I',
+            GC_S(1)            VALUE 'S',
+            GC_X(1)            VALUE 'X',
+            GC_1(1)            VALUE '1',
+            GC_BT(2)           VALUE 'BT',
+            GC_EQ(2)           VALUE 'EQ',
+            GC_PP(2)           VALUE 'PP',
+            GC_01(2)           VALUE '01',
+            GC_DIS(3)          VALUE 'DIS',
+            GC_SND(3)          VALUE 'SND',
+            GC_KBDM(4)         VALUE 'KBDM',
+            GC_ROH1(4)         VALUE 'ROH1',
+            GC_ROH2(4)         VALUE 'ROH2',
+            GC_0001(4)         VALUE '0001',
+            GC_0010(4)         VALUE '0010',
+            GC_1100(4)         VALUE '1100',
+            GC_1306(4)         VALUE '1306',
+            GC_MM00062(7)      VALUE 'MM00062',
+            GC_P_IFSYT(7)      VALUE 'P_IFSYT',
+            GC_P_EKORG(7)      VALUE 'P_EKORG',
+            GC_P_WERKS(7)      VALUE 'P_WERKS',
+            GC_P_FCDAT(7)      VALUE 'P_FCDAT',
+            GC_P_TCDAT(7)      VALUE 'P_TCDAT',
+            GC_S_IFDAT-LOW(11) VALUE 'S_IFDAT-LOW'.
+
+
+*----------------------------------------------------------------------*
+* SELECTION-SCREEN
+*----------------------------------------------------------------------*
+SELECTION-SCREEN BEGIN OF BLOCK BK1 WITH FRAME TITLE TEXT-S01.
+  SELECTION-SCREEN BEGIN OF LINE.
+    PARAMETERS : P_ILOG RADIOBUTTON GROUP GR1
+                             USER-COMMAND GR1 DEFAULT 'X'.
+    SELECTION-SCREEN COMMENT (15) TEXT-R01 FOR FIELD P_ILOG.
+
+    SELECTION-SCREEN POSITION 32.
+    PARAMETERS : P_SEND RADIOBUTTON GROUP GR1.
+    SELECTION-SCREEN COMMENT (15) TEXT-R02 FOR FIELD P_SEND.
+  SELECTION-SCREEN END   OF LINE.
+SELECTION-SCREEN END   OF BLOCK BK1.
+
+SELECTION-SCREEN BEGIN OF BLOCK BK2 WITH FRAME TITLE TEXT-S02.
+  PARAMETERS     : P_IFSYT TYPE ZGTE_FLDVAL              "I/F 시스템
+                                AS LISTBOX VISIBLE LENGTH 17.
+  SELECT-OPTIONS : S_IFDAT  FOR ZGTMMT9000-IFDAT  MODIF ID DIS, "I/F 일자
+                   S_IFKEY  FOR ZGTMMT9000-ZIFKEY MODIF ID DIS. "I/F Key
+  PARAMETERS     : P_EKORG LIKE EKKO-EKORG MODIF ID SND, "구매 조직
+                   P_WERKS LIKE EKPO-WERKS MODIF ID SND. "플랜트
+  SELECT-OPTIONS : S_EKGRP  FOR EKKO-EKGRP,              "구매그룹
+                   S_LIFNR  FOR EKKO-LIFNR,              "공급업체
+                   S_EBELN  FOR EKKO-EBELN,              "구매오더 번호
+                   S_BEDAT  FOR EKKO-BEDAT,              "구매 증빙일
+                   S_BSART  FOR EKKO-BSART.              "구매 문서 유형
+
+  SELECTION-SCREEN BEGIN OF LINE.
+    SELECTION-SCREEN COMMENT (10) TEXT-S20 MODIF ID SND.
+    SELECTION-SCREEN POSITION 33.
+    PARAMETERS   : P_FCDAT LIKE SY-DATLO   MODIF ID SND. "변경시작 일시
+    SELECTION-SCREEN POSITION 45.
+    PARAMETERS   : P_FCTIM LIKE SY-TIMLO   MODIF ID SND.
+  SELECTION-SCREEN END   OF LINE.
+  SELECTION-SCREEN BEGIN OF LINE.
+    SELECTION-SCREEN COMMENT (10) TEXT-S21 MODIF ID SND.
+    SELECTION-SCREEN POSITION 33.
+    PARAMETERS   : P_TCDAT LIKE SY-DATLO   MODIF ID SND. "변경종료 일시
+    SELECTION-SCREEN POSITION 45.
+    PARAMETERS   : P_TCTIM LIKE SY-TIMLO   MODIF ID SND.
+  SELECTION-SCREEN END   OF LINE.
+SELECTION-SCREEN END   OF BLOCK BK2.
+
+SELECTION-SCREEN BEGIN OF BLOCK BK3 WITH FRAME TITLE TEXT-S03.
+  SELECTION-SCREEN BEGIN OF LINE.
+    PARAMETERS : P_ALL RADIOBUTTON GROUP GR3 MODIF ID DIS
+                             USER-COMMAND GR3 DEFAULT 'X'.
+    SELECTION-SCREEN COMMENT (15) TEXT-R03 MODIF ID DIS FOR FIELD P_ALL.
+
+    SELECTION-SCREEN POSITION 32.
+    PARAMETERS : P_SUC RADIOBUTTON GROUP GR3 MODIF ID DIS.
+    SELECTION-SCREEN COMMENT (15) TEXT-R04 MODIF ID DIS FOR FIELD P_SUC.
+
+    SELECTION-SCREEN POSITION 64.
+    PARAMETERS : P_ERR RADIOBUTTON GROUP GR3 MODIF ID DIS.
+    SELECTION-SCREEN COMMENT (15) TEXT-R05 MODIF ID DIS FOR FIELD P_ERR.
+  SELECTION-SCREEN END   OF LINE.
+SELECTION-SCREEN END   OF BLOCK BK3.

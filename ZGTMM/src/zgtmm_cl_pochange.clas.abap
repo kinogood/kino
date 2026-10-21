@@ -1,0 +1,140 @@
+class ZGTMM_CL_POCHANGE definition
+  public
+  final
+  create public .
+
+public section.
+
+  interfaces IF_BADI_INTERFACE .
+  interfaces IF_EX_ME_PROCESS_PO_CUST .
+protected section.
+private section.
+ENDCLASS.
+
+
+
+CLASS ZGTMM_CL_POCHANGE IMPLEMENTATION.
+
+
+  method IF_EX_ME_PROCESS_PO_CUST~CHECK.
+
+  endmethod.
+
+
+  method IF_EX_ME_PROCESS_PO_CUST~CLOSE.
+  endmethod.
+
+
+  method IF_EX_ME_PROCESS_PO_CUST~FIELDSELECTION_HEADER.
+  endmethod.
+
+
+  method IF_EX_ME_PROCESS_PO_CUST~FIELDSELECTION_HEADER_REFKEYS.
+  endmethod.
+
+
+  method IF_EX_ME_PROCESS_PO_CUST~FIELDSELECTION_ITEM.
+  endmethod.
+
+
+  method IF_EX_ME_PROCESS_PO_CUST~FIELDSELECTION_ITEM_REFKEYS.
+  endmethod.
+
+
+  METHOD IF_EX_ME_PROCESS_PO_CUST~INITIALIZE.
+
+    DATA : LV_ASET(1).
+
+    "PO 생성시 최초 한번만 공급업체 자동 셋팅되도록(SJM 25.04.11)
+    FREE MEMORY ID 'ZOSV'.
+
+    SELECT SINGLE FLD_03
+      FROM ZGTPPT1010 INTO @DATA(LV_CHK)
+     WHERE MODULE_KIND = 'MM'
+       AND CODEGRP     = '0200'
+       AND FLD_01      = 'ZGTMM_EH_POCHANGE'.
+
+    IF LV_CHK = 'X'.
+      EXPORT LV_ASET = 'X' TO MEMORY ID 'ZOSV'.
+    ENDIF.
+
+  ENDMETHOD.
+
+
+  method IF_EX_ME_PROCESS_PO_CUST~OPEN.
+  endmethod.
+
+
+  method IF_EX_ME_PROCESS_PO_CUST~POST.
+  endmethod.
+
+
+  method IF_EX_ME_PROCESS_PO_CUST~PROCESS_ACCOUNT.
+  endmethod.
+
+
+  method IF_EX_ME_PROCESS_PO_CUST~PROCESS_HEADER.
+  endmethod.
+
+
+  METHOD IF_EX_ME_PROCESS_PO_CUST~PROCESS_ITEM.
+
+*(S)SPG 별 적용 대상 체크 및 직납 정보 조회(SJM 24.10.29)
+    DATA : LR_HDR TYPE REF TO IF_PURCHASE_ORDER_MM,
+           LS_HDR TYPE MEPOHEADER,
+           LS_ITM TYPE MEPOITEM.
+
+    DATA : LV_ASET(1). "추가(SJM 25.04.11)
+
+
+    CLEAR : LR_HDR, LS_HDR, LS_ITM.
+
+    LS_ITM = IM_ITEM->GET_DATA( ).
+
+    "PO 생성시 최초 한번만 공급업체 자동 셋팅되도록(SJM 25.04.11)
+    CHECK LS_ITM-EBELN IS INITIAL.
+    CHECK LS_ITM-EMLIF IS INITIAL.
+
+    CHECK LS_ITM-WERKS IS NOT INITIAL
+      AND LS_ITM-MATNR IS NOT INITIAL.
+
+    IMPORT LV_ASET TO LV_ASET FROM MEMORY ID 'ZOSV'.
+    CHECK LV_ASET = 'X'.
+
+    LR_HDR = IM_ITEM->GET_HEADER( ).
+    LS_HDR = LR_HDR->GET_DATA( ).
+
+    SELECT SINGLE ZUSE INTO @DATA(LV_ZUSE)
+      FROM ZGTMM_CV_GETAPPSTATBYSPG
+     WHERE WERKS = @LS_ITM-WERKS
+*      AND BUKRS = @LS_HDR-BUKRS
+       AND ZTYPE = '01'.
+
+    IF LV_ZUSE = 'X'.
+      "직납 정보 조회
+      SELECT SINGLE EMLIF, LBLKZ
+        INTO @DATA(LS_DATA)
+        FROM ZGTMM_CV_GETDIRECTVEND
+       WHERE BUKRS = @LS_HDR-BUKRS
+         AND WERKS = @LS_ITM-WERKS
+         AND MATNR = @LS_ITM-MATNR
+         AND LIFNR = @LS_HDR-LIFNR
+         AND CNT   = 1. "벤더가 다중인 경우 자동 지정 안함(사용자 결정 필요)
+
+      IF SY-SUBRC = 0.
+        LS_ITM-EMLIF = LS_DATA-EMLIF.
+        LS_ITM-LBLKZ = LS_DATA-LBLKZ.
+
+        FREE MEMORY ID 'ZOSV'.
+      ENDIF.
+    ENDIF.
+
+    CALL METHOD IM_ITEM->SET_DATA( IM_DATA = LS_ITM ).
+*(E)SPG 별 적용 대상 체크 및 직납 정보 조회(SJM 24.10.29)
+
+  ENDMETHOD.
+
+
+  method IF_EX_ME_PROCESS_PO_CUST~PROCESS_SCHEDULE.
+  endmethod.
+ENDCLASS.

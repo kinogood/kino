@@ -1,0 +1,493 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_FUGR" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <AREAT>부스닥트 MES I/F 수신</AREAT>
+   <INCLUDES>
+    <SOBJ_NAME>LZGTMM60F01</SOBJ_NAME>
+    <SOBJ_NAME>LZGTMM60TOP</SOBJ_NAME>
+    <SOBJ_NAME>SAPLZGTMM60</SOBJ_NAME>
+   </INCLUDES>
+   <FUNCTIONS>
+    <item>
+     <FUNCNAME>ZGTMM_BDMES_COMP_TF</FUNCNAME>
+     <REMOTE_CALL>R</REMOTE_CALL>
+     <SHORT_TEXT>[BD] 사급자재 출고 I/F 수신</SHORT_TEXT>
+     <IMPORT>
+      <RSIMP>
+       <PARAMETER>I_SYSTEM_ID</PARAMETER>
+       <DEFAULT>&apos;KBDM&apos;</DEFAULT>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>CHAR4</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_ZGRCD</PARAMETER>
+       <TYP>ZGTE_BD_ZGRCD</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_WERKS</PARAMETER>
+       <TYP>WERKS_D</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_ZIFKEY</PARAMETER>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>ZGTEIFKEY</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>IS_HEAD</PARAMETER>
+       <TYP>ZGTMMSIF0069</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>IS_PASS</PARAMETER>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>ZGTMMSIF0070</TYP>
+      </RSIMP>
+     </IMPORT>
+     <EXPORT>
+      <RSEXP>
+       <PARAMETER>O_MBLNR</PARAMETER>
+       <TYP>MBLNR</TYP>
+      </RSEXP>
+      <RSEXP>
+       <PARAMETER>O_MJAHR</PARAMETER>
+       <TYP>MJAHR</TYP>
+      </RSEXP>
+      <RSEXP>
+       <PARAMETER>O_IV_NO</PARAMETER>
+       <TYP>ZIV_NO</TYP>
+      </RSEXP>
+      <RSEXP>
+       <PARAMETER>O_RESULT</PARAMETER>
+       <TYP>BAPI_MTYPE</TYP>
+      </RSEXP>
+      <RSEXP>
+       <PARAMETER>O_MESSAGE</PARAMETER>
+       <TYP>BAPI_MSG</TYP>
+      </RSEXP>
+     </EXPORT>
+     <TABLES>
+      <RSTBL>
+       <PARAMETER>IT_ITEM</PARAMETER>
+       <DBSTRUCT>ZGTMMSIF0071</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>OT_RTN</PARAMETER>
+       <DBSTRUCT>ZGTMMSIF0068</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+     </TABLES>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>I_SYSTEM_ID</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>송신 시스템</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_ZGRCD</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>[BD] 사급 출고처리 구분: T(사급출고), C(취소)</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_WERKS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>출고 플랜트</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_ZIFKEY</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Interface Key</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>IS_HEAD</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>[BD] 사급자재 출고 헤더</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>IS_PASS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>[BD] 통문요청 헤더</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>O_MBLNR</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>자재 문서 번호</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>O_MJAHR</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>자재 문서 연도</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>O_IV_NO</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>거래명세서 No - 통문증 번호</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>O_RESULT</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>S:성공, E:Error(실패)</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>O_MESSAGE</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>메시지 텍스트</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>IT_ITEM</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>[BD] 사급출고 아이템</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>OT_RTN</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>BAPI 상세 리턴</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+    <item>
+     <FUNCNAME>ZGTMM_BDMES_ETCPASS_REQ</FUNCNAME>
+     <REMOTE_CALL>R</REMOTE_CALL>
+     <SHORT_TEXT>[BD] 기타통문 요청 I/F 수신</SHORT_TEXT>
+     <IMPORT>
+      <RSIMP>
+       <PARAMETER>I_SYSTEM_ID</PARAMETER>
+       <DEFAULT>&apos;KBDM&apos;</DEFAULT>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>CHAR4</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_ZGRCD</PARAMETER>
+       <TYP>ZGTE_BD_ZGRCD</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_ZIFKEY</PARAMETER>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>ZGTEIFKEY</TYP>
+      </RSIMP>
+     </IMPORT>
+     <EXPORT>
+      <RSEXP>
+       <PARAMETER>O_RESULT</PARAMETER>
+       <TYP>BAPI_MTYPE</TYP>
+      </RSEXP>
+      <RSEXP>
+       <PARAMETER>O_MESSAGE</PARAMETER>
+       <TYP>BAPI_MSG</TYP>
+      </RSEXP>
+     </EXPORT>
+     <TABLES>
+      <RSTBL>
+       <PARAMETER>IT_TAB</PARAMETER>
+       <DBSTRUCT>ZGTMMSIF0072</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>OT_RTN</PARAMETER>
+       <DBSTRUCT>ZGTMMSIF0073</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+     </TABLES>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>I_SYSTEM_ID</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>송신 시스템</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_ZGRCD</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>&apos;E&apos;: 기타통문요청, &apos;C&apos;: 취소</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_ZIFKEY</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Interface Key</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>O_RESULT</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>S:성공, E:Error(실패)</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>O_MESSAGE</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>메시지 텍스트</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>IT_TAB</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>[BD] 기타통문 요청</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>OT_RTN</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>[BD] 기타통문 요청 결과</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+    <item>
+     <FUNCNAME>ZGTMM_BDMES_GOODS_PO_RECEIPT</FUNCNAME>
+     <REMOTE_CALL>R</REMOTE_CALL>
+     <SHORT_TEXT>[BD] 구매오더 PO입고 I/F 수신</SHORT_TEXT>
+     <IMPORT>
+      <RSIMP>
+       <PARAMETER>I_SYSTEM_ID</PARAMETER>
+       <DEFAULT>&apos;KBDM&apos;</DEFAULT>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>CHAR4</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_ZGRCD</PARAMETER>
+       <TYP>ZGTE_BD_ZGRCD</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_ZIFKEY</PARAMETER>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>ZGTEIFKEY</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>IS_HEAD</PARAMETER>
+       <TYP>ZGTMMSIF0066</TYP>
+      </RSIMP>
+     </IMPORT>
+     <EXPORT>
+      <RSEXP>
+       <PARAMETER>O_MBLNR</PARAMETER>
+       <TYP>MBLNR</TYP>
+      </RSEXP>
+      <RSEXP>
+       <PARAMETER>O_MJAHR</PARAMETER>
+       <TYP>MJAHR</TYP>
+      </RSEXP>
+      <RSEXP>
+       <PARAMETER>O_RESULT</PARAMETER>
+       <TYP>BAPI_MTYPE</TYP>
+      </RSEXP>
+      <RSEXP>
+       <PARAMETER>O_MESSAGE</PARAMETER>
+       <TYP>BAPI_MSG</TYP>
+      </RSEXP>
+     </EXPORT>
+     <TABLES>
+      <RSTBL>
+       <PARAMETER>IT_ITEM</PARAMETER>
+       <DBSTRUCT>ZGTMMSIF0067</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>OT_RTN</PARAMETER>
+       <DBSTRUCT>ZGTMMSIF0068</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+     </TABLES>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>I_SYSTEM_ID</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>송신 시스템</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_ZGRCD</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>[BD] 입고처리 구분: R(입고), C(취소)</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_ZIFKEY</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Interface Key</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>IS_HEAD</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>[BD] 입고문서 헤더</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>O_MBLNR</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>자재 문서 번호</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>O_MJAHR</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>자재 문서 연도</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>O_RESULT</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>S:성공, E:Error(실패)</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>O_MESSAGE</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>메시지 텍스트</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>IT_ITEM</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>[BD] 입고문서 아이템</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>OT_RTN</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>BAPI 상세 리턴</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+    <item>
+     <FUNCNAME>ZGTMM_BDMES_STOCK_LIST</FUNCNAME>
+     <REMOTE_CALL>R</REMOTE_CALL>
+     <SHORT_TEXT>[BD] 재고 조회 I/F 수신</SHORT_TEXT>
+     <IMPORT>
+      <RSIMP>
+       <PARAMETER>I_SYSTEM_ID</PARAMETER>
+       <DEFAULT>&apos;KBDM&apos;</DEFAULT>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>CHAR4</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_WERKS</PARAMETER>
+       <DEFAULT>&apos;1306&apos;</DEFAULT>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>EWERK</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_JOB_NO</PARAMETER>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>ZGTE_BD_JOBNO</TYP>
+      </RSIMP>
+     </IMPORT>
+     <EXPORT>
+      <RSEXP>
+       <PARAMETER>O_RESULT</PARAMETER>
+       <TYP>BAPI_MTYPE</TYP>
+      </RSEXP>
+      <RSEXP>
+       <PARAMETER>O_MESSAGE</PARAMETER>
+       <TYP>BAPI_MSG</TYP>
+      </RSEXP>
+     </EXPORT>
+     <TABLES>
+      <RSTBL>
+       <PARAMETER>IT_MAT</PARAMETER>
+       <DBSTRUCT>/ACCGO/CMN_S_MATNR</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>OT_TAB</PARAMETER>
+       <DBSTRUCT>ZGTMMSIF0061</DBSTRUCT>
+      </RSTBL>
+     </TABLES>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>I_SYSTEM_ID</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>송신 시스템</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_WERKS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>플랜트</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_JOB_NO</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>제조지시 번호</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>O_RESULT</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>S:성공, E:Error(실패)</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>O_MESSAGE</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>메시지 텍스트</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>IT_MAT</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>테이블 유형: 자재 번호</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>OT_TAB</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>[BD] 재고 조회 결과</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+    <item>
+     <FUNCNAME>ZGTMM_BDMES_VENDOR_SEARCH</FUNCNAME>
+     <REMOTE_CALL>R</REMOTE_CALL>
+     <SHORT_TEXT>[BD] 공급업체 조회 I/F 수신</SHORT_TEXT>
+     <IMPORT>
+      <RSIMP>
+       <PARAMETER>I_SYSTEM_ID</PARAMETER>
+       <DEFAULT>&apos;KBDM&apos;</DEFAULT>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>CHAR4</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_LIFNR</PARAMETER>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>LIFNR</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_NAME1</PARAMETER>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>NAME1_GP</TYP>
+      </RSIMP>
+     </IMPORT>
+     <EXPORT>
+      <RSEXP>
+       <PARAMETER>O_RESULT</PARAMETER>
+       <TYP>BAPI_MTYPE</TYP>
+      </RSEXP>
+      <RSEXP>
+       <PARAMETER>O_MESSAGE</PARAMETER>
+       <TYP>BAPI_MSG</TYP>
+      </RSEXP>
+     </EXPORT>
+     <TABLES>
+      <RSTBL>
+       <PARAMETER>OT_TAB</PARAMETER>
+       <DBSTRUCT>ZGTMMSIF0060</DBSTRUCT>
+      </RSTBL>
+     </TABLES>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>I_SYSTEM_ID</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>송신 시스템</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_LIFNR</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>공급업체 계정번호</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_NAME1</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>공급업체 이름 검색</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>O_RESULT</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>S:성공, E:Error(실패)</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>O_MESSAGE</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>메시지 텍스트</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>OT_TAB</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>[BD] 공급업체 조회 결과</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+   </FUNCTIONS>
+  </asx:values>
+ </asx:abap>
+</abapGit>

@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_DTEL" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <DD04V>
+    <ROLLNAME>ZTIBIDNO</ROLLNAME>
+    <DDLANGUAGE>3</DDLANGUAGE>
+    <DOMNAME>NUMC10</DOMNAME>
+    <LOGFLAG>X</LOGFLAG>
+    <HEADLEN>29</HEADLEN>
+    <SCRLEN1>10</SCRLEN1>
+    <SCRLEN2>19</SCRLEN2>
+    <SCRLEN3>29</SCRLEN3>
+    <DDTEXT>반입번호[연도(4)+일련번호(6)]</DDTEXT>
+    <REPTEXT>반입번호[연도(4)+일련번호(6)]</REPTEXT>
+    <SCRTEXT_S>반입번호</SCRTEXT_S>
+    <SCRTEXT_M>반입번호[연도+번호]</SCRTEXT_M>
+    <SCRTEXT_L>반입번호[연도(4)+일련번호(6)]</SCRTEXT_L>
+    <DTELMASTER>3</DTELMASTER>
+    <REFKIND>D</REFKIND>
+   </DD04V>
+  </asx:values>
+ </asx:abap>
+</abapGit>

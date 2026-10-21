@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_PARA" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <TPARA>
+    <PARAMID>ZTIIIPNO</PARAMID>
+   </TPARA>
+   <TPARAT>
+    <PARAMID>ZTIIIPNO</PARAMID>
+    <SPRACHE>3</SPRACHE>
+    <PARTEXT>적하보험 관리번호</PARTEXT>
+   </TPARAT>
+  </asx:values>
+ </asx:abap>
+</abapGit>

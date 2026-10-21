@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_TRAN" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <TSTC>
+    <TCODE>ZTII030</TCODE>
+    <CINFO>Ag==</CINFO>
+   </TSTC>
+   <TSTCC>
+    <TCODE>ZTII030</TCODE>
+    <S_WEBGUI>1</S_WEBGUI>
+    <S_WIN32>X</S_WIN32>
+    <S_PLATIN>X</S_PLATIN>
+   </TSTCC>
+   <TSTCT>
+    <SPRSL>3</SPRSL>
+    <TCODE>ZTII030</TCODE>
+    <TTEXT>구매오더-&gt;수입의뢰 복사필드 정의</TTEXT>
+   </TSTCT>
+   <TSTCP>
+    <TCODE>ZTII030</TCODE>
+    <PARAM>/*SM30 VIEWNAME=ZTITIG30;UPDATE=X;</PARAM>
+   </TSTCP>
+   <AUTHORIZATIONS>
+    <TSTCA>
+     <TCODE>ZTII030</TCODE>
+    </TSTCA>
+   </AUTHORIZATIONS>
+   <I18N_TPOOL>
+    <TSTCT>
+     <SPRSL>D</SPRSL>
+     <TTEXT>Nummernkreise Einkaufsbelege</TTEXT>
+    </TSTCT>
+    <TSTCT>
+     <SPRSL>E</SPRSL>
+     <TTEXT>Number Ranges for Purch. Documents</TTEXT>
+    </TSTCT>
+   </I18N_TPOOL>
+  </asx:values>
+ </asx:abap>
+</abapGit>

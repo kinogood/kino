@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_DTEL" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <DD04V>
+    <ROLLNAME>ZGTE_LENGTH</ROLLNAME>
+    <DDLANGUAGE>3</DDLANGUAGE>
+    <HEADLEN>02</HEADLEN>
+    <SCRLEN1>02</SCRLEN1>
+    <SCRLEN2>02</SCRLEN2>
+    <SCRLEN3>02</SCRLEN3>
+    <DDTEXT>조장</DDTEXT>
+    <REPTEXT>조장</REPTEXT>
+    <SCRTEXT_S>조장</SCRTEXT_S>
+    <SCRTEXT_M>조장</SCRTEXT_M>
+    <SCRTEXT_L>조장</SCRTEXT_L>
+    <DTELMASTER>3</DTELMASTER>
+    <DATATYPE>DEC</DATATYPE>
+    <LENG>000013</LENG>
+    <DECIMALS>000003</DECIMALS>
+    <OUTPUTLEN>000017</OUTPUTLEN>
+   </DD04V>
+  </asx:values>
+ </asx:abap>
+</abapGit>

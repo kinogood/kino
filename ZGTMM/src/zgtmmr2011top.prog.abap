@@ -1,0 +1,149 @@
+*&---------------------------------------------------------------------*
+*& Include          ZGTMMR2011TOP
+*&---------------------------------------------------------------------*
+
+*----------------------------------------------------------------------*
+* TYPES
+*----------------------------------------------------------------------*
+TYPES:
+  BEGIN OF TY_LIST,
+    STATUS     TYPE C LENGTH 4,
+    BANFN      TYPE EBAN-BANFN,
+    BNFPO      TYPE EBAN-BNFPO,
+    FRGKZ      TYPE EBAN-FRGKZ,
+    BADAT      TYPE EBAN-BADAT,
+    ERNAM      TYPE EBAN-ERNAM,
+    NAME_TEXT  TYPE PUSER002-NAME_TEXT,
+    MATNR      TYPE EBAN-MATNR,
+    TXZ01      TYPE EBAN-TXZ01,
+    WERKS      TYPE EBAN-WERKS,
+    NAME1      TYPE T001W-NAME1,
+    LGORT      TYPE EBAN-LGORT,
+    LGOBE      TYPE T001L-LGOBE,
+    MENGE      TYPE EBAN-MENGE,
+    MEINS      TYPE EBAN-MEINS,
+    LFDAT      TYPE EBAN-LFDAT,
+    PREIS      TYPE EBAN-PREIS,
+    WAERS      TYPE EBAN-WAERS,
+    PEINH      TYPE EBAN-PEINH,
+    ZAMT       TYPE GSWRT,
+    EKORG      TYPE EBAN-EKORG,
+    EKOTX      TYPE T024E-EKOTX,
+    EKGRP      TYPE EBAN-EKGRP,
+    EKNAM      TYPE T024-EKNAM,
+    AFNAM      TYPE EBAN-AFNAM,
+    KNTTP      TYPE EBAN-KNTTP,
+    KNTTX      TYPE T163I-KNTTX,
+    ANLN1      TYPE EBKN-ANLN1,
+    TXT50      TYPE ANLA-TXT50,
+    KOSTL      TYPE EBKN-KOSTL,
+    KOSTL_TEXT TYPE CSKT-KTEXT,
+    SAKTO      TYPE EBKN-SAKTO,
+    SAKTO_TEXT TYPE SKAT-TXT20,
+    AUFNR      TYPE EBKN-AUFNR,
+    AUFNR_TEXT TYPE AUFK-KTEXT,
+    PS_PSP_PNR TYPE EBKN-PS_PSP_PNR,
+    POST1      TYPE PRPS-POST1,
+    PSTYP      TYPE EBAN-PSTYP,
+    PTEXT      TYPE T163Y-PTEXT,
+    APPSTATUS  TYPE C LENGTH 200,
+    MESSAGE    TYPE BAPI_MSG,
+  END OF TY_LIST.
+
+
+TYPES:
+  TY_T_LIST       TYPE STANDARD TABLE OF TY_LIST,
+  TY_T_ZGTMMT1070 TYPE STANDARD TABLE OF ZGTMMT1070.
+
+*----------------------------------------------------------------------*
+* DATA
+*----------------------------------------------------------------------*
+DATA:
+  GV_EKORG TYPE T024E-EKORG,
+  GV_WERKS TYPE T001W-WERKS,
+  GV_EKGRP TYPE T024-EKGRP,
+  GV_BADAT TYPE EBAN-BADAT,
+  GV_ERNAM TYPE EBAN-ERNAM,
+  GV_BANFN TYPE EBAN-BANFN,
+  GV_MATNR TYPE MARA-MATNR,
+  GV_WAERS TYPE T001-WAERS,
+  GV_APPUSER TYPE ZZPA0001-PERNR. "ID(사번) ALPHA CONV용
+
+DATA:
+  GT_LIST TYPE STANDARD TABLE OF TY_LIST.
+
+DATA:
+  GV_ERROR  TYPE C LENGTH 1,
+  GT_ECOMM  TYPE STANDARD TABLE OF SY-UCOMM,
+  GV_OKCODE TYPE SY-UCOMM.
+
+*----------------------------------------------------------------------*
+* CONSTANTS
+*----------------------------------------------------------------------*
+
+CONSTANTS:
+  GC_A TYPE C LENGTH 1 VALUE 'A',
+  GC_C TYPE C LENGTH 1 VALUE 'C',
+  GC_E TYPE C LENGTH 1 VALUE 'E',
+  GC_R TYPE C LENGTH 1 VALUE 'R',
+  GC_S TYPE C LENGTH 1 VALUE 'S'.
+
+CONSTANTS:
+  GC_1 TYPE C LENGTH 1 VALUE '1'.
+
+CONSTANTS:
+  GC_REL_CODE TYPE BAPIMMPARA-REL_CODE VALUE 'AN'.
+
+*----------------------------------------------------------------------*
+* ALV
+*----------------------------------------------------------------------*
+DATA:
+  GO_GRID_100  TYPE REF TO CL_GUI_ALV_GRID,
+  GO_CONT_100  TYPE REF TO CL_GUI_CUSTOM_CONTAINER,
+  GV_ASAVE_100 TYPE CHAR01 VALUE GC_A,
+  GS_LAYO_100  TYPE LVC_S_LAYO,
+  GS_VARI_100  TYPE DISVARIANT,
+  GT_FCAT_100  TYPE LVC_T_FCAT,
+  GT_SORT_100  TYPE LVC_T_SORT,
+  GT_EXCL_100  TYPE UI_FUNCTIONS.
+
+*----------------------------------------------------------------------*
+* Screen - 1000
+*----------------------------------------------------------------------*
+SELECTION-SCREEN BEGIN OF BLOCK B01 WITH FRAME TITLE TEXT-S01.
+
+  PARAMETERS:
+    P_BUKRS TYPE T001-BUKRS MEMORY ID BUK MODIF ID BUK.
+
+  SELECT-OPTIONS:
+    S_WERKS FOR GV_WERKS MEMORY ID WRK MODIF ID WRK,
+    S_EKORG FOR GV_EKORG MEMORY ID EKO MODIF ID EKO,
+    S_EKGRP FOR GV_EKGRP MEMORY ID EKG MODIF ID EKG.
+
+  PARAMETERS:
+    P_APPUS TYPE ZGTMMT1070-APPUSER MODIF ID APP
+                      DEFAULT SY-UNAME.
+
+  SELECT-OPTIONS:
+   S_BADAT FOR GV_BADAT,
+   S_ERNAM FOR GV_ERNAM,
+   S_BANFN FOR GV_BANFN,
+   S_MATNR FOR GV_MATNR.
+
+SELECTION-SCREEN END   OF BLOCK B01.
+
+SELECTION-SCREEN BEGIN OF BLOCK B02 WITH FRAME TITLE TEXT-S02.
+
+  SELECTION-SCREEN BEGIN OF LINE.
+    PARAMETERS : P_CONF RADIOBUTTON GROUP GR1
+                             DEFAULT 'X'
+                             USER-COMMAND CM1.
+    SELECTION-SCREEN COMMENT (15) TEXT-R01 FOR FIELD P_CONF.
+
+    SELECTION-SCREEN POSITION 20.
+    PARAMETERS : P_DISP RADIOBUTTON GROUP GR1.
+    SELECTION-SCREEN COMMENT (15) TEXT-R02 FOR FIELD P_DISP.
+
+  SELECTION-SCREEN END   OF LINE.
+
+SELECTION-SCREEN END   OF BLOCK B02.

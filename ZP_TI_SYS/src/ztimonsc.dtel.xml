@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_DTEL" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <DD04V>
+    <ROLLNAME>ZTIMONSC</ROLLNAME>
+    <DDLANGUAGE>3</DDLANGUAGE>
+    <DOMNAME>ZTIMONSC</DOMNAME>
+    <LOGFLAG>X</LOGFLAG>
+    <HEADLEN>11</HEADLEN>
+    <SCRLEN1>10</SCRLEN1>
+    <SCRLEN2>15</SCRLEN2>
+    <SCRLEN3>20</SCRLEN3>
+    <DDTEXT>계산서 종류</DDTEXT>
+    <REPTEXT>계산서 종류</REPTEXT>
+    <SCRTEXT_S>계산서종류</SCRTEXT_S>
+    <SCRTEXT_M>계산서 종류</SCRTEXT_M>
+    <SCRTEXT_L>계산서 종류</SCRTEXT_L>
+    <DTELMASTER>3</DTELMASTER>
+    <REFKIND>D</REFKIND>
+   </DD04V>
+  </asx:values>
+ </asx:abap>
+</abapGit>

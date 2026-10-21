@@ -1,0 +1,443 @@
+*&---------------------------------------------------------------------*
+*& INCLUDE          ZGTMMR4330TOP
+*&---------------------------------------------------------------------*
+*----------------------------------------------------------------------*
+* TYPE POOLS
+*----------------------------------------------------------------------*
+
+*----------------------------------------------------------------------*
+*  TABLES
+*----------------------------------------------------------------------*
+TABLES :
+  T001W, MARC, EKKO,
+  ZGTMMT9410, ZGTMMT9411,
+  SSCRFIELDS.
+
+*----------------------------------------------------------------------*
+* TYPES
+*----------------------------------------------------------------------*
+*=> GTY + _ + XXXXX.XXX
+*----------------------------------------------------------------------*
+TYPES:
+ BEGIN OF TY_LIST,
+   ID           TYPE ICON-ID,
+   STATUS  TYPE ICON-NAME,
+   DELNO   TYPE ZGTMMT9410-DELNO,
+   DELITEM TYPE ZGTMMT9410-DELITEM,
+   DOC_URL TYPE ZGTMMT9410-DOC_URL, "실제 URL데이터 담기용
+   DOC_TXT TYPE CHAR10, "ALV 표기/핫스팟 용
+   DR_LABELNO TYPE ZGTMMT9415-DR_LABELNO, "드럼라벨번호
+   EBELN    TYPE  ZGTMM_CV_GET_GODELIVERY_DATA-EBELN,
+   EBELP    TYPE  ZGTMM_CV_GET_GODELIVERY_DATA-EBELP,
+   LIFNR      TYPE LFA1-LIFNR, "ZGTMM_CV_GET_GODELIVERY_DATA-LIFNR,
+   NAME1    TYPE LFA1-NAME1, "ZGTMM_CV_GET_PODATA_H-NAME1,
+   WERKS    TYPE ZGTMM_CV_GET_GODELIVERY_DATA-WERKS,
+   WERKS_N TYPE T001W-NAME1,
+   LGORT    TYPE ZGTMM_CV_GET_GODELIVERY_DATA-LGORT,
+   LGORT_N TYPE LGOBE,
+   MATNR    TYPE ZGTMM_CV_GET_MATDOC-MATNR,
+   TXZ01     TYPE ZGTMM_CV_GET_PODATA_RAW-TXZ01,
+   XCHPF    TYPE MARC-XCHPF,
+   DPCBT    TYPE MARC-DPCBT, "단일배치유형
+   BUDAT    TYPE ZGTMM_CV_GET_GODELIVERY_DATA-BUDAT, "납품일자
+   MENGE   TYPE ZGTMM_CV_GET_GODELIVERY_DATA-MENGE,
+   MEINS     TYPE ZGTMM_CV_GET_GODELIVERY_DATA-MEINS,
+   ERFMG    TYPE ZGTMM_CV_GET_MATDOC-ERFMG,   "입고수량
+   REMAIN_QTY TYPE ZGTMM_CV_GET_MATDOC-ERFMG, "오더잔량
+   ELIKZ      TYPE ZGTMM_CV_GET_PODATA_RAW-ELIKZ,  "납품완료지시자
+   DELCLOSE TYPE ZGTMMT9410-DELCLOSE,       "납품문서종결
+   GRBUDAT   TYPE ZGTMM_CV_GET_MATDOC-BUDAT,  "입고전기일
+   MBLNR       TYPE ZGTMM_CV_GET_MATDOC-MBLNR,
+   MBLNR_C   TYPE ZGTMM_CV_GET_MATDOC-MBLNR, "드럼라벨 체크용
+   MJAHR        TYPE ZGTMM_CV_GET_MATDOC-MJAHR,
+   PSTYP        TYPE ZGTMM_CV_GET_PODATA_RAW-PSTYP, "품목범주
+   PTEXT        TYPE ZGTMM_CV_GET_PODATA_RAW-PTEXT,
+   KNTTP        TYPE ZGTMM_CV_GET_PODATA_RAW-KNTTP, "계정지정범주
+   KNTTX        TYPE ZGTMM_CV_GET_PODATA_RAW-KNTTX,
+   ANLN1        TYPE EKKN-ANLN1,  "자산
+   TXT50         TYPE ANLA-TXT50,
+   KOSTL        TYPE EKKN-KOSTL,  "코스트센터
+   KTEXT        TYPE CSKT-KTEXT,
+   AUFNR        TYPE EKKN-AUFNR,  "오더
+   ATEXT        TYPE AUFK-KTEXT,
+   SAKTO        TYPE EKKN-SAKTO,  "G/L 계정
+   GTEXT        TYPE SKAT-TXT20,
+   PS_PSP_PNR TYPE EKKN-PS_PSP_PNR, "WBS
+   POST1         TYPE PRPS-POST1,
+   LOEKZ        TYPE LOEKZ,
+   UEBTO        TYPE ZGTMM_CV_GET_PODATA_RAW-UEBTO,        "초과 납품 허용 한도
+   HSDAT         TYPE ZGTMM_CV_GET_GODELIVERY_DATA-HSDAT, "제조일
+   LICHA          TYPE ZGTMM_CV_GET_GODELIVERY_DATA-LICHA,  "공급업체 배치 번호
+   MTART         TYPE MARA-MTART, "자재유형
+   MATKL         TYPE MARA-MATKL, "자재그룹
+   INSMK          TYPE EKPO-INSMK,
+   RETPO         TYPE ZGTMM_CV_GET_PODATA_RAW-RETPO,
+   VBELN         TYPE ZGTMM_CV_GET_PODATA_RAW-VBELN, "판매오더
+   POSNR         TYPE ZGTMM_CV_GET_PODATA_RAW-POSNR, "판매오더항목
+   POAMT         TYPE ZGTMM_CV_GET_PODATA_RAW-NETWR, "입고대상금액
+   WAERS         TYPE ZGTMM_CV_GET_PODATA_RAW-WAERS,
+
+   MESSAGE    TYPE BAPI_MSG,
+   EDIT, "입고 수량 필드 변경 가능 여부 제어용
+   LINE_ID        TYPE MB_LINE_ID,  "문서순번(자재문서품목)
+
+   STYLE      TYPE LVC_T_STYL,
+ END OF TY_LIST,
+ BEGIN OF TY_LIST_LABEL,
+             CHECK,
+             ZIFKEY       TYPE ZGTMMT9411-ZIFKEY,
+             DELNO       TYPE ZGTMMT9411-DELNO,
+             DELITEM     TYPE ZGTMMT9411-DELITEM,
+             EBELN        TYPE ZGTMMT9411-EBELN,
+             EBELP        TYPE ZGTMMT9411-EBELP,
+             LABELNO   TYPE ZGTMMT9411-LABELNO,
+             LABELITEM TYPE ZGTMMT9411-LABELITEM,
+             MENGE       TYPE ZGTMMT9411-MENGE,
+             PKG_QTY    TYPE ZGTMMT9411-PKG_QTY,
+             PKG_UNIT    TYPE ZGTMMT9411-PKG_UNIT,
+             GRSTATUS, "입고여부
+             PSTYP         TYPE ZGTMM_CV_GET_PODATA_RAW-PSTYP, "품목범주
+*             MTART         TYPE MARA-MTART,
+          END OF TY_LIST_LABEL,
+
+  BEGIN OF TY_T163I,
+    KNTTP TYPE T163I-KNTTP,
+    KNTTX TYPE T163I-KNTTX,
+  END OF TY_T163I,
+  BEGIN OF TY_T163Y,
+    PSTYP TYPE T163Y-PSTYP,
+    PTEXT TYPE T163Y-PTEXT,
+  END OF TY_T163Y.
+
+TYPES :
+  BEGIN OF TY_PO_RESB,
+    EBELN TYPE RESB-EBELN,
+    EBELP TYPE RESB-EBELP,
+    MENGE TYPE EKPO-MENGE,
+    RSNUM TYPE RESB-RSNUM,
+    RSPOS TYPE RESB-RSPOS,
+    BDMNG TYPE RESB-BDMNG,
+    MATNR TYPE RESB-MATNR,
+    MEINS TYPE RESB-MEINS,
+    WERKS TYPE RESB-WERKS,
+    LGORT TYPE RESB-LGORT,
+    CHARG TYPE RESB-CHARG,
+    XCHPF TYPE MARC-XCHPF,
+    LIFNR TYPE EKKO-LIFNR,
+  END OF TY_PO_RESB,
+  BEGIN OF TY_PO_DELCOMP,
+    EBELN      TYPE ZGTMMT9412-EBELN,
+    EBELP      TYPE ZGTMMT9412-EBELP,
+    DELNO	     TYPE ZGTMMT9412-DELNO,
+    DELITEM	   TYPE ZGTMMT9412-DELITEM,
+    LIFNR      TYPE ZGTMMT9412-LIFNR,
+    IDNRK      TYPE ZGTMMT9412-IDNRK,
+    CHARG      TYPE ZGTMMT9412-CHARG,
+    WERKS      TYPE ZGTMMT9412-WERKS,
+    LGORT      TYPE ZGTMMT9412-LGORT,
+    ISSUE_QTY  TYPE ZGTMMT9412-ISSUE_QTY,
+    ISSUE_UNIT TYPE ZGTMMT9412-ISSUE_UNIT,
+    XCHPF      TYPE MARC-XCHPF,
+  END OF TY_PO_DELCOMP,
+  BEGIN OF TY_MSLB,
+    MATNR TYPE MSLB-MATNR,
+    WERKS TYPE MSLB-WERKS,
+    CHARG TYPE MSLB-CHARG,
+    LIFNR TYPE MSLB-LIFNR,
+    LBLAB TYPE MSLB-LBLAB,
+    XPCBT TYPE MCH1-XPCBT,
+    XPRGI LIKE  MILL_PCBT_MAT_DIA-XPRGI,
+  END OF TY_MSLB,
+  BEGIN OF TY_PO_DISPO,
+    EBELN TYPE RESB-EBELN,
+    EBELP TYPE RESB-EBELP,
+    DISPO TYPE MARC-DISPO,
+  END OF TY_PO_DISPO,
+  BEGIN OF TY_PO_DRGR,
+    EBELN TYPE EKPO-EBELN,
+    EBELP TYPE EKPO-EBELP,
+    INSMK TYPE EKPO-INSMK,
+  END OF TY_PO_DRGR,
+  BEGIN OF TY_LABEL,
+    ZIFKEY         TYPE ZGTMMT9411-ZIFKEY,
+    SYSTEM_ID   TYPE ZGTMMT9411-SYSTEM_ID,
+    DELNO         TYPE ZGTMMT9411-DELNO,
+    DELITEM       TYPE ZGTMMT9411-DELITEM,
+    LABELNO      TYPE ZGTMMT9411-LABELNO,
+    LABELITEM    TYPE ZGTMMT9411-LABELITEM,
+    WERKS          TYPE ZGTMMT9411-WERKS,
+    EBELN           TYPE ZGTMMT9411-EBELN,
+    EBELP           TYPE ZGTMMT9411-EBELP,
+    LGORT           TYPE ZGTMMT9411-LGORT,
+    MENGE          TYPE ZGTMMT9411-MENGE,
+    MEINS            TYPE ZGTMMT9411-MEINS,
+    PKG_QTY       TYPE ZGTMMT9411-PKG_QTY,
+    PKG_UNIT      TYPE ZGTMMT9411-PKG_UNIT,
+    TAGNR           TYPE ZPPT0001-TAGNR,
+    GRSTATUS,
+  END OF TY_LABEL,
+  BEGIN OF TY_VC,
+    PDOC TYPE ZGTMM_CV_PO_VCVALUE_MAIN-PDOC,   "ebeln
+    PDOCITEM TYPE ZGTMM_CV_PO_VCVALUE_MAIN-PDOCITEM,  "ebelp
+    MATNR TYPE ZGTMM_CV_PO_VCVALUE_MAIN-MATNR,
+    TXZ01 TYPE ZGTMM_CV_PO_VCVALUE_MAIN-TXZ01,
+    WERKS TYPE MARC-WERKS,
+    DPCBT  TYPE MARC-DPCBT,
+    LENGTH TYPE ZGTMM_CV_PO_VCVALUE_MAIN-LENGTH,
+    DRQTY TYPE ZGTMM_CV_PO_VCVALUE_MAIN-DRQTY,
+    COLOR TYPE ZGTMM_CV_PO_VCVALUE_MAIN-COLOR,
+    DRUM TYPE ZGTMM_CV_PO_VCVALUE_MAIN-DRUM,
+  END OF TY_VC,
+  BEGIN OF TY_MES,
+    ZIFKEY TYPE ZGTMMT9422-ZIFKEY,
+    SYSTEM_ID TYPE ZGTMMT9422-SYSTEM_ID,
+    DR_LABEL_NO TYPE ZGTMMT9422-DR_LABEL_NO,
+    EBELN TYPE ZGTMMT9422-EBELN,
+    EBELP TYPE ZGTMMT9422-EBELP,
+    DELNO TYPE ZGTMMT9420-DELNO,
+    DELITEM TYPE ZGTMMT9420-DELITEM,
+    LABELNO TYPE ZGTMMT9420-LABELNO,
+    LABELITEM TYPE ZGTMMT9420-LABELITEM,
+    MBLNR TYPE ZGTMMT9423-MBLNR,
+    MJAHR TYPE ZGTMMT9423-MJAHR,
+    BUDAT TYPE ZGTMMT9422-BUDAT,
+    CANCEL TYPE ZGTMM_CV_GET_MATDOC-CANCELLED,
+    REVERSAL TYPE ZGTMM_CV_GET_MATDOC-REVERSAL_MOVEMENT,
+  END OF TY_MES,
+  BEGIN OF TY_MAT,
+    MJAHR TYPE MATDOC-MJAHR,
+    EBELN TYPE MATDOC-EBELN ,
+    EBELP TYPE EKPO-EBELP,
+    DELNO TYPE ZGTMMT9420-DELNO,
+    DELITEM TYPE ZGTMMT9420-DELITEM,
+    MBLNR TYPE MATDOC-MBLNR,
+    ZEILE  TYPE ZEILE,
+    ERFMG TYPE ZGTMM_CV_GET_MATDOC-ERFMG,
+    BUDAT TYPE MATDOC-BUDAT,
+    MATNR TYPE EKPO-MATNR,
+    CANCELLED TYPE ZGTMM_CV_GET_MATDOC-CANCELLED,
+    REVERSAL_MOVEMENT TYPE ZGTMM_CV_GET_MATDOC-REVERSAL_MOVEMENT,
+    BWART TYPE MATDOC-BWART,
+  END OF TY_MAT.
+
+
+TYPES:
+  TY_T_LIST                TYPE STANDARD TABLE OF TY_LIST,
+  TY_T_ZGTMMT9450   TYPE STANDARD TABLE OF ZGTMMT9450,
+  TY_T_PO_RESB         TYPE STANDARD TABLE OF TY_PO_RESB,
+  TY_T_PO_DELCOMP   TYPE STANDARD TABLE OF TY_PO_DELCOMP,
+  TY_T_PO_DISPO         TYPE STANDARD TABLE OF TY_PO_DISPO,
+  TY_T_PO_DRGR          TYPE STANDARD TABLE OF TY_PO_DRGR,
+  TY_T_MSLB                TYPE STANDARD TABLE OF TY_MSLB,
+  TY_T_LABEL               TYPE STANDARD TABLE OF TY_LABEL,
+  TY_T_VC                    TYPE STANDARD TABLE OF TY_VC,
+  TY_T_MES                  TYPE STANDARD TABLE OF TY_MES,
+  TY_T_MAT                  TYPE STANDARD TABLE OF TY_MAT,
+  TY_T_BAPI2017_GM_ITEM_CREATE TYPE STANDARD TABLE OF BAPI2017_GM_ITEM_CREATE.
+
+*----------------------------------------------------------------------*
+* GLOBAL VARIABLE
+*----------------------------------------------------------------------*
+* => GV + '_' XX.XXX
+*----------------------------------------------------------------------*
+DATA :
+  GV_OKCODE             TYPE SY-UCOMM,
+  GV_OKCODE_SAVE   TYPE SY-UCOMM,
+  GV_OKCODE_SAVE2  TYPE SY-UCOMM,
+  GV_QUES(50),
+  GV_ANSWER,
+  GV_EDIT,
+  GV_NEW,
+  GV_ERR,
+  GV_YES,
+  GV_NO,
+  GV_MODE.
+
+DATA :
+  GV_MENGE TYPE MENGE_D,
+  GV_BUDAT TYPE EKKO-AEDAT,
+  GV_VBELN TYPE VBAP-VBELN,
+  GV_TEXT TYPE SO_OBJ_DES.
+
+*----------------------------------------------------------------------*
+* GLOBAL STRUCTURE
+*----------------------------------------------------------------------*
+* => GS + '_' XX.XXX
+*----------------------------------------------------------------------*
+DATA :
+      GS_LIST TYPE TY_LIST,
+      GS_LIST_LABEL TYPE TY_LIST_LABEL,
+      GS_MES TYPE TY_MES,
+      GS_ZGTPPT1010 TYPE ZGTPPT1010.
+
+*DATA : BEGIN OF GS_LIST_LABEL.
+*DATA :   CHECK,
+*             ZIFKEY       TYPE ZGTMMT9411-ZIFKEY,
+*             DELNO       TYPE ZGTMMT9411-DELNO,
+*             DELITEM     TYPE ZGTMMT9411-DELITEM,
+*             LABELNO   TYPE ZGTMMT9411-LABELNO,
+*             LABELITEM TYPE ZGTMMT9411-LABELITEM,
+*             MENGE       TYPE ZGTMMT9411-MENGE,
+*             PKG_QTY    TYPE ZGTMMT9411-PKG_QTY,
+*             PKG_UNIT    TYPE ZGTMMT9411-PKG_UNIT,
+*             PSTYP         TYPE ZGTMM_CV_GET_PODATA_RAW-PSTYP, "품목범주
+*             MTART         TYPE MARA-MTART,
+*          END OF GS_LIST_LABEL.
+
+DATA :  GS_RETURN LIKE BAPIRET2.
+
+*----------------------------------------------------------------------*
+* GLOBAL INTERNAL TABLE
+*----------------------------------------------------------------------*
+* => GT_ + XXX...XX
+*----------------------------------------------------------------------*
+DATA : GT_LIST       LIKE TABLE OF GS_LIST,
+           GT_LIST_C   LIKE TABLE OF GS_LIST,
+           GT_LIST_S   LIKE TABLE OF GS_LIST.
+
+DATA : GT_LIST_LABEL LIKE TABLE OF GS_LIST_LABEL,
+           GT_LIST_300 LIKE TABLE OF GS_LIST_LABEL.
+
+DATA : GT_ZPPT0001 LIKE TABLE OF ZPPT0001,
+           GT_ZGTPPT1010 LIKE TABLE OF ZGTPPT1010,
+           GT_MES TYPE STANDARD TABLE OF TY_MES,
+           GT_ZGTMMT9415 TYPE STANDARD TABLE OF ZGTMMT9415,
+           GT_9410 LIKE TABLE OF ZGTMMT9410,
+           GT_9411 TYPE TABLE OF TY_LABEL, "LIKE TABLE OF ZGTMMT9411,
+           GT_9415 LIKE TABLE OF ZGTMMT9415,
+           GT_4403 LIKE TABLE OF ZGTMMT4403,
+           GT_DELI_X TYPE TABLE OF ZGTMM_CV_GET_GODELIVERY_DATA.
+
+DATA : GT_RETURN LIKE TABLE OF BAPIRET2,
+           GT_EX         TYPE STANDARD TABLE OF SY-UCOMM.
+
+DATA:
+  GT_T163I TYPE SORTED TABLE OF TY_T163I WITH UNIQUE KEY KNTTP,
+  GT_T163Y TYPE SORTED TABLE OF TY_T163Y WITH UNIQUE KEY PSTYP.
+
+DATA : GT_MTXT TYPE BCSY_TEXT,
+           GS_MTXT TYPE SOLI.
+
+*----------------------------------------------------------------------*
+* GLOBAL RANGE                                                         *
+*----------------------------------------------------------------------*
+* => GR_ + XXX.XX                                                      *
+*----------------------------------------------------------------------*
+
+
+
+*----------------------------------------------------------------------*
+* GLOBAL FIELD SYMBOLS                                                 *
+*----------------------------------------------------------------------*
+* => <FS_XXX...XX>, EX)<FS_ITAB>, <FS_WA>, <FS_NN>                     *
+*----------------------------------------------------------------------*
+
+
+*----------------------------------------------------------------------*
+* CONSTANTS
+*----------------------------------------------------------------------*
+CONSTANTS :
+     GC_A(1)             VALUE 'A',
+     GC_B(1)             VALUE 'B',
+     GC_C(1)             VALUE 'C',
+     GC_D(1)             VALUE 'D',
+     GC_E(1)             VALUE 'E',
+     GC_F(1)             VALUE 'F',
+     GC_H(1)             VALUE 'H',
+     GC_I(1)              VALUE 'I',
+     GC_L(1)             VALUE 'L',
+     GC_N(1)             VALUE 'N',
+     GC_O(1)             VALUE 'O',
+     GC_P(1)             VALUE 'P',
+     GC_R(1)             VALUE 'R',
+     GC_S(1)             VALUE 'S',
+     GC_X(1)             VALUE 'X',
+     GC_Y(1)             VALUE 'Y',
+     GC_1(1)             VALUE '1',
+     GC_3(1)             VALUE '3',
+     GC_BT(2)           VALUE 'BT',
+     GC_EQ(2)           VALUE 'EQ',
+     GC_OK(2)           VALUE 'OK',
+     GC_MM(2)          VALUE 'MM'.
+
+CONSTANTS :
+GC_MAX TYPE INT4 VALUE 495,  "BAPI 생성 시 최대 데이터 라인 수
+GC_KSRM(4)    VALUE 'KSRM',
+GC_HIBE(4)      VALUE 'HIBE',
+GC_HAWA(4)   VALUE 'HAWA',
+GC_0830(4)     VALUE '0830',
+GC_ZGRSTATUS(9) VALUE 'ZGRSTATUS',
+GC_ZIVSTATUS(9) VALUE 'ZIVSTATUS'.
+
+*----------------------------------------------------------------------*
+*
+*----------------------------------------------------------------------*
+DEFINE _SET_RANGES.
+
+  &1-LOW = &2.
+  &1-HIGH = &3.
+  &1-OPTION = &4.
+  &1-SIGN = &5.
+  APPEND &1.
+
+END-OF-DEFINITION.
+
+*----------------------------------------------------------------------*
+* SELECTION SCREEN
+*----------------------------------------------------------------------*
+* SELECTION OPTION => SO_XX...X
+* PARAMETER        => PA_XX...X
+* CHECKBOX         => CB_XX...X
+* RADIO BUTTON     => RB_XX...X
+*----------------------------------------------------------------------*
+SELECTION-SCREEN BEGIN OF BLOCK B1 WITH FRAME TITLE TEXT-001.
+  SELECTION-SCREEN BEGIN OF LINE.
+
+    PARAMETERS P_DNO RADIOBUTTON GROUP RD1 USER-COMMAND UC1 DEFAULT 'X'. "납품문서
+    SELECTION-SCREEN COMMENT (15) TEXT-R01 FOR FIELD P_DNO.
+
+    PARAMETERS P_PO RADIOBUTTON GROUP RD1 . "구매오더
+    SELECTION-SCREEN COMMENT (15) TEXT-R02 FOR FIELD P_PO.
+
+    PARAMETERS P_LNO RADIOBUTTON GROUP RD1 . "라벨번호
+    SELECTION-SCREEN COMMENT (15) TEXT-R03 FOR FIELD P_LNO.
+
+    PARAMETERS P_DIS RADIOBUTTON GROUP RD1 . "표준/수기 명세서 일괄조회
+    SELECTION-SCREEN COMMENT (15) TEXT-R07 FOR FIELD P_DIS.
+
+SELECTION-SCREEN END OF LINE.
+SELECTION-SCREEN END OF BLOCK B1.
+
+SELECTION-SCREEN BEGIN OF BLOCK B2 WITH FRAME TITLE TEXT-004.
+
+  PARAMETERS       :  P_BUKRS TYPE T001-BUKRS OBLIGATORY, "회사코드
+                                P_WERKS TYPE T001W-WERKS OBLIGATORY. "플랜트
+
+  SELECT-OPTIONS : S_MATNR FOR MARC-MATNR, "자재코드
+                                S_DELNO FOR ZGTMMT9410-DELNO MODIF ID MD1,  "납품문서
+                                S_BUDAT FOR ZGTMMT9410-BUDAT MODIF ID MD1 , "납품일자
+                                S_AEDAT  FOR EKKO-AEDAT MODIF ID MD3 , "구매오더 생성일
+                                S_EINDT  FOR EKKO-AEDAT MODIF ID MD2 , "납품예정일
+                                S_LIFNR   FOR EKKO-LIFNR,    "공급업체
+                                S_EBELN FOR EKKO-EBELN, "구매오더
+                                S_LABEL FOR ZGTMMT9411-LABELNO MODIF ID MD4, "라벨번호
+                                S_EKGRP FOR EKKO-EKGRP MODIF ID MDD, "구매그룹
+                                S_DATE FOR EKKO-AEDAT MODIF ID DIS,   "기준일자
+                                S_VBELN FOR GV_VBELN . "판매오더
+
+SELECTION-SCREEN END OF BLOCK B2.
+
+SELECTION-SCREEN BEGIN OF BLOCK B3 WITH FRAME TITLE TEXT-002.
+  SELECTION-SCREEN BEGIN OF LINE.
+
+    PARAMETERS P_ALL RADIOBUTTON GROUP RD2 USER-COMMAND UC2. "전체
+    SELECTION-SCREEN COMMENT (15) TEXT-R04 FOR FIELD P_ALL.
+
+    PARAMETERS P_FIN RADIOBUTTON GROUP RD2 . "입고완료
+    SELECTION-SCREEN COMMENT (15) TEXT-R05 FOR FIELD P_FIN.
+
+    PARAMETERS P_NFN RADIOBUTTON GROUP RD2 DEFAULT 'X'. "미완료
+    SELECTION-SCREEN COMMENT (15) TEXT-R06 FOR FIELD P_NFN.
+
+SELECTION-SCREEN END OF LINE.
+SELECTION-SCREEN END OF BLOCK B3.

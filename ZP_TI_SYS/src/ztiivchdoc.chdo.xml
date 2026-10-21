@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_CHDO" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <CHDO>
+    <REPORTS_GENERATED>
+     <TCDRPS>
+      <OBJECT>ZTIIVCHDOC</OBJECT>
+      <REPORTNAME>ZTIIVCHDOC</REPORTNAME>
+      <TEXTCASE>X</TEXTCASE>
+      <ARBGEB>CD</ARBGEB>
+      <FEHLERNR>600</FEHLERNR>
+      <FGRP>ZTIIVCHDOC</FGRP>
+      <PREFIX>V</PREFIX>
+      <UPDATE_FLG>1</UPDATE_FLG>
+      <DATAGEN>X</DATAGEN>
+     </TCDRPS>
+    </REPORTS_GENERATED>
+    <OBJECTS>
+     <TCDOBS>
+      <OBJECT>ZTIIVCHDOC</OBJECT>
+      <TABNAME>ZTITIVK</TABNAME>
+     </TCDOBS>
+     <TCDOBS>
+      <OBJECT>ZTIIVCHDOC</OBJECT>
+      <TABNAME>ZTITIVP</TABNAME>
+      <MULTCASE>X</MULTCASE>
+     </TCDOBS>
+     <TCDOBS>
+      <OBJECT>ZTIIVCHDOC</OBJECT>
+      <TABNAME>ZTITIVV</TABNAME>
+      <MULTCASE>X</MULTCASE>
+     </TCDOBS>
+    </OBJECTS>
+    <OBJECTS_TEXT>
+     <TCDOBTS>
+      <SPRAS>3</SPRAS>
+      <OBJECT>ZTIIVCHDOC</OBJECT>
+      <OBTEXT>[Import] 상업송장 변경문서</OBTEXT>
+     </TCDOBTS>
+    </OBJECTS_TEXT>
+   </CHDO>
+  </asx:values>
+ </asx:abap>
+</abapGit>

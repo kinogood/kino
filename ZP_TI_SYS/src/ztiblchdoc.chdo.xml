@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_CHDO" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <CHDO>
+    <REPORTS_GENERATED>
+     <TCDRPS>
+      <OBJECT>ZTIBLCHDOC</OBJECT>
+      <REPORTNAME>ZTIBLCHDOC</REPORTNAME>
+      <TEXTCASE>X</TEXTCASE>
+      <ARBGEB>CD</ARBGEB>
+      <FEHLERNR>600</FEHLERNR>
+      <FGRP>ZTIBLCHDOC</FGRP>
+      <PREFIX>V</PREFIX>
+      <UPDATE_FLG>1</UPDATE_FLG>
+     </TCDRPS>
+    </REPORTS_GENERATED>
+    <OBJECTS>
+     <TCDOBS>
+      <OBJECT>ZTIBLCHDOC</OBJECT>
+      <TABNAME>ZTITBLC</TABNAME>
+      <MULTCASE>X</MULTCASE>
+     </TCDOBS>
+     <TCDOBS>
+      <OBJECT>ZTIBLCHDOC</OBJECT>
+      <TABNAME>ZTITBLK</TABNAME>
+     </TCDOBS>
+     <TCDOBS>
+      <OBJECT>ZTIBLCHDOC</OBJECT>
+      <TABNAME>ZTITBLP</TABNAME>
+      <MULTCASE>X</MULTCASE>
+     </TCDOBS>
+    </OBJECTS>
+    <OBJECTS_TEXT>
+     <TCDOBTS>
+      <SPRAS>3</SPRAS>
+      <OBJECT>ZTIBLCHDOC</OBJECT>
+      <OBTEXT>[Import] Bill of Lading(AWB) 변경문서</OBTEXT>
+     </TCDOBTS>
+    </OBJECTS_TEXT>
+   </CHDO>
+  </asx:values>
+ </asx:abap>
+</abapGit>

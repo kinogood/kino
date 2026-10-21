@@ -1,0 +1,40 @@
+FUNCTION Z_NF2_FILE_CONTROL1.
+*"--------------------------------------------------------------------
+*"*"로컬인터페이스:
+*"  IMPORTING
+*"     VALUE(IMP_MODE) TYPE  CHAR1 OPTIONAL
+*"  EXPORTING
+*"     VALUE(EV_FLAG1) TYPE  CHAR1
+*"     VALUE(EV_FLAG2) TYPE  CHAR1
+*"     VALUE(EV_FLAG3) TYPE  CHAR1
+*"     VALUE(EV_FLAG4) TYPE  CHAR1
+*"     VALUE(EV_FLAG5) TYPE  CHAR1
+*"  TABLES
+*"      FILEINFO STRUCTURE  ZNFT1002
+*"--------------------------------------------------------------------
+
+  CLEAR: GS_ZNFT1002, GV_READ,
+         GV_FLAG1, GV_FLAG2, GV_FLAG3,
+         GV_FLAG4, GV_FLAG5.
+
+* 업로드: 1, 다운로드:2
+* 업로드&다운로드: 3
+  GV_READ = IMP_MODE.
+  CLEAR GS_ZNFT1002.
+  MOVE-CORRESPONDING FILEINFO TO GS_ZNFT1002.
+
+* call screen
+  CALL SCREEN 3000 STARTING AT 10 03
+                   ENDING   AT 80 11.
+
+  IF GV_FCODE EQ 'OKAY'.
+    MOVE-CORRESPONDING GS_ZNFT1002 TO FILEINFO.
+
+    EV_FLAG1 = GV_FLAG1.
+    EV_FLAG2 = GV_FLAG2.
+    EV_FLAG3 = GV_FLAG3.
+    EV_FLAG4 = GV_FLAG4.
+    EV_FLAG5 = GV_FLAG5.
+  ENDIF.
+
+ENDFUNCTION.

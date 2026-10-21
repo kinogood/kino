@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_DTEL" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <DD04V>
+    <ROLLNAME>ZGTE_MM_GSRM_PL_PKG_QTY</ROLLNAME>
+    <DDLANGUAGE>3</DDLANGUAGE>
+    <DOMNAME>MENG13</DOMNAME>
+    <HEADLEN>09</HEADLEN>
+    <SCRLEN1>09</SCRLEN1>
+    <SCRLEN2>09</SCRLEN2>
+    <SCRLEN3>09</SCRLEN3>
+    <DDTEXT>파레트 포장 수량</DDTEXT>
+    <REPTEXT>파레트 포장 수량</REPTEXT>
+    <SCRTEXT_S>파레트 포장 수량</SCRTEXT_S>
+    <SCRTEXT_M>파레트 포장 수량</SCRTEXT_M>
+    <SCRTEXT_L>파레트 포장 수량</SCRTEXT_L>
+    <DTELMASTER>3</DTELMASTER>
+    <REFKIND>D</REFKIND>
+   </DD04V>
+  </asx:values>
+ </asx:abap>
+</abapGit>

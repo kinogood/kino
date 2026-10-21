@@ -1,0 +1,285 @@
+FUNCTION-POOL ZGTMM01.                      "MESSAGE-ID ..
+
+
+DATA : GV_SYSTEM_ID LIKE ZGTMMT9000-SYSTEM_ID.
+
+DATA : GV_ZSTAT   LIKE ZGTMMT9000-ZSTAT,
+       GV_MESSAGE LIKE ZGTMMT9000-MESSAGE.
+
+DATA : GT_9000 LIKE ZGTMMT9000 OCCURS 0 WITH HEADER LINE.
+
+DATA : GV_LINE TYPE I.
+
+DATA : GV_LINEID       TYPE MB_LINE_ID,
+       GV_LINEID_P     TYPE MB_LINE_ID,
+       GT_SUB_LINEID   TYPE MB_LINE_ID,
+       GT_SUB_LINEID_P TYPE MB_LINE_ID.
+
+DATA : BEGIN OF GS_MSEG,
+         MENGE LIKE MSEG-MENGE,
+         MEINS LIKE MSEG-MEINS,
+       END   OF GS_MSEG.
+
+DATA : GV_DISPO    LIKE MARC-DISPO,
+       GV_AUFNR    LIKE ZPPT0001-AUFNR,
+       GS_ZPPT0001 LIKE ZPPT0001.
+
+DATA : GV_MVT_IND TYPE KZBEW,
+       GV_RESB(1).
+
+DATA : GS_MHDR        LIKE BAPI2017_GM_HEAD_01,
+       GS_CHDR        LIKE BAPI2017_GM_HEAD_02,
+       GS_MCOD        LIKE BAPI2017_GM_CODE,
+       GS_MHDRT       LIKE BAPI2017_GM_HEAD_RET,
+       GT_MITM        LIKE BAPI2017_GM_ITEM_CREATE  OCCURS 0 WITH HEADER LINE,
+       GT_MSRN        LIKE BAPI2017_GM_SERIALNUMBER OCCURS 0 WITH HEADER LINE,
+       GT_RTN         LIKE BAPIRET2                 OCCURS 0 WITH HEADER LINE,
+       GT_RES_CHANGE  LIKE BAPI2093_RES_ITEM_CHANGE OCCURS 0 WITH HEADER LINE,
+       GT_RES_CHANGEX LIKE BAPI2093_RES_ITEM_CHANGEX OCCURS 0 WITH HEADER LINE,
+       GT_RES_NEW     LIKE BAPI2093_RES_ITEM_NEW OCCURS 0 WITH HEADER LINE,
+       GT_RTN2        LIKE BAPIRET2 OCCURS 0 WITH HEADER LINE.
+
+DATA : GT_DITM LIKE BAPI2017_GM_ITEM_SHOW OCCURS 0 WITH HEADER LINE.
+
+DATA : GS_PARA LIKE CTU_PARAMS,
+       GT_BDCD LIKE BDCDATA    OCCURS 0 WITH HEADER LINE,
+       GT_BDCM LIKE BDCMSGCOLL OCCURS 0 WITH HEADER LINE.
+
+DATA : GV_MBLNR LIKE MATDOC-MBLNR,
+       GV_MJAHR LIKE MATDOC-MJAHR,
+       GV_BUDAT LIKE MATDOC-BUDAT.
+
+DATA : GV_BUKRS TYPE BUKRS.
+
+DATA : BEGIN OF GT_LOT OCCURS 0, "추가(SJM 25.06.10)
+         MJAHR    LIKE MATDOC-MJAHR,
+         MBLNR    LIKE MATDOC-MBLNR,
+         ZEILE    LIKE MATDOC-ZEILE,
+         PRUEFLOS LIKE QALS-PRUEFLOS,
+       END   OF GT_LOT.
+
+
+CONSTANTS : GC_A(1)      VALUE 'A',
+            GC_B(1)      VALUE 'B',
+            GC_C(1)      VALUE 'C',
+            GC_E(1)      VALUE 'E',
+            GC_I(1)      VALUE 'I',
+            GC_N(1)      VALUE 'N',
+            GC_S(1)      VALUE 'S',
+            GC_W(1)      VALUE 'W',
+            GC_X(1)      VALUE 'X',
+            GC_Y(1)      VALUE 'Y',
+            GC_1(1)      VALUE '1',
+            GC_AU(2)     VALUE 'AU',
+            GC_OK(2)     VALUE 'OK',
+            GC_00(2)     VALUE '00',
+            GC_01(2)     VALUE '01',
+            GC_02(2)     VALUE '02',
+            GC_101(3)    VALUE '101',
+            GC_543(3)    VALUE '543',
+            GC_000000(6) VALUE '000000'.
+
+*----------------------------------------------------------------------*
+* ZGTMM_IF_I_IMGR_RCV
+*----------------------------------------------------------------------*
+DATA : GT_I10 LIKE ZGTMMSIF0010 OCCURS 0 WITH HEADER LINE,
+       GT_I11 LIKE ZGTMMSIF0011 OCCURS 0 WITH HEADER LINE,
+       GT_I17 LIKE ZGTMMSIF0017 OCCURS 0 WITH HEADER LINE,
+       GT_I21 LIKE ZGTMMSIF0021 OCCURS 0 WITH HEADER LINE, "추가(SJM 25.06.10)
+       GT_T21 LIKE ZGTMMSIF0021 OCCURS 0 WITH HEADER LINE. "추가(SJM 25.06.10)
+
+DATA : GT_9070 LIKE ZGTMMT9070 OCCURS 0 WITH HEADER LINE,
+       GT_9071 LIKE ZGTMMT9071 OCCURS 0 WITH HEADER LINE,
+       GT_9072 LIKE ZGTMMT9072 OCCURS 0 WITH HEADER LINE.
+
+DATA : GS_ZTITCCK  TYPE ZTITCCK,
+*      GT_ZTITCCK  TYPE TABLE OF ZTITCCK,
+       GS_ZTITCCP  TYPE ZTITCCP,
+       GT_ZTITCCP  TYPE TABLE OF ZTISCCIT,
+       GS_ZTISCCIT TYPE ZTISCCIT,
+       GT_ZTITGRB  TYPE TABLE OF ZTITGRB,
+       GS_ZTITGRB  TYPE ZTITGRB.
+
+
+*----------------------------------------------------------------------*
+* ZGTMM_IF_I_SCGR_RCV
+*----------------------------------------------------------------------*
+DATA : GT_I12 LIKE ZGTMMSIF0012 OCCURS 0 WITH HEADER LINE,
+       GT_I13 LIKE ZGTMMSIF0013 OCCURS 0 WITH HEADER LINE,
+       GT_I18 LIKE ZGTMMSIF0018 OCCURS 0 WITH HEADER LINE,
+       GT_I20 LIKE ZGTMMSIF0020 OCCURS 0 WITH HEADER LINE, "추가(SJM 25.06.10)
+       GT_T20 LIKE ZGTMMSIF0020 OCCURS 0 WITH HEADER LINE. "추가(SJM 25.06.10)
+
+DATA : GT_9080 LIKE ZGTMMT9080 OCCURS 0 WITH HEADER LINE,
+       GT_9081 LIKE ZGTMMT9081 OCCURS 0 WITH HEADER LINE,
+       GT_9082 LIKE ZGTMMT9082 OCCURS 0 WITH HEADER LINE.
+
+DATA : GS_PBV LIKE ZGTMMSIF0013.
+
+DATA : BEGIN OF GT_DO OCCURS 0,
+         VBELN LIKE LIPS-VBELN,
+         POSNR LIKE LIPS-POSNR,
+       END   OF GT_DO.
+
+DATA : BEGIN OF GT_SUB OCCURS 0,
+         MATNR LIKE ZMMTI34-MATNR,
+         IDNRK LIKE ZMMTI35-IDNRK,
+         CHARG LIKE ZMMTI35-CHARG,
+         LFIMG LIKE ZMMTI35-LFIMG,
+         MEINS LIKE ZMMTI35-MEINS,
+       END OF GT_SUB.
+
+* 공급업체 배치재고 Internal Table
+DATA : BEGIN OF GT_MSLB OCCURS 0,
+         MATNR TYPE MSLB-MATNR,
+         WERKS TYPE MSLB-WERKS, "2023.11.28 ZITCS4HDEV01 추가
+         CHARG TYPE MSLB-CHARG,
+         SOBKZ TYPE MSLB-SOBKZ, "2023.11.28 ZITCS4HDEV01 추가
+         LIFNR TYPE MSLB-LIFNR, "2023.11.28 ZITCS4HDEV01 추가
+         LBLAB TYPE MSLB-LBLAB,
+         MEINS TYPE MARA-MEINS, "2023.11.28 ZITCS4HDEV01 추가
+       END OF GT_MSLB.
+
+*----------------------------------------------------------------------*
+* ZGTMM_IF_I_GR_RCV
+*----------------------------------------------------------------------*
+*DATA: GT_I12 LIKE ZGTMMSIF0012 OCCURS 0 WITH HEADER LINE,
+DATA : GT_I14 LIKE ZGTMMSIF0014 OCCURS 0 WITH HEADER LINE.
+*      GT_I18 LIKE ZGTMMSIF0018 OCCURS 0 WITH HEADER LINE.
+
+DATA : GT_9090 LIKE ZGTMMT9090 OCCURS 0 WITH HEADER LINE,
+       GT_9091 LIKE ZGTMMT9091 OCCURS 0 WITH HEADER LINE,
+       GT_9092 LIKE ZGTMMT9092 OCCURS 0 WITH HEADER LINE.
+
+DATA : BEGIN OF GS_DUPLICATE,
+         MBLNR TYPE MBLNR,
+         MJAHR TYPE MJAHR,
+         ZRESULT(1),
+         MESSAGE LIKE ZGTMMSIF0018-MESSAGE,
+
+       END OF GS_DUPLICATE,
+       GT_DUPLICATE LIKE TABLE OF GS_DUPLICATE.
+
+
+*----------------------------------------------------------------------*
+* ZGTMM_IF_I_GRREV_RCV
+*----------------------------------------------------------------------*
+DATA : GT_I19 LIKE ZGTMMSIF0019 OCCURS 0 WITH HEADER LINE.
+
+DATA : GT_9100 LIKE ZGTMMT9100 OCCURS 0 WITH HEADER LINE.
+
+
+*----------------------------------------------------------------------*
+* ZGTMM_IF_I_MVT_RCV
+*----------------------------------------------------------------------*
+DATA : GT_I15 LIKE ZGTMMSIF0015 OCCURS 0 WITH HEADER LINE,
+       GT_I16 LIKE ZGTMMSIF0016 OCCURS 0 WITH HEADER LINE,
+       GS_I15 LIKE ZGTMMSIF0015.
+
+DATA : GT_9110 LIKE ZGTMMT9110 OCCURS 0 WITH HEADER LINE,
+       GT_9111 LIKE ZGTMMT9111 OCCURS 0 WITH HEADER LINE.
+
+
+*----------------------------------------------------------------------*
+* ZGTMM_IF_I_GIBYRESB
+*----------------------------------------------------------------------*
+DATA : GT_I40 LIKE ZGTMMSIF0040 OCCURS 0 WITH HEADER LINE,
+       GT_I41 LIKE ZGTMMSIF0041 OCCURS 0 WITH HEADER LINE,
+       GS_I40 LIKE ZGTMMSIF0040.
+
+DATA : GT_9120 LIKE ZGTMMT9120 OCCURS 0 WITH HEADER LINE,
+       GT_9121 LIKE ZGTMMT9121 OCCURS 0 WITH HEADER LINE.
+
+DATA : GV_BWART TYPE BWART.
+
+*----------------------------------------------------------------------*
+* ZGTMM_IF_I_MDOCANCEL
+*----------------------------------------------------------------------*
+DATA : GT_9150 LIKE ZGTMMT9150 OCCURS 0 WITH HEADER LINE.
+
+*----------------------------------------------------------------------*
+* ZGTMM_IF_I_SCRAP_RCV - 스크랩 처리
+*----------------------------------------------------------------------*
+DATA : GS_ZGTMMT9250        TYPE ZGTMMT9250,
+       GS_ZGTMMT9250C       TYPE ZGTMMT9250,
+       GT_ZGTMMT9250        TYPE TABLE OF ZGTMMT9250,
+       GT_ZGTMMT9250_RESULT TYPE TABLE OF ZGTMMSIF0079.
+
+DATA : BEGIN OF GS_SCRAP,
+         PRCTR    LIKE MARC-PRCTR,         "손익센터
+         SP_MATNR LIKE ZCOTP010-SP_MATNR,  "원가차감코드
+         MATNR    LIKE MARA-MATNR,         "SCRAP 자재
+         MEINS    LIKE MARA-MEINS,         "SCRAP 자재단위
+         LGORT    LIKE ZPPT0106-LGORT,     "SCRAP 저장위치
+         VLDYM    LIKE ZPPT0106-VLDYM,     "SCRAP 유효년월
+         MENGE    LIKE MCHB-CLABS,         "SCRAP 수량
+       END OF GS_SCRAP.
+
+DATA : GV_GSBER TYPE CSKS-GSBER. "사업 영역
+DATA : GS_ZCOTP006 TYPE ZCOTP006. "SCRAP 처리 이력 테이블
+DATA : P_MJAHR LIKE MKPF-MJAHR.
+
+DATA : GV_CO_ORDER      TYPE AUFNR,
+       GV_CO_ORDER_TEMP TYPE AUFNR,
+       GV_MBLNR_O       TYPE MBLNR,
+       GV_MBLNR_I       TYPE MBLNR,
+       GV_MBLNR_Z       TYPE MBLNR,
+       GV_MBLNR_OC      TYPE MBLNR,
+       GV_MBLNR_IC      TYPE MBLNR,
+       GV_MBLNR_ZC      TYPE MBLNR,
+       GV_MBLNR_M       TYPE MBLNR,
+       GV_MBLNR_MC      TYPE MBLNR.
+
+DATA : GV_MESSAGE_CO TYPE BAPI_MSG,
+       GV_MESSAGE_MO TYPE BAPI_MSG,
+       GV_MESSAGE_MI TYPE BAPI_MSG,
+       GV_MESSAGE_MZ TYPE BAPI_MSG,
+       GV_MESSAGE_MM TYPE BAPI_MSG.
+DATA : GT_RETURN TYPE TABLE OF BAPIRET2 WITH HEADER LINE.
+
+DATA : GV_ERROR(1).
+
+DATA: GS_GMHEAD  LIKE BAPI2017_GM_HEAD_01,
+      GS_GMCODE  LIKE BAPI2017_GM_CODE,
+      GS_HEADRET LIKE BAPI2017_GM_HEAD_RET,
+      GS_MATDOC  LIKE BAPI2017_GM_HEAD_RET-MAT_DOC,
+      GS_DOCYEAR LIKE BAPI2017_GM_HEAD_RET-DOC_YEAR.
+
+
+*--> 사내거래 입출고 꼬리표 테이블
+TABLES : ZPPT0026, "--> 비가동 내역
+         ZPPT0141, "--> 비가동 상세내역
+         ZPPT0134, "--> 꼬리표
+         ZPPT0001, "--> 꼬리표
+         ZPPT0211, "--> 꼬리표
+         ZPPT0019. "--> 꼬리표
+*<-- 사내거래 입출고 꼬리표 테이블
+
+*----------------------------------------------------------------------*
+*--> "추가(KFCM 26.09.19) - [s]
+*----------------------------------------------------------------------*
+CONSTANTS: C_SCRAP_NO_OBJECT TYPE NROBJ VALUE 'ZCO_SCRAP',
+           C_TCODE_KKF1      TYPE TCODE VALUE 'KKF1',
+           C_TCODE_MB1A      TYPE TCODE VALUE 'MB1A',
+           C_TCODE_MB1C      TYPE TCODE VALUE 'MB1C',
+           C_TCODE_MB31      TYPE TCODE VALUE 'MB31',
+           C_TCODE_MBST      TYPE TCODE VALUE 'MBST'.
+
+
+** BDC Data
+DATA : GT_BDCDATA LIKE BDCDATA    OCCURS 0 WITH HEADER LINE,
+       GT_MESSTAB LIKE BDCMSGCOLL OCCURS 0 WITH HEADER LINE.
+
+DATA : G_TXT(25)     TYPE C.
+
+
+**  BAPI 처리를 위한 Data Declaration
+DATA: GT_ITEM       TYPE TABLE OF BAPI2017_GM_ITEM_CREATE
+                                           WITH HEADER LINE,
+      GS_HEADER     TYPE BAPI2017_GM_HEAD_01,
+      GS_CODE       TYPE BAPI2017_GM_CODE,
+      GV_MATDOC     TYPE MBLNR,
+      GV_DOCYEAR    TYPE MJAHR.
+*----------------------------------------------------------------------*
+*<-- "추가(KFCM 26.09.19) - [e]
+*----------------------------------------------------------------------*

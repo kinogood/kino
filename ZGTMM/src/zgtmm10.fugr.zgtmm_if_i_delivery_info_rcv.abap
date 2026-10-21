@@ -1,0 +1,164 @@
+FUNCTION ZGTMM_IF_I_DELIVERY_INFO_RCV.
+*"----------------------------------------------------------------------
+*"*"Local Interface:
+*"  IMPORTING
+*"     VALUE(I_SYSTEM_ID) TYPE  ZGTE_IF_TARGET
+*"     VALUE(I_BUKRS) TYPE  BUKRS
+*"  EXPORTING
+*"     VALUE(ZO_RESULT) TYPE  ZO_RESULT
+*"     VALUE(ZO_MESSAGE) TYPE  ZO_MESSAGE
+*"  TABLES
+*"      IT_ITEM STRUCTURE  ZGTMMS4002 OPTIONAL
+*"      IT_LABEL STRUCTURE  ZGTMMS4003 OPTIONAL
+*"      IT_ISSUE STRUCTURE  ZGTMMS4004 OPTIONAL
+*"      IT_PLLABEL STRUCTURE  ZGTMMS4010 OPTIONAL
+*"----------------------------------------------------------------------
+*&---------------------------------------------------------------------*
+*& 모듈          : MM
+*& 프로그램 ID : ZGTMM_IF_I_DELIVERY_INFO_RCV
+*& 프로그램 명 :  납품 정보 수신(G-SRM->SAP)
+*& 개요   : GSRM 에서 발행된 납품 문서정보를 수신 저장
+*& 생성일 : 2026.01.21
+*& 생성자 : ZGODEV07
+*&---------------------------------------------------------------------*
+*& 외부 호출 프로그램 개요   : N/A
+*& 타 시스템 인터페이스 개요 : G-SRM -> EAI -> SAP
+*&---------------------------------------------------------------------*
+*& 프로그램 수정이력
+*&---------------------------------------------------------------------*
+*& 수정일  : 2026.08.05
+*& 수정자  : ZGODEV04
+*& 수정개요: 수신 구조체 필드추가(DELTYPE_납품서유형)
+*&---------------------------------------------------------------------*
+
+*1-1) Import Parameter 중 전송 정보가 없는 경우 다음 값 Return 후 종료
+* Export Parameter                      Value
+* ZO_RESULT                     "02"
+* ZO_MESSAGE                      "필수 값이 누락되었습니다."
+
+  "초기화
+  CLEAR:
+    ZO_RESULT,
+    ZO_MESSAGE.
+
+  "필수 값이 누락 되었습니다.
+  IF I_SYSTEM_ID EQ SPACE OR I_BUKRS EQ SPACE.
+    ZO_RESULT = GC_02.
+    ZO_MESSAGE = TEXT-E01.
+    EXIT.
+  ENDIF.
+
+*2) 전송 정보 저장(Log 등록)
+  DATA:
+    LS_LOG        TYPE ZGTMMT9000,
+    LT_ZGTMMT9410 TYPE STANDARD TABLE OF ZGTMMT9410,
+    LT_ZGTMMT9411 TYPE STANDARD TABLE OF ZGTMMT9411,
+    LT_ZGTMMT9412 TYPE STANDARD TABLE OF ZGTMMT9412,
+    LT_ZGTMMT9413 TYPE STANDARD TABLE OF ZGTMMT9413.
+
+
+  GET TIME STAMP FIELD LS_LOG-ZIFKEY.
+  LS_LOG-ZIFNO = GC_MM00031.
+  LS_LOG-SYSTEM_ID = I_SYSTEM_ID.
+  LS_LOG-ZSTAT = GC_S.
+  LS_LOG-IFDAT = SY-DATLO.
+  LS_LOG-IFTIM = SY-TIMLO.
+  LS_LOG-IFNAM = SY-UNAME.
+  LS_LOG-ERDAT = SY-DATUM.
+  LS_LOG-ERDAT_LOCAL = SY-DATLO.
+  LS_LOG-ERTIM = SY-UZEIT.
+  LS_LOG-ERTIM_LOCAL = SY-TIMLO.
+  LS_LOG-ERNAM = SY-UNAME.
+
+  LT_ZGTMMT9410[] = VALUE #( FOR <LS_ITEM> IN IT_ITEM
+                       ( VALUE #( BASE CORRESPONDING #( <LS_ITEM> )
+                                  ZIFKEY  = LS_LOG-ZIFKEY
+                                  SYSTEM_ID = LS_LOG-SYSTEM_ID ) ) ).
+
+  LT_ZGTMMT9411[] = VALUE #( FOR <LS_LABEL> IN IT_LABEL
+                       ( VALUE #( BASE CORRESPONDING #( <LS_LABEL> )
+                                  ZIFKEY  = LS_LOG-ZIFKEY
+                                  SYSTEM_ID = LS_LOG-SYSTEM_ID ) ) ).
+
+  LT_ZGTMMT9412[] = VALUE #( FOR <LS_ISSUE> IN IT_ISSUE
+                       ( VALUE #( BASE CORRESPONDING #( <LS_ISSUE> )
+                                  ZIFKEY  = LS_LOG-ZIFKEY
+                                  SYSTEM_ID = LS_LOG-SYSTEM_ID ) ) ).
+
+  LT_ZGTMMT9413[] = VALUE #( FOR <LS_PLLABEL> IN IT_PLLABEL
+                       ( VALUE #( BASE CORRESPONDING #( <LS_PLLABEL> )
+                                  ZIFKEY  = LS_LOG-ZIFKEY
+                                  SYSTEM_ID = LS_LOG-SYSTEM_ID ) ) ).
+
+  LOOP AT LT_ZGTMMT9410 ASSIGNING FIELD-SYMBOL(<LS_ZGTMMT9410>).
+    <LS_ZGTMMT9410>-EBELN = |{ <LS_ZGTMMT9410>-EBELN ALPHA = IN }|.
+    <LS_ZGTMMT9410>-EBELP = |{ <LS_ZGTMMT9410>-EBELP ALPHA = IN }|.
+
+    CALL FUNCTION 'CONVERSION_EXIT_CUNIT_INPUT'
+      EXPORTING
+        INPUT  = <LS_ZGTMMT9410>-MEINS
+      IMPORTING
+        OUTPUT = <LS_ZGTMMT9410>-MEINS.
+
+  ENDLOOP.
+
+  LOOP AT LT_ZGTMMT9411 ASSIGNING FIELD-SYMBOL(<LS_ZGTMMT9411>).
+    <LS_ZGTMMT9411>-EBELN = |{ <LS_ZGTMMT9411>-EBELN ALPHA = IN }|.
+    <LS_ZGTMMT9411>-EBELP = |{ <LS_ZGTMMT9411>-EBELP ALPHA = IN }|.
+
+    CALL FUNCTION 'CONVERSION_EXIT_CUNIT_INPUT'
+      EXPORTING
+        INPUT  = <LS_ZGTMMT9411>-MEINS
+      IMPORTING
+        OUTPUT = <LS_ZGTMMT9411>-MEINS.
+
+    CALL FUNCTION 'CONVERSION_EXIT_CUNIT_INPUT'
+      EXPORTING
+        INPUT  = <LS_ZGTMMT9411>-PKG_UNIT
+      IMPORTING
+        OUTPUT = <LS_ZGTMMT9411>-PKG_UNIT.
+
+  ENDLOOP.
+
+  LOOP AT LT_ZGTMMT9412 ASSIGNING FIELD-SYMBOL(<LS_ZGTMMT9412>).
+    <LS_ZGTMMT9412>-EBELN = |{ <LS_ZGTMMT9412>-EBELN ALPHA = IN }|.
+    <LS_ZGTMMT9412>-EBELP = |{ <LS_ZGTMMT9412>-EBELP ALPHA = IN }|.
+    <LS_ZGTMMT9412>-LIFNR = |{ <LS_ZGTMMT9412>-LIFNR ALPHA = IN }|.
+
+    CALL FUNCTION 'CONVERSION_EXIT_MATN1_INPUT'
+      EXPORTING
+        INPUT  = <LS_ZGTMMT9412>-IDNRK
+      IMPORTING
+        OUTPUT = <LS_ZGTMMT9412>-IDNRK.
+
+    CALL FUNCTION 'CONVERSION_EXIT_CUNIT_INPUT'
+      EXPORTING
+        INPUT  = <LS_ZGTMMT9412>-ISSUE_UNIT
+      IMPORTING
+        OUTPUT = <LS_ZGTMMT9412>-ISSUE_UNIT.
+
+  ENDLOOP.
+
+  LOOP AT LT_ZGTMMT9413 ASSIGNING FIELD-SYMBOL(<LS_ZGTMMT9413>).
+    <LS_ZGTMMT9413>-EBELN = |{ <LS_ZGTMMT9413>-EBELN ALPHA = IN }|.
+    <LS_ZGTMMT9413>-EBELP = |{ <LS_ZGTMMT9413>-EBELP ALPHA = IN }|.
+
+    CALL FUNCTION 'CONVERSION_EXIT_CUNIT_INPUT'
+      EXPORTING
+        INPUT  = <LS_ZGTMMT9413>-PL_PKG_UNIT
+      IMPORTING
+        OUTPUT = <LS_ZGTMMT9413>-PL_PKG_UNIT.
+
+  ENDLOOP.
+
+  MODIFY ZGTMMT9410 FROM TABLE LT_ZGTMMT9410.
+  MODIFY ZGTMMT9411 FROM TABLE LT_ZGTMMT9411.
+  MODIFY ZGTMMT9412 FROM TABLE LT_ZGTMMT9412.
+  MODIFY ZGTMMT9413 FROM TABLE LT_ZGTMMT9413.
+  MODIFY ZGTMMT9000 FROM LS_LOG.
+  COMMIT WORK.
+
+  ZO_RESULT = GC_00.
+  ZO_MESSAGE = TEXT-M24.
+
+ENDFUNCTION.

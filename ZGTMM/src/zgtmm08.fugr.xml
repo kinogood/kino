@@ -1,0 +1,159 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_FUGR" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <AREAT>[가온] MM 공통 Function 2</AREAT>
+   <INCLUDES>
+    <SOBJ_NAME>LZGTMM08F01</SOBJ_NAME>
+    <SOBJ_NAME>LZGTMM08TOP</SOBJ_NAME>
+    <SOBJ_NAME>SAPLZGTMM08</SOBJ_NAME>
+   </INCLUDES>
+   <FUNCTIONS>
+    <item>
+     <FUNCNAME>ZGTMM_EXPAND_MRPVIEW</FUNCNAME>
+     <SHORT_TEXT>자재 마스터 구매 view 확장 function</SHORT_TEXT>
+     <IMPORT>
+      <RSIMP>
+       <PARAMETER>I_MATNR</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>MATNR</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_WERKS</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>WERKS_D</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_BESKZ</PARAMETER>
+       <OPTIONAL>X</OPTIONAL>
+       <REFERENCE>X</REFERENCE>
+       <TYP>BESKZ</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_SOBSL</PARAMETER>
+       <OPTIONAL>X</OPTIONAL>
+       <REFERENCE>X</REFERENCE>
+       <TYP>SOBSL</TYP>
+      </RSIMP>
+     </IMPORT>
+     <EXPORT>
+      <RSEXP>
+       <PARAMETER>E_TYPE</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>BAPI_MTYPE</TYP>
+      </RSEXP>
+      <RSEXP>
+       <PARAMETER>E_MESSAGE</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>BAPI_MSG</TYP>
+      </RSEXP>
+     </EXPORT>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>I_MATNR</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>자재 번호</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_WERKS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>플랜트</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_BESKZ</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>조달 유형</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_SOBSL</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>특별 조달 유형</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>E_TYPE</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>메시지 유형: S 성공, E 오류, W 경고, I 정보, A 중단</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>E_MESSAGE</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>메시지 텍스트</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+    <item>
+     <FUNCNAME>ZGTMM_EXPAND_PURVIEW</FUNCNAME>
+     <SHORT_TEXT>자재 마스터 구매 view 확장 function</SHORT_TEXT>
+     <IMPORT>
+      <RSIMP>
+       <PARAMETER>I_MATNR</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>MATNR</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_WERKS</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>WERKS_D</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_BESKZ</PARAMETER>
+       <OPTIONAL>X</OPTIONAL>
+       <REFERENCE>X</REFERENCE>
+       <TYP>BESKZ</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_SOBSL</PARAMETER>
+       <OPTIONAL>X</OPTIONAL>
+       <REFERENCE>X</REFERENCE>
+       <TYP>SOBSL</TYP>
+      </RSIMP>
+     </IMPORT>
+     <EXPORT>
+      <RSEXP>
+       <PARAMETER>E_TYPE</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>BAPI_MTYPE</TYP>
+      </RSEXP>
+      <RSEXP>
+       <PARAMETER>E_MESSAGE</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>BAPI_MSG</TYP>
+      </RSEXP>
+     </EXPORT>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>I_MATNR</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>자재 번호</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_WERKS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>플랜트</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_BESKZ</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>조달 유형</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_SOBSL</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>특별 조달 유형</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>E_TYPE</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>메시지 유형: S 성공, E 오류, W 경고, I 정보, A 중단</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>E_MESSAGE</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>메시지 텍스트</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+   </FUNCTIONS>
+  </asx:values>
+ </asx:abap>
+</abapGit>

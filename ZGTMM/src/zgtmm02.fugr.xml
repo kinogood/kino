@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_FUGR" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <AREAT>적정 재고</AREAT>
+   <INCLUDES>
+    <SOBJ_NAME>LZGTMM02F01</SOBJ_NAME>
+    <SOBJ_NAME>LZGTMM02TOP</SOBJ_NAME>
+    <SOBJ_NAME>SAPLZGTMM02</SOBJ_NAME>
+   </INCLUDES>
+   <FUNCTIONS>
+    <item>
+     <FUNCNAME>ZGTMM_GETSUIT_STOCK</FUNCNAME>
+     <REMOTE_CALL>R</REMOTE_CALL>
+     <SHORT_TEXT>적정 재고 조회(과거 소모 실적 기준)</SHORT_TEXT>
+     <IMPORT>
+      <RSIMP>
+       <PARAMETER>I_PTYPE</PARAMETER>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>CHAR1</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_OPTION</PARAMETER>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>CHAR1</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_FROM</PARAMETER>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>BUDAT</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_TO</PARAMETER>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>BUDAT</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_VALUE</PARAMETER>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>SALK3</TYP>
+      </RSIMP>
+     </IMPORT>
+     <EXPORT>
+      <RSEXP>
+       <PARAMETER>ZRESULT</PARAMETER>
+       <TYP>BAPI_MTYPE</TYP>
+      </RSEXP>
+      <RSEXP>
+       <PARAMETER>MESSAGE</PARAMETER>
+       <TYP>BAPI_MSG</TYP>
+      </RSEXP>
+     </EXPORT>
+     <TABLES>
+      <RSTBL>
+       <PARAMETER>IT_TAB</PARAMETER>
+       <DBSTRUCT>ZGTMMS0003</DBSTRUCT>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>OT_TAB</PARAMETER>
+       <DBSTRUCT>ZGTMMS0004</DBSTRUCT>
+      </RSTBL>
+     </TABLES>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>I_PTYPE</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>W: Weekly, D: Daily</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_OPTION</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>&apos; &apos; : 저장 정보 조회, &apos;1&apos; : 저장 후 조회, &apos;2&apos; : 저장 없이 조회, &apos;9&apos; : 저장만</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_FROM</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>조회 기간 - From</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_TO</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>조회 기간 - To</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_VALUE</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>조회 금액</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>ZRESULT</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>처리 결과 (&apos;S&apos;,&apos;E&apos;)</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>MESSAGE</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>처리 메세지</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>IT_TAB</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>적정재고 산출 대상</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>OT_TAB</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>적정재고 산출 결과</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+   </FUNCTIONS>
+  </asx:values>
+ </asx:abap>
+</abapGit>

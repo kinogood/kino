@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_FUGR" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <AREAT>[가온] SAPI I/F 공통</AREAT>
+   <INCLUDES>
+    <SOBJ_NAME>LZGTMM17TOP</SOBJ_NAME>
+    <SOBJ_NAME>SAPLZGTMM17</SOBJ_NAME>
+   </INCLUDES>
+   <FUNCTIONS>
+    <item>
+     <FUNCNAME>ZGTMM_IF_GET_DESTINATION</FUNCNAME>
+     <SHORT_TEXT>I/F Destination 조회</SHORT_TEXT>
+     <IMPORT>
+      <RSIMP>
+       <PARAMETER>I_ZIFNO</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>ZGTEIFNO</TYP>
+      </RSIMP>
+     </IMPORT>
+     <EXPORT>
+      <RSEXP>
+       <PARAMETER>E_ZDEST</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>ZDEST</TYP>
+      </RSEXP>
+     </EXPORT>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>I_ZIFNO</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Interface NO</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>E_ZDEST</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Destination</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+   </FUNCTIONS>
+  </asx:values>
+ </asx:abap>
+</abapGit>

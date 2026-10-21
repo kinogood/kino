@@ -1,0 +1,164 @@
+*&---------------------------------------------------------------------*
+*&  Include           ZGTMMR4700TOP                                   *
+*&---------------------------------------------------------------------*
+
+TABLES: MARD, MARDH, MARA, MKPF, MSEG, MATDOC, S017, ZEDT0720.
+
+*********************************************************
+*            Gloval Table Variance                      *
+*********************************************************
+DATA: BEGIN OF GT_LIST OCCURS 0,
+        WERKS    LIKE MARD-WERKS,
+        NAME1    LIKE T001W-NAME1,
+        LGORT    LIKE MARD-LGORT,
+        LGOBE    LIKE T001L-LGOBE,
+        PRCTR    LIKE MARC-PRCTR,   "손익센터
+        MCTXT    LIKE CEPCT-MCTXT,  "손익센터명
+        MATNR    LIKE MARD-MATNR,
+        MAKTX    LIKE MAKT-MAKTX,
+        COLOR    LIKE ZEDT0720-COLOR,
+        MTART    LIKE MARA-MTART,
+        MEINS    LIKE MARA-MEINS,
+
+        STDWT_CU  LIKE MARD-LABST,   "표준중량(동량)
+        STDWT_AL  LIKE MARD-LABST,   "표준중량(AL)
+        STDWT_OPT LIKE MARD-LABST,   "표준중량(광량)
+
+        QTY1     LIKE MARD-LABST,    "전월재고
+
+        GR01     LIKE MARD-LABST,    "생산입고
+        GR02     LIKE MARD-LABST,    "구매입고
+        GR03     LIKE MARD-LABST,    "이전입고
+        GR04     LIKE MARD-LABST,    "고객반품
+        GR05     LIKE MARD-LABST,    "위탁회수
+        GR06     LIKE MARD-LABST,    "기타입고
+        GRTOT    LIKE MARD-LABST,
+        GI01     LIKE MARD-LABST,    "판매출고
+        GI02     LIKE MARD-LABST,    "이전출고
+        GI03     LIKE MARD-LABST,    "폐기출고
+        GI04     LIKE MARD-LABST,    "사내소비
+        GI05     LIKE MARD-LABST,    "위탁보충
+        GI06     LIKE MARD-LABST,    "기타출고
+        GITOT    LIKE MARD-LABST,
+
+        JAIGO    LIKE MARD-LABST,   "현재고
+        JAIGO_AV LIKE MARD-LABST,   "현재고 가용
+        JAIGO_QM LIKE MARD-LABST,   "현재고 품질
+        JAIGO_BO LIKE MARD-LABST,   "현재고 보류
+
+        QTY1_CU  LIKE /NFM/TVGW-VGW,     "전월재고 동량
+        JAIGO_CU LIKE /NFM/TVGW-VGW,     "현재고 동량
+        GRTOT_CU LIKE /NFM/TVGW-VGW,    "입고 동량
+        GITOT_CU LIKE /NFM/TVGW-VGW,     "출고 동량
+        QTY1_AL  LIKE /NFM/TVGW-VGW,     "전월재고 AL량
+        JAIGO_AL LIKE /NFM/TVGW-VGW,     "현재고 AL량
+        GRTOT_AL LIKE /NFM/TVGW-VGW,    "입고 AL량
+        GITOT_AL LIKE /NFM/TVGW-VGW,     "출고 AL량
+
+        QTY1_OPT  LIKE /NFM/TVGW-VGW,     "전월재고 광량
+        JAIGO_OPT LIKE /NFM/TVGW-VGW,     "현재고 광량
+        GRTOT_OPT LIKE /NFM/TVGW-VGW,    "입고 광량
+        GITOT_OPT LIKE /NFM/TVGW-VGW,     "출고 광량
+
+      END OF GT_LIST.
+
+DATA: BEGIN OF GT_MARD OCCURS 0.
+        INCLUDE STRUCTURE MARD.
+DATA:   MTART LIKE MARA-MTART,
+        MEINS LIKE MARA-MEINS.
+DATA: END OF GT_MARD.
+
+DATA: BEGIN OF GT_MARDH OCCURS 0.
+        INCLUDE STRUCTURE MARDH.
+DATA: END OF GT_MARDH.
+
+DATA: BEGIN OF GT_MSKA OCCURS 0.
+        INCLUDE STRUCTURE MSKA.
+DATA:   MTART LIKE MARA-MTART,
+        MEINS LIKE MARA-MEINS.
+DATA: END OF GT_MSKA.
+
+DATA: BEGIN OF GT_MSKAH OCCURS 0.
+        INCLUDE STRUCTURE MSKAH.
+DATA: END OF GT_MSKAH.
+
+*/ TIME_OUT 방지용 - GET_MTO/GET_MTS LOOP 내 SELECT 제거
+*/ 목적의 Bulk 조회 결과 테이블
+DATA: GT_MSKAH_ALL TYPE SORTED TABLE OF MSKAH
+        WITH NON-UNIQUE KEY MATNR WERKS LGORT CHARG SOBKZ
+                             VBELN POSNR LFGJA LFMON.
+DATA: GT_MARDH_ALL TYPE SORTED TABLE OF MARDH
+        WITH NON-UNIQUE KEY MATNR WERKS LGORT LFGJA LFMON.
+
+
+*/ MSEG
+DATA: GT_ZLET0242 LIKE ZLET0242 OCCURS 0 WITH HEADER LINE.
+DATA: GT_ZLET0021 LIKE ZLET0021 OCCURS 0 WITH HEADER LINE.
+DATA: BEGIN OF GT_MSEG OCCURS 0.
+        INCLUDE STRUCTURE MSEG.
+DATA:   MTART LIKE MARA-MTART.
+DATA: END OF GT_MSEG.
+
+DATA: GT_MSG LIKE ZLES009 OCCURS 0 WITH HEADER LINE.
+********************************************************
+*           GLOVAL VARIANCE                            *
+********************************************************
+DATA: GV_DATE  LIKE SY-DATUM.
+DATA: GV_LDATE LIKE SY-DATUM.
+DATA: GV_LFGJA LIKE MSKU-LFGJA.
+DATA: GV_LFMON LIKE MSKU-LFMON.
+DATA: GV_LIN   TYPE I.
+DATA: GV_FLAG.
+DATA: FIELD_TEXT01(10).
+DATA: GV_LABST LIKE MARD-LABST,
+      GV_INSME LIKE MARD-LABST,
+      GV_SPEME LIKE MARD-LABST,
+      GV_EINME LIKE MARD-LABST.
+DATA: GV_YEARMON LIKE ISELLIST-MONTH.
+DATA: P_YYMM     LIKE ISELLIST-MONTH.
+********************************************************
+*           RANDES & CONSTANTS & CONTROLS              *
+********************************************************
+RANGES: R_BUDAT FOR MKPF-BUDAT.
+RANGES: R_BWART FOR MSEG-BWART.
+
+********************************************************
+*/ 선택조건
+********************************************************
+SELECTION-SCREEN BEGIN OF BLOCK B1 WITH FRAME TITLE TEXT-001.
+  SELECT-OPTIONS: S_WERKS FOR MSEG-WERKS
+                MEMORY ID WRK OBLIGATORY.  "플랜트
+  SELECT-OPTIONS: S_LGORT FOR MSEG-LGORT.  "저장위치
+  SELECT-OPTIONS: S_MTART FOR MARA-MTART.  "자재유형
+  SELECT-OPTIONS: S_SPART FOR MARA-SPART.  "제품군
+  SELECT-OPTIONS: S_MATKL FOR MARA-MATKL.  "자재그룹
+  SELECT-OPTIONS: S_MATNR FOR MARD-MATNR.  "자재
+
+*>> START - Archiving 관련변경 01 -> 20080325
+  SELECTION-SCREEN SKIP 1.
+*-- TEXT: '아카이브 데이터 포함'
+  PARAMETERS: P_ARCV AS CHECKBOX.
+*>> END   - Archiving 관련변경 01 -> 20080325
+SELECTION-SCREEN END   OF BLOCK B1.
+*/ 기간 조건
+SELECTION-SCREEN BEGIN OF BLOCK B3 WITH FRAME TITLE TEXT-003.
+* 일보
+  SELECTION-SCREEN BEGIN OF LINE.
+    PARAMETERS: R04 RADIOBUTTON GROUP G_R1
+                    USER-COMMAND UCOMM DEFAULT 'X'.
+    SELECTION-SCREEN COMMENT 4(32) TEXT-204 FOR FIELD R04.
+    SELECT-OPTIONS: S_DATE1 FOR MKPF-BUDAT.
+  SELECTION-SCREEN END OF LINE.
+* 월보
+  SELECTION-SCREEN BEGIN OF LINE.
+    PARAMETERS: R05 RADIOBUTTON GROUP G_R1 .
+    SELECTION-SCREEN COMMENT 4(32) TEXT-205 FOR FIELD R05.
+    SELECT-OPTIONS: S_DATE2 FOR S017-SPMON NO INTERVALS NO-EXTENSION.
+  SELECTION-SCREEN END OF LINE.
+
+SELECTION-SCREEN END   OF BLOCK B3.
+
+
+SELECTION-SCREEN BEGIN OF BLOCK B2 WITH FRAME TITLE TEXT-004.
+  PARAMETERS: P_SAVE AS CHECKBOX MEMORY ID P1 DEFAULT ' '.
+SELECTION-SCREEN END   OF BLOCK B2.

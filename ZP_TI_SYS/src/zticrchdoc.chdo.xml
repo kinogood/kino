@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_CHDO" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <CHDO>
+    <REPORTS_GENERATED>
+     <TCDRPS>
+      <OBJECT>ZTICRCHDOC</OBJECT>
+      <REPORTNAME>ZTICRCHDOC</REPORTNAME>
+      <TEXTCASE>X</TEXTCASE>
+      <ARBGEB>CD</ARBGEB>
+      <FEHLERNR>600</FEHLERNR>
+      <FGRP>ZTICRCHDOC</FGRP>
+      <PREFIX>V</PREFIX>
+      <UPDATE_FLG>1</UPDATE_FLG>
+     </TCDRPS>
+    </REPORTS_GENERATED>
+    <OBJECTS>
+     <TCDOBS>
+      <OBJECT>ZTICRCHDOC</OBJECT>
+      <TABNAME>ZTITCR1</TABNAME>
+      <MULTCASE>X</MULTCASE>
+     </TCDOBS>
+     <TCDOBS>
+      <OBJECT>ZTICRCHDOC</OBJECT>
+      <TABNAME>ZTITCR2</TABNAME>
+      <MULTCASE>X</MULTCASE>
+     </TCDOBS>
+     <TCDOBS>
+      <OBJECT>ZTICRCHDOC</OBJECT>
+      <TABNAME>ZTITCR3</TABNAME>
+      <MULTCASE>X</MULTCASE>
+     </TCDOBS>
+     <TCDOBS>
+      <OBJECT>ZTICRCHDOC</OBJECT>
+      <TABNAME>ZTITCR5</TABNAME>
+      <MULTCASE>X</MULTCASE>
+     </TCDOBS>
+     <TCDOBS>
+      <OBJECT>ZTICRCHDOC</OBJECT>
+      <TABNAME>ZTITCRK</TABNAME>
+     </TCDOBS>
+     <TCDOBS>
+      <OBJECT>ZTICRCHDOC</OBJECT>
+      <TABNAME>ZTITCRP</TABNAME>
+      <MULTCASE>X</MULTCASE>
+     </TCDOBS>
+    </OBJECTS>
+    <OBJECTS_TEXT>
+     <TCDOBTS>
+      <SPRAS>3</SPRAS>
+      <OBJECT>ZTICRCHDOC</OBJECT>
+      <OBTEXT>[Import] 수입신고의뢰 변경문서</OBTEXT>
+     </TCDOBTS>
+    </OBJECTS_TEXT>
+   </CHDO>
+  </asx:values>
+ </asx:abap>
+</abapGit>

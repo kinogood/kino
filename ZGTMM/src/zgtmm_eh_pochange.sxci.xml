@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_SXCI" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <SXCI>
+    <IMPLEMENTATION_DATA>
+     <IMP_NAME>ZGTMM_EH_POCHANGE</IMP_NAME>
+     <TEXT>PO DATA 변경</TEXT>
+     <IMP_CLASS>ZGTMM_CL_POCHANGE</IMP_CLASS>
+     <EXIT_NAME>ME_PROCESS_PO_CUST</EXIT_NAME>
+     <INTER_NAME>IF_EX_ME_PROCESS_PO_CUST</INTER_NAME>
+     <ACTIVE>X</ACTIVE>
+    </IMPLEMENTATION_DATA>
+   </SXCI>
+  </asx:values>
+ </asx:abap>
+</abapGit>

@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_DTEL" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <DD04V>
+    <ROLLNAME>ZTIICSNO</ROLLNAME>
+    <DDLANGUAGE>3</DDLANGUAGE>
+    <DOMNAME>ZTIICSNO</DOMNAME>
+    <MEMORYID>ZTIICSNO</MEMORYID>
+    <LOGFLAG>X</LOGFLAG>
+    <HEADLEN>12</HEADLEN>
+    <SCRLEN1>10</SCRLEN1>
+    <SCRLEN2>15</SCRLEN2>
+    <SCRLEN3>20</SCRLEN3>
+    <DDTEXT>수입비용 문서번호</DDTEXT>
+    <REPTEXT>비용문서번호</REPTEXT>
+    <SCRTEXT_S>비용문서</SCRTEXT_S>
+    <SCRTEXT_M>비용문서번호</SCRTEXT_M>
+    <SCRTEXT_L>비용문서번호</SCRTEXT_L>
+    <DTELMASTER>3</DTELMASTER>
+    <SHLPNAME>ZTICS00</SHLPNAME>
+    <SHLPFIELD>ICSNO</SHLPFIELD>
+    <REFKIND>D</REFKIND>
+   </DD04V>
+  </asx:values>
+ </asx:abap>
+</abapGit>

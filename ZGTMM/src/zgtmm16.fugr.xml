@@ -1,0 +1,109 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_FUGR" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <AREAT>[가온] S.Outlook -&gt; SAP I/F</AREAT>
+   <INCLUDES>
+    <SOBJ_NAME>LZGTMM16F01</SOBJ_NAME>
+    <SOBJ_NAME>LZGTMM16TOP</SOBJ_NAME>
+    <SOBJ_NAME>SAPLZGTMM16</SOBJ_NAME>
+   </INCLUDES>
+   <FUNCTIONS>
+    <item>
+     <FUNCNAME>ZGTMM_IF_I_DIRECTREQ</FUNCNAME>
+     <REMOTE_CALL>R</REMOTE_CALL>
+     <SHORT_TEXT>OEM 직납 요청(Sales Outlook -&gt; SAP)</SHORT_TEXT>
+     <IMPORT>
+      <RSIMP>
+       <PARAMETER>I_BUKRS</PARAMETER>
+       <TYP>BUKRS</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_WERKS</PARAMETER>
+       <TYP>WERKS_D</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>IS_D365_LOGIN</PARAMETER>
+       <TYP>ZSDS_LOG_0000</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_PERNR</PARAMETER>
+       <TYP>PERSNO</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_NAME</PARAMETER>
+       <TYP>NAME1</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_EMAIL</PARAMETER>
+       <TYP>AD_SMTPADR</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_TELNO</PARAMETER>
+       <TYP>CHAR16</TYP>
+      </RSIMP>
+     </IMPORT>
+     <EXPORT>
+      <RSEXP>
+       <PARAMETER>ES_RETURN</PARAMETER>
+       <TYP>ZSDS_LOG_0001</TYP>
+      </RSEXP>
+     </EXPORT>
+     <TABLES>
+      <RSTBL>
+       <PARAMETER>IT_DATA</PARAMETER>
+       <DBSTRUCT>ZGTMMS4511</DBSTRUCT>
+      </RSTBL>
+     </TABLES>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>I_BUKRS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>회사코드</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_WERKS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>플랜트</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>IS_D365_LOGIN</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>RFC LOG</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_PERNR</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>사원 번호</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_NAME</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>이름</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_EMAIL</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>전자메일 주소</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_TELNO</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>영업사원전화번호</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>ES_RETURN</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>RFC LOG</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>IT_DATA</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>OEM 직납 대상 정보 조회</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+   </FUNCTIONS>
+  </asx:values>
+ </asx:abap>
+</abapGit>

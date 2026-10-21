@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_DTEL" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <DD04V>
+    <ROLLNAME>ZTIISTBK</ROLLNAME>
+    <DDLANGUAGE>3</DDLANGUAGE>
+    <DOMNAME>CHAR65</DOMNAME>
+    <LOGFLAG>X</LOGFLAG>
+    <HEADLEN>55</HEADLEN>
+    <SCRLEN1>10</SCRLEN1>
+    <SCRLEN2>17</SCRLEN2>
+    <SCRLEN3>34</SCRLEN3>
+    <DDTEXT>매입/지급/인수은행에 대한 지시사항</DDTEXT>
+    <REPTEXT>매입/지급/인수은행에 대한 지시사항</REPTEXT>
+    <SCRTEXT_S>지시사항</SCRTEXT_S>
+    <SCRTEXT_M>인수은행 지시사항</SCRTEXT_M>
+    <SCRTEXT_L>매입/지급/인수은행에 대한 지시사항</SCRTEXT_L>
+    <DTELMASTER>3</DTELMASTER>
+    <REFKIND>D</REFKIND>
+   </DD04V>
+  </asx:values>
+ </asx:abap>
+</abapGit>

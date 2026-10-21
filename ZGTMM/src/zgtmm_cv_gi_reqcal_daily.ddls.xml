@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_DDLS" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <DDLS>
+    <DDLNAME>ZGTMM_CV_GI_REQCAL_DAILY</DDLNAME>
+    <DDLANGUAGE>3</DDLANGUAGE>
+    <DDTEXT>소모기준 적정 재고 산출 용 플랜트/자재 별 소요량 계산(일자별)</DDTEXT>
+    <SOURCE_TYPE>W</SOURCE_TYPE>
+   </DDLS>
+  </asx:values>
+ </asx:abap>
+</abapGit>

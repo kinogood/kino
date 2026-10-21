@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_DTEL" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <DD04V>
+    <ROLLNAME>ZTIBOIND</ROLLNAME>
+    <DDLANGUAGE>3</DDLANGUAGE>
+    <DOMNAME>X</DOMNAME>
+    <LOGFLAG>X</LOGFLAG>
+    <HEADLEN>44</HEADLEN>
+    <SCRLEN1>10</SCRLEN1>
+    <SCRLEN2>17</SCRLEN2>
+    <SCRLEN3>24</SCRLEN3>
+    <DDTEXT>수입면허필증 생성시 반출정보 자동생성 지시자</DDTEXT>
+    <REPTEXT>수입면허필증 생성시 반출정보 자동생성 지시자</REPTEXT>
+    <SCRTEXT_S>반출생성</SCRTEXT_S>
+    <SCRTEXT_M>반출정보 자동생성</SCRTEXT_M>
+    <SCRTEXT_L>반출정보 자동생성 지시자</SCRTEXT_L>
+    <DTELMASTER>3</DTELMASTER>
+    <REFKIND>D</REFKIND>
+   </DD04V>
+  </asx:values>
+ </asx:abap>
+</abapGit>

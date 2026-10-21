@@ -1,0 +1,240 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_DOMA" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <DD01V>
+    <DOMNAME>ZTIBIOCD</DOMNAME>
+    <DDLANGUAGE>3</DDLANGUAGE>
+    <DATATYPE>CHAR</DATATYPE>
+    <LENG>000002</LENG>
+    <OUTPUTLEN>000002</OUTPUTLEN>
+    <VALEXI>X</VALEXI>
+    <DDTEXT>반출입 구분</DDTEXT>
+   </DD01V>
+   <DD07V_TAB>
+    <DD07V>
+     <VALPOS>0001</VALPOS>
+     <DDLANGUAGE>3</DDLANGUAGE>
+     <DOMVALUE_L>10</DOMVALUE_L>
+     <DDTEXT>입항 반입</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0002</VALPOS>
+     <DDLANGUAGE>3</DDLANGUAGE>
+     <DOMVALUE_L>11</DOMVALUE_L>
+     <DDTEXT>무적화물 반입</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0003</VALPOS>
+     <DDLANGUAGE>3</DDLANGUAGE>
+     <DOMVALUE_L>15</DOMVALUE_L>
+     <DDTEXT>Sea &amp; Air 반입</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0004</VALPOS>
+     <DDLANGUAGE>3</DDLANGUAGE>
+     <DOMVALUE_L>20</DOMVALUE_L>
+     <DDTEXT>보세운송 반입</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0005</VALPOS>
+     <DDLANGUAGE>3</DDLANGUAGE>
+     <DOMVALUE_L>21</DOMVALUE_L>
+     <DDTEXT>이고 반입</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0006</VALPOS>
+     <DDLANGUAGE>3</DDLANGUAGE>
+     <DOMVALUE_L>22</DOMVALUE_L>
+     <DDTEXT>BWT물품 B/L 분할/합병 반입</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0007</VALPOS>
+     <DDLANGUAGE>3</DDLANGUAGE>
+     <DOMVALUE_L>23</DOMVALUE_L>
+     <DDTEXT>일괄구매물품 B/L분할 반입</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0008</VALPOS>
+     <DDLANGUAGE>3</DDLANGUAGE>
+     <DOMVALUE_L>24</DOMVALUE_L>
+     <DDTEXT>경유지 반입</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0009</VALPOS>
+     <DDLANGUAGE>3</DDLANGUAGE>
+     <DOMVALUE_L>25</DOMVALUE_L>
+     <DDTEXT>검역물품 인수증에 의한 반입</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0010</VALPOS>
+     <DDLANGUAGE>3</DDLANGUAGE>
+     <DOMVALUE_L>30</DOMVALUE_L>
+     <DDTEXT>이적허가 반입</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0011</VALPOS>
+     <DDLANGUAGE>3</DDLANGUAGE>
+     <DOMVALUE_L>40</DOMVALUE_L>
+     <DDTEXT>압수품해제 반입</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0012</VALPOS>
+     <DDLANGUAGE>3</DDLANGUAGE>
+     <DOMVALUE_L>41</DOMVALUE_L>
+     <DDTEXT>선용품 등록 반입</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0013</VALPOS>
+     <DDLANGUAGE>3</DDLANGUAGE>
+     <DOMVALUE_L>49</DOMVALUE_L>
+     <DDTEXT>입항 반입(현도)</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0014</VALPOS>
+     <DDLANGUAGE>3</DDLANGUAGE>
+     <DOMVALUE_L>50</DOMVALUE_L>
+     <DDTEXT>수입신고수리후 반출</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0015</VALPOS>
+     <DDLANGUAGE>3</DDLANGUAGE>
+     <DOMVALUE_L>51</DOMVALUE_L>
+     <DDTEXT>수입신고수리전 반출</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0016</VALPOS>
+     <DDLANGUAGE>3</DDLANGUAGE>
+     <DOMVALUE_L>52</DOMVALUE_L>
+     <DDTEXT>B/L제시인도물품 반출</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0017</VALPOS>
+     <DDLANGUAGE>3</DDLANGUAGE>
+     <DOMVALUE_L>53</DOMVALUE_L>
+     <DDTEXT>목록통관특송물품 반출</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0018</VALPOS>
+     <DDLANGUAGE>3</DDLANGUAGE>
+     <DOMVALUE_L>54</DOMVALUE_L>
+     <DDTEXT>선용품적재허가 반출</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0019</VALPOS>
+     <DDLANGUAGE>3</DDLANGUAGE>
+     <DOMVALUE_L>55</DOMVALUE_L>
+     <DDTEXT>선용품반입검사 반출</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0020</VALPOS>
+     <DDLANGUAGE>3</DDLANGUAGE>
+     <DOMVALUE_L>56</DOMVALUE_L>
+     <DDTEXT>수입신고전물품바출신고수리에의한 반출</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0021</VALPOS>
+     <DDLANGUAGE>3</DDLANGUAGE>
+     <DOMVALUE_L>60</DOMVALUE_L>
+     <DDTEXT>보세운송 반출</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0022</VALPOS>
+     <DDLANGUAGE>3</DDLANGUAGE>
+     <DOMVALUE_L>61</DOMVALUE_L>
+     <DDTEXT>이고 반출</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0023</VALPOS>
+     <DDLANGUAGE>3</DDLANGUAGE>
+     <DOMVALUE_L>62</DOMVALUE_L>
+     <DDTEXT>BWT물품 B/L분할/합병 반출</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0024</VALPOS>
+     <DDLANGUAGE>3</DDLANGUAGE>
+     <DOMVALUE_L>63</DOMVALUE_L>
+     <DDTEXT>일괄구매물품 B/L분할 반출</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0025</VALPOS>
+     <DDLANGUAGE>3</DDLANGUAGE>
+     <DOMVALUE_L>64</DOMVALUE_L>
+     <DDTEXT>경유지 반출</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0026</VALPOS>
+     <DDLANGUAGE>3</DDLANGUAGE>
+     <DOMVALUE_L>70</DOMVALUE_L>
+     <DDTEXT>통과화물선적 반출</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0027</VALPOS>
+     <DDLANGUAGE>3</DDLANGUAGE>
+     <DOMVALUE_L>71</DOMVALUE_L>
+     <DDTEXT>반송화물 반출</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0028</VALPOS>
+     <DDLANGUAGE>3</DDLANGUAGE>
+     <DOMVALUE_L>72</DOMVALUE_L>
+     <DDTEXT>이적허가 반출</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0029</VALPOS>
+     <DDLANGUAGE>3</DDLANGUAGE>
+     <DOMVALUE_L>73</DOMVALUE_L>
+     <DDTEXT>검역물품 인수증에 이한 반출</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0030</VALPOS>
+     <DDLANGUAGE>3</DDLANGUAGE>
+     <DOMVALUE_L>74</DOMVALUE_L>
+     <DDTEXT>까르네물품 반출</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0031</VALPOS>
+     <DDLANGUAGE>3</DDLANGUAGE>
+     <DOMVALUE_L>75</DOMVALUE_L>
+     <DDTEXT>Sea &amp; Air 반출</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0032</VALPOS>
+     <DDLANGUAGE>3</DDLANGUAGE>
+     <DOMVALUE_L>80</DOMVALUE_L>
+     <DDTEXT>멸각폐기 반출</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0033</VALPOS>
+     <DDLANGUAGE>3</DDLANGUAGE>
+     <DOMVALUE_L>81</DOMVALUE_L>
+     <DDTEXT>공매 반출</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0034</VALPOS>
+     <DDLANGUAGE>3</DDLANGUAGE>
+     <DOMVALUE_L>82</DOMVALUE_L>
+     <DDTEXT>국고귀속 반출</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0035</VALPOS>
+     <DDLANGUAGE>3</DDLANGUAGE>
+     <DOMVALUE_L>83</DOMVALUE_L>
+     <DDTEXT>체화폐기 반출</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0036</VALPOS>
+     <DDLANGUAGE>3</DDLANGUAGE>
+     <DOMVALUE_L>90</DOMVALUE_L>
+     <DDTEXT>압수품 반출</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0037</VALPOS>
+     <DDLANGUAGE>3</DDLANGUAGE>
+     <DOMVALUE_L>99</DOMVALUE_L>
+     <DDTEXT>기타 반출</DDTEXT>
+    </DD07V>
+   </DD07V_TAB>
+  </asx:values>
+ </asx:abap>
+</abapGit>

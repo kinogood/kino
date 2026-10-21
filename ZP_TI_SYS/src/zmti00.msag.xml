@@ -1,0 +1,2504 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_MSAG" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <T100A>
+    <ARBGB>ZMTI00</ARBGB>
+    <MASTERLANG>3</MASTERLANG>
+    <STEXT>[TraSys] 수입관리 시스템 메시지 클래스</STEXT>
+   </T100A>
+   <T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>000</MSGNR>
+     <TEXT>&amp; 기능을 사용할 수 없습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>001</MSGNR>
+     <TEXT>수입요청문서 유형을 유지보수 하지 않았습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>002</MSGNR>
+     <TEXT>구매문서유형[&amp;]/지급조건[&amp;]에 대한 수입문서유형을 유지보수하지 않았습니다</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>003</MSGNR>
+     <TEXT>추가 구매오더의 공급업체[&amp;]와 선택된 공급업체[&amp;]가 서로 상이합니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>004</MSGNR>
+     <TEXT>추가 구매오더의 수입요청유형[&amp;]과 기존 입력된 유형[&amp;]이 서로 상이합니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>005</MSGNR>
+     <TEXT>구매오더의 잔량을 초과하였습니다. 수입요청 가능수량 &amp; 입니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>006</MSGNR>
+     <TEXT>추가 구매오더의 통화[&amp;]와 기존 입력된 통화[&amp;]가 서로 상이합니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>007</MSGNR>
+     <TEXT>추가 자재문서의 통화[&amp;]와 기존 입력된 통화[&amp;]가 서로 상이합니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>008</MSGNR>
+     <TEXT>추가 자재문서의 공급업체[&amp;]와 선택된 공급업체[&amp;]가 서로 상이합니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>009</MSGNR>
+     <TEXT>서로 다른 &amp; 가(이) 존재합니다. 해당 기능을 수행할 수 없습니다</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>010</MSGNR>
+     <TEXT>자재문서의 잔량을 초과하였습니다. 수입요청 가능수량 &amp; 입니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>011</MSGNR>
+     <TEXT>존재하지 않는 회사코드 &amp; 입니다</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>012</MSGNR>
+     <TEXT>회사코드 &amp; 의 EDI 관련 항목을 정의하지 않았습니다</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>013</MSGNR>
+     <TEXT>EDI 신청서를 작성하지 않았습니다. EDI 항목을 확인 후 전송하세요</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>014</MSGNR>
+     <TEXT>수입요청문서 유형 &amp; 은 선급금 기능을 사용할 수 없습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>015</MSGNR>
+     <TEXT>전신환 송금(T/T) 건이 아닙니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>016</MSGNR>
+     <TEXT>입력 환율 &amp; 과 시스템 환율 &amp; 이 서로 일치하지 않습니다</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>017</MSGNR>
+     <TEXT>품목에 서로 다른 호선정보가 존재합니다</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>018</MSGNR>
+     <TEXT>국가별 운송기간을 유지보수 하지 않았습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>019</MSGNR>
+     <TEXT>정의되지 않은 프로젝트입니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>020</MSGNR>
+     <TEXT>품목의 호선정보와 헤더의 호선정보가 상이합니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>021</MSGNR>
+     <TEXT>품목의 여러 호선정보를 보유하고 있습니다</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>022</MSGNR>
+     <TEXT>은행 정보가 등록되지 않았습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>023</MSGNR>
+     <TEXT>한개 이상의 은행코드 정보가 존재합니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>024</MSGNR>
+     <TEXT>Term Charge와 관련된 비용항목이 아닙니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>025</MSGNR>
+     <TEXT>품목 &amp; 의 금액과 계산된 금액 사이에 차이가 발생합니다</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>026</MSGNR>
+     <TEXT>유보금은 회계처리를 할 수 없습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>027</MSGNR>
+     <TEXT>해당 문서 &amp; 수입신용장 문서입니다. 선급금 정보를 등록하시겠습니까?</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>028</MSGNR>
+     <TEXT>선급금 수량 &amp; 이상으로만 수입요청 수량을 입력할 수 있습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>029</MSGNR>
+     <TEXT>변경된 데이타가 존재하지 않습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>030</MSGNR>
+     <TEXT>포워더를 지정하지 않았습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>031</MSGNR>
+     <TEXT>품목에 프로젝트 정보와 헤더 프로젝트 정보가 서로 상이합니다</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>032</MSGNR>
+     <TEXT>추가 구매오더의 &amp;1 [&amp;2]와 기존 입력된 &amp;1 [&amp;3]가 서로 상이합니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>033</MSGNR>
+     <TEXT>위탁자재일 경우, 추가 기능을 사용할 수 없습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>034</MSGNR>
+     <TEXT>&amp; 을(를) 입력하지 않았습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>035</MSGNR>
+     <TEXT>회사코드 &amp; 에 대해서 프로세스를 정의하지 않았습니다.[ T-Code : ZTII000 ]</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>036</MSGNR>
+     <TEXT>EDI 송신데이타를 취소할 수 없습니다. 이미 송신된 상태입니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>037</MSGNR>
+     <TEXT>총 &amp; 건의 레코드를 재조회하였습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>038</MSGNR>
+     <TEXT>EDI 문서를 작성하지 않았습니다. EDI 화면 상에서 작업 후 상신바랍니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>039</MSGNR>
+     <TEXT>EDI 문서를 작성하지 않았습니다. EDI 화면 상에서 작업 후 의뢰바랍니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>040</MSGNR>
+     <TEXT>정상적으로 EDI 데이타를 전송하였습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>041</MSGNR>
+     <TEXT>EDI 데이타를 전송 중 오류가 발생하였습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>042</MSGNR>
+     <TEXT>추가할 &amp; 이(가) 존재하지 않습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>043</MSGNR>
+     <TEXT>B/L 품목[ &amp; - &amp; ]에 해당하는 면장정보가 존재하지 않습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>044</MSGNR>
+     <TEXT>송금가능 금액을 초과하였습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>045</MSGNR>
+     <TEXT>정상적으로 부보의뢰 데이타를 전송하였습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>046</MSGNR>
+     <TEXT>부보의뢰 데이타를 전송 중 오류가 발생하였습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>047</MSGNR>
+     <TEXT>&amp; 항목에 &amp; 값을 유지보수 하지 않았습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>048</MSGNR>
+     <TEXT>도메인 &amp; 항목에 &amp; 값을 유지보수 하지 않았습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>049</MSGNR>
+     <TEXT>최종선적일/유효기일을  자동으로 변경합니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>100</MSGNR>
+     <TEXT>참조할 복사원본을 입력하세요( &amp; &amp; &amp; ).</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>101</MSGNR>
+     <TEXT>구매오더 &amp; &amp; 는 존재하지 않거나 수입요청문서 유형을 지정하지 않았습니다</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>102</MSGNR>
+     <TEXT>구매문서범주 &amp; 는 수입요청 기능을 사용할 수 없습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>103</MSGNR>
+     <TEXT>가용한 수량이 존재하는 아이템이 존재하지 않습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>104</MSGNR>
+     <TEXT>수입요청종류를 &amp;로 진행하시겠습니까?</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>105</MSGNR>
+     <TEXT>관리번호[ &amp; - &amp; ]로 정상적으로 저장되었습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>106</MSGNR>
+     <TEXT>구매오더 &amp;를 참조로 생성된 수입요청이 존재하지 않습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>107</MSGNR>
+     <TEXT>개설(승인)번호 &amp;로 생성된 수입요청이 존재하지 않습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>108</MSGNR>
+     <TEXT>수입요청 관리번호 &amp;은(는) 존재하지 않습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>109</MSGNR>
+     <TEXT>후속 &amp; 문서가 이미 존재합니다. 해당 기능을 수행할 수 없습니다</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>110</MSGNR>
+     <TEXT>이미 참조된 구매오더 &amp; &amp; 입니다</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>111</MSGNR>
+     <TEXT>관리번호[ &amp; - &amp; ]로 정상적으로 삭제되었습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>112</MSGNR>
+     <TEXT>수입요청종류를 &amp;로 변경하시겠습니까?</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>113</MSGNR>
+     <TEXT>문서상태가 &amp;된 상태입니다. 계속 진행하시겠습니까?</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>114</MSGNR>
+     <TEXT>&amp; - &amp; 문서는 &amp; 상태여서 해당 기능을 수행할 수 없습니다</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>115</MSGNR>
+     <TEXT>선택하신 문서의 회차 &amp; 는 최종 Amend 회차 &amp; 보다 이전 문서입니다</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>116</MSGNR>
+     <TEXT>수입요청종류가 &amp;인 문서는 Amend 기능을 사용할 수 없습니다</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>117</MSGNR>
+     <TEXT>개설금액(Amount)이(가) 변경됩니다</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>118</MSGNR>
+     <TEXT>개설금액(Amount)이(가) 아이템의 합계와 차이가 발생합니다</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>119</MSGNR>
+     <TEXT>&amp;은(는) &amp; 보다 이후 일자여야만 합니다</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>120</MSGNR>
+     <TEXT>국가코드 &amp; 의 공항/항구코드 &amp; 는(은) 유지보수 되지 않았습니다</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>121</MSGNR>
+     <TEXT>관리번호 &amp; 를 정상적으로 개설요청을 수행하였습니다</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>122</MSGNR>
+     <TEXT>관리번호 &amp; 를 정상적으로 접수처리 되었습니다</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>123</MSGNR>
+     <TEXT>관리번호 &amp; 를 정상적으로 개설신청 처리 하였습니다</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>124</MSGNR>
+     <TEXT>선급금 및 유보금 중 하나의 송금유형만을 정의하세요</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>125</MSGNR>
+     <TEXT>선급금 여부를 자동 선택합니다. 계속 진행하시겠습니까?</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>126</MSGNR>
+     <TEXT>현재 릴리즈(승인)가 완료된 상태가 아닙니다</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>127</MSGNR>
+     <TEXT>기존에 입력된 포워더 정보가 삭제됩니다. 계속 진행하시겠습니까?</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>128</MSGNR>
+     <TEXT>선적국가 &amp; 에 포워더 &amp; 가 유지보수 되지 않았습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>129</MSGNR>
+     <TEXT>수입요청문서[ &amp; - &amp; ] 상에 &amp;을(를) 유지보수 하지 않았습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>130</MSGNR>
+     <TEXT>수취인 거래은행 코드를 입력하지 않았습니다</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>131</MSGNR>
+     <TEXT>주요구비서류 중 적어도 하나의 필드는 필수입니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>132</MSGNR>
+     <TEXT>수입요청문서[ &amp; - &amp; ] 상에 비용문서를 이미 &amp; 하였습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>133</MSGNR>
+     <TEXT>&amp; 번째 품목에 &amp;을(를) 입력하지 않았습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>134</MSGNR>
+     <TEXT>&amp; 번째 품목에 수량이 &amp; 가능수량을 초과합니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>135</MSGNR>
+     <TEXT>저장할 품목이 존재하지 않습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>136</MSGNR>
+     <TEXT>수입요청종류가 &apos;&amp;&apos; 인 문서는 종료처리 기능을 사용할 수 없습니다</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>137</MSGNR>
+     <TEXT>수입요청 관리번호 &amp;에 Amend &amp; 회차는 존재하지 않습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>138</MSGNR>
+     <TEXT>수입요청 관리번호 &amp;에 &amp; 품목은 존재하지 않습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>139</MSGNR>
+     <TEXT>자재문서 &amp;의 &amp;번째 품목에 단가 및 금액 정보가 유지보수 되지 않았습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>140</MSGNR>
+     <TEXT>수입요청종류를 &amp;으로는 수입요청을 진행할 수 없습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>141</MSGNR>
+     <TEXT>&amp; 인 구매문서는 수입의뢰를 할 수 없습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>142</MSGNR>
+     <TEXT>부보조건을 입력하지 않았습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>143</MSGNR>
+     <TEXT>관리번호 &amp; 를 정상적으로 은행배정 처리 하였습니다</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>144</MSGNR>
+     <TEXT>사후송금문서[ &amp; ]는 EDI 개별화면에서 송신하시기 바랍니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>145</MSGNR>
+     <TEXT>존재하지 않는 구매오더번호[ &amp; ] 입니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>146</MSGNR>
+     <TEXT>구매오더[ &amp; ]의 인도조건[ &amp; ]은 적하부보를 들지 않는 조건입니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>147</MSGNR>
+     <TEXT>구매오더[ &amp; ]는 릴리즈(승인)가 완료된 상태가 아닙니다</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>148</MSGNR>
+     <TEXT>&amp;이(가) &amp; 보다 &amp; 일이상 차이가 납니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>149</MSGNR>
+     <TEXT>수입요청종류[&amp;]와 지급조건의 수입종류[&amp;]가 서로 상이합니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>150</MSGNR>
+     <TEXT>수입요청문서가 &amp;일 경우는 적하보험 기능을 사용할 수 없습니다</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>151</MSGNR>
+     <TEXT>수입요청종류가 &amp;인 문서입니다. 적하보험부보 하시겠습니까?</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>152</MSGNR>
+     <TEXT>해당 수입요청 &amp; 는 적하보험 부보여부를 선택하지 않았습니다</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>153</MSGNR>
+     <TEXT>해당 수입요청 &amp; 는 이미 부보된 내역이 존재합니다. 계속 진행하시겠습니까?</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>154</MSGNR>
+     <TEXT>관리번호 &amp; &amp; 를 정상적으로 부보의뢰 하였습니다</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>155</MSGNR>
+     <TEXT>이미 존재하는 보험증권 번호 &amp; 입니다. 계속 진행하시겠습니까?</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>156</MSGNR>
+     <TEXT>존재하지 않는 적하보험 관리번호[ &amp; ] 입니다</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>157</MSGNR>
+     <TEXT>배서할 항목이 존재하지 않습니다. 변경된 데이타가 존재하지 않습니다</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>158</MSGNR>
+     <TEXT>보험사 정보가 등록되지 않았습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>159</MSGNR>
+     <TEXT>한개 이상의 보험사 정보가 존재합니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>160</MSGNR>
+     <TEXT>적하보험문서[ &amp; - &amp; ] 상에 &amp;을(를) 유지보수 하지 않았습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>161</MSGNR>
+     <TEXT>적하보험문서[ &amp; - &amp; ]는 보험료 정보가 동일하여 갱신하지 않았습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>162</MSGNR>
+     <TEXT>적하보험문서[ &amp; - &amp; ]를 &amp;로 정상적으로 송신하였습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>163</MSGNR>
+     <TEXT>적하보험문서[ &amp; - &amp; ]를 &amp;로 송신 중 오류가 발생하였습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>164</MSGNR>
+     <TEXT>정의하지 않은 지급조건[ &amp; ]입니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>165</MSGNR>
+     <TEXT>수입의뢰종류가 &amp;인 문서는 LG업무를 진행할 수 없습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>166</MSGNR>
+     <TEXT>회사[ &amp; ]는 수입요청 승인 관리 프로세스를 지정하지 않았습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>167</MSGNR>
+     <TEXT>관리번호 &amp; 를 정상적으로 &amp; 처리 되었습니다</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>168</MSGNR>
+     <TEXT>수입요청[&amp; - &amp;]을 승인한 상태여서 해당 프로세스를 사용할 수 없습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>169</MSGNR>
+     <TEXT>수입요청[&amp; - &amp;]은 미승인 상태여서 해당 프로세스를 사용할 수 없습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>170</MSGNR>
+     <TEXT>&amp; 번째 품목의 구매오더 품목[ &amp; - &amp; ]이 삭제된 상태입니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>172</MSGNR>
+     <TEXT>사후송금문서[ &amp; ]는 수입의뢰문서를 참조할 수 없습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>173</MSGNR>
+     <TEXT>사후송금문서는 송장처리 이후에 해당 기능을 수행할 수 있습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>174</MSGNR>
+     <TEXT>사후송금용 구매오더[ &amp; ]는 개별생성 기능을 사용할 수 없습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>175</MSGNR>
+     <TEXT>수입의뢰[ &amp; - &amp; ]는 반려사유를 입력하지 않았습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>176</MSGNR>
+     <TEXT>적하보험문서[ &amp; - &amp; ]은 이미 부보의뢰 진행 중 입니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>177</MSGNR>
+     <TEXT>&amp; 번째 품목은 전략상품 PO[&amp;-&amp;]여서 Simulation 기능을 지원하지 않습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>178</MSGNR>
+     <TEXT>로그인ID [ &amp; ]의 회사코드가 정의 되지 않았습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>200</MSGNR>
+     <TEXT>B/L 관리번호 &amp;은(는) 존재하지 않습니다</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>201</MSGNR>
+     <TEXT>관리번호[ &amp; ]로 정상적으로 삭제되었습니다</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>202</MSGNR>
+     <TEXT>관리번호[ &amp; ]로 정상적으로 저장되었습니다</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>203</MSGNR>
+     <TEXT>수입요청종류가 &amp;인 문서는 B/L 기능을 사용할 수 없습니다</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>204</MSGNR>
+     <TEXT>수입요청문서가 &amp;일 경우는 B/L 기능을 사용할 수 없습니다</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>205</MSGNR>
+     <TEXT>추가할 수입요청의 공급업체[&amp;]와 B/L상의 공급업체[&amp;]가 서로 상이합니다</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>206</MSGNR>
+     <TEXT>추가 수입요청의 통화[&amp;]와 기존 입력된 통화[&amp;]가 서로 상이합니다</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>207</MSGNR>
+     <TEXT>존재하지 않는 B/L 번호[ &amp; ] 입니다</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>208</MSGNR>
+     <TEXT>잔량을 초과하였습니다. B/L 가능수량 &amp; 입니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>209</MSGNR>
+     <TEXT>추가할 예약의 공급업체[&amp;]와 B/L상의 공급업체[&amp;]가 서로 상이합니다</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>210</MSGNR>
+     <TEXT>추가할 예약의 통화[&amp;]와 기존 입력된 통화[&amp;]가 서로 상이합니다</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>211</MSGNR>
+     <TEXT>이미 존재하는 B/L 번호[ &amp; ]입니다. 계속 진행하시겠습니까?</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>212</MSGNR>
+     <TEXT>B/L 아이템의 송장금액과 계산된 정가금액 사이에 차이가 발생합니다</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>213</MSGNR>
+     <TEXT>B/L Amount가 변경됩니다</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>214</MSGNR>
+     <TEXT>B/L Amount가 아이템의 합계와 차이가 발생합니다</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>215</MSGNR>
+     <TEXT>OFE 자재는 예약만을 참조할 수 있습니다</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>216</MSGNR>
+     <TEXT>B/L 문서 &amp; &amp; 는 존재하지 않습니다</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>217</MSGNR>
+     <TEXT>수입요청 &amp; &amp; &amp; 는 존재하지 않습니다</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>218</MSGNR>
+     <TEXT>조회할 문서번호를 입력하지 않았습니다. 무환 B/L을 등록하시겠습니까?</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>219</MSGNR>
+     <TEXT>선급금이 있는 수입건의 첫번째 B/L은 선급금 수량 이상을 처리해야 합니다</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>220</MSGNR>
+     <TEXT>B/L Amount가 0 이하일 수는 없습니다</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>221</MSGNR>
+     <TEXT>분할할 금액이 구매오더 금액과 동일합니다</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>222</MSGNR>
+     <TEXT>분할할 금액이 구매오더 금액보다 큽니다</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>223</MSGNR>
+     <TEXT>&amp; 수입요청문서 &amp; 는 B/L 기능을 사용할 수 없습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>224</MSGNR>
+     <TEXT>B/L 문서[ &amp; ] 상에 &amp;을(를) 유지보수 하지 않았습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>225</MSGNR>
+     <TEXT>보세운송통관을 요하는 B/L번호가 아닙니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>226</MSGNR>
+     <TEXT>추가 수입요청의 &amp; [&amp;]와 기존 입력된 [&amp;]가 서로 상이합니다</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>227</MSGNR>
+     <TEXT>기기장비재는 구매오더만을 참조할 수 있습니다</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>228</MSGNR>
+     <TEXT>사후송금 관련자재는 구매오더만을 참조할 수 있습니다</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>229</MSGNR>
+     <TEXT>T/T 수입요청문서 &amp; 의 문서상태가 &amp; 일 경우 사용할 수 없습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>230</MSGNR>
+     <TEXT>선급금 수량 &amp; 이상으로만  선적수량을 입력할 수 있습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>231</MSGNR>
+     <TEXT>선적서류문서[ &amp; ] 상에 비용문서를 이미 &amp; 하였습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>232</MSGNR>
+     <TEXT>선적서류[ &amp; ] 상에 &amp;을(를) 유지보수 하지 않았습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>233</MSGNR>
+     <TEXT>선급금 금액 &amp; 이상으로만 송장금액을 입력할 수 있습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>234</MSGNR>
+     <TEXT>헤더 총송장금액이 아이템의 합계 금액으로 자동 변경됩니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>235</MSGNR>
+     <TEXT>총 송장금액 &amp; 이 가능금액 &amp; 을 초과합니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>236</MSGNR>
+     <TEXT>총 송장금액 &amp; 이 선급금 &amp; 미만 입니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>237</MSGNR>
+     <TEXT>총 송장금액 &amp; 이 선급금+유보금 &amp; 미만 입니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>238</MSGNR>
+     <TEXT>수입신고종류가 미통관인 선적서류[ &amp; ]입니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>239</MSGNR>
+     <TEXT>최종 선적품목을 포함할 경우, 금액만 분할 할 수 없습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>240</MSGNR>
+     <TEXT>선급금 금액 중 &amp;를 배부할 수 없어서 선급금 금액을 조정합니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>241</MSGNR>
+     <TEXT>이미 포함하고 있는 문서[ &amp; : &amp; ]입니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>242</MSGNR>
+     <TEXT>통관요청 프로세스를 사용할 수 없도록 설정하였습니다. T-Code : ZTII000</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>243</MSGNR>
+     <TEXT>이미 존재하는 B/L 번호[ &amp; ]입니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>244</MSGNR>
+     <TEXT>선적서류송부 프로세스를 사용할 수 없도록 설정하였습니다. T-Code : ZTII000</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>245</MSGNR>
+     <TEXT>실입항입력 프로세스를 사용할 수 없도록 설정하였습니다. T-Code : ZTII000</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>246</MSGNR>
+     <TEXT>관리번호 &amp; 를 정상적으로 통관요청 처리 하였습니다</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>247</MSGNR>
+     <TEXT>관리번호 &amp; 를 정상적으로 통관요청 하였습니다</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>248</MSGNR>
+     <TEXT>B/L 관리번호[ &amp; ]는 자가장치장 통관형태가 아닙니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>249</MSGNR>
+     <TEXT>입력가능한 구매오더[ &amp; ]의 수량이 존재하지 않습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>300</MSGNR>
+     <TEXT>송장 관리번호 &amp;은(는) 존재하지 않습니다</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>301</MSGNR>
+     <TEXT>B/L의 잔량을 초과하였습니다. 송장처리 가능수량은 &amp; 입니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>302</MSGNR>
+     <TEXT>송장값 &amp; 을(를) 단가로 계산된 금액 &amp; 으로 수정합니다</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>303</MSGNR>
+     <TEXT>송장값 &amp; 과 단가로 계산된 금액 &amp; 이 서로 상이합니다</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>304</MSGNR>
+     <TEXT>송장번호[&amp;]로 입력된 문서가 &amp; 건 존재합니다</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>305</MSGNR>
+     <TEXT>트랜잭션의 &amp; 기능은 사용하실 수 없습니다</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>306</MSGNR>
+     <TEXT>추가 B/L의 공급업체[&amp;]와 선택된 공급업체[&amp;]가 서로 상이합니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>307</MSGNR>
+     <TEXT>추가 B/L의 통화[&amp;]와 기존 입력된 통화[&amp;]가 서로 상이합니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>308</MSGNR>
+     <TEXT>송장금액(Amount)이(가) 변경됩니다</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>309</MSGNR>
+     <TEXT>송장금액(Amount)이(가) 아이템의 합계와 차이가 발생합니다</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>310</MSGNR>
+     <TEXT>이미 존재하는 송장번호[ &amp; ]입니다. 계속 진행하시겠습니까?</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>311</MSGNR>
+     <TEXT>추가 수입요청의 공급업체[&amp;]와 선택된 공급업체[&amp;]가 서로 상이합니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>312</MSGNR>
+     <TEXT>추가 수입요청의 통화[&amp;]와 기존 입력된 통화[&amp;]가 서로 상이합니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>313</MSGNR>
+     <TEXT>송장관리번호 &amp; 로 저장하였습니다. 금액을 확인 후 물대전기하세요.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>314</MSGNR>
+     <TEXT>송장관리번호 &amp; 로 저장하였습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>315</MSGNR>
+     <TEXT>송장 관리번호[ &amp; ]가 정상적으로 삭제되었습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>316</MSGNR>
+     <TEXT>유보금의 지급조건이 입력되지 않았습니다. 분할금액화면에서 확인바랍니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>317</MSGNR>
+     <TEXT>유보금이 송장금액을 초과할 수 없습니다. 유보금을 초기화 합니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>318</MSGNR>
+     <TEXT>선적서류 관리번호 &amp;로 생성된 상업송장문서가 존재하지 않습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>319</MSGNR>
+     <TEXT>B/L Number &amp; 로 생성된 상업송장문서가 존재하지 않습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>320</MSGNR>
+     <TEXT>Invoice Number &amp; 로 생성된 상업송장문서가 존재하지 않습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>321</MSGNR>
+     <TEXT>B/L의 Web I/F를 확인하지 않은 자료는 &amp;(을)를 생성할 수 없습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>322</MSGNR>
+     <TEXT>해당 수입요청문서[ &amp; ]상에 개설은행 정보가 존재하지 않습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>323</MSGNR>
+     <TEXT>수입의뢰정보가 존재하지 않습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>324</MSGNR>
+     <TEXT>사전송금건은 B/L을 참조하여 생성할 수 없습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>325</MSGNR>
+     <TEXT>인도조건2 필드에 정확한 명칭을 입력해주세요</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>400</MSGNR>
+     <TEXT>통관 관리번호 &amp; - &amp; 은(는) 존재하지 않습니다</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>401</MSGNR>
+     <TEXT>구매오더 &amp; &amp; 에 대해서 인바운드 납품을 생성하지 못했습니다</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>402</MSGNR>
+     <TEXT>B/L의 Web I/F를 확인하지 않은 자료는 수입신고 자료를 생성할 수 없습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>403</MSGNR>
+     <TEXT>이미 존재하는 면장번호[ &amp; ]입니다. 계속 진행하시겠습니까?</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>404</MSGNR>
+     <TEXT>이미 존재하는 면장번호[ &amp; ]입니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>430</MSGNR>
+     <TEXT>수입신고의뢰 관리번호 &amp; - &amp; 은(는) 존재하지 않습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>431</MSGNR>
+     <TEXT>이미 존재하는 수입신고의뢰번호[ &amp; ]입니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>432</MSGNR>
+     <TEXT>B/L 관리번호 &amp; 로 생성된 수입요청이 존재하지 않습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>433</MSGNR>
+     <TEXT>통화 &amp;에 해당하는 &amp; 일의 관세청 고시환율이 존재하지 않습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>434</MSGNR>
+     <TEXT>B/L(AWB) 잔량을 초과하였습니다. 수입신고의뢰 가능수량 &amp; 입니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>435</MSGNR>
+     <TEXT>정상적으로 수입신고의뢰 데이타를 전송하였습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>436</MSGNR>
+     <TEXT>수입신고의뢰 데이타를 전송 중 오류가 발생하였습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>437</MSGNR>
+     <TEXT>저장할 란/행사항이 존재하지 않습니다. 란/행을 구성하세요!</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>438</MSGNR>
+     <TEXT>&amp; 번째 란사항에 필수항목[ &amp; ]을 입력하지 않았습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>439</MSGNR>
+     <TEXT>B/L Number[ &amp; ]로 생성된 수입신고필증이 존재하지 않습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>440</MSGNR>
+     <TEXT>B/L관리번호[ &amp; ]로 생성된 수입신고필증이 존재하지 않습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>441</MSGNR>
+     <TEXT>통관관리번호 &amp; 은(는) 존재하지 않습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>442</MSGNR>
+     <TEXT>통관관리번호[ &amp; - &amp; ]로 등록된 면장정보가 존재하지 않습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>443</MSGNR>
+     <TEXT>통관관리번호[ &amp; - &amp; ]는 이미 수입면장 정보를 생성했습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>450</MSGNR>
+     <TEXT>회사코드 &amp; 에 대하여 반입예정정보에 대한 프로세스를 정의하지 않았습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>451</MSGNR>
+     <TEXT>존재하지 않는 B/L 번호[ &amp; ] 입니다. 미지정 반입정보를 등록하시겠습니까?</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>452</MSGNR>
+     <TEXT>이미 반입예정정보로 생성된 B/L(AWB) 관리번호 &amp; 입니다</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>453</MSGNR>
+     <TEXT>B/L에 미지정된 반입정보[ &amp; ]입니다. B/L 지정 후 재수행하십시요.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>454</MSGNR>
+     <TEXT>반입예정문서[ &amp; ]를 B/L 관리번호[ &amp; ]로 정상적으로 지정하였습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>455</MSGNR>
+     <TEXT>반입예정문서[ &amp; ]를 B/L관리번호[ &amp; ]로 지정작업 중 오류가 발생하였습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>456</MSGNR>
+     <TEXT>반출문서[ &amp; ]를 B/L관리번호[ &amp; ]로 정상적으로 지정하였습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>457</MSGNR>
+     <TEXT>반출문서[ &amp; ]를 B/L관리번호[ &amp; ]로 지정작업 중 오류가 발생하였습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>460</MSGNR>
+     <TEXT>이미 B/L에 지정된 반입정보[ &amp; ]입니다. 작업을 수행하지 않습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>461</MSGNR>
+     <TEXT>반입문서[ &amp; ]를 B/L 관리번호[ &amp; ]로 정상적으로 지정하였습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>462</MSGNR>
+     <TEXT>반입문서[ &amp; ]를 B/L 관리번호[ &amp; ]로 지정작업 중 오류가 발생하였습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>463</MSGNR>
+     <TEXT>이미 생성된 반입정보[ &amp; ]입니다. 작업을 수행하지 않습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>464</MSGNR>
+     <TEXT>이미 B/L에 지정된 반입예정정보[ &amp; ]입니다. 작업을 수행하지 않습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>465</MSGNR>
+     <TEXT>이미 B/L에 지정된 반출정보[ &amp; ]입니다. 작업을 수행하지 않습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>470</MSGNR>
+     <TEXT>반출문서[ &amp; ]를 정상적으로 저장하였습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>480</MSGNR>
+     <TEXT>보세창고의 잔량을 초과하였습니다. 창고출고 가능수량은 &amp; 입니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>481</MSGNR>
+     <TEXT>보세구역 출고[ &amp; - &amp; ]로 정상적으로 저장하였습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>482</MSGNR>
+     <TEXT>보세구역 출고[ &amp; - &amp; ]를 정상적으로 삭제하였습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>483</MSGNR>
+     <TEXT>통관관리번호[ &amp; ]는 이미 출고완료된 상태입니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>484</MSGNR>
+     <TEXT>수입통관문서의 잔량을 초과하였습니다. 출고 가능수량은 &amp; 입니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>485</MSGNR>
+     <TEXT>존재하지 않는 보세구역 출고번호[ &amp; - &amp; ]입니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>500</MSGNR>
+     <TEXT>수입입고 관리번호 &amp;은(는) 존재하지 않습니다</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>501</MSGNR>
+     <TEXT>전기할 통관관리번호를 입력하세요</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>502</MSGNR>
+     <TEXT>전기 중 예기치 않은 오류가 발생하였습니다</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>503</MSGNR>
+     <TEXT>통관관리번호[ &amp; ]는 관세 정보가 동일하여 갱신하지 않았습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>504</MSGNR>
+     <TEXT>통관관리번호[ &amp; ]는 부가세 정보가 동일하여 갱신하지 않았습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>505</MSGNR>
+     <TEXT>통관관리번호[ &amp; ]는 통관수수료 정보가 동일하여 갱신하지 않았습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>506</MSGNR>
+     <TEXT>통관관리번호 &amp; 로 저장하였습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>507</MSGNR>
+     <TEXT>통관관리번호 &amp; 로 &amp;을 저장하였습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>508</MSGNR>
+     <TEXT>통관관리번호 [ &amp; ] 상에 &amp;을(를) 유지보수 하지 않았습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>509</MSGNR>
+     <TEXT>거래처 정보가 등록되지 않았습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>510</MSGNR>
+     <TEXT>한개 이상의 거래처 정보가 존재합니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>511</MSGNR>
+     <TEXT>통관관리번호[ &amp; ]는 &amp; 정보가 동일하여 갱신하지 않았습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>512</MSGNR>
+     <TEXT>기기장비재 불출 중 오류가 발생하였습니다. 시스템 담당자에게 문의하세요.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>513</MSGNR>
+     <TEXT>&amp; 번째 품목에 &amp; 가 입력되지 않았습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>514</MSGNR>
+     <TEXT>구매오더[ &amp; ] 품목[ &amp; ]에 관세전가액을 처리할 입고문서가 없습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>515</MSGNR>
+     <TEXT>구매오더[ &amp; ] 품목[ &amp; ]은 G/R 기준 입고지시자가 설정되지 않았습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>516</MSGNR>
+     <TEXT>구매오더[ &amp; - &amp; ]의 단위[ &amp; ]와 상이한 단위[ &amp; ]입니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>517</MSGNR>
+     <TEXT>B/L 관리번호[ &amp; ]로 송장처리된 내역이 존재하지 않습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>518</MSGNR>
+     <TEXT>입력된 Batch data가 존재하지 않습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>562</MSGNR>
+     <TEXT>통관수수료율이 등록되어있지 않아 자동계산 할수 없습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>600</MSGNR>
+     <TEXT>B/L 번호[ &amp; ]로 생성된 L/G 문서가 존재하지 않습니다</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>601</MSGNR>
+     <TEXT>L/G 관리번호[ &amp; ]는 존재하지 않습니다</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>602</MSGNR>
+     <TEXT>반입예정정보 관리번호[ &amp; ]는 존재하지 않습니다</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>603</MSGNR>
+     <TEXT>반입신고관리번호 [ &amp; ]는 존재하지 않습니다</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>604</MSGNR>
+     <TEXT>반출신고관리번호 [ &amp; ]는 존재하지 않습니다</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>605</MSGNR>
+     <TEXT>&amp; [ &amp; ]는 존재하지 않습니다</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>606</MSGNR>
+     <TEXT>B/L 번호[ &amp; ]로 생성된 반입예정정보가 존재하지 않습니다</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>607</MSGNR>
+     <TEXT>반입번호 &amp;로 생성된 반입정보가 존재하지 않습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>608</MSGNR>
+     <TEXT>반입번호 &amp;로 생성된 반입정보가 &amp;건 존재합니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>609</MSGNR>
+     <TEXT>B/L Number &amp;로 생성된 반입정보가 존재하지 않습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>610</MSGNR>
+     <TEXT>B/L Number &amp;로 생성된 반입정보가 &amp;건 존재합니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>611</MSGNR>
+     <TEXT>B/L 관리번호[ &amp; ]로 생성된 반입정보가 존재하지 않습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>700</MSGNR>
+     <TEXT>세금계산서 관리번호 &amp;은(는) 존재하지 않습니다</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>701</MSGNR>
+     <TEXT>세금계산서 관리번호 &amp; 로 저장하였습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>702</MSGNR>
+     <TEXT>세금계산서 관리번호[ &amp; ]가 정상적으로 삭제되었습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>703</MSGNR>
+     <TEXT>수입요청종류가 &amp;인 문서는 세금계산서 기능을 사용할 수 없습니다</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>704</MSGNR>
+     <TEXT>추가 수입요청 관리번호[&amp;]와 선택된 수입요청관리번호[&amp;]가 서로 상이합니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>707</MSGNR>
+     <TEXT>이미 반영된 &amp; [ &amp; ] 입니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>713</MSGNR>
+     <TEXT>존재하지 않는 계산서번호 [ &amp; ]입니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>714</MSGNR>
+     <TEXT>계산서[ &amp; ]는 존재하지 않는 수입의뢰문서[ &amp; ]가 참조되었습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>715</MSGNR>
+     <TEXT>계산서[ &amp; ]를 정상적으로 삭제하였습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>716</MSGNR>
+     <TEXT>총 &amp;건의 계산서를 정상적으로 삭제하였습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>717</MSGNR>
+     <TEXT>총 &amp;건을 정상적으로 회계전표상에 반영하였습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>720</MSGNR>
+     <TEXT>문서종류 &amp; 는 인수증을 생성할 수 없습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>721</MSGNR>
+     <TEXT>인수증을 생성할 Local L/C Number가 존재하지 않습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>722</MSGNR>
+     <TEXT>생성할 Local L/C Number가 &amp; 건 존재합니다. 한개의 Local L/C만 선택하세요.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>723</MSGNR>
+     <TEXT>인수증을 생성할 전표번호를 선택하세요.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>724</MSGNR>
+     <TEXT>인수증을 생성할 전표가 존재하지 않습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>725</MSGNR>
+     <TEXT>인수증 관리번호 &amp;은(는) 존재하지 않습니다</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>740</MSGNR>
+     <TEXT>이미 등록된 접수번호[ &amp; - &amp; - &amp; ] 입니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>741</MSGNR>
+     <TEXT>수입요청종류가 &amp;인 문서는 기납증/분증 기능을 사용할 수 없습니다</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>742</MSGNR>
+     <TEXT>존재하지 않는 기납증문서[ &amp; ] 입니다. 확인 바랍니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>743</MSGNR>
+     <TEXT>헤더 금액과 차이 발생하여 아이템 금액을 자동 배부합니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>744</MSGNR>
+     <TEXT>기납증문서[ &amp; ] 상에 &amp;을(를) 유지보수 하지 않았습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>745</MSGNR>
+     <TEXT>기납증문서[ &amp; ] 상에 비용문서를 이미 &amp; 하였습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>800</MSGNR>
+     <TEXT>Invoice number &amp;로 생성된 상업송장문서가 존재하지 않습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>801</MSGNR>
+     <TEXT>Notice 관리번호 &amp;은(는) 존재하지 않습니다</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>802</MSGNR>
+     <TEXT>관리번호[ &amp; ]로 정상적으로 삭제되었습니다</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>803</MSGNR>
+     <TEXT>관리번호[ &amp; ]로 정상적으로 저장되었습니다</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>804</MSGNR>
+     <TEXT>B/L number &amp;로 생성된 상업송장문서가 존재하지 않습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>805</MSGNR>
+     <TEXT>&amp;인 문서는 Notice를 생성할 수 없습니다</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>806</MSGNR>
+     <TEXT>추가 수입요청[&amp;]와 기존 입력된 수입요청[&amp;]이 서로 상이합니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>807</MSGNR>
+     <TEXT>상업송장의 잔량을 초과하였습니다. Notice 입력가능수량은 &amp; 입니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>808</MSGNR>
+     <TEXT>추가 B/L관리번호[&amp;]와 기존 입력된 B/L관리번호[&amp;]가 서로 상이합니다</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>809</MSGNR>
+     <TEXT>Notice Amount가 아이템의 합계와 차이가 발생합니다</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>810</MSGNR>
+     <TEXT>Notice Amount가 변경됩니다</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>811</MSGNR>
+     <TEXT>수입요청종류가 &amp;인 문서는 Notice 기능을 사용할 수 없습니다</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>812</MSGNR>
+     <TEXT>수입요청문서는 &amp;  &amp; 상태여서 해당 기능을 수행할 수 없습니다</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>813</MSGNR>
+     <TEXT>반제할 전표가 존재하지 않습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>814</MSGNR>
+     <TEXT>반제할 전표문서가 &amp;건 존재합니다. 해당 작업을 수행할 수 없습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>815</MSGNR>
+     <TEXT>&amp; 는 Usance 거래가 아니므로 차입정보를 생성할 수 없습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>816</MSGNR>
+     <TEXT>&amp; 는 회계상에 차입된 정보가 존재하지 않습니다</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>817</MSGNR>
+     <TEXT>&amp; 는 차입관련 전표가 존재합니다. 해당 내역을 &amp; 할 수 없습니다</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>818</MSGNR>
+     <TEXT>&amp; 는 이미 차입정보를 회계에 반영하였습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>819</MSGNR>
+     <TEXT>만기일 &amp; 은 시작일 &amp; 이후 일자만 입력 가능합니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>820</MSGNR>
+     <TEXT>&amp; 는 이종통화 거래입니다. 수작업으로 처리하세요.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>821</MSGNR>
+     <TEXT>Notice를 입력할 데이타가 존재하지 않습니다. L/C개설 및 물대를 확인하세요!</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>822</MSGNR>
+     <TEXT>Notice Configuration을 정의하지 않았습니다. [ Transaction : ZTII038 ]</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>823</MSGNR>
+     <TEXT>거래은행[ &amp; ]상에 통화[ &amp; ] 로 유지보수된 계정 ID가 존재하지 않습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>824</MSGNR>
+     <TEXT>사업영역 &amp; 상에 코스트센터를 지정하지 않았습니다. [ T-code : ZTII039 ]</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>850</MSGNR>
+     <TEXT>비용문서 관리번호[ &amp; - &amp; ]은(는) 존재하지 않습니다</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>851</MSGNR>
+     <TEXT>수입비용문서를 전기 중 예기치 않은 오류가 발생하였습니다</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>852</MSGNR>
+     <TEXT>배부할 수입문서가 존재하지 않습니다</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>853</MSGNR>
+     <TEXT>배부할 수 없는 비용그룹[ &amp; ]입니다</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>854</MSGNR>
+     <TEXT>공급업체[ &amp; ]에 수취인을 유지보수 하지 않았습니다</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>855</MSGNR>
+     <TEXT>입력된 지급조건[&amp;]과 공급업체 &amp; 의 지급조건[&amp;]이 상이합니다</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>856</MSGNR>
+     <TEXT>부가세 금액과 전표금액이 서로 상이합니다</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>857</MSGNR>
+     <TEXT>과세표준액이 누락되었습니다. 자동계산합니다</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>858</MSGNR>
+     <TEXT>허용된 대체수취인 계정번호가 아닙니다</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>859</MSGNR>
+     <TEXT>비용배부를 하지 않는 전기방법 입니다</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>860</MSGNR>
+     <TEXT>수입면허의 잔량을 초과하였습니다. 입고 가능수량 &amp; 입니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>861</MSGNR>
+     <TEXT>회사코드 &amp; 에 &amp; 코드가 유지보수 되지 않았습니다</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>862</MSGNR>
+     <TEXT>해당 &amp;은(는) 수입비용문서 &amp; - &amp; 로 이미 등록되었습니다. 진행하시겠습니까?</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>863</MSGNR>
+     <TEXT>전기할 금액을 변경합니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>864</MSGNR>
+     <TEXT>회계처리할 금액이 없습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>865</MSGNR>
+     <TEXT>수입제비용 코드를 유지보수 하지 않았습니다</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>866</MSGNR>
+     <TEXT>&amp; 비용 코드를 유지보수 하지 않았습니다</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>867</MSGNR>
+     <TEXT>전기 종류가 다른 문서들이 존재합니다. 확인바랍니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>868</MSGNR>
+     <TEXT>부가세 비용코드를 유지보수 하지 않았습니다</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>869</MSGNR>
+     <TEXT>부가세 기표일 경우 시뮬레이션 기능을 사용할 수 없습니다</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>870</MSGNR>
+     <TEXT>전기 작업을 수행할 수 없습니다. 시스템 담당자에게 문의하세요</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>871</MSGNR>
+     <TEXT>무환부대비 비용코드를 유지보수 하지 않았습니다</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>872</MSGNR>
+     <TEXT>배부할 품목이 존재하지 않습니다. 해당 문서를 확인하세요</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>873</MSGNR>
+     <TEXT>역분개문서를 번호 &amp;으(로) 전기하였습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>874</MSGNR>
+     <TEXT>&amp; 그룹에 대한 비용코드를 유지보수 하지 않았습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>875</MSGNR>
+     <TEXT>구매오더 &amp; &amp; 의 조건유형 &amp; 을 확인하세요. 운송비용을 처리할 수 없습니다</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>876</MSGNR>
+     <TEXT>사용할 수 없는 사업영역 &amp; 입니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>877</MSGNR>
+     <TEXT>전기할 비용항목이 존재하지 않습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>878</MSGNR>
+     <TEXT>회사코드 &amp; 의 비용코드 정의에 관세지정비용코드를 유지보수하지 않았습니다</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>879</MSGNR>
+     <TEXT>수입문서와 관련된 계산서[ &amp; ]가 아닙니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>880</MSGNR>
+     <TEXT>해당 &amp;은(는) 수입비용문서 &amp; - &amp; 로 이미 등록되었습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>881</MSGNR>
+     <TEXT>물류송장검증과 회계전기를 동시에 입력할 수 없습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>884</MSGNR>
+     <TEXT>세금코드를 &amp; 로 자동으로 변경합니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>885</MSGNR>
+     <TEXT>서로 다른 세금코드가 존재합니다. 세금코드를 변경하세요.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>886</MSGNR>
+     <TEXT>세금코드는 V0 로 입력해 주십시오</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>890</MSGNR>
+     <TEXT>존재하지 않는 계산서[ &amp; ]입니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>900</MSGNR>
+     <TEXT>사용자가 작업을 취소하였습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>901</MSGNR>
+     <TEXT>자리수가 &amp; 이여야만 합니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>902</MSGNR>
+     <TEXT>검색조건에 해당하는 자료가 존재하지 않습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>903</MSGNR>
+     <TEXT>정확한 라인을 선택하세요.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>904</MSGNR>
+     <TEXT>원시통화(&amp;)와 대상통화(&amp;)가 동일합니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>905</MSGNR>
+     <TEXT>원시통화에 &amp;를 입력할 수 없습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>906</MSGNR>
+     <TEXT>리스트의 한 라인에 커서를 놓으십시오</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>907</MSGNR>
+     <TEXT>출력할 수 없는 문서입니다. 확인바랍니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>908</MSGNR>
+     <TEXT>출력장치를 선택하지 않았습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>909</MSGNR>
+     <TEXT>라인을 선택하지 않았습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>910</MSGNR>
+     <TEXT>해당문서에 오류가 존재합니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>911</MSGNR>
+     <TEXT>해당문서에 오류 데이타가 존재하지 않습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>912</MSGNR>
+     <TEXT>해당 문서를 저장 중 오류가 발생하였습니다. 시스템 담당자에게 문의하세요.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>913</MSGNR>
+     <TEXT>조회할 문서번호를 입력하세요.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>914</MSGNR>
+     <TEXT>조회할 문서번호를 하나만 입력하세요.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>915</MSGNR>
+     <TEXT>&amp; &amp;을(를) 입력하십시오</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>916</MSGNR>
+     <TEXT>&amp; &amp;이(가) 구매처에 등록되지 않았습니다</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>917</MSGNR>
+     <TEXT>해당 선택에 대한 값이 없습니다</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>918</MSGNR>
+     <TEXT>&amp;이(가) EDI 파트너가 등록되지 않았습니다</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>919</MSGNR>
+     <TEXT>해당 문서는 &amp; 상태여서 해당 기능을 수행할 수 없습니다</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>920</MSGNR>
+     <TEXT>해당 문서는 &amp; 상태입니다. 수작업으로 등록하시겠습니까?</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>921</MSGNR>
+     <TEXT>문서상태가 &amp;된 상태입니다. 계속 진행하시겠습니까?</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>922</MSGNR>
+     <TEXT>해당 문서는 &amp; 상태입니다</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>923</MSGNR>
+     <TEXT>해당 문서 &amp;는 종료 처리된 상태입니다</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>924</MSGNR>
+     <TEXT>&amp; [ &amp; ]이(가) 정의되지 않았습니다</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>925</MSGNR>
+     <TEXT>&amp; &amp;을(를) 입력하지 않았습니다. 계속 진행하시겠습니까?</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>926</MSGNR>
+     <TEXT>해당 기능을 수행하지 못하였습니다. 시스템 담당자에게 문의하세요.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>927</MSGNR>
+     <TEXT>세관코드 &amp; 가 공급업체에 지정되지 않았습니다</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>928</MSGNR>
+     <TEXT>&amp; &amp;에 EDI에서 사용 불가능한 문자 &apos;&amp;&apos; 가(이) 입력되었습니다</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>929</MSGNR>
+     <TEXT>다중 선택을 지원하지 않습니다</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>930</MSGNR>
+     <TEXT>유효하지 않은 트랜잭션입니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>931</MSGNR>
+     <TEXT>&amp; 은행에 대해 한도를 계산했습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>932</MSGNR>
+     <TEXT>은행한도를 갱신 중 오류가 발생하였습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>933</MSGNR>
+     <TEXT>정상적으로 조회하였습니다</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>934</MSGNR>
+     <TEXT>워크플로우 이벤트 생성시 오류가 발생하였습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>935</MSGNR>
+     <TEXT>텍스트 오브젝트 &amp; 는 유지보수 되지 않았습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>936</MSGNR>
+     <TEXT>처리할 후속업무가 없습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>937</MSGNR>
+     <TEXT>&amp; &amp;이(가) 구매처에 등록되지 않았습니다</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>938</MSGNR>
+     <TEXT>&amp; 비용그룹은 전표를 발생할 수 없습니다. 확인 바랍니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>939</MSGNR>
+     <TEXT>&amp; 상태는 사용할 수 없는 트랜잭션입니다. 회사별 프로세스를 확인하세요.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>940</MSGNR>
+     <TEXT>존재하지 않은 &amp; [ &amp; ] 입니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>941</MSGNR>
+     <TEXT>기존 문서종류 &amp; 를 업무가불용 문서종류 &amp; 로 자동변환됩니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>942</MSGNR>
+     <TEXT>다중 선택은 지원하지 않는 기능입니다. 확인 바랍니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>943</MSGNR>
+     <TEXT>회계처리할 내역이 존재하지 않습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>944</MSGNR>
+     <TEXT>일괄처리시는 같은 조건일 경우만 처리 가능합니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>945</MSGNR>
+     <TEXT>문서[&amp; - &amp;]가 존재하지 않아서 해당문서의 상태만 변경합니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>946</MSGNR>
+     <TEXT>물품매도확약서는 필수입니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>947</MSGNR>
+     <TEXT>물품매도확약서 번호를 입력하지 마세요.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>948</MSGNR>
+     <TEXT>&amp; 에 대한 서류번호를 입력하세요.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>949</MSGNR>
+     <TEXT>유환/무환 PO가 섞여있습니다. 구분해서 처리하세요.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>950</MSGNR>
+     <TEXT>데이타세트를 여는 중 오류, 리턴코드: &amp;</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>951</MSGNR>
+     <TEXT>문서[&amp; - &amp;]가 존재하지 않아서 해당문서의 상태만 변경합니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>997</MSGNR>
+     <TEXT>&amp; &amp; &amp;</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>998</MSGNR>
+     <TEXT>&amp; &amp;</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>ZMTI00</ARBGB>
+     <MSGNR>999</MSGNR>
+     <TEXT>&amp;</TEXT>
+    </T100>
+   </T100>
+  </asx:values>
+ </asx:abap>
+</abapGit>

@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_DTEL" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <DD04V>
+    <ROLLNAME>ZTIUSDTC</ROLLNAME>
+    <DDLANGUAGE>3</DDLANGUAGE>
+    <DOMNAME>ZTIUSDTC</DOMNAME>
+    <LOGFLAG>X</LOGFLAG>
+    <HEADLEN>23</HEADLEN>
+    <SCRLEN1>10</SCRLEN1>
+    <SCRLEN2>16</SCRLEN2>
+    <SCRLEN3>23</SCRLEN3>
+    <DDTEXT>Usance Transaction Type</DDTEXT>
+    <REPTEXT>Usance Transaction Type</REPTEXT>
+    <SCRTEXT_S>Usance Typ</SCRTEXT_S>
+    <SCRTEXT_M>Transaction Type</SCRTEXT_M>
+    <SCRTEXT_L>Usance Transaction Type</SCRTEXT_L>
+    <DTELMASTER>3</DTELMASTER>
+    <REFKIND>D</REFKIND>
+   </DD04V>
+  </asx:values>
+ </asx:abap>
+</abapGit>

@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_SHLP" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <DD30V>
+    <SHLPNAME>ZTIIG51_A</SHLPNAME>
+    <DDLANGUAGE>3</DDLANGUAGE>
+    <DDTEXT>기타 부가조건 텍스트</DDTEXT>
+    <ISSIMPLE>X</ISSIMPLE>
+    <SELMETHOD>ZTITIG51</SELMETHOD>
+    <SELMTYPE>T</SELMTYPE>
+    <HOTKEY>A</HOTKEY>
+    <DIALOGTYPE>A</DIALOGTYPE>
+   </DD30V>
+   <DD32P_TABLE>
+    <DD32P>
+     <SHLPNAME>ZTIIG51_A</SHLPNAME>
+     <FIELDNAME>OUTSQ</FIELDNAME>
+     <FLPOSITION>0001</FLPOSITION>
+     <ROLLNAME>ZTIOUTSQ</ROLLNAME>
+     <SHLPSELPOS>01</SHLPSELPOS>
+     <SHLPLISPOS>01</SHLPLISPOS>
+     <ROLLCHANGE>X</ROLLCHANGE>
+     <SCRLEN3>20</SCRLEN3>
+    </DD32P>
+    <DD32P>
+     <SHLPNAME>ZTIIG51_A</SHLPNAME>
+     <FIELDNAME>LTEXT</FIELDNAME>
+     <FLPOSITION>0002</FLPOSITION>
+     <ROLLNAME>ZTILTXTC</ROLLNAME>
+     <SHLPOUTPUT>X</SHLPOUTPUT>
+     <SHLPSELPOS>02</SHLPSELPOS>
+     <SHLPLISPOS>02</SHLPLISPOS>
+     <SCRLEN3>20</SCRLEN3>
+    </DD32P>
+   </DD32P_TABLE>
+  </asx:values>
+ </asx:abap>
+</abapGit>

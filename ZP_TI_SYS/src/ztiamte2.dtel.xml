@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_DTEL" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <DD04V>
+    <ROLLNAME>ZTIAMTE2</ROLLNAME>
+    <DDLANGUAGE>3</DDLANGUAGE>
+    <DOMNAME>CHAR35</DOMNAME>
+    <LOGFLAG>X</LOGFLAG>
+    <HEADLEN>35</HEADLEN>
+    <SCRLEN1>10</SCRLEN1>
+    <SCRLEN2>19</SCRLEN2>
+    <SCRLEN3>20</SCRLEN3>
+    <DDTEXT>변경후 부가금액부담</DDTEXT>
+    <REPTEXT>변경후 부가금액부담</REPTEXT>
+    <SCRTEXT_S>변경부가액</SCRTEXT_S>
+    <SCRTEXT_M>변경후 부가금액부담</SCRTEXT_M>
+    <SCRTEXT_L>변경후 부가금액부담</SCRTEXT_L>
+    <DTELMASTER>3</DTELMASTER>
+    <REFKIND>D</REFKIND>
+   </DD04V>
+  </asx:values>
+ </asx:abap>
+</abapGit>

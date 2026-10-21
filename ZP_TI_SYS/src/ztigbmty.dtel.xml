@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_DTEL" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <DD04V>
+    <ROLLNAME>ZTIGBMTY</ROLLNAME>
+    <DDLANGUAGE>3</DDLANGUAGE>
+    <DOMNAME>METYP</DOMNAME>
+    <LOGFLAG>X</LOGFLAG>
+    <HEADLEN>34</HEADLEN>
+    <SCRLEN1>10</SCRLEN1>
+    <SCRLEN2>20</SCRLEN2>
+    <SCRLEN3>34</SCRLEN3>
+    <DDTEXT>승인반려사유 미입력시 Message Type</DDTEXT>
+    <REPTEXT>승인반려사유 미입력시 Message Type</REPTEXT>
+    <SCRTEXT_S>Message Ty</SCRTEXT_S>
+    <SCRTEXT_M>반려사유 미입력시 MT</SCRTEXT_M>
+    <SCRTEXT_L>승인반려사유 미입력시 Message Type</SCRTEXT_L>
+    <DTELMASTER>3</DTELMASTER>
+    <REFKIND>D</REFKIND>
+   </DD04V>
+  </asx:values>
+ </asx:abap>
+</abapGit>

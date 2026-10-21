@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_DTEL" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <DD04V>
+    <ROLLNAME>ZSHFNO</ROLLNAME>
+    <DDLANGUAGE>3</DDLANGUAGE>
+    <DOMNAME>CHAR10</DOMNAME>
+    <MEMORYID>ZNFSHF</MEMORYID>
+    <LOGFLAG>X</LOGFLAG>
+    <HEADLEN>16</HEADLEN>
+    <SCRLEN1>10</SCRLEN1>
+    <SCRLEN2>16</SCRLEN2>
+    <SCRLEN3>20</SCRLEN3>
+    <DDTEXT>만기이동요청번호</DDTEXT>
+    <REPTEXT>만기이동요청번호</REPTEXT>
+    <SCRTEXT_S>만기이동</SCRTEXT_S>
+    <SCRTEXT_M>만기이동요청번호</SCRTEXT_M>
+    <SCRTEXT_L>만기이동요청번호</SCRTEXT_L>
+    <DTELMASTER>3</DTELMASTER>
+    <SHLPNAME>ZNF2SHFNO</SHLPNAME>
+    <SHLPFIELD>SHFNO</SHLPFIELD>
+    <REFKIND>D</REFKIND>
+   </DD04V>
+  </asx:values>
+ </asx:abap>
+</abapGit>

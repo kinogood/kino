@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_FUGR" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <AREAT>[가온] 구매요청</AREAT>
+   <INCLUDES>
+    <SOBJ_NAME>LZGTMM20TOP</SOBJ_NAME>
+    <SOBJ_NAME>SAPLZGTMM20</SOBJ_NAME>
+   </INCLUDES>
+   <FUNCTIONS>
+    <item>
+     <FUNCNAME>ZGTMM_PR_RELEASE</FUNCNAME>
+     <SHORT_TEXT>구매요청 결재 상태 릴리즈</SHORT_TEXT>
+     <IMPORT>
+      <RSIMP>
+       <PARAMETER>I_APPID</PARAMETER>
+       <TYP>CHAR32</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_STATE</PARAMETER>
+       <TYP>CHAR10</TYP>
+      </RSIMP>
+     </IMPORT>
+     <EXPORT>
+      <RSEXP>
+       <PARAMETER>MTYPE</PARAMETER>
+       <TYP>BAPI_MTYPE</TYP>
+      </RSEXP>
+      <RSEXP>
+       <PARAMETER>MESSAGE</PARAMETER>
+       <TYP>BAPI_MSG</TYP>
+      </RSEXP>
+     </EXPORT>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>I_APPID</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>전자결재 고유 문서 번호</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_STATE</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>WELS 전자 결재 상태</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>MTYPE</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>메시지 유형: S 성공, E 오류, W 경고, I 정보, A 중단</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>MESSAGE</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>텍스트 필드 길이 200</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+   </FUNCTIONS>
+  </asx:values>
+ </asx:abap>
+</abapGit>

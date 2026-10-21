@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_SOBJ" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <SWOTDV>
+    <SWOTDV>
+     <OBJTYPE>ZTITBLK</OBJTYPE>
+     <VERB>FIDNO</VERB>
+     <VERBTYPE>K</VERBTYPE>
+     <CREA_REL>620</CREA_REL>
+     <EDITORDER>0001</EDITORDER>
+     <EDITELEM>FIDNO</EDITELEM>
+     <REFTYPE>D</REFTYPE>
+     <REFSTRUCT>ZTITBLK</REFSTRUCT>
+     <REFFIELD>IBLNO</REFFIELD>
+     <ELEMTYPE>E</ELEMTYPE>
+    </SWOTDV>
+   </SWOTDV>
+   <SWOTOL>
+    <SWOTOL>
+     <OBJTYPE>ZTITBLK</OBJTYPE>
+     <AREA>HLA0006041</AREA>
+     <AREACLASS>04</AREACLASS>
+     <MAINENTRY>X</MAINENTRY>
+    </SWOTOL>
+   </SWOTOL>
+   <SWOTTV>
+    <SWOTTV>
+     <OBJTYPE>ZTITBLK</OBJTYPE>
+     <LANGUAGE>3</LANGUAGE>
+     <VERB>FIDNO</VERB>
+     <DESCRIPT>B/L 관리번호</DESCRIPT>
+     <SHORTTEXT>B/L 관리번호</SHORTTEXT>
+    </SWOTTV>
+   </SWOTTV>
+   <TOJTB>
+    <TOJTB>
+     <NAME>ZTITBLK</NAME>
+     <ACTIVE>X</ACTIVE>
+     <ACTIVELANG>E</ACTIVELANG>
+     <PROGNAME>ZTITBLK</PROGNAME>
+     <EDITELEM>ZTItblk</EDITELEM>
+     <EPRIMETHOD>Display</EPRIMETHOD>
+     <APPLIC>*</APPLIC>
+     <CREA_REL>620</CREA_REL>
+     <CHAN_REL>620</CHAN_REL>
+     <VERSION>620</VERSION>
+     <OBJTYPECLS>01</OBJTYPECLS>
+     <KEYLENGTH>10</KEYLENGTH>
+     <MODELONLY>R</MODELONLY>
+     <REL_REL>620</REL_REL>
+    </TOJTB>
+   </TOJTB>
+   <TOJTT>
+    <TOJTT>
+     <NAME>ZTITBLK</NAME>
+     <LANGUAGE>3</LANGUAGE>
+     <NTEXT>[TraSys] 수입B/L 관련 오브젝트 유형</NTEXT>
+     <STEXT>ZTITBLK</STEXT>
+    </TOJTT>
+   </TOJTT>
+  </asx:values>
+ </asx:abap>
+</abapGit>

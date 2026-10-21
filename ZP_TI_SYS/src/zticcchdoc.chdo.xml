@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_CHDO" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <CHDO>
+    <REPORTS_GENERATED>
+     <TCDRPS>
+      <OBJECT>ZTICCCHDOC</OBJECT>
+      <REPORTNAME>ZTICCCHDOC</REPORTNAME>
+      <TEXTCASE>X</TEXTCASE>
+      <ARBGEB>CD</ARBGEB>
+      <FEHLERNR>600</FEHLERNR>
+      <FGRP>ZTICCCHDOC</FGRP>
+      <PREFIX>V</PREFIX>
+      <UPDATE_FLG>1</UPDATE_FLG>
+      <DATAGEN>X</DATAGEN>
+     </TCDRPS>
+    </REPORTS_GENERATED>
+    <OBJECTS>
+     <TCDOBS>
+      <OBJECT>ZTICCCHDOC</OBJECT>
+      <TABNAME>ZTITCC1</TABNAME>
+      <MULTCASE>X</MULTCASE>
+     </TCDOBS>
+     <TCDOBS>
+      <OBJECT>ZTICCCHDOC</OBJECT>
+      <TABNAME>ZTITCC2</TABNAME>
+      <MULTCASE>X</MULTCASE>
+     </TCDOBS>
+     <TCDOBS>
+      <OBJECT>ZTICCCHDOC</OBJECT>
+      <TABNAME>ZTITCC3</TABNAME>
+      <MULTCASE>X</MULTCASE>
+     </TCDOBS>
+     <TCDOBS>
+      <OBJECT>ZTICCCHDOC</OBJECT>
+      <TABNAME>ZTITCC4</TABNAME>
+      <MULTCASE>X</MULTCASE>
+     </TCDOBS>
+     <TCDOBS>
+      <OBJECT>ZTICCCHDOC</OBJECT>
+      <TABNAME>ZTITCCK</TABNAME>
+     </TCDOBS>
+     <TCDOBS>
+      <OBJECT>ZTICCCHDOC</OBJECT>
+      <TABNAME>ZTITCCP</TABNAME>
+      <MULTCASE>X</MULTCASE>
+     </TCDOBS>
+    </OBJECTS>
+    <OBJECTS_TEXT>
+     <TCDOBTS>
+      <SPRAS>3</SPRAS>
+      <OBJECT>ZTICCCHDOC</OBJECT>
+      <OBTEXT>[Import] 수입면허필증 변경문서</OBTEXT>
+     </TCDOBTS>
+    </OBJECTS_TEXT>
+   </CHDO>
+  </asx:values>
+ </asx:abap>
+</abapGit>

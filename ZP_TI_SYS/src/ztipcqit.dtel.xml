@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_DTEL" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <DD04V>
+    <ROLLNAME>ZTIPCQIT</ROLLNAME>
+    <DDLANGUAGE>3</DDLANGUAGE>
+    <DOMNAME>NUMC3</DOMNAME>
+    <LOGFLAG>X</LOGFLAG>
+    <HEADLEN>17</HEADLEN>
+    <SCRLEN1>10</SCRLEN1>
+    <SCRLEN2>17</SCRLEN2>
+    <SCRLEN3>20</SCRLEN3>
+    <DDTEXT>물품내역 품목번호</DDTEXT>
+    <REPTEXT>물품내역 품목번호</REPTEXT>
+    <SCRTEXT_S>품목번호</SCRTEXT_S>
+    <SCRTEXT_M>물품내역 품목번호</SCRTEXT_M>
+    <SCRTEXT_L>물품내역 품목번호</SCRTEXT_L>
+    <DTELMASTER>3</DTELMASTER>
+    <REFKIND>D</REFKIND>
+   </DD04V>
+  </asx:values>
+ </asx:abap>
+</abapGit>

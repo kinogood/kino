@@ -1,0 +1,1401 @@
+*----------------------------------------------------------------------*
+***INCLUDE LZGTMM10F02.
+*----------------------------------------------------------------------*
+
+*&---------------------------------------------------------------------*
+*& Form F_CHECK_VALUES_VENDOR_RCV
+*&---------------------------------------------------------------------*
+*& text
+*&---------------------------------------------------------------------*
+*&      --> LS_DATA
+*&      <-- ZO_RESULT
+*&      <-- ZO_MESSAGE
+*&---------------------------------------------------------------------*
+FORM F_CHECK_VALUES_VENDOR_RCV  USING  PV_BUKRS
+                                                                          PV_TYPE
+                                                                          PS_DATA TYPE ZGTMMS1010
+                                                              CHANGING CV_LIFNR
+                                                                          CV_RESULT
+                                                                       CV_MESSAGE.
+
+*	필드
+*	KTOKK   T077K
+*	COUNTRY  T005
+*	REGION T005S
+*	BRSCH T016
+*	ZTERM  T052
+*	KALSK TMKK
+*	EKORG T024E
+* AKONT	 SKB1
+* BVTYP ZGTPPT1010
+* BANKS  T005
+* BANKL BNKA
+
+  SELECT SINGLE
+    KTOKK
+    FROM T077K
+    WHERE KTOKK EQ @PS_DATA-KTOKK
+    INTO @DATA(LV_CHK1).
+  IF SY-SUBRC NE 0.
+    CV_RESULT = GC_02.
+    CV_MESSAGE = TEXT-E02.
+    EXIT.
+  ENDIF.
+
+  SELECT SINGLE
+    LAND1
+    FROM T005
+    WHERE LAND1 EQ @PS_DATA-COUNTRY
+    INTO @DATA(LV_CHK2).
+  IF SY-SUBRC NE 0.
+    CV_RESULT = GC_02.
+    CV_MESSAGE = TEXT-E02.
+    EXIT.
+  ENDIF.
+
+  IF PS_DATA-REGION IS NOT INITIAL.
+    SELECT SINGLE
+      BLAND
+      FROM T005S
+      WHERE LAND1 EQ @PS_DATA-COUNTRY
+      AND BLAND EQ @PS_DATA-REGION
+      INTO @DATA(LV_CHK3).
+    IF SY-SUBRC NE 0.
+      CV_RESULT = GC_02.
+      CV_MESSAGE = TEXT-E02.
+      EXIT.
+    ENDIF.
+  ENDIF.
+
+  IF PS_DATA-GRIDT IS NOT INITIAL.
+    SELECT SINGLE
+      J_1ADTYP
+      FROM J_1ADTYP
+      WHERE J_1ADTYP EQ @PS_DATA-GRIDT
+      AND BUKRS EQ @PV_BUKRS
+      INTO @DATA(LV_CHK4).
+    IF SY-SUBRC NE 0.
+      CV_RESULT = GC_02.
+      CV_MESSAGE = TEXT-E02.
+      EXIT.
+    ENDIF.
+  ENDIF.
+
+  SELECT SINGLE
+    ZTERM
+    FROM T052
+    WHERE ZTERM EQ @PS_DATA-ZTERM
+    INTO @DATA(LV_CHK5).
+  IF SY-SUBRC NE 0.
+    CV_RESULT = GC_02.
+    CV_MESSAGE = TEXT-E02.
+    EXIT.
+  ENDIF.
+
+  IF PS_DATA-KALSK IS NOT INITIAL.
+    SELECT SINGLE
+      KALSK
+      FROM TMKK
+      WHERE KALSK EQ @PS_DATA-KALSK
+      INTO @DATA(LV_CHK6).
+    IF SY-SUBRC NE 0.
+      CV_RESULT = GC_02.
+      CV_MESSAGE = TEXT-E02.
+      EXIT.
+    ENDIF.
+  ENDIF.
+
+  SELECT SINGLE
+    EKORG
+    FROM T024E
+    WHERE EKORG EQ @PS_DATA-EKORG
+    INTO @DATA(LV_CHK7).
+  IF SY-SUBRC NE 0.
+    CV_RESULT = GC_02.
+    CV_MESSAGE = TEXT-E02.
+    EXIT.
+  ENDIF.
+
+  SELECT SINGLE
+    SAKNR
+    FROM SKB1
+    WHERE BUKRS EQ @PV_BUKRS
+    AND SAKNR EQ @PS_DATA-AKONT
+    INTO @DATA(LV_CHK8).
+  IF SY-SUBRC NE 0.
+    CV_RESULT = GC_02.
+    CV_MESSAGE = TEXT-E02.
+    EXIT.
+  ENDIF.
+
+  IF PS_DATA-INCO1 IS NOT INITIAL.
+    SELECT SINGLE
+      INCO1
+      FROM TINC
+      WHERE INCO1 EQ @PS_DATA-INCO1
+      INTO @DATA(LV_CHK9).
+    IF SY-SUBRC NE 0.
+      CV_RESULT = GC_02.
+      CV_MESSAGE = TEXT-E02.
+      EXIT.
+    ENDIF.
+  ENDIF.
+
+  "<--공급업체-고객 연결 데이터 추가
+  IF PS_DATA-KUNNR IS NOT INITIAL.
+    SELECT SINGLE
+      KUNNR
+      FROM KNA1
+      WHERE KUNNR EQ @PS_DATA-KUNNR
+      INTO @DATA(LV_CHK10).
+    IF SY-SUBRC NE 0.
+      CV_RESULT = GC_02.
+      CV_MESSAGE = TEXT-E02.
+      EXIT.
+    ENDIF.
+  ENDIF.
+  "공급업체-고객 연결 데이터 추가-->
+
+
+
+  CASE PV_TYPE.
+    WHEN GC_C.
+*
+*2) 중복 점검 확인
+*	2-1) I_TYPE=C 일때, COUNTRY=KR 인 경우 수신 받은 STCD2 값과 동일한 사업자번호로 등록된 공급업체 BP 존재 여부 체크
+*     등록된 코드가 존재하고 입력 받은 BUKRS, EKORG 값으로 LFB1, LFM1에 모두 등록되어있으면 다음 값 Return 후 종료
+*
+*   Export Parameter                      Value
+*   ZO_RESULT                     "02"
+*   ZO_MESSAGE                      "공급업체 ****** 로 등록된 업체입니다."
+*
+*
+*2-1-1) 등록된 BP가 존재하고 등록된 BP의 계정그룹(KTOKK)과 수신 된 계정그룹(KTOKK) 이 동일한 경우
+*     : 입력 받은 BUKRS, EKORG 기준 LFB1, LFM1에 모두 등록되어있으면 다음 값 Return 후 종료
+
+      IF PS_DATA-COUNTRY EQ 'KR'.
+        SELECT SINGLE
+          LF~LIFNR
+          FROM LFA1 AS LF
+          WHERE LF~STCD2 EQ @PS_DATA-STCD2
+          AND LF~KTOKK EQ @PS_DATA-KTOKK "등록된 BP가 존재하고 등록된 BP의 계정그룹(KTOKK)과 수신 된 계정그룹(KTOKK) 이 동일한 경우
+          "입력 받은 BUKRS, EKORG 기준 LFB1, LFM1에 모두 등록되어있으면 다음 값 Return 후 종료
+          AND EXISTS (
+              SELECT
+                LB~LIFNR
+                FROM LFB1 AS LB
+                WHERE LB~LIFNR EQ LF~LIFNR
+                  AND LB~BUKRS EQ @PV_BUKRS
+          )
+          AND EXISTS (
+              SELECT
+                LM~LIFNR
+                FROM LFM1 AS LM
+                WHERE LM~LIFNR EQ LF~LIFNR
+                  AND LM~EKORG EQ @PS_DATA-EKORG
+          )
+          INTO @DATA(LV_DUPL1).
+        IF SY-SUBRC EQ 0.
+          CV_LIFNR = |{ LV_DUPL1 ALPHA = OUT }|.
+          CV_RESULT = GC_02.
+          MESSAGE S159(ZGTMM01) INTO CV_MESSAGE WITH CV_LIFNR.
+          EXIT.
+        ENDIF.
+
+*   2-1-2) 등록된 BP가 존재하고 등록된 BP의 계정그룹과(KTOKK)과 수신 된 계정그룹(KTOKK)이 다른 경우
+*         : 입력 받은 BUKRS 기준 LFA1-LOEVM AND LFB1-LOEVM 이 공백이면 다음 값 Return 후 종료
+*         (LFA1-LOEVM or LFB1-LOEVM = X 이면 신규 생성 대상으로 진행)
+        SELECT SINGLE
+          LF~LIFNR
+          FROM LFA1 AS LF
+          WHERE LF~STCD2 EQ @PS_DATA-STCD2
+          AND LF~KTOKK NE @PS_DATA-KTOKK  "등록된 BP가 존재하고 등록된 BP의 계정그룹과(KTOKK)과 수신 된 계정그룹(KTOKK)이 다른 경우
+          "입력 받은 BUKRS 기준 LFA1-LOEVM AND LFB1-LOEVM 이 공백이면 다음 값 Return 후 종료
+          AND LF~LOEVM EQ @SPACE
+          AND NOT EXISTS (
+                SELECT
+                  LB~LIFNR
+                  FROM LFB1 AS LB
+                  WHERE LB~LIFNR EQ LF~LIFNR
+                    AND LB~BUKRS EQ @PV_BUKRS
+                    AND LB~LOEVM EQ @ABAP_TRUE
+          )
+        INTO @DATA(LV_DUPL2).
+        IF SY-SUBRC EQ 0.
+*1. 다른 계정 그룹 코드가 존재할 때
+*è export parameter LIFNR -> 공백으로 변경 요청
+*          CV_LIFNR = |{ LV_DUPL2 ALPHA = OUT }|.
+          CV_RESULT = GC_02.
+          MESSAGE S161(ZGTMM01) INTO CV_MESSAGE WITH CV_LIFNR.
+          EXIT.
+        ENDIF.
+
+      ENDIF.
+
+    WHEN GC_U.
+*	2-2) I_TYPE=U 일때 수신받은 LIFNR 값이 SAP내 존재하지 않는 경우 다음 값 Return  후 종료
+*
+*   Export Parameter                      Value
+*   ZO_RESULT                     "02"
+*   ZO_MESSAGE                      "존재하지 않는 공급업체 코드 입니다."
+*
+      SELECT SINGLE
+        LIFNR
+        FROM LFA1
+        WHERE LIFNR EQ @PS_DATA-LIFNR
+        INTO @DATA(LV_VALI1).
+      IF SY-SUBRC NE 0.
+        CV_RESULT = GC_02.
+        CV_MESSAGE = TEXT-E03.
+        EXIT.
+      ENDIF.
+  ENDCASE.
+
+
+ENDFORM.
+*&---------------------------------------------------------------------*
+*& Form F_CHECK_VALUES_VENDOR_RCV2
+*&---------------------------------------------------------------------*
+*& text
+*&---------------------------------------------------------------------*
+*&      --> LS_DATA
+*&      <-- ZO_RESULT
+*&      <-- ZO_MESSAGE
+*&---------------------------------------------------------------------*
+FORM F_CHECK_VALUES_VENDOR_RCV2  TABLES PT_DATA STRUCTURE ZGTMMS1017
+                                                               USING  PV_BUKRS
+                                                              CHANGING CV_RESULT
+                                                                       CV_MESSAGE.
+*	필드
+* BVTYP ZGTPPT1010
+* BANKS  T005
+* BANKL BNKA
+  SELECT FROM ZGTPPT1010
+    FIELDS *
+    WHERE MODULE_KIND EQ 'MM'
+        AND CODEGRP = '0510'
+        AND FLD_01     = @PV_BUKRS
+    INTO TABLE @DATA(LT_1010).
+  SORT LT_1010 BY FLD_01 FLD_02.
+
+
+  LOOP AT PT_DATA INTO DATA(LS_1017).
+
+    IF LS_1017-BVTYP IS NOT INITIAL.
+      READ TABLE LT_1010 ASSIGNING FIELD-SYMBOL(<FS>)
+      WITH KEY FLD_01 = PV_BUKRS
+                     FLD_02 = LS_1017-BVTYP BINARY SEARCH.
+
+      IF SY-SUBRC NE 0.
+        CV_RESULT = GC_02.
+        CV_MESSAGE = TEXT-E02.
+        EXIT.
+      ENDIF.
+    ENDIF.
+
+    IF LS_1017-BANKS IS NOT INITIAL.
+      SELECT SINGLE
+         LAND1
+       FROM T005
+       WHERE LAND1 EQ @LS_1017-BANKS
+       INTO @DATA(LV_BNK1).
+
+      IF SY-SUBRC NE 0.
+        CV_RESULT = GC_02.
+        CV_MESSAGE = TEXT-E02.
+        EXIT.
+      ENDIF.
+    ENDIF.
+
+    IF LS_1017-BANKL IS NOT INITIAL.
+      SELECT SINGLE
+         BANKL
+       FROM BNKA
+       WHERE BANKS EQ @LS_1017-BANKS
+            AND BANKL EQ @LS_1017-BANKL
+       INTO @DATA(LV_BNK2).
+
+      IF SY-SUBRC NE 0.
+        CV_RESULT = GC_02.
+        CV_MESSAGE = TEXT-E02.
+        EXIT.
+      ENDIF.
+    ENDIF.
+
+    CLEAR LS_1017.
+  ENDLOOP.
+
+ENDFORM.
+*&---------------------------------------------------------------------*
+*& Form F_SET_VALUES_VENDER_RCV
+*&---------------------------------------------------------------------*
+*& text
+*&---------------------------------------------------------------------*
+*&      --> I_BUKRS
+*&      --> I_TYPE
+*&      --> LS_DATA
+*&      <-- LT_DATA
+*&---------------------------------------------------------------------*
+FORM F_SET_VALUES_VENDER_RCV  TABLES CT_ITAB2 STRUCTURE ZGTMMS1017
+                          USING    PV_BUKRS
+                                       PV_TYPE
+                                       PS_DATA TYPE ZGTMMS1010
+                              CHANGING CT_DATA TYPE CVIS_EI_EXTERN_T.
+
+  CASE PV_TYPE.
+    WHEN GC_C.
+      PERFORM F_SET_CVIS_EI_EXTERN_T_C TABLES CT_ITAB2
+                      USING PV_BUKRS PS_DATA CHANGING CT_DATA.
+
+    WHEN GC_U.
+      PERFORM F_SET_CVIS_EI_EXTERN_T_U TABLES CT_ITAB2
+                      USING PV_BUKRS PS_DATA CHANGING CT_DATA.
+
+  ENDCASE.
+
+ENDFORM.
+
+*&---------------------------------------------------------------------*
+*& Form F_SET_CVIS_EI_EXTERN_T_C
+*&---------------------------------------------------------------------*
+*& text
+*&---------------------------------------------------------------------*
+*&      --> PV_BUKRS
+*&      --> PS_DATA
+*&      <-- CT_DATA
+*&---------------------------------------------------------------------*
+FORM F_SET_CVIS_EI_EXTERN_T_C TABLES CT_ITAB2 STRUCTURE ZGTMMS1017
+                              USING    PV_BUKRS
+                                        PS_DATA TYPE ZGTMMS1010
+                               CHANGING CT_DATA TYPE CVIS_EI_EXTERN_T.
+
+  DATA :
+    LV_LIFNR        TYPE LFA1-LIFNR,
+    LV_PARTNER      TYPE BU_PARTNER,
+    LV_PARTNER_GUID TYPE SYSUUID_X16,
+    LS_DATA         TYPE CVIS_EI_EXTERN.
+
+*3-1. I_TYPE=C 일때, COUNTRY=KR 인 경우STCD2 로 일치하는 BP 가 미존재 하는 경우 신규 생성 처리
+
+  "기존 공급업체코드 조회
+  PERFORM F_GET_LIFNR_BY_STCD2 USING PS_DATA PV_BUKRS CHANGING LV_LIFNR.
+
+  "공급업체코드가 있는 경우 파트너 코드 조회
+  PERFORM F_GET_PARTNER_BY_LIFNR USING LV_LIFNR CHANGING LV_PARTNER LV_PARTNER_GUID.
+
+  "파트너 기본 정보 설정
+  PERFORM F_SET_PARTNER_DATA TABLES CT_ITAB2 USING LV_PARTNER LV_PARTNER_GUID PS_DATA CHANGING LS_DATA.
+
+  "파트너 Role 설정
+  PERFORM F_SET_PARTNER_ROLE_DATA USING LV_PARTNER PS_DATA CHANGING LS_DATA.
+
+  "공급업체 기본 정보 설정
+  PERFORM F_SET_VENDOR_DATA USING LV_LIFNR PS_DATA CHANGING LS_DATA.
+
+  "회사코드 정보 설정
+  PERFORM F_SET_COMPANY_DATA USING PV_BUKRS LV_LIFNR PS_DATA CHANGING LS_DATA.
+
+  "구매조직 정보 설정
+  PERFORM F_SET_PURCHAING_DATA USING PV_BUKRS LV_LIFNR PS_DATA CHANGING LS_DATA.
+
+  "라인추가
+  APPEND LS_DATA TO CT_DATA.
+
+ENDFORM.
+
+*&---------------------------------------------------------------------*
+*& Form F_SET_CVIS_EI_EXTERN_T_U
+*&---------------------------------------------------------------------*
+*& text
+*&---------------------------------------------------------------------*
+*&      --> PV_BUKRS
+*&      --> PS_DATA
+*&      <-- CT_DATA
+*&---------------------------------------------------------------------*
+FORM F_SET_CVIS_EI_EXTERN_T_U TABLES  CT_ITAB2 STRUCTURE ZGTMMS1017
+                           USING    PV_BUKRS
+                                        PS_DATA TYPE ZGTMMS1010
+                               CHANGING CT_DATA TYPE CVIS_EI_EXTERN_T.
+
+*I_TYPE  = U 일때 수신 받은 LIFNR 값을 기준으로 일반 데이터 정보만 변경 처리
+*4-1) 수신 받은 데이터 기준 아래 필드 항목기준으로 정보 업데이트 처리
+
+  DATA :
+    LV_LIFNR        TYPE LFA1-LIFNR,
+    LV_PARTNER      TYPE BU_PARTNER,
+    LV_PARTNER_GUID TYPE SYSUUID_X16,
+    LS_DATA         TYPE CVIS_EI_EXTERN,
+    LS_ADDRESS      TYPE BUS_EI_BUPA_ADDRESS,
+    LV_ADDRESS_GUID TYPE BU_ADDRESS_GUID,
+    LS_PHONE        TYPE BUS_EI_BUPA_TELEPHONE,
+    LS_FAX          TYPE BUS_EI_BUPA_FAX,
+    LS_SMTP         TYPE BUS_EI_BUPA_SMTP,
+    LS_BANK         TYPE BUS_EI_BUPA_BANKDETAIL,
+    LV_PASS.
+
+  SELECT SINGLE
+    LIFNR
+    FROM LFA1
+    WHERE LIFNR EQ @PS_DATA-LIFNR
+    INTO @LV_LIFNR.
+
+  SELECT SINGLE
+    BU~PARTNER,
+    BU~PARTNER_GUID
+   FROM BUT000 AS BU
+                INNER JOIN
+             CVI_VEND_LINK AS CV ON   BU~PARTNER_GUID EQ CV~PARTNER_GUID
+   WHERE CV~VENDOR EQ  @LV_LIFNR
+    INTO (@LV_PARTNER , @LV_PARTNER_GUID).
+
+  DO 2 TIMES.
+    DATA(LV_IDX) = SY-INDEX.
+    CLEAR LS_BANK.
+
+    LS_DATA-PARTNER-HEADER-OBJECT_TASK = GC_U.
+    LS_DATA-PARTNER-HEADER-OBJECT_INSTANCE-BPARTNER = LV_PARTNER .
+    LS_DATA-PARTNER-HEADER-OBJECT_INSTANCE-BPARTNERGUID =  LV_PARTNER_GUID.
+
+*BP 중앙
+    LS_DATA-PARTNER-CENTRAL_DATA-COMMON-DATA-BP_CENTRALDATA-SEARCHTERM1 = PS_DATA-SORT1.
+    LS_DATA-PARTNER-CENTRAL_DATA-COMMON-DATA-BP_ORGANIZATION-NAME1 = PS_DATA-NAME1.
+
+    LS_DATA-PARTNER-CENTRAL_DATA-COMMON-DATAX-BP_CENTRALDATA-SEARCHTERM1 = ABAP_TRUE.
+    LS_DATA-PARTNER-CENTRAL_DATA-COMMON-DATAX-BP_ORGANIZATION-NAME1 = ABAP_TRUE.
+
+*BP CENTRAL BANKDETAIL
+    IF LV_IDX = 1.
+*1.기존 은행계좌정보 가져오기. 삭제 선행 위함.
+      DATA LT_BANKDETAIL TYPE TABLE OF BAPIBUS1006_BANKDETAILS.
+      CALL FUNCTION 'BAPI_BUPA_BANKDETAILS_GET'
+        EXPORTING
+          BUSINESSPARTNER = LV_PARTNER
+        TABLES
+          BANKDETAILS     = LT_BANKDETAIL.
+      LOOP AT LT_BANKDETAIL INTO DATA(LS_BK).
+        LS_BANK-TASK = GC_D.
+        LS_BANK-DATA_KEY = LS_BK-BANKDETAILID.
+        LS_BANK-DATA-BANK_CTRY = LS_BK-BANK_CTRY.
+        LS_BANK-DATA-BANK_KEY   = LS_BK-BANK_KEY.
+        LS_BANK-DATA-BANK_ACCT = LS_BK-BANK_ACCT.
+        LS_BANK-DATA-ACCOUNTHOLDER = LS_BK-ACCOUNTHOLDER.
+        LS_BANK-DATA-EXTERNALBANKID = LS_BK-EXTERNALBANKID.
+
+        LS_BANK-DATAX-BANK_CTRY = GC_X.
+        LS_BANK-DATAX-BANK_KEY   = GC_X.
+        LS_BANK-DATAX-BANK_ACCT = GC_X.
+        LS_BANK-DATAX-ACCOUNTHOLDER = GC_X.
+        LS_BANK-DATAX-EXTERNALBANKID = GC_X.
+
+        APPEND LS_BANK TO LS_DATA-PARTNER-CENTRAL_DATA-BANKDETAIL-BANKDETAILS.
+      ENDLOOP.
+
+    ELSE.
+* [신규] 새로운 은행 정보 추가
+      CHECK LV_PASS IS INITIAL.
+      SORT CT_ITAB2 BY BVTYP.
+
+      LOOP AT CT_ITAB2 INTO DATA(LS_IT) GROUP BY ( BVTYP = LS_IT-BVTYP
+                                                                                  SIZE = GROUP SIZE )
+         ASSIGNING FIELD-SYMBOL(<FSG>).
+
+        LOOP AT GROUP <FSG> ASSIGNING FIELD-SYMBOL(<BNK>).
+          IF <FSG>-SIZE > 1.
+*수신한 CUVN_SQ 건수 전체를 계좌정보로 등록
+*동일한 BVTYP 코드를 순차 채번하여 등록_ex) BVTYP = 600T이면, 다음 차수는 601T,602T..채번
+            DATA(LV_TABIX) = SY-TABIX.
+            DATA(LV_LAST_CHAR) = SUBSTRING( VAL = <BNK>-BVTYP OFF = STRLEN( <BNK>-BVTYP ) - 1 LEN = 1 ).
+            LS_BANK-DATA_KEY = COND #( WHEN LV_TABIX = 1 THEN <BNK>-BVTYP
+                                                             ELSE |{ <BNK>-BVTYP(3) + 1 }{ LV_LAST_CHAR }| ).
+            <BNK>-BVTYP = LS_BANK-DATA_KEY.
+          ELSE.
+            LS_BANK-DATA_KEY = <BNK>-BVTYP.
+          ENDIF.
+*계좌정보 변경은 신규 등록 형태로 구성.
+          LS_BANK-TASK = GC_I.
+          LS_BANK-DATA-BANK_CTRY = <BNK>-BANKS.
+          LS_BANK-DATA-BANK_KEY   = <BNK>-BANKL.
+          LS_BANK-DATA-BANK_ACCT = <BNK>-BANKN.
+          LS_BANK-DATA-ACCOUNTHOLDER = <BNK>-KOINH.
+          LS_BANK-DATA-EXTERNALBANKID = <BNK>-BKEXT.
+
+          LS_BANK-DATAX-BANK_CTRY = GC_X.
+          LS_BANK-DATAX-BANK_KEY   = GC_X.
+          LS_BANK-DATAX-BANK_ACCT = GC_X.
+          LS_BANK-DATAX-ACCOUNTHOLDER = GC_X.
+          LS_BANK-DATAX-EXTERNALBANKID = GC_X.
+
+          APPEND LS_BANK TO LS_DATA-PARTNER-CENTRAL_DATA-BANKDETAIL-BANKDETAILS.
+        ENDLOOP.
+
+      ENDLOOP.
+    ENDIF.
+
+*주소
+    SELECT SINGLE ADDRESS_GUID
+    FROM BUT020
+    WHERE PARTNER EQ @LV_PARTNER
+    INTO @LV_ADDRESS_GUID.
+
+    LS_ADDRESS-TASK = GC_U.
+    LS_ADDRESS-DATA_KEY-GUID = LV_ADDRESS_GUID.
+
+    LS_ADDRESS-DATA-POSTAL-DATA-STREET = PS_DATA-STREET.
+    LS_ADDRESS-DATA-POSTAL-DATA-CITY = PS_DATA-CITY1.
+    LS_ADDRESS-DATA-POSTAL-DATA-POSTL_COD1 = PS_DATA-POST_CODE1.
+
+    LS_ADDRESS-DATA-POSTAL-DATAX-STREET = ABAP_TRUE.
+    LS_ADDRESS-DATA-POSTAL-DATAX-CITY = ABAP_TRUE.
+    IF PS_DATA-POST_CODE1 IS NOT INITIAL.
+      LS_ADDRESS-DATA-POSTAL-DATAX-POSTL_COD1 = ABAP_TRUE.
+    ENDIF.
+    APPEND LS_ADDRESS TO LS_DATA-PARTNER-CENTRAL_DATA-ADDRESS-ADDRESSES.
+
+* Vender
+    LS_DATA-VENDOR-HEADER-OBJECT_TASK =  GC_U.
+    LS_DATA-VENDOR-HEADER-OBJECT_INSTANCE-LIFNR = LV_LIFNR.
+
+    LS_DATA-VENDOR-CENTRAL_DATA-CENTRAL-DATA-J_1KFREPRE = PS_DATA-J_1KFREPRE.
+    LS_DATA-VENDOR-CENTRAL_DATA-CENTRAL-DATA-J_1KFTBUS = PS_DATA-J_1KFTBUS.
+    LS_DATA-VENDOR-CENTRAL_DATA-CENTRAL-DATA-J_1KFTIND = PS_DATA-J_1KFTIND.
+    LS_DATA-VENDOR-CENTRAL_DATA-CENTRAL-DATA-KUNNR = PS_DATA-KUNNR.   "공급업체-고객 연결 데이터 추가
+
+    LS_DATA-VENDOR-CENTRAL_DATA-CENTRAL-DATAX-J_1KFREPRE = ABAP_TRUE.
+    LS_DATA-VENDOR-CENTRAL_DATA-CENTRAL-DATAX-J_1KFTBUS = ABAP_TRUE.
+    LS_DATA-VENDOR-CENTRAL_DATA-CENTRAL-DATAX-J_1KFTIND = ABAP_TRUE.
+    LS_DATA-VENDOR-CENTRAL_DATA-CENTRAL-DATAX-KUNNR = ABAP_TRUE.    "공급업체-고객 연결 데이터 추가
+
+
+*Tax
+    DATA:
+      LS_TAXNUMBER TYPE BUS_EI_BUPA_TAXNUMBER,
+      LV_FNAME     TYPE LVC_FNAME,
+      LV_NUMC      TYPE N LENGTH 1.
+
+    CLEAR LS_TAXNUMBER.
+    SELECT
+      TAXTYPE
+      FROM DFKKBPTAXNUM
+      WHERE PARTNER EQ @LV_PARTNER
+      ORDER BY TAXTYPE
+      INTO TABLE @DATA(LT_TAX).
+
+    IF PS_DATA-STCD1 IS NOT INITIAL.
+      DO 1 TIMES.
+        LV_NUMC += 1.
+        LV_FNAME = 'STCD' && LV_NUMC.
+        ASSIGN COMPONENT LV_FNAME OF STRUCTURE PS_DATA TO FIELD-SYMBOL(<LV_STCD>).
+        CHECK <LV_STCD> IS ASSIGNED.
+
+        "독일은 TAX TYPE 규칙이 다름
+        IF PS_DATA-COUNTRY EQ 'DE'.
+          CASE LV_NUMC.
+            WHEN '1'.
+              LS_TAXNUMBER-DATA_KEY-TAXTYPE = 'DE2'.
+            WHEN '2'.
+              LS_TAXNUMBER-DATA_KEY-TAXTYPE = 'DE5'.
+            WHEN OTHERS.
+              CONTINUE.
+          ENDCASE.
+        ELSE.
+          LS_TAXNUMBER-DATA_KEY-TAXTYPE = PS_DATA-COUNTRY && LV_NUMC.
+        ENDIF.
+
+        LS_TAXNUMBER-DATA_KEY-TAXNUMBER = <LV_STCD>.
+        LS_TAXNUMBER-TASK = COND #( WHEN LINE_EXISTS( LT_TAX[ TAXTYPE = LS_TAXNUMBER-DATA_KEY-TAXTYPE ] ) THEN
+                                                            COND #( WHEN <LV_STCD> IS INITIAL THEN GC_D ELSE GC_U ) ELSE GC_I ).
+
+        APPEND LS_TAXNUMBER TO LS_DATA-PARTNER-CENTRAL_DATA-TAXNUMBER-TAXNUMBERS.
+      ENDDO.
+    ENDIF.
+
+    APPEND LS_DATA TO CT_DATA.
+
+    IF LV_IDX = 1.
+*계좌정보는 삭제 후 등록하는 형태이기 때문에, 먼저 삭제위한 호출
+*CL_MD_BP_MAINTAIN 호출
+      CL_MD_BP_MAINTAIN=>MAINTAIN(
+        EXPORTING
+          I_DATA = CT_DATA
+        IMPORTING
+            E_RETURN = DATA(LT_RES)
+    ).
+      IF LT_RES[] IS NOT INITIAL.
+        READ TABLE LT_RES ASSIGNING FIELD-SYMBOL(<LT_MSG>) INDEX 1.
+        READ TABLE <LT_MSG>-OBJECT_MSG[] ASSIGNING FIELD-SYMBOL(<LS_MSG_E>) WITH KEY TYPE = GC_E.
+        IF SY-SUBRC EQ 0.
+          CALL FUNCTION 'BAPI_TRANSACTION_ROLLBACK'.
+          LV_PASS = GC_X.
+        ELSE.
+          READ TABLE <LT_MSG>-OBJECT_MSG[] ASSIGNING FIELD-SYMBOL(<LS_MSG_A>) WITH KEY TYPE = GC_A.
+          IF SY-SUBRC EQ 0.
+            CALL FUNCTION 'BAPI_TRANSACTION_ROLLBACK'.
+            LV_PASS = GC_X.
+          ELSE.
+            CLEAR LV_PASS.
+            CALL FUNCTION 'BAPI_TRANSACTION_COMMIT'
+              EXPORTING
+                WAIT = ABAP_TRUE.
+
+            WAIT UP TO 1 SECONDS.
+          ENDIF.
+        ENDIF.
+      ENDIF.
+      CLEAR : LS_DATA-PARTNER-CENTRAL_DATA-BANKDETAIL-BANKDETAILS, CT_DATA.
+    ENDIF.
+
+  ENDDO.
+
+ENDFORM.
+
+*&---------------------------------------------------------------------*
+*& Form F_GET_NEXT_PARTNER_NUMBER
+*&---------------------------------------------------------------------*
+*& text
+*&---------------------------------------------------------------------*
+*&      --> LV_BU_NRRNG
+*&      <-- LS_DATA_VENDOR_HEADER_OBJECT_I
+*&---------------------------------------------------------------------*
+FORM F_GET_NEXT_PARTNER_NUMBER  USING  PV_BU_NRRNG
+                              CHANGING CV_PARTNER.
+
+  "Number range 조회
+  SELECT SINGLE
+    FROMNUMBER,
+    TONUMBER
+    FROM NRIV
+    WHERE OBJECT EQ 'BU_PARTNER'
+    AND NRRANGENR EQ @PV_BU_NRRNG
+    INTO @DATA(LS_NRIV).
+
+  CHECK SY-SUBRC EQ 0.
+
+  "기존 번호 조회
+  DATA LR_PARTNER TYPE RANGE OF BUT000-PARTNER.
+  LR_PARTNER = VALUE #( ( SIGN = 'I' OPTION = 'BT' LOW = LS_NRIV-FROMNUMBER HIGH = LS_NRIV-TONUMBER ) ).
+  SELECT MAX( PARTNER )
+    FROM BUT000
+    WHERE PARTNER IN @LR_PARTNER
+    INTO @DATA(LV_PARTNER).
+
+  IF LV_PARTNER IS INITIAL.
+    CV_PARTNER = LS_NRIV-FROMNUMBER.
+  ELSE.
+    CV_PARTNER = LV_PARTNER + 1.
+  ENDIF.
+
+ENDFORM.
+
+*&---------------------------------------------------------------------*
+*& Form F_GET_LIFNR_BY_STCD2
+*&---------------------------------------------------------------------*
+*& text
+*&---------------------------------------------------------------------*
+*&      --> PS_DATA
+*&      <-- LV_LIFNR
+*&---------------------------------------------------------------------*
+FORM F_GET_LIFNR_BY_STCD2  USING  PS_DATA TYPE ZGTMMS1010
+                                                             PV_BUKRS
+                           CHANGING CV_LIFNR.
+
+  CLEAR CV_LIFNR.
+
+  IF PS_DATA-COUNTRY EQ 'KR'.
+*   2-1-2) 등록된 BP가 존재하고 등록된 BP의 계정그룹과(KTOKK)과 수신 된 계정그룹(KTOKK)이 다른 경우
+*         : 입력 받은 BUKRS 기준 LFA1-LOEVM AND LFB1-LOEVM 이 공백이면 다음 값 Return 후 종료
+*         (LFA1-LOEVM or LFB1-LOEVM = X 이면 신규 생성 대상으로 진행)
+    SELECT SINGLE
+      LF~LIFNR
+      FROM LFA1 AS LF
+      WHERE LF~STCD2 EQ @PS_DATA-STCD2
+      AND LF~LOEVM EQ @SPACE "(LFA1-LOEVM or LFB1-LOEVM = X 이면 신규 생성 대상으로 진행)
+      AND NOT EXISTS (
+          SELECT
+            LB~LIFNR
+            FROM LFB1 AS LB
+            WHERE LB~LIFNR EQ LF~LIFNR
+              AND LB~BUKRS EQ @PV_BUKRS
+              AND LB~LOEVM EQ @ABAP_TRUE "(LFA1-LOEVM or LFB1-LOEVM = X 이면 신규 생성 대상으로 진행)
+      )
+      INTO @CV_LIFNR.
+  ELSE.
+    SELECT SINGLE
+      LIFNR
+      FROM LFA1
+      WHERE LIFNR EQ @PS_DATA-LIFNR
+      INTO @CV_LIFNR.
+  ENDIF.
+
+ENDFORM.
+
+*&---------------------------------------------------------------------*
+*& Form F_GET_PARTNER_BY_LIFNR
+*&---------------------------------------------------------------------*
+*& text
+*&---------------------------------------------------------------------*
+*&      --> LV_LIFNR
+*&      <-- LV_PARTNER
+*&      <-- LV_PARTNER_GUID
+*&---------------------------------------------------------------------*
+FORM F_GET_PARTNER_BY_LIFNR  USING    PV_LIFNR
+                             CHANGING CV_PARTNER
+                                      CV_PARTNER_GUID.
+
+  CLEAR:
+    CV_PARTNER,
+    CV_PARTNER_GUID.
+
+  IF PV_LIFNR IS NOT INITIAL.
+    SELECT SINGLE
+      BU~PARTNER,
+      BU~PARTNER_GUID
+     FROM BUT000 AS BU
+                  INNER JOIN
+               CVI_VEND_LINK AS CV ON   BU~PARTNER_GUID EQ CV~PARTNER_GUID
+     WHERE CV~VENDOR EQ  @PV_LIFNR
+      INTO (@CV_PARTNER , @CV_PARTNER_GUID).
+  ENDIF.
+
+ENDFORM.
+
+*&---------------------------------------------------------------------*
+*& Form F_SET_PARTNER_DATA
+*&---------------------------------------------------------------------*
+*& text
+*&---------------------------------------------------------------------*
+*&      --> LV_LIFNR
+*&      --> LV_PARTNER
+*&      --> LV_PARTNER_GUID
+*&      <-- LS_DATA
+*&---------------------------------------------------------------------*
+FORM F_SET_PARTNER_DATA TABLES PT_ITAB STRUCTURE ZGTMMS1017
+                        USING PV_PARTNER
+                                  PV_PARTNER_GUID
+                                  PS_DATA TYPE ZGTMMS1010
+                         CHANGING CS_DATA TYPE CVIS_EI_EXTERN.
+
+  DATA:
+    LS_ADDRESS      TYPE BUS_EI_BUPA_ADDRESS,
+    LV_ADDRESS_GUID TYPE BU_ADDRESS_GUID,
+    LS_PHONE        TYPE BUS_EI_BUPA_TELEPHONE,
+    LS_FAX          TYPE BUS_EI_BUPA_FAX,
+    LS_SMTP         TYPE BUS_EI_BUPA_SMTP,
+    LV_BU_GROUP     TYPE BU_GROUP,
+    LV_BU_NRRNG     TYPE BU_NRRNG,
+    LS_BANK         TYPE BUS_EI_BUPA_BANKDETAIL,
+    LV_BU_XEXST     TYPE BU_XEXST,
+    LV_NRIND        TYPE NRIND,
+    LS_TAXNUMBER    TYPE BUS_EI_BUPA_TAXNUMBER,
+    LV_FNAME        TYPE LVC_FNAME,
+    LV_NUMC         TYPE N LENGTH 1.
+
+  IF PV_PARTNER IS INITIAL.
+    CS_DATA-ENSURE_CREATE-CREATE_VENDOR = ABAP_TRUE.
+    CS_DATA-PARTNER-HEADER-OBJECT_TASK = GC_I.
+    TRY.
+        CS_DATA-PARTNER-HEADER-OBJECT_INSTANCE-BPARTNERGUID = CL_SYSTEM_UUID=>CREATE_UUID_X16_STATIC( ).
+      CATCH  CX_UUID_ERROR.
+    ENDTRY.
+*    CS_DATA-PARTNER-HEADER-OBJECT_INSTANCE-BPARTNERGUID = CL_SYSTEM_UUID=>CREATE_UUID_X16_STATIC( ).
+
+    LS_ADDRESS-TASK = GC_I.
+    LS_PHONE-CONTACT-TASK = GC_I.
+    LS_FAX-CONTACT-TASK = GC_I.
+    LS_SMTP-CONTACT-TASK = GC_I.
+    LS_BANK-TASK = GC_I.
+
+*  3-1-1) BP Grouping 채번 결정
+*    : I_TAB-KOTTK 기준 채번
+    SELECT SINGLE
+      TC~BU_GROUP,
+      TB~NRRNG
+    FROM TBC001 AS TC
+                  INNER JOIN
+              TB001 AS TB ON TC~BU_GROUP EQ TB~BU_GROUP
+    WHERE TC~KTOKK EQ @PS_DATA-KTOKK
+    INTO ( @LV_BU_GROUP, @LV_BU_NRRNG ).
+
+    SELECT SINGLE
+       NV~EXTERNIND
+      FROM NRIV AS NV
+      WHERE NV~OBJECT EQ 'BU_PARTNER'
+      AND NV~NRRANGENR EQ @LV_BU_NRRNG
+      INTO @LV_NRIND.
+
+
+    CS_DATA-PARTNER-CENTRAL_DATA-COMMON-DATA-BP_CONTROL-CATEGORY = GC_2. "조직
+    CS_DATA-PARTNER-CENTRAL_DATA-COMMON-DATA-BP_CONTROL-GROUPING = LV_BU_GROUP.
+
+    "외부채번
+    IF LV_NRIND EQ ABAP_TRUE.
+      PERFORM F_GET_NEXT_PARTNER_NUMBER USING LV_BU_NRRNG CHANGING CS_DATA-PARTNER-HEADER-OBJECT_INSTANCE-BPARTNER.
+      CALL FUNCTION 'CONVERSION_EXIT_ALPHA_INPUT'
+        EXPORTING
+          INPUT  = CS_DATA-PARTNER-HEADER-OBJECT_INSTANCE-BPARTNER
+        IMPORTING
+          OUTPUT = CS_DATA-PARTNER-HEADER-OBJECT_INSTANCE-BPARTNER.
+    ENDIF.
+
+
+    CS_DATA-PARTNER-CENTRAL_DATA-COMMON-DATA-BP_CENTRALDATA-TITLE_KEY = GC_03.
+    CS_DATA-PARTNER-CENTRAL_DATA-COMMON-DATA-BP_CENTRALDATA-SEARCHTERM1 = PS_DATA-SORT1.
+    CS_DATA-PARTNER-CENTRAL_DATA-COMMON-DATA-BP_ORGANIZATION-NAME1 = PS_DATA-NAME1.
+    CS_DATA-PARTNER-CENTRAL_DATA-COMMON-DATA-BP_CENTRALDATA-PARTNERLANGUAGEISO = PS_DATA-LANGU.
+    CALL FUNCTION 'CONVERSION_EXIT_ISOLA_INPUT'
+      EXPORTING
+        INPUT  = PS_DATA-LANGU
+      IMPORTING
+        OUTPUT = CS_DATA-PARTNER-CENTRAL_DATA-COMMON-DATA-BP_CENTRALDATA-PARTNERLANGUAGE.
+
+    CS_DATA-PARTNER-CENTRAL_DATA-COMMON-DATAX-BP_CENTRALDATA-TITLE_KEY = ABAP_TRUE.
+    CS_DATA-PARTNER-CENTRAL_DATA-COMMON-DATAX-BP_CENTRALDATA-SEARCHTERM1 = ABAP_TRUE.
+    CS_DATA-PARTNER-CENTRAL_DATA-COMMON-DATAX-BP_ORGANIZATION-NAME1 = ABAP_TRUE.
+    CS_DATA-PARTNER-CENTRAL_DATA-COMMON-DATAX-BP_CENTRALDATA-PARTNERLANGUAGEISO = ABAP_TRUE.
+    CS_DATA-PARTNER-CENTRAL_DATA-COMMON-DATAX-BP_CENTRALDATA-PARTNERLANGUAGE = ABAP_TRUE.
+
+  ELSE.
+
+    CS_DATA-PARTNER-HEADER-OBJECT_TASK = GC_U.
+    CS_DATA-PARTNER-HEADER-OBJECT_INSTANCE-BPARTNER = PV_PARTNER .
+    CS_DATA-PARTNER-HEADER-OBJECT_INSTANCE-BPARTNERGUID =  PV_PARTNER_GUID.
+
+  ENDIF.
+
+*Tax
+  CLEAR LS_TAXNUMBER.
+  SELECT
+    TAXTYPE
+    FROM DFKKBPTAXNUM
+    WHERE PARTNER EQ @PV_PARTNER
+    ORDER BY TAXTYPE
+    INTO TABLE @DATA(LT_TAX).
+
+  DO 2 TIMES.
+    LV_NUMC += 1.
+    LV_FNAME = 'STCD' && LV_NUMC.
+    ASSIGN COMPONENT LV_FNAME OF STRUCTURE PS_DATA TO FIELD-SYMBOL(<LV_STCD>).
+    CHECK <LV_STCD> IS ASSIGNED.
+    CHECK <LV_STCD> IS NOT INITIAL. "생성/확장 시는 값이 있는 경우만 진행
+
+    "독일은 TAX TYPE 규칙이 다름
+    IF PS_DATA-COUNTRY EQ 'DE'.
+      CASE LV_NUMC.
+        WHEN '1'.
+          LS_TAXNUMBER-DATA_KEY-TAXTYPE = 'DE2'.
+        WHEN '2'.
+          LS_TAXNUMBER-DATA_KEY-TAXTYPE = 'DE5'.
+        WHEN OTHERS.
+          CONTINUE.
+      ENDCASE.
+    ELSE.
+      LS_TAXNUMBER-DATA_KEY-TAXTYPE = PS_DATA-COUNTRY && LV_NUMC.
+    ENDIF.
+
+    LS_TAXNUMBER-DATA_KEY-TAXNUMBER = <LV_STCD>.
+    LS_TAXNUMBER-TASK = COND #( WHEN LINE_EXISTS( LT_TAX[ TAXTYPE = LS_TAXNUMBER-DATA_KEY-TAXTYPE ] ) THEN
+                                                        COND #( WHEN <LV_STCD> IS INITIAL THEN GC_D ELSE GC_U ) ELSE GC_I  ).
+    APPEND LS_TAXNUMBER TO CS_DATA-PARTNER-CENTRAL_DATA-TAXNUMBER-TAXNUMBERS.
+  ENDDO.
+
+
+  IF PV_PARTNER IS INITIAL.
+
+*    SELECT SINGLE ADDRESS_GUID
+*    FROM BUT020
+*    WHERE PARTNER EQ @LV_PARTNER
+*    INTO @LV_ADDRESS_GUID.
+*
+*    LS_ADDRESS-DATA_KEY-GUID = LV_ADDRESS_GUID.
+*  ENDIF.
+
+    LS_ADDRESS-DATA-POSTAL-DATA-STREET = PS_DATA-STREET.
+    LS_ADDRESS-DATA-POSTAL-DATA-CITY = PS_DATA-CITY1.
+    LS_ADDRESS-DATA-POSTAL-DATA-POSTL_COD1 = PS_DATA-POST_CODE1.
+    LS_ADDRESS-DATA-POSTAL-DATA-COUNTRY = PS_DATA-COUNTRY.
+    LS_ADDRESS-DATA-POSTAL-DATA-REGION = PS_DATA-REGION.
+    LS_ADDRESS-DATA-POSTAL-DATA-LANGUISO = PS_DATA-LANGU.
+    CALL FUNCTION 'CONVERSION_EXIT_ISOLA_INPUT'
+      EXPORTING
+        INPUT  = PS_DATA-LANGU
+      IMPORTING
+        OUTPUT = LS_ADDRESS-DATA-POSTAL-DATA-LANGU.
+
+    LS_ADDRESS-DATA-POSTAL-DATAX-STREET = ABAP_TRUE.
+    LS_ADDRESS-DATA-POSTAL-DATAX-CITY = ABAP_TRUE.
+    LS_ADDRESS-DATA-POSTAL-DATAX-POSTL_COD1 = ABAP_TRUE.
+    LS_ADDRESS-DATA-POSTAL-DATAX-COUNTRY = ABAP_TRUE.
+    LS_ADDRESS-DATA-POSTAL-DATAX-REGION = ABAP_TRUE.
+    LS_ADDRESS-DATA-POSTAL-DATAX-LANGU_ISO = ABAP_TRUE.
+    LS_ADDRESS-DATA-POSTAL-DATAX-LANGU = ABAP_TRUE.
+
+
+    IF PS_DATA-TEL_NUMBER IS NOT INITIAL.
+      LS_ADDRESS-DATA-COMMUNICATION-PHONE-CURRENT_STATE = ABAP_TRUE.
+      LS_PHONE-CONTACT-DATA-TELEPHONE = PS_DATA-TEL_NUMBER.
+      LS_PHONE-CONTACT-DATAX-TELEPHONE = ABAP_TRUE.
+      APPEND LS_PHONE TO LS_ADDRESS-DATA-COMMUNICATION-PHONE-PHONE.
+    ENDIF.
+
+    IF PS_DATA-FAX_NUMBER IS NOT INITIAL.
+      LS_ADDRESS-DATA-COMMUNICATION-FAX-CURRENT_STATE = ABAP_TRUE.
+      LS_FAX-CONTACT-DATA-FAX = PS_DATA-FAX_NUMBER.
+      LS_FAX-CONTACT-DATAX-FAX = ABAP_TRUE.
+      APPEND LS_FAX TO LS_ADDRESS-DATA-COMMUNICATION-FAX-FAX.
+    ENDIF.
+
+    IF PS_DATA-SMTP_ADDR IS NOT INITIAL.
+      LS_ADDRESS-DATA-COMMUNICATION-SMTP-CURRENT_STATE = ABAP_TRUE.
+      LS_SMTP-CONTACT-DATA-E_MAIL = PS_DATA-SMTP_ADDR.
+      LS_SMTP-CONTACT-DATAX-E_MAIL = ABAP_TRUE.
+      APPEND LS_SMTP TO LS_ADDRESS-DATA-COMMUNICATION-SMTP-SMTP.
+    ENDIF.
+
+    APPEND LS_ADDRESS TO CS_DATA-PARTNER-CENTRAL_DATA-ADDRESS-ADDRESSES.
+  ENDIF.
+
+*계좌정보 설정 추가
+  CHECK PT_ITAB[] IS NOT INITIAL.
+  LOOP AT PT_ITAB INTO DATA(LS_IT) GROUP BY ( BVTYP = LS_IT-BVTYP
+                                                                             SIZE  = GROUP SIZE )
+        ASSIGNING FIELD-SYMBOL(<FSTYP>).
+
+    LOOP AT GROUP <FSTYP> ASSIGNING FIELD-SYMBOL(<FGR>) .
+      IF <FSTYP>-SIZE > 1.
+*수신한 CUVN_SQ 건수 전체를 계좌정보로 등록
+*BVTYP 코드를 순차 채번하여 등록_ex) BVTYP = 600T이면, 다음 차수는 601T,602T..채번
+        DATA(LV_TABIX) = SY-TABIX.
+        DATA(LV_LAST_CHAR) = SUBSTRING( VAL = <FGR>-BVTYP OFF = STRLEN( <FGR>-BVTYP ) - 1 LEN = 1 ).
+        LS_BANK-DATA_KEY = COND #( WHEN LV_TABIX = 1 THEN <FGR>-BVTYP
+                                                         ELSE |{ <FGR>-BVTYP(3) + 1 }{ LV_LAST_CHAR }| ).
+      ELSE.
+        LS_BANK-DATA_KEY = <FGR>-BVTYP.
+      ENDIF.
+
+      LS_BANK-TASK = GC_I.
+      LS_BANK-DATA-BANK_CTRY = <FGR>-BANKS.
+      LS_BANK-DATA-BANK_KEY   = <FGR>-BANKL.
+      LS_BANK-DATA-BANK_ACCT = <FGR>-BANKN.
+      LS_BANK-DATA-ACCOUNTHOLDER = <FGR>-KOINH.
+      LS_BANK-DATA-EXTERNALBANKID = <FGR>-BKEXT.
+
+      LS_BANK-DATAX-BANK_CTRY = GC_X.
+      LS_BANK-DATAX-BANK_KEY   = GC_X.
+      LS_BANK-DATAX-BANK_ACCT = GC_X.
+      LS_BANK-DATAX-ACCOUNTHOLDER = GC_X.
+      LS_BANK-DATAX-EXTERNALBANKID = GC_X.
+
+      APPEND LS_BANK TO CS_DATA-PARTNER-CENTRAL_DATA-BANKDETAIL-BANKDETAILS.
+    ENDLOOP.
+
+  ENDLOOP.
+
+
+*
+*  IF LV_LIFNR IS NOT INITIAL AND LV_PARTNER IS NOT INITIAL.
+*    LS_DATA-PARTNER-HEADER-OBJECT_TASK = GC_U.
+*    LS_DATA-PARTNER-HEADER-OBJECT_INSTANCE-BPARTNER = LV_PARTNER .
+*    LS_DATA-PARTNER-HEADER-OBJECT_INSTANCE-BPARTNERGUID =  LV_PARTNER_GUID.
+*
+*    LS_ADDRESS-TASK = GC_U.
+*    LS_PHONE-CONTACT-TASK = GC_U.
+*    LS_FAX-CONTACT-TASK = GC_U.
+*    LS_SMTP-CONTACT-TASK = GC_U.
+*
+*  ELSE.
+*    LS_DATA-ENSURE_CREATE-CREATE_VENDOR = ABAP_TRUE.
+*    LS_DATA-PARTNER-HEADER-OBJECT_TASK = GC_I.
+*    LS_DATA-PARTNER-HEADER-OBJECT_INSTANCE-BPARTNERGUID = CL_SYSTEM_UUID=>CREATE_UUID_X16_STATIC( ).
+*    LS_DATA-VENDOR-HEADER-OBJECT_TASK =  GC_I.
+*
+*    LS_ADDRESS-TASK = GC_I.
+*    LS_PHONE-CONTACT-TASK = GC_I.
+*    LS_FAX-CONTACT-TASK = GC_I.
+*    LS_SMTP-CONTACT-TASK = GC_I.
+*  ENDIF.
+*
+*  IF LV_LIFNR IS INITIAL.
+**  3-1-1) BP Grouping 채번 결정
+**    : I_TAB-KOTTK 기준 채번
+*    SELECT SINGLE
+*      TC~BU_GROUP,
+*      TB~NRRNG,
+*      TB~XEXST
+*    FROM TBC001 AS TC
+*                  INNER JOIN
+*              TB001 AS TB ON TC~BU_GROUP EQ TB~BU_GROUP
+*    WHERE TC~KTOKK EQ @PS_DATA-KTOKK
+*    INTO ( @LV_BU_GROUP, @LV_BU_NRRNG, @LV_BU_XEXST ).
+*
+*    LS_DATA-PARTNER-CENTRAL_DATA-COMMON-DATA-BP_CONTROL-CATEGORY = GC_2. "조직
+*    LS_DATA-PARTNER-CENTRAL_DATA-COMMON-DATA-BP_CONTROL-GROUPING = LV_BU_GROUP.
+*
+*    "외부채번
+*    IF LV_BU_XEXST EQ ABAP_TRUE.
+*      PERFORM F_GET_NEXT_LIFNR_NUMBER USING LV_BU_NRRNG CHANGING LS_DATA-PARTNER-HEADER-OBJECT_INSTANCE-BPARTNER.
+*      CALL FUNCTION 'CONVERSION_EXIT_ALPHA_INPUT'
+*        EXPORTING
+*          INPUT  = LS_DATA-PARTNER-HEADER-OBJECT_INSTANCE-BPARTNER
+*        IMPORTING
+*          OUTPUT = LS_DATA-PARTNER-HEADER-OBJECT_INSTANCE-BPARTNER.
+*      LS_DATA-VENDOR-HEADER-OBJECT_INSTANCE-LIFNR = LS_DATA-PARTNER-HEADER-OBJECT_INSTANCE-BPARTNER.
+*    ENDIF.
+*  ENDIF.
+
+ENDFORM.
+
+*&---------------------------------------------------------------------*
+*& Form F_SET_PARTNER_ROLE_DATA
+*&---------------------------------------------------------------------*
+*& text
+*&---------------------------------------------------------------------*
+*&      --> LV_PARTNER
+*&      --> PS_DATA
+*&      <-- LS_DATA
+*&      <-- LV_FLVN00
+*&      <-- LV_FLVN01
+*&---------------------------------------------------------------------*
+FORM F_SET_PARTNER_ROLE_DATA  USING PV_PARTNER
+                                                                    PS_DATA TYPE ZGTMMS1010
+                         CHANGING CS_DATA TYPE CVIS_EI_EXTERN.
+
+  DATA LS_ROLE TYPE BUS_EI_BUPA_ROLES.
+
+*	3-1-2) BP Role
+*   : FLVN00, FLVN01
+  IF PV_PARTNER IS NOT INITIAL.
+    SELECT BT~RLTYP
+       FROM BUT000 AS BU
+                    INNER JOIN
+                 BUT100 AS BT ON BU~PARTNER EQ BT~PARTNER
+     WHERE BU~PARTNER EQ @PV_PARTNER
+      ORDER BY BT~RLTYP
+      INTO TABLE @DATA(LT_RCHK).
+
+  ELSE.
+    SELECT
+            TB~ROLE,
+            TB~ROLECATEGORY
+      FROM CVIC_VEND_TO_BP2 AS CV
+                    INNER JOIN
+                TB003  AS TB ON CV~ROLE EQ TB~ROLE
+     WHERE CV~ACCOUNT_GROUP EQ @PS_DATA-KTOKK
+      INTO TABLE @DATA(LT_DROLE).
+
+    LOOP AT LT_DROLE ASSIGNING FIELD-SYMBOL(<LS_DROLE>).
+      CLEAR LS_ROLE.
+      LS_ROLE-TASK = GC_I.
+      LS_ROLE-DATA_KEY = <LS_DROLE>-ROLE.
+      LS_ROLE-DATA-ROLECATEGORY = <LS_DROLE>-ROLECATEGORY.
+      LS_ROLE-DATA-VALID_FROM = SY-DATUM.
+      LS_ROLE-DATA-VALID_TO = '99991231'.
+      LS_ROLE-DATAX-VALID_FROM = ABAP_TRUE.
+      LS_ROLE-DATAX-VALID_TO = ABAP_TRUE.
+      APPEND LS_ROLE TO CS_DATA-PARTNER-CENTRAL_DATA-ROLE-ROLES.
+    ENDLOOP.
+  ENDIF.
+
+  READ TABLE LT_RCHK WITH KEY RLTYP = 'FLVN00' BINARY SEARCH TRANSPORTING NO FIELDS.
+  IF SY-SUBRC NE 0.
+    CLEAR LS_ROLE.
+    LS_ROLE-TASK = GC_I.
+    LS_ROLE-DATA_KEY = 'FLVN00'.
+    LS_ROLE-DATA-ROLECATEGORY = 'FLVN00'.
+    LS_ROLE-DATA-VALID_FROM = SY-DATUM.
+    LS_ROLE-DATA-VALID_TO = '99991231'.
+    LS_ROLE-DATAX-VALID_FROM = ABAP_TRUE.
+    LS_ROLE-DATAX-VALID_TO = ABAP_TRUE.
+    APPEND LS_ROLE TO CS_DATA-PARTNER-CENTRAL_DATA-ROLE-ROLES.
+  ENDIF.
+
+  READ TABLE LT_RCHK WITH KEY RLTYP = 'FLVN01' BINARY SEARCH TRANSPORTING NO FIELDS.
+  IF SY-SUBRC NE 0.
+    CLEAR LS_ROLE.
+    LS_ROLE-TASK = GC_I.
+    LS_ROLE-DATA_KEY = 'FLVN01'.
+    LS_ROLE-DATA-ROLECATEGORY = 'FLVN01'.
+    LS_ROLE-DATA-VALID_FROM = SY-DATUM.
+    LS_ROLE-DATA-VALID_TO = '99991231'.
+    LS_ROLE-DATAX-VALID_FROM = ABAP_TRUE.
+    LS_ROLE-DATAX-VALID_TO = ABAP_TRUE.
+    APPEND LS_ROLE TO CS_DATA-PARTNER-CENTRAL_DATA-ROLE-ROLES.
+  ENDIF.
+
+
+ENDFORM.
+
+*&---------------------------------------------------------------------*
+*& Form F_SET_VENDOR_DATA
+*&---------------------------------------------------------------------*
+*& text
+*&---------------------------------------------------------------------*
+*&      --> LV_LIFNR
+*&      --> PS_DATA
+*&      <-- LS_DATA
+*&---------------------------------------------------------------------*
+FORM F_SET_VENDOR_DATA  USING    PV_LIFNR
+                                 PS_DATA TYPE ZGTMMS1010
+                        CHANGING CS_DATA TYPE CVIS_EI_EXTERN.
+
+  IF PV_LIFNR IS INITIAL.
+    CS_DATA-VENDOR-HEADER-OBJECT_INSTANCE-LIFNR = CS_DATA-PARTNER-HEADER-OBJECT_INSTANCE-BPARTNER.
+    CS_DATA-VENDOR-HEADER-OBJECT_TASK =  GC_I.
+
+    CS_DATA-VENDOR-CENTRAL_DATA-CENTRAL-DATA-KTOKK = PS_DATA-KTOKK.
+    CS_DATA-VENDOR-CENTRAL_DATA-CENTRAL-DATA-STCD1 = PS_DATA-STCD1.
+    CS_DATA-VENDOR-CENTRAL_DATA-CENTRAL-DATA-STCD2 = PS_DATA-STCD2.
+    CS_DATA-VENDOR-CENTRAL_DATA-CENTRAL-DATA-J_1KFREPRE = PS_DATA-J_1KFREPRE.
+    CS_DATA-VENDOR-CENTRAL_DATA-CENTRAL-DATA-J_1KFTBUS = PS_DATA-J_1KFTBUS.
+    CS_DATA-VENDOR-CENTRAL_DATA-CENTRAL-DATA-J_1KFTIND = PS_DATA-J_1KFTIND.
+    CS_DATA-VENDOR-CENTRAL_DATA-CENTRAL-DATA-KUNNR = PS_DATA-KUNNR. "공급업체-고객 연결 데이터 추가
+
+    CS_DATA-VENDOR-CENTRAL_DATA-CENTRAL-DATAX-KTOKK = ABAP_TRUE.
+    CS_DATA-VENDOR-CENTRAL_DATA-CENTRAL-DATAX-STCD1 = ABAP_TRUE.
+    CS_DATA-VENDOR-CENTRAL_DATA-CENTRAL-DATAX-STCD2 = ABAP_TRUE.
+    CS_DATA-VENDOR-CENTRAL_DATA-CENTRAL-DATAX-J_1KFREPRE = ABAP_TRUE.
+    CS_DATA-VENDOR-CENTRAL_DATA-CENTRAL-DATAX-J_1KFTBUS = ABAP_TRUE.
+    CS_DATA-VENDOR-CENTRAL_DATA-CENTRAL-DATAX-J_1KFTIND = ABAP_TRUE.
+    CS_DATA-VENDOR-CENTRAL_DATA-CENTRAL-DATAX-KUNNR = ABAP_TRUE.    "공급업체-고객 연결 데이터 추가
+
+
+  ELSE.
+    CS_DATA-VENDOR-HEADER-OBJECT_INSTANCE-LIFNR = PV_LIFNR.
+    CS_DATA-VENDOR-HEADER-OBJECT_TASK =  GC_U.
+  ENDIF.
+
+ENDFORM.
+
+*&---------------------------------------------------------------------*
+*& Form F_SET_COMPANY_DATA
+*&---------------------------------------------------------------------*
+*& text
+*&---------------------------------------------------------------------*
+*&      --> LV_LIFNR
+*&      --> PS_DATA
+*&      <-- LS_DATA
+*&---------------------------------------------------------------------*
+FORM F_SET_COMPANY_DATA  USING    PV_BUKRS
+                                                              PV_LIFNR
+                                 PS_DATA TYPE ZGTMMS1010
+                        CHANGING CS_DATA TYPE CVIS_EI_EXTERN.
+
+  DATA LS_COMPANY TYPE VMDS_EI_COMPANY.
+
+* Company
+  SELECT SINGLE
+    BUKRS
+    FROM LFB1
+    WHERE LIFNR EQ @PV_LIFNR
+    AND BUKRS EQ @PV_BUKRS
+    INTO @DATA(LV_BUKRS).
+
+  CHECK LV_BUKRS IS INITIAL.
+  LS_COMPANY-TASK = GC_I.
+
+  LS_COMPANY-DATA_KEY-BUKRS = PV_BUKRS.
+  LS_COMPANY-DATA-GRICD = 'AA'.  "FI 확인 후 AA고정
+  LS_COMPANY-DATA-GRIDT = PS_DATA-GRIDT.
+  LS_COMPANY-DATA-ZTERM = PS_DATA-ZTERM.
+  LS_COMPANY-DATA-AKONT = PS_DATA-AKONT.
+
+  LS_COMPANY-DATAX-GRICD = ABAP_TRUE.
+  LS_COMPANY-DATAX-GRIDT = ABAP_TRUE.
+  LS_COMPANY-DATAX-ZTERM = ABAP_TRUE.
+  LS_COMPANY-DATAX-AKONT = ABAP_TRUE.
+
+  SELECT SINGLE
+    FLD_03,
+    FLD_04,
+    FLD_05
+    FROM ZGTPPT1010
+    WHERE MODULE_KIND EQ 'MM'
+    AND CODEGRP EQ '0500'
+    AND FLD_01 EQ @PV_BUKRS
+    AND FLD_02 EQ @PS_DATA-KTOKK
+    INTO ( @LS_COMPANY-DATA-FDGRV, @LS_COMPANY-DATA-ZUAWA,  @LS_COMPANY-DATA-REPRF ).
+  IF SY-SUBRC EQ 0.
+    LS_COMPANY-DATAX-FDGRV = ABAP_TRUE.
+    LS_COMPANY-DATAX-ZUAWA = ABAP_TRUE.
+    LS_COMPANY-DATAX-REPRF = ABAP_TRUE.
+  ENDIF.
+
+
+  APPEND LS_COMPANY  TO CS_DATA-VENDOR-COMPANY_DATA-COMPANY .
+
+ENDFORM.
+
+*&---------------------------------------------------------------------*
+*& Form F_SET_PURCHAING_DATA
+*&---------------------------------------------------------------------*
+*& text
+*&---------------------------------------------------------------------*
+*&      --> LV_LIFNR
+*&      --> PS_DATA
+*&      <-- LS_DATA
+*&---------------------------------------------------------------------*
+FORM F_SET_PURCHAING_DATA  USING PV_BUKRS PV_LIFNR
+                                 PS_DATA TYPE ZGTMMS1010
+                        CHANGING CS_DATA TYPE CVIS_EI_EXTERN.
+
+  DATA LS_PURCHASING   TYPE VMDS_EI_PURCHASING.
+
+* Purchasing
+  SELECT SINGLE
+    EKORG
+    FROM LFM1
+    WHERE LIFNR EQ @PV_LIFNR
+    AND EKORG EQ @PS_DATA-EKORG
+    INTO @DATA(LV_EKORG).
+
+  CHECK LV_EKORG IS INITIAL.
+  LS_PURCHASING-TASK = GC_I.
+  LS_PURCHASING-DATA-SPERM = ABAP_FALSE.
+  LS_PURCHASING-DATAX-SPERM = ABAP_TRUE.
+
+  LS_PURCHASING-DATA_KEY = PS_DATA-EKORG.
+  LS_PURCHASING-DATA-WAERS = PS_DATA-WAERS.
+  LS_PURCHASING-DATA-ZTERM = PS_DATA-ZTERM.
+  LS_PURCHASING-DATA-VERKF = PS_DATA-VERKF.
+  LS_PURCHASING-DATA-TELF1 = PS_DATA-TELF1.
+  LS_PURCHASING-DATA-KALSK = PS_DATA-KALSK.
+  LS_PURCHASING-DATA-INCO1 = PS_DATA-INCO1.
+
+
+  LS_PURCHASING-DATA-KZAUT = ABAP_TRUE.
+  LS_PURCHASING-DATA-XERSY = ABAP_TRUE.
+  IF PS_DATA-COUNTRY EQ 'KR'.
+    LS_PURCHASING-DATA-WEBRE = ABAP_TRUE.
+  ELSE.
+    LS_PURCHASING-DATA-WEBRE = SPACE.
+  ENDIF.
+
+  LS_PURCHASING-DATAX-WAERS = ABAP_TRUE.
+  LS_PURCHASING-DATAX-ZTERM = ABAP_TRUE.
+  LS_PURCHASING-DATAX-VERKF = ABAP_TRUE.
+  LS_PURCHASING-DATAX-TELF1 = ABAP_TRUE.
+  LS_PURCHASING-DATAX-KALSK = ABAP_TRUE.
+  LS_PURCHASING-DATAX-KZAUT = ABAP_TRUE.
+  LS_PURCHASING-DATAX-XERSY = ABAP_TRUE.
+  LS_PURCHASING-DATAX-WEBRE = ABAP_TRUE.
+  LS_PURCHASING-DATAX-INCO1 = ABAP_TRUE.
+
+*
+*MEPRF                    "ZGTPPT1010-MODULE_KIND='MM', ZGTPPT1010-CODEGRP = '0500' 기준 동일한  동일한 BUKRS(FLD_01)
+*,KOTTK(FLD_02) 라인의 FLD_06값 "
+
+  SELECT SINGLE
+    FLD_06
+    FROM ZGTPPT1010
+    WHERE MODULE_KIND EQ 'MM'
+    AND CODEGRP EQ '0500'
+    AND FLD_01 EQ @PV_BUKRS
+    AND FLD_02 EQ @PS_DATA-KTOKK
+    INTO @LS_PURCHASING-DATA-MEPRF.
+  IF SY-SUBRC EQ 0.
+    LS_PURCHASING-DATAX-MEPRF = ABAP_TRUE.
+  ENDIF.
+
+  APPEND LS_PURCHASING TO CS_DATA-VENDOR-PURCHASING_DATA-PURCHASING.
+
+ENDFORM.
+
+*&---------------------------------------------------------------------*
+*& Form ZGTMM_IF_I_VENDOR_RCV_LOG
+*&---------------------------------------------------------------------*
+*& text
+*&---------------------------------------------------------------------*
+*&      --> GC_1
+*&      --> I_SYSTEM_ID
+*&      --> I_BUKRS
+*&      --> I_TYPE
+*&      --> LS_DATA
+*&---------------------------------------------------------------------*
+FORM ZGTMM_IF_I_VENDOR_RCV_LOG TABLES PT_DATA2  STRUCTURE ZGTMMS1017
+                                                                        CT_LOG_DATA2 STRUCTURE ZGTMMT9271
+                            USING    PV_STEP
+                                         PV_SYSTEM_ID
+                                         PV_BUKRS
+                                         PV_TYPE
+                                         PS_DATA TYPE ZGTMMS1010
+                      CHANGING   CS_LOG TYPE ZGTMMT9000
+                                         CS_LOG_DATA TYPE ZGTMMT9270.
+
+  DATA : LS_LOG_DATA2 TYPE ZGTMMT9271,
+         LV_KEY       TYPE BU_BKVID.
+
+  CASE PV_STEP.
+    WHEN GC_1. "수신 후 바로 저장
+      CLEAR CS_LOG.
+      GET TIME STAMP FIELD CS_LOG-ZIFKEY.
+      CS_LOG-ZIFNO       = GC_MM00026.
+      CS_LOG-SYSTEM_ID   = PV_SYSTEM_ID.
+      CS_LOG-IFDAT       = SY-DATLO.
+      CS_LOG-IFTIM       = SY-TIMLO.
+      CS_LOG-IFNAM       = SY-UNAME.
+
+      CLEAR CS_LOG_DATA.
+      CS_LOG_DATA = CORRESPONDING #( PS_DATA ).
+      CS_LOG_DATA-ZIFKEY = CS_LOG-ZIFKEY.
+      CS_LOG_DATA-SYSTEM_ID = CS_LOG-SYSTEM_ID.
+      CS_LOG_DATA-BUKRS = PV_BUKRS.
+      CS_LOG_DATA-REQTYPE = PV_TYPE.
+
+      LOOP AT PT_DATA2 INTO DATA(LS_IT) .
+        CLEAR LS_LOG_DATA2.
+
+        LS_LOG_DATA2 = CORRESPONDING #( LS_IT ).
+        LS_LOG_DATA2-ZIFKEY = CS_LOG-ZIFKEY.
+        LS_LOG_DATA2-SYSTEM_ID = CS_LOG-SYSTEM_ID.
+        LS_LOG_DATA2-REQTYPE = PV_TYPE.
+        LS_LOG_DATA2-LIFNR = COND #( WHEN PV_TYPE = GC_C THEN CS_LOG_DATA-LIFNR
+                                                           ELSE LS_LOG_DATA2-LIFNR ).
+
+        APPEND LS_LOG_DATA2 TO CT_LOG_DATA2.
+      ENDLOOP.
+
+      MODIFY ZGTMMT9270 FROM CS_LOG_DATA.
+      MODIFY ZGTMMT9271 FROM TABLE CT_LOG_DATA2.
+      MODIFY ZGTMMT9000 FROM CS_LOG.
+      COMMIT WORK.
+
+    WHEN GC_2. "BP 적용 후 저장
+
+      UPDATE ZGTMMT9270 SET
+        LIFNR = @CS_LOG_DATA-LIFNR
+       WHERE ZIFKEY EQ @CS_LOG_DATA-ZIFKEY
+       AND SYSTEM_ID EQ @CS_LOG_DATA-SYSTEM_ID
+       AND BUKRS EQ @CS_LOG_DATA-BUKRS
+       AND REQTYPE EQ @CS_LOG_DATA-REQTYPE
+       AND GVENDOR EQ @CS_LOG_DATA-GVENDOR.
+
+      LOOP AT PT_DATA2 INTO DATA(LS_LOG).
+        UPDATE ZGTMMT9271 SET
+           LIFNR = @CS_LOG_DATA-LIFNR,
+           CUVN_SQ = @LS_LOG-CUVN_SQ,
+           BVTYP = @LS_LOG-BVTYP,
+           BANKN = @LS_LOG-BANKN,
+           KOINH  = @LS_LOG-KOINH
+         WHERE ZIFKEY EQ @CS_LOG_DATA-ZIFKEY
+         AND SYSTEM_ID EQ @CS_LOG_DATA-SYSTEM_ID
+         AND REQTYPE EQ @CS_LOG_DATA-REQTYPE
+         AND GVENDOR EQ @LS_LOG-GVENDOR
+         AND LIFNR EQ @LS_LOG-LIFNR.
+
+        CLEAR LS_LOG.
+      ENDLOOP.
+
+      UPDATE ZGTMMT9000 SET
+        ZSTAT = @CS_LOG-ZSTAT,
+        MESSAGE = @CS_LOG-MESSAGE,
+        ERDAT = @SY-DATUM,
+        ERDAT_LOCAL = @SY-DATLO,
+        ERTIM = @SY-UZEIT,
+        ERTIM_LOCAL = @SY-TIMLO,
+        ERNAM = @SY-UNAME
+       WHERE ZIFNO EQ @CS_LOG-ZIFNO
+       AND ZIFKEY EQ @CS_LOG-ZIFKEY
+       AND SYSTEM_ID EQ @CS_LOG-SYSTEM_ID.
+      COMMIT WORK.
+  ENDCASE.
+
+
+ENDFORM.

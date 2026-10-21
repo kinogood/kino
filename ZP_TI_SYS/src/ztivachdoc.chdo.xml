@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_CHDO" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <CHDO>
+    <REPORTS_GENERATED>
+     <TCDRPS>
+      <OBJECT>ZTIVACHDOC</OBJECT>
+      <REPORTNAME>ZTIVACHDOC</REPORTNAME>
+      <TEXTCASE>X</TEXTCASE>
+      <ARBGEB>CD</ARBGEB>
+      <FEHLERNR>600</FEHLERNR>
+      <FGRP>ZTIVACHDOC</FGRP>
+      <PREFIX>V</PREFIX>
+      <UPDATE_FLG>1</UPDATE_FLG>
+     </TCDRPS>
+    </REPORTS_GENERATED>
+    <OBJECTS>
+     <TCDOBS>
+      <OBJECT>ZTIVACHDOC</OBJECT>
+      <TABNAME>ZTITVAK</TABNAME>
+     </TCDOBS>
+     <TCDOBS>
+      <OBJECT>ZTIVACHDOC</OBJECT>
+      <TABNAME>ZTITVAP</TABNAME>
+      <MULTCASE>X</MULTCASE>
+     </TCDOBS>
+    </OBJECTS>
+    <OBJECTS_TEXT>
+     <TCDOBTS>
+      <SPRAS>3</SPRAS>
+      <OBJECT>ZTIVACHDOC</OBJECT>
+      <OBTEXT>[TraSys] 세금계산서 변경문서</OBTEXT>
+     </TCDOBTS>
+    </OBJECTS_TEXT>
+   </CHDO>
+  </asx:values>
+ </asx:abap>
+</abapGit>
